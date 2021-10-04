@@ -6,40 +6,7 @@ require("themes/gruvbox")
 local lsp = require "lspconfig"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-lsp.sumneko_lua.setup {
-  cmd = {
-    "/home/squirrel/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/bin/Linux/lua-language-server",
-    "-E",
-    "/home/squirrel/.local/share/nvim/lsp_servers/sumneko_lua/extension/server/main.lua"
-  },
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = runtime_path
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {"vim"}
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true)
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false
-      }
-    }
-  }
-}
+ 
 local servers = {"html", "cssls", "denols", "vuels", "bashls", "yamlls", "jsonls"}
 --local servers = nvimlspinstaller.get_installed_servers()
 for _, server in pairs(servers) do
@@ -71,50 +38,11 @@ require("telescope").setup {
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("session-lens")
 
--- indent-blankline
-require("indent_blankline").setup {
-  char_list = {"|", "¦", "┆", "┊"},
-  show_current_context = true,
-  space_char_blankline = " ",
-  filetype_exclude = {"help", "dashboard", "NvimTree"}
-}
-
 -- project.nvim
--- integration nvim-tree.lua
--- vim.g.nvim_tree_update_cwd = 1
--- vim.g.nvim_tree_respect_buf_cwd = 1
-
 require("telescope").load_extension("projects")
 
 -- dashboard-nvim
 vim.g.dashboard_default_executive = "telescope"
---vim.g.dashboard_session_directory = '~/.cache/vim/session'
---map {'n','<leader>sl','<c-u>SessionLoad<cr>'}
 
--- autosession
 
--- kcomment
-vim.g.kommentary_create_default_mappings = false
-require("kommentary.config")
-vim.api.nvim_set_keymap("n", "<leader>cc", "<Plug>kommentary_line_default", {})
-vim.api.nvim_set_keymap("n", "<leader>c", "<Plug>kommentary_motion_default", {})
-vim.api.nvim_set_keymap("x", "<leader>c", "<Plug>kommentary_visual_default", {})
-
--- formatter.nvim
-require("formatter").setup(
-  {
-    filetype = {
-      lua = {
-        -- luafmt
-        function()
-          return {
-            exe = "luafmt",
-            args = {"--indent-count", 2, "--stdin"},
-            stdin = true
-          }
-        end
-      }
-    }
-  }
-)
 

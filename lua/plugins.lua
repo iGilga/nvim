@@ -31,12 +31,6 @@ require("packer").startup(
       }
     )
     use {
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}
-    }
-
-    use {
       "nvim-telescope/telescope.nvim",
       requires = {
         "nvim-lua/plenary.nvim",
@@ -45,21 +39,9 @@ require("packer").startup(
     }
 
     use {
-      "lewis6991/gitsigns.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim"
-      }
-    }
-    use {
       "windwp/nvim-autopairs",
       config = function()
         require("plugins.autopairs")
-      end
-    }
-    use {
-      "blackCauldron7/surround.nvim",
-      config = function()
-        require "surround".setup {mappings_style = "sandwich"}
       end
     }
     use {
@@ -91,9 +73,15 @@ require("packer").startup(
         require("project_nvim").setup {}
       end
     }
-    use "glepnir/dashboard-nvim"
-    use "lukas-reineke/indent-blankline.nvim"
-    use "mhartington/formatter.nvim"
+    use {
+      "lukas-reineke/indent-blankline.nvim",
+      config = require("indent_blankline").setup {
+        char_list = {"|", "¦", "┆", "┊"},
+        show_current_context = true,
+        space_char_blankline = " ",
+        filetype_exclude = {"help", "dashboard", "NvimTree"}
+      }
+    }
     use {
       "rmagatti/session-lens",
       requires = {"rmagatti/auto-session", "nvim-telescope/telescope.nvim"},
