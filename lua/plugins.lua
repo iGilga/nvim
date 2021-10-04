@@ -94,7 +94,6 @@ require("packer").startup(
     use "glepnir/dashboard-nvim"
     use "lukas-reineke/indent-blankline.nvim"
     use "mhartington/formatter.nvim"
-    use "b3nj5m1n/kommentary"
     use {
       "rmagatti/session-lens",
       requires = {"rmagatti/auto-session", "nvim-telescope/telescope.nvim"},

@@ -3,18 +3,7 @@ require("keymaps")
 require "settings"
 require("themes/gruvbox")
 
--- Coq
-vim.g.coq_settings = {
-  auto_start = true,
-  keymap = {
-    jump_to_mark = "<leader>c"
-  }
-  --display = { icons = { mode = 'none' } }
-}
-
 local lsp = require "lspconfig"
-local nvimlspinstaller = require "nvim-lsp-installer"
-local coq = require "coq" -- add this
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -56,23 +45,7 @@ local servers = {"html", "cssls", "denols", "vuels", "bashls", "yamlls", "jsonls
 for _, server in pairs(servers) do
   --if not (server == "sumneko_lua") then
   lsp[server].setup {}
-  lsp[server].setup(coq.lsp_ensure_capabilities({capabilities = capabilities}))
   --end
-end
-
--- NvimTree
-local tree = {}
-tree.toggle = function()
-  local treeWidth = 30
-  vim.g.nvim_tree_width = treeWidth
-  require("nvim-tree").toggle()
-  if require("nvim-tree.view").win_open() then
-    require("bufferline.state").set_offset(treeWidth + 1, "NvimTree")
-    require "nvim-tree".find_file(true)
-  else
-    require("bufferline.state").set_offset(0)
-    require "nvim-tree".close()
-  end
 end
 
 -- Telescope
