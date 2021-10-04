@@ -1,84 +1,4 @@
---local use = require("packer").use
---[[ require("packer").startup(
-  function()
-    use "wbthomason/packer.nvim" -- Package manager
-    use {
-      "neovim/nvim-lsp-config",
-      "williamboman/nvim-lsp-installer"
-    }
-    use {
-      "nvim-treesitter/nvim-treesitter",
-      run = ":TSUpdate"
-    }
-    use "nvim-treesitter/nvim-treesitter-textobjects"
-    use {
-      "ms-jpq/coq_nvim",
-      branch = "coq",
-      requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}
-    }
-
-    use {
-      "nvim-telescope/telescope.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim",
-        "nvim-telescope/telescope-fzy-native.nvim"
-      }
-    }
-    use {
-      "lewis6991/gitsigns.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim"
-      }
-    }
-    use "windwp/nvim-autopairs"
-    use "windwp/nvim-ts-autotag"
-    use {
-      "blackCauldron7/surround.nvim",
-      config = function()
-        require "surround".setup {mappings_style = "sandwich"}
-      end
-    }
-    use {
-      "romgrk/barbar.nvim",
-      requires = {"kyazdani42/nvim-web-devicons"}
-    }
-    use {
-      "hoob3rt/lualine.nvim",
-      requires = {"kyazdani42/nvim-web-devicons", opt = true}
-    }
-    use {
-      "phaazon/hop.nvim",
-      as = "hop",
-      config = function()
-        -- you can configure Hop the way you like here; see :h hop-config
-        require "hop".setup {}
-      end
-    }
-    use {
-      "kyazdani42/nvim-tree.lua",
-      requires = "kyazdani42/nvim-web-devicons"
-    }
-    use {
-      "ahmedkhalf/project.nvim",
-      config = function()
-        require("project_nvim").setup {}
-      end
-    }
-    use "glepnir/dashboard-nvim"
-    use "lukas-reineke/indent-blankline.nvim"
-    use "mhartington/formatter.nvim"
-    use "b3nj5m1n/kommentary"
-    use {
-      "rmagatti/session-lens",
-      requires = {"rmagatti/auto-session", "nvim-telescope/telescope.nvim"},
-      config = function()
-        require("session-lens").setup({})
-      end
-    }
-  end
-) ]]
 require("plugins")
-local map = require "utils".map
 require("keymaps")
 require "settings"
 require("themes/gruvbox")
@@ -155,18 +75,6 @@ tree.toggle = function()
   end
 end
 
-map {"n", "<C-t>", ":NvimTreeToggle<CR>"}
---map {'n','<C-t>','<cmd> lua tree.toggle()<CR>'}
-
--- barbar.nvim
-local opts = {noremap = true, silent = true}
-map {"n", "<A-;>", ":BufferNext<CR>", opts}
-map {"n", "<A-l>", ":BufferPrevious<CR>", opts}
-
--- hop mapping
-map {"n", "<leader>w", "<cmd>lua require'hop'.hint_words()<cr>"}
-map {"n", "<leader>l", "<cmd>lua require'hop'.hint_lines()<cr>"}
-
 -- Telescope
 require("telescope").setup {
   defaults = {
@@ -190,12 +98,6 @@ require("telescope").setup {
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("session-lens")
 
-map {"n", "<leader>ff", "<cmd>lua require('telescope.builtin').find_files()<cr>"}
-map {"n", "<leader>fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>"}
-map {"n", "<leader>fb", "<cmd>lua require('telescope.builtin').buffers()<cr>"}
-map {"n", "<leader>fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>"}
-map {"n", "<leader>fs", "<cmd>:lua require('session-lens').search_session()<cr>"}
-
 -- indent-blankline
 require("indent_blankline").setup {
   char_list = {"|", "¦", "┆", "┊"},
@@ -210,12 +112,10 @@ require("indent_blankline").setup {
 -- vim.g.nvim_tree_respect_buf_cwd = 1
 
 require("telescope").load_extension("projects")
-map {"n", "<leader>fd", "<cmd>:Telescope projects<cr>"}
 
 -- dashboard-nvim
 vim.g.dashboard_default_executive = "telescope"
 --vim.g.dashboard_session_directory = '~/.cache/vim/session'
-map {"n", "<leader>ss", ":SessionSave<cr>"}
 --map {'n','<leader>sl','<c-u>SessionLoad<cr>'}
 
 -- autosession
@@ -245,4 +145,3 @@ require("formatter").setup(
   }
 )
 
-map {"n", "<leader>f", "<cmd>:Format<cr>", {silent = true, noremap = true}}
