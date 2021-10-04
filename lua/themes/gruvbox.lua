@@ -1,11 +1,9 @@
-local use = require('packer').use
-use 'eddyekofo94/gruvbox-flat.nvim'
-vim.cmd('colorscheme gruvbox-flat')
---local gruvbox = require('gruvbox-flat')
---gruvbox.load()
-require('lualine').setup {
+local use = require("packer").use
+use "eddyekofo94/gruvbox-flat.nvim"
+vim.cmd("colorscheme gruvbox-flat")
+require("lualine").setup {
   options = {
-    theme = 'gruvbox-flat'
-  }
+    theme = "gruvbox-flat"
+  },
+  extensions = {"nvim-tree"}
 }
---vim.g.gruvbox_flat_style = 'dark'
