@@ -6,18 +6,17 @@ local nnoremap = k.nnoremap
 
 -- map the leader key
 -- vim.g.mapleader = k.t "<space>"
-k.nmap {"<Space>", "<Leader>", {}}
-local opts = {}
+k.nmap {"<Space>", "<Leader>"}
 
 -- remapping from basic vim to jkl;
-noremap {"l", "h", opts}
-noremap {";", "l", opts}
-noremap {"h", ";", opts}
+noremap {"l", "h"}
+noremap {";", "l"}
+noremap {"h", ";"}
 
 -- save and quit
-nnoremap {"<leader>q", ":q<cr>", opts}
-nnoremap {"<c-q>", ":qa<cr>", opts}
-nnoremap {"<leader>s", ":w<cr>", opts}
+nnoremap {"<leader>q", ":q<cr>"}
+nnoremap {"<c-q>", ":qa<cr>"}
+nnoremap {"<leader>s", ":w<cr>"}
 
 -- barbar.nvim
 local opts = {silent = true}
@@ -39,4 +38,4 @@ nnoremap {"<leader>fd", "<cmd>:Telescope projects<cr>"}
 
 nnoremap {"<leader>ss", ":SessionSave<cr>"}
 
-nnoremap {"<leader>f", "<cmd>:Format<cr>", {silent = true}}
+nnoremap {"<leader>f", "<cmd>:Format<cr>", opts}
