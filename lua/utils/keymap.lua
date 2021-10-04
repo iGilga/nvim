@@ -2,7 +2,10 @@ _G.KeymapStore = _G.KeymapStore or {}
 local buildmap = function(mode, defaults, args)
   local lhs = args[1]
   local rhs = args[2]
-  local opts = vim.tbl_extend("force", defaults, args[3])
+  local opts = defaults
+  if args[3] then
+    opts = vim.tbl_extend("force", defaults, args[3])
+  end
   local buffer = opts.buffer or nil
   opts.buffer = nil
 
@@ -97,11 +100,11 @@ function keymap.tnoremap(args)
   return buildmap("t", {noremap = true}, args)
 end
 
-function keymap.sinmap(args)
+function keymap.nmaps(args)
   return buildmap("n", {noremap = false, silent = true}, args)
 end
 
-function keymap.sinnoremap(args)
+function keymap.nnoremaps(args)
   return buildmap("n", {noremap = true, silent = true}, args)
 end
 
