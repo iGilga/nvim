@@ -5,7 +5,9 @@ require("packer").startup(
     use({"wbthomason/packer.nvim", opt = true})
     use {
       "neovim/nvim-lsp-config",
-      "williamboman/nvim-lsp-installer"
+            requires = {
+        "williamboman/nvim-lsp-installer"
+      }
     }
     use {
       "dstein64/vim-startuptime",
@@ -40,7 +42,6 @@ require("packer").startup(
         require("plugins.telescope")
       end
     }
-
     use {
       "windwp/nvim-autopairs",
       config = function()
@@ -93,3 +94,5 @@ require("packer").startup(
     }
   end
 )
+
+require('plugins.lsp')
