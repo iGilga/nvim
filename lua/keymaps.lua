@@ -5,8 +5,8 @@ local nnoremap = k.nnoremap
 --local tnoremap = k.tnoremap
 
 -- map the leader key
--- vim.g.mapleader = k.t "<space>"
-k.nmap {"<Space>", "<Leader>"}
+vim.g.mapleader = k.t "<Space>"
+--k.nmap {"<Space>", "<Leader>"}
 
 -- remapping from basic vim to jkl;
 noremap {"l", "h"}
