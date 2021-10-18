@@ -5,7 +5,7 @@ local nnoremap = k.nnoremap
 --local tnoremap = k.tnoremap
 
 -- map the leader key
-vim.g.mapleader = k.t "<Space>"
+-- vim.g.mapleader = k.t "<Space>"
 --k.nmap {"<Space>", "<Leader>"}
 
 -- remapping from basic vim to jkl;
@@ -29,4 +29,6 @@ nnoremap {"<leader>l", "<cmd>lua require'hop'.hint_lines()<cr>"}
 
 nnoremap {"<leader>ss", ":SessionSave<cr>"}
 
-nnoremap {"<leader>f", "<cmd>:Format<cr>", opts}
+nnoremap {"<leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<cr>"}
+
+nnoremap {"<c-t>", '<cmd>:NnnExplorer<cr>'}
