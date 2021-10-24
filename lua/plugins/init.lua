@@ -5,13 +5,14 @@ require("packer").startup(
     use({"wbthomason/packer.nvim", opt = true})
     use {
       "neovim/nvim-lsp-config",
-            requires = {
+      requires = {
         "williamboman/nvim-lsp-installer"
       }
     }
     use {
-      "dstein64/vim-startuptime",
-      cmd = "StartupTime"
+      "ms-jpq/coq_nvim",
+      branch = "coq",
+      requires = {"ms-jpq/coq.artifacts", branch = "artifacts"}
     }
     use(
       {
@@ -54,7 +55,12 @@ require("packer").startup(
     }
     use {
       "hoob3rt/lualine.nvim",
-      requires = {"kyazdani42/nvim-web-devicons", opt = true}
+      requires = {"kyazdani42/nvim-web-devicons", opt = true},
+      config = function()
+        require('lualine').setup {
+                 options = {disabled_filetypes = {'NnnExplorer'}}
+        }
+               end
     }
     use {
       "phaazon/hop.nvim",
@@ -64,10 +70,16 @@ require("packer").startup(
       end
     }
     use {
-      "kyazdani42/nvim-tree.lua",
-      requires = "kyazdani42/nvim-web-devicons",
+      "luukvbaal/nnn.nvim",
       config = function()
-        require("plugins.nvimtree")
+        require("nnn").setup {
+          explorer = {
+            session = "local"
+          },
+          picker = {
+            session = "local"
+          }
+        }
       end
     }
     use {
@@ -82,17 +94,30 @@ require("packer").startup(
         char_list = {"|", "¦", "┆", "┊"},
         show_current_context = true,
         space_char_blankline = " ",
-        filetype_exclude = {"help", "dashboard", "NvimTree"}
+        filetype_exclude = {"help", "dashboard", "NvimTree", "NnnExplorer", "NnnPicker"}
       }
     }
+    -- use {
+    --   "rmagatti/session-lens",
+    --   requires = {"rmagatti/auto-session", "nvim-telescope/telescope.nvim"},
+    --   config = function()
+    --     require("session-lens").setup({})
+    --   end
+    -- }
+    use({ "jose-elias-alvarez/null-ls.nvim",
+    config = function()
+      require("plugins.null-ls")
+    end,
+    requires = {"nvim-lua/plenary.nvim", "neovim/nvim-lspconfig"}
+    })
     use {
-      "rmagatti/session-lens",
-      requires = {"rmagatti/auto-session", "nvim-telescope/telescope.nvim"},
-      config = function()
-        require("session-lens").setup({})
-      end
-    }
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+}
+
   end
 )
 
-require('plugins.lsp')
+require("plugins.lsp")
