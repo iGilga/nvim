@@ -1,6 +1,7 @@
 local k = require "utils.keymap"
 local noremap = k.noremap
 local nnoremap = k.nnoremap
+local tnoremap = k.tnoremap
 --local vnoremap = k.vnoremap
 --local tnoremap = k.tnoremap
 
@@ -31,4 +32,5 @@ nnoremap {"<leader>ss", ":SessionSave<cr>"}
 
 nnoremap {"<leader>f", "<cmd>lua vim.lsp.buf.formatting_sync()<cr>"}
 
-nnoremap {"<c-t>", '<cmd>:NnnExplorer<cr>'}
+tnoremap {"<c-t>", '<cmd>:NnnPicker<cr>'}
+nnoremap {"<c-t>", '<cmd>:NnnPicker<cr>'}
