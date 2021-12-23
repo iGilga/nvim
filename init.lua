@@ -7,4 +7,3 @@ require("themes/gruvbox")
 -- dashboard-nvim
 --vim.g.dashboard_default_executive = "telescope"
 
-

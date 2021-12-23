@@ -57,3 +57,6 @@ o.clipboard = 'unnamedplus'
 
 -- When running macros and regexes on a large file, lazy redraw tells neovim not to draw the screen, which greatly speeds it up, upto 6-7x faster
 o.lazyredraw = true
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menu,menuone,noselect'
