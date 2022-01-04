@@ -26,7 +26,7 @@ local get_formatting = function()
   }
 end
 
-local opts = {
+local setup = {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -66,10 +66,6 @@ local opts = {
       end
     end,
   },
-  -- documentation = {
-  --   border = cosmic_ui.get_border(),
-  --   winhighlight = 'FloatBorder:FloatBorder,Normal:Normal',
-  -- },
   experimental = {
     ghost_text = true,
   },
@@ -87,7 +83,7 @@ vim.cmd([[
   autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
 ]])
 
-cmp.setup(opts)
+cmp.setup(setup)
 
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
