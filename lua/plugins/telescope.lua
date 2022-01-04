@@ -22,6 +22,7 @@ require('telescope').setup({
     mappings = {
       i = {
         ['<esc>'] = require('telescope.actions').close,
+        ['<C-h>'] = 'which_key',
       },
     },
   },
@@ -51,5 +52,8 @@ nnoremap({ '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>"
 nnoremap({ '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>" })
 nnoremap({ '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
 nnoremap({ '<leader>sl', "<cmd>:lua require('session-lens').search_session()<cr>" })
+
+nnoremap({ '<leader>h', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>' })
+nnoremap({ '<leader>i', '<cmd>lua require("telescope.builtin").git_status()<cr>' })
 
 nnoremap({ '<leader>fd', '<cmd>:Telescope projects<cr>' })
