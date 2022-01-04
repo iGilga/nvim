@@ -41,17 +41,6 @@ function M.init(use, config)
   })
 
   use({
-    'folke/tokyonight.nvim',
-    as = 'tokyonight',
-    config = function()
-      vim.g.tokyonight_style = 'night'
-      vim.g.tokyonight_sidebars = { 'qf' }
-      vim.cmd('color tokyonight')
-    end,
-    disable = config.theme ~= 'tokyonight',
-  })
-
-  use({
     'shaunsingh/nord.nvim',
     as = 'nord',
     config = function()
