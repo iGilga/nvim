@@ -1,62 +1,89 @@
-local o, wo = vim.o, vim.wo
-local opt = vim.opt
+local g, o, opt = vim.g, vim.o, vim.opt
 local indent = 2
 
 -- Better default
-opt.hidden = true -- Don't save when switching buffer
-opt.inccommand = "split"
+-- opt.inccommand = "split"
 opt.splitright = true
 opt.splitbelow = true
-opt.mouse = "a"
-opt.showmode = false
---opt.fillchars = [[eob: ,vert:│]] -- stl:│,stlnc:│
-opt.encoding = "UTF-8"
-opt.shortmess:append "cI"
+opt.mouse = 'a'
+-- opt.showmode = false
+opt.fillchars = { eob = ' ' }
+opt.encoding = 'UTF-8'
+opt.shortmess:append('sI')
 opt.scrolloff = 8
 --opt.swapfile = false
 --opt.timeout = true
 -- Decrease update time
-o.timeoutlen = 500
-o.updatetime = 200
+opt.timeoutlen = 400
+opt.updatetime = 250
 
 -- Better editor UI
-wo.number = true
---wo.relativenumber = true
-wo.signcolumn = "yes:1"
-wo.cursorline = true
+opt.number = true
+opt.numberwidth = 2
+--opt.relativenumber = true
+opt.signcolumn = 'yes:1'
+opt.cursorline = true
 
 -- Undo and backup options
-o.backup = false
-o.writebackup = false
-o.undofile = true
-o.swapfile = false
-o.backupdir = "~/.nvim/backup/"
-o.directory = "~/.nvim/tmp/"
-o.undodir = "/tmp/"
+opt.backup = false
+opt.writebackup = false
+opt.undofile = true
+opt.swapfile = false
+opt.backupdir = '~/.nvim/backup/'
+opt.directory = '~/.nvim/tmp/'
+opt.undodir = '/tmp/'
 
 -- Colors
 opt.termguicolors = true
-opt.background = "dark"
+opt.background = 'dark'
 
--- /
-o.smartcase = true
-o.ignorecase = true
-o.hlsearch = false
+opt.hidden = true -- Don't save when switching buffer
+opt.smartcase = true
+opt.ignorecase = true
+-- o.hlsearch = false
 
 -- Tab size options
-o.expandtab = true
-o.smarttab = true
-o.tabstop = indent
-o.shiftwidth = indent
-o.softtabstop = indent
-o.smartindent = true
-wo.wrap = false
+opt.expandtab = true
+opt.smarttab = true
+opt.tabstop = 8
+opt.shiftwidth = indent
+-- o.softtabstop = indent
+opt.smartindent = true
+opt.wrap = false
 
 -- Makes neovim and host OS clipboard play nicely with each other
-o.clipboard = 'unnamedplus'
-
+opt.clipboard = 'unnamedplus'
+opt.cmdheight = 1
 -- When running macros and regexes on a large file, lazy redraw tells neovim not to draw the screen, which greatly speeds it up, upto 6-7x faster
-o.lazyredraw = true
+opt.lazyredraw = true
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,menuone,noselect'
+opt.completeopt = 'menu,menuone,noselect'
+
+o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+
+-- disable some builtin vim plugins
+local disabled_built_ins = {
+  '2html_plugin',
+  'getscript',
+  'getscriptPlugin',
+  'gzip',
+  'logipat',
+  'netrw',
+  'netrwPlugin',
+  'netrwSettings',
+  'netrwFileHandlers',
+  'matchit',
+  'tar',
+  'tarPlugin',
+  'rrhelper',
+  'spellfile_plugin',
+  'vimball',
+  'vimballPlugin',
+  'zip',
+  'zipPlugin',
+}
+
+for _, plugin in pairs(disabled_built_ins) do
+  g['loaded_' .. plugin] = 1
+end

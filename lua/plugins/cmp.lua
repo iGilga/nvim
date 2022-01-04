@@ -16,11 +16,11 @@ local get_formatting = function()
     format = require('lspkind').cmp_format({
       with_text = true,
       menu = {
-        buffer = '[buf]',
+        buffer = '[Buffer]',
         nvim_lsp = '[LSP]',
-        nvim_lua = '[VimApi]',
-        path = '[path]',
-        luasnip = '[snip]',
+        nvim_lua = '[Lua]',
+        path = '[Path]',
+        luasnip = '[LuaSnip]',
       },
     }),
   }
@@ -65,7 +65,7 @@ local opts = {
         fallback()
       end
     end,
-    },
+  },
   -- documentation = {
   --   border = cosmic_ui.get_border(),
   --   winhighlight = 'FloatBorder:FloatBorder,Normal:Normal',
@@ -89,8 +89,15 @@ vim.cmd([[
 
 cmp.setup(opts)
 
--- cmp.setup.cmdline('/', {
---   sources = {
---     { name = 'buffer' }
---   }
--- })
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' },
+    { name = 'cmdline' },
+  }),
+})
+
+cmp.setup.cmdline('/', {
+  sources = {
+    { name = 'buffer' },
+  },
+})
