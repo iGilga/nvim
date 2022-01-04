@@ -39,18 +39,17 @@ return packer.startup({
         },
       },
     })
-
     -- syntax code
     use({
-      {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate',
-        config = function()
-          require('plugins.treesitter')
-        end,
+      'nvim-treesitter/nvim-treesitter',
+      requires = {
+        'windwp/nvim-ts-autotag',
+        'nvim-treesitter/nvim-treesitter-refactor',
       },
-      { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' },
-      { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' },
+      run = ':TSUpdate',
+      config = function()
+        require('plugins.treesitter')
+      end,
     })
 
     -- finder file, code, etc
@@ -151,6 +150,14 @@ return packer.startup({
       'numToStr/Comment.nvim',
       config = function()
         require('Comment').setup()
+      end,
+    })
+
+    use({
+      'folke/todo-comments.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('plugins.todocomments')
       end,
     })
 
