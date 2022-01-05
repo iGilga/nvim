@@ -2,7 +2,6 @@ local nnoremap = require('utils.keymap').nnoremap
 
 require('telescope').setup({
   defaults = {
-    prompt_prefix = ' ',
     file_ignore_patterns = {
       '.git/',
     },
