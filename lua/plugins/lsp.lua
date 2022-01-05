@@ -104,6 +104,13 @@ local serverConfig = {
     },
   },
   lua = {},
+  yamlls = {
+    settings = {
+      schemas = {
+        ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
+      },
+    },
+  },
 }
 
 local function setup_servers()
