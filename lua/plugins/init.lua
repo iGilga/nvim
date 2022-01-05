@@ -79,8 +79,18 @@ return packer.startup({
         require('lualine').setup({
           options = {
             disabled_filetypes = { 'NnnExplorer', 'NnnPicker' },
-            sections = { lualine_c = { require('auto-session-library').current_session_name } },
           },
+          sections = {
+            -- lualine_c = {
+            -- },
+            lualine_x = {
+              { require('auto-session-library').current_session_name },
+              'encoding',
+              'fileformat',
+              'filetype',
+            },
+          },
+          extensions = { 'fzf' },
         })
       end,
     })
