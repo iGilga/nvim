@@ -27,16 +27,6 @@ local sources = {
   }),
 }
 
--- local denofmt = {
---   method = nullls.methods.FORMATTING,
---   filetypes = {"javascipt, javascriptreact, javascript.jsx"},
---   generator = nullls.formatter({
---     command = "deno",
---     --args = { "fmt", "-"},
---     to_stdin = true
---   }),
--- }
-
 local setup = {
   sources = sources,
 }
