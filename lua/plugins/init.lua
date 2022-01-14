@@ -142,7 +142,7 @@ return packer.startup({
       config = function()
         require('nnn').setup({
           explorer = { session = 'local' },
-          picker = { session = 'local' },
+          picker = { style = { border = 'rounded' }, session = 'local' },
         })
       end,
     })
@@ -234,6 +234,26 @@ return packer.startup({
         require('plugins.sessionlens')
       end,
     })
+    use({
+      'yamatsum/nvim-cursorline',
+      disable = true,
+    })
+
+    use({
+      'tami5/lspsaga.nvim',
+      config = function()
+        local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
+        require('lspsaga').setup({
+          error_sign = signs.Error,
+          warn_sign = signs.Warn,
+          hint_sign = signs.Hint,
+          infor_sign = signs.Info,
+        })
+      end,
+      disable = true,
+    })
+
+    use('MunifTanjim/nui.nvim')
 
     if pluginPacker.first_install then
       packer.sync()
