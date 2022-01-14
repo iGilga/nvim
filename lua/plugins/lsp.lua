@@ -1,10 +1,9 @@
 local serversRange = { 'html', 'cssls', 'denols', 'vuels', 'bashls', 'yamlls', 'jsonls', 'sumneko_lua' }
 
 local lspconfig = require('lspconfig')
--- local coq = require("coq")
 
 local on_attach = function(_, bufnr)
-  local function buf_set_keymap(...)
+  local function buf_ser_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
   end
   local function buf_set_option(...)
