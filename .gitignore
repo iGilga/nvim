@@ -1,2 +1,4 @@
 plugin/packer_compiled.lua
+.luarc.json
 sessions
+test.lua
