@@ -44,6 +44,15 @@ function keymap.nnoremap(args)
   return buildmap("n", {noremap = true}, args)
 end
 
+function keymap.imap(args)
+  return buildmap("i", {noremap = false}, args)
+end
+
+function keymap.inoremap(args)
+  return buildmap("i", {noremap = true}, args)
+end
+
+
 function keymap.vmap(args)
   return buildmap("v", {noremap = false}, args)
 end
