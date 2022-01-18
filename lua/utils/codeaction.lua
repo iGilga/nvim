@@ -4,6 +4,45 @@ local event = require('nui.utils.autocmd').event
 
 local M = {}
 
+local function fix_zero_version(workspace_edit)
+  if workspace_edit and workspace_edit.documentChanges then
+    for _, change in pairs(workspace_edit.documentChanges) do
+      local text_document = change.textDocument
+      if text_document and text_document.version and text_document.version == 0 then
+        text_document.version = nil
+      end
+    end
+  end
+  return workspace_edit
+end
+
+local function transform_action(action)
+  -- Remove 0 -version from LSP codeaction request payload.
+  -- Is only run on the "java.apply.workspaceEdit" codeaction.
+  -- Fixed Java/jdtls compatibility with Telescope
+  -- See fix_zero_version commentary for more information
+  local command = (action.command and action.command.command) or action.command
+  if not (command == 'java.apply.workspaceEdit') then
+    return action
+  end
+  local arguments = (action.command and action.command.arguments) or action.arguments
+  action.edit = fix_zero_version(arguments[1])
+  return action
+end
+
+local function execute_action(action)
+  if action.edit or type(action.command) == 'table' then
+    if action.edit then
+      vim.lsp.util.apply_workspace_edit(action.edit)
+    end
+    if type(action.command) == 'table' then
+      vim.lsp.buf.execute_command(action.command)
+    end
+  else
+    vim.lsp.buf.execute_command(action)
+  end
+end
+
 local default_border = 'rounded'
 local default_user_opts = {
   border_style = default_border,
