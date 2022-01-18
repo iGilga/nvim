@@ -253,6 +253,16 @@ return packer.startup({
       disable = true,
     })
 
+    -- rename
+    use({
+      'filipdutescu/renamer.nvim',
+      branch = 'master',
+      requires = { { 'nvim-lua/plenary.nvim' } },
+      config = function ()
+        require('renamer').setup()
+      end
+    })
+
     use('MunifTanjim/nui.nvim')
 
     if pluginPacker.first_install then
