@@ -52,7 +52,6 @@ function keymap.inoremap(args)
   return buildmap("i", {noremap = true}, args)
 end
 
-
 function keymap.vmap(args)
   return buildmap("v", {noremap = false}, args)
 end

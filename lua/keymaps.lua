@@ -2,8 +2,7 @@ local k = require('utils.keymap')
 local noremap = k.noremap
 local nnoremap = k.nnoremap
 local tnoremap = k.tnoremap
---local vnoremap = k.vnoremap
---local tnoremap = k.tnoremap
+local inoremap = k.inoremap
 
 -- map the leader key
 vim.g.mapleader = k.t('<Space>')
@@ -50,3 +49,6 @@ tnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
 nnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
 
 nnoremap({ '<leader>ga', "<cmd>lua require('utils.codeaction').code_actions()<cr>" })
+
+inoremap({ 'F2', '<cmd>lua require("renamer").rename()<cr>' })
+nnoremap({ '<leader>rr', '<cmd>lua require("renamer").rename()<cr>' })
