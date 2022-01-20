@@ -29,7 +29,21 @@ return packer.startup({
         require('plugins.lsp')
       end,
       requires = {
-        { 'williamboman/nvim-lsp-installer' },
+        {
+          'williamboman/nvim-lsp-installer',
+          config = function()
+            local lspinstaller = require('nvim-lsp-installer')
+            lspinstaller.settings({
+              ui = {
+                icons = {
+                  server_installed = '✓',
+                  server_pending = '➜',
+                  server_uninstalled = '✗',
+                },
+              },
+            })
+          end,
+        },
         {
           'jose-elias-alvarez/null-ls.nvim',
           config = function()
@@ -179,6 +193,7 @@ return packer.startup({
           char_list = { '|', '¦', '┆', '┊' },
           show_current_context = true,
           space_char_blankline = ' ',
+          buftype_exclude = { 'terminal', 'prompt', 'nofile', 'help' },
           filetype_exclude = { 'help', 'packer', 'lspinfo', 'dashboard', 'NnnExplorer', 'NnnPicker' },
         })
       end,
@@ -251,16 +266,6 @@ return packer.startup({
         })
       end,
       disable = true,
-    })
-
-    -- rename
-    use({
-      'filipdutescu/renamer.nvim',
-      branch = 'master',
-      requires = { { 'nvim-lua/plenary.nvim' } },
-      config = function ()
-        require('renamer').setup()
-      end
     })
 
     use('MunifTanjim/nui.nvim')
