@@ -1,4 +1,4 @@
-local serversRange = { 'html', 'cssls', 'denols', 'vuels', 'bashls', 'yamlls', 'jsonls', 'sumneko_lua' }
+local serversRange = { 'html', 'cssls', 'denols', 'vuels', 'bashls', 'jsonls', 'sumneko_lua', 'tailwindcss' }
 
 local lspconfig = require('lspconfig')
 
@@ -31,7 +31,9 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>')
   buf_set_keymap('n', 'gt', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>')
   buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
-  -- buf_map(bufnr, 'n', 'gn', '<cmd>lua require("cosmic-ui").rename()<cr>')
+  -- rename
+  buf_set_keymap('i','F3', "<cmd>lua require('utils.rename').rename()<cr>" )
+  buf_set_keymap('n','<leader>rr', "<cmd>lua require('utils.rename').rename()<cr>" )
 
   -- diagnostics
   buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
@@ -43,6 +45,7 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
   -- code actions
+  buf_set_keymap('n','<leader>ga', "<cmd>lua require('utils.codeaction').code_actions()<cr>")
   -- buf_map(bufnr, 'n', '<leader>ga', '<cmd>lua require("cosmic-ui").code_actions()<cr>')
   -- buf_map(bufnr, 'v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>')
 
@@ -71,7 +74,8 @@ local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if ok then
   capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 end
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
@@ -100,13 +104,6 @@ local serverConfig = {
     },
   },
   lua = {},
-  yamlls = {
-    settings = {
-      schemas = {
-        ['https://json.schemastore.org/github-workflow.json'] = '/.github/workflows/*',
-      },
-    },
-  },
 }
 
 local function setup_servers()
