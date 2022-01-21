@@ -4,6 +4,17 @@ local event = require('nui.utils.autocmd').event
 
 local M = {}
 
+local config = {
+  min_width = nil,
+  border = {
+    bottom_hl = 'FloatBorder',
+    highlight = 'FloatBorder',
+    style = 'rounded',
+    title = 'Code Actions',
+    title_align = 'center',
+    title_hl = 'FloatBorder',
+  },
+}
 local function fix_zero_version(workspace_edit)
   if workspace_edit and workspace_edit.documentChanges then
     for _, change in pairs(workspace_edit.documentChanges) do
@@ -43,34 +54,7 @@ local function execute_action(action)
   end
 end
 
-local default_border = 'rounded'
-local default_user_opts = {
-  border_style = default_border,
-  rename = {
-    border = {
-      highlight = 'FloatBorder',
-      style = nil,
-      title = 'Rename',
-      title_align = 'left',
-      title_hl = 'FloatBorder',
-    },
-    prompt = '> ',
-    prompt_hl = 'Comment',
-  },
-  code_actions = {
-    min_width = nil,
-    border = {
-      bottom_hl = 'FloatBorder',
-      highlight = 'FloatBorder',
-      style = nil,
-      title = 'Code Actions',
-      title_align = 'center',
-      title_hl = 'FloatBorder',
-    },
-  },
-}
-
-local index_of = function (tbl, item)
+local index_of = function(tbl, item)
   for i, value in ipairs(tbl) do
     if value == item then
       return i
@@ -93,11 +77,11 @@ M.code_actions = function(opts)
     print('No results from textDocument/codeAction')
     return
   end
-
+  -- items for menu
   local menu_items = {}
-
+  -- result items to filter through
   local result_items = {}
-  local min_width = 0
+  local min_width = config.min_width or 0
 
   for client_id, response in pairs(results_lsp) do
     if response.result and not vim.tbl_isempty(response.result) then
@@ -130,11 +114,11 @@ M.code_actions = function(opts)
     },
     relative = 'cursor',
     border = {
-      highlight = 'FloatBorder',
-      style = default_user_opts.border_style,
+      highlight = config.border.highlight,
+      style = config.border.style,
       text = {
-        top = ntext('Code Actions'),
-        top_align = 'center',
+        top = ntext(config.border.title, config.border.title_hl),
+        top_align = config.border.title_align,
       },
       padding = { 0, 1 },
     },
@@ -146,7 +130,7 @@ M.code_actions = function(opts)
     lines = menu_items,
     min_width = min_width,
     separator = {
-      char = '·',
+      char = ' ',
       text_align = 'center',
     },
     keymap = {
@@ -157,7 +141,8 @@ M.code_actions = function(opts)
     },
     on_change = function(item, menu)
       local pos = index_of(result_items, item)
-      menu.border:set_text('bottom', '(' .. tostring(pos) .. '/' .. #result_items .. ')', 'right')
+      local text = '(' .. tostring(pos) .. '/' .. #result_items .. ')'
+      menu.border:set_text('bottom', ntext(text, config.border.bottom_hl), 'right')
     end,
     on_submit = function(item)
       local action = item.ctx.command
@@ -185,7 +170,7 @@ M.code_actions = function(opts)
       end
     end,
   })
-
+  -- mount the component
   menu:mount()
 
   vim.api.nvim_buf_call(menu.bufnr, function()
@@ -193,7 +178,7 @@ M.code_actions = function(opts)
       vim.api.nvim_imput('<Esc>')
     end
   end)
-
+  -- close menu when cursor leaves buffer
   menu:on(event.BufLeave, menu.menu_props.on_close, { once = true })
 end
 
