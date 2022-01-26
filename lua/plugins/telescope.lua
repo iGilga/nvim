@@ -1,6 +1,12 @@
 local nnoremap = require('utils.keymap').nnoremap
 
-require('telescope').setup({
+local telescope = require('telescope')
+local actions = require('telescope.actions')
+
+local trouble = require('trouble.providers.telescope')
+
+
+telescope.setup({
   defaults = {
     file_ignore_patterns = {
       '.git/',
@@ -20,8 +26,12 @@ require('telescope').setup({
     },
     mappings = {
       i = {
-        ['<esc>'] = require('telescope.actions').close,
+        ['<esc>'] = actions.close,
         ['<C-h>'] = 'which_key',
+        ['<c-n>'] = trouble.open_with_trouble,
+      },
+      n = {
+        ['<c-n>'] = trouble.open_with_trouble,
       },
     },
   },
