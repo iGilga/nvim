@@ -185,6 +185,30 @@ return packer.startup({
       end,
     })
 
+    use({
+      'folke/trouble.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('trouble').setup({})
+        vim.api.nvim_set_keymap('n', '<leader>xx', '<cmd>Trouble<cr>', { silent = true, noremap = true })
+        vim.api.nvim_set_keymap(
+          'n',
+          '<leader>xw',
+          '<cmd>Trouble workspace_diagnostics<cr>',
+          { silent = true, noremap = true }
+        )
+        vim.api.nvim_set_keymap(
+          'n',
+          '<leader>xd',
+          '<cmd>Trouble document_diagnostics<cr>',
+          { silent = true, noremap = true }
+        )
+        vim.api.nvim_set_keymap('n', '<leader>xl', '<cmd>Trouble loclist<cr>', { silent = true, noremap = true })
+        vim.api.nvim_set_keymap('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', { silent = true, noremap = true })
+        vim.api.nvim_set_keymap('n', 'gR', '<cmd>Trouble lsp_references<cr>', { silent = true, noremap = true })
+      end,
+    })
+
     -- indentline
     use({
       'lukas-reineke/indent-blankline.nvim',
@@ -223,6 +247,17 @@ return packer.startup({
       'norcalli/nvim-colorizer.lua',
       config = function()
         require('plugins.colorizer')
+      end,
+    })
+
+    use({
+      'folke/twilight.nvim',
+      config = function()
+        require('twilight').setup({
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        })
       end,
     })
 
@@ -268,8 +303,33 @@ return packer.startup({
       disable = true,
     })
 
+    use('rcarriga/nvim-notify')
+
     use('MunifTanjim/nui.nvim')
 
+    use({
+      'max397574/better-escape.nvim',
+      config = function()
+        require('better_escape').setup()
+      end,
+      disable = true,
+    })
+
+    use({
+      'LudoPinelli/comment-box.nvim',
+      config = function()
+        local keymap = vim.api.nvim_set_keymap
+
+        keymap('n', '<Leader>cl', "<Cmd>lua require('comment-box').lbox()<CR>", {})
+        keymap('v', '<Leader>cl', "<Cmd>lua require('comment-box').lbox()<CR>", {})
+
+        keymap('n', '<Leader>cc', "<Cmd>lua require('comment-box').cbox()<CR>", {})
+        keymap('v', '<Leader>cc', "<Cmd>lua require('comment-box').cbox()<CR>", {})
+
+        keymap('n', '<Leader>ci', "<Cmd>lua require('comment-box').line()<CR>", {})
+        keymap('i', '<-l>', "<Cmd>lua require('comment-box').line()<CR>", {})
+      end,
+    })
     if pluginPacker.first_install then
       packer.sync()
     end

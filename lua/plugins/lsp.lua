@@ -1,4 +1,4 @@
-local serversRange = { 'html', 'cssls', 'denols', 'vuels', 'bashls', 'jsonls', 'sumneko_lua', 'tailwindcss' }
+local serversRange = { 'html', 'cssls', 'vuels', 'bashls', 'jsonls', 'sumneko_lua', 'tailwindcss' }
 
 local lspconfig = require('lspconfig')
 
@@ -32,8 +32,8 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'gt', '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>')
   buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
   -- rename
-  buf_set_keymap('i','F3', "<cmd>lua require('utils.rename').rename()<cr>" )
-  buf_set_keymap('n','<leader>rr', "<cmd>lua require('utils.rename').rename()<cr>" )
+  buf_set_keymap('i', 'F3', "<cmd>lua require('utils.rename').rename()<cr>")
+  buf_set_keymap('n', '<leader>rr', "<cmd>lua require('utils.rename').rename()<cr>")
 
   -- diagnostics
   buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
@@ -45,7 +45,7 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
   -- code actions
-  buf_set_keymap('n','<leader>ga', "<cmd>lua require('utils.codeaction').code_actions()<cr>")
+  buf_set_keymap('n', '<leader>ga', "<cmd>lua require('utils.codeaction').code_actions()<cr>")
   -- buf_map(bufnr, 'n', '<leader>ga', '<cmd>lua require("cosmic-ui").code_actions()<cr>')
   -- buf_map(bufnr, 'v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>')
 
@@ -77,6 +77,9 @@ end
 
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
+require('utils.sign')
+
+
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
@@ -103,7 +106,26 @@ local serverConfig = {
       },
     },
   },
-  lua = {},
+  jsonls = {
+    settings = {
+      json = {
+        schemas = {
+          {
+            fileMatch = { 'pacakge.json' },
+            url = 'https://json.schemastore.org/package.json',
+          },
+          {
+            fileMatch = { '.eslintrc' },
+            url = 'https://json.schemastore.org/eslintrc.json',
+          },
+          {
+            fileMatch = { 'docker-compose.yml' },
+            url = 'https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json',
+          },
+        },
+      },
+    },
+  },
 }
 
 local function setup_servers()
