@@ -13,12 +13,15 @@ end
 local sources = {
   nullls.builtins.code_actions.eslint_d.with({
     condition = has_eslint_config,
+    prefer_local = 'node_modules/.bin',
   }),
   nullls.builtins.diagnostics.eslint_d.with({
     condition = has_eslint_config,
+    prefer_local = 'node_modules/.bin',
   }),
   nullls.builtins.formatting.eslint_d.with({
     condition = has_eslint_config,
+    prefer_local = 'node_modules/.bin',
   }),
   nullls.builtins.code_actions.gitsigns,
   nullls.builtins.formatting.prettierd,
