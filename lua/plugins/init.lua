@@ -79,6 +79,9 @@ return packer.startup({
       end,
     })
 
+    -- telescope with hop
+    use({ 'nvim-telescope/telescope-hop.nvim' })
+
     -- topline
     use({
       'romgrk/barbar.nvim',
