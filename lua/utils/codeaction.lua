@@ -74,7 +74,9 @@ M.code_actions = function(opts)
   local results_lsp, _ = vim.lsp.buf_request_sync(0, 'textDocument/codeAction', opts.params, opts.timeout)
 
   if not results_lsp or vim.tbl_isempty(results_lsp) then
-    print('No results from textDocument/codeAction')
+    vim.notify('No results from textDocument/codeAction', vim.log.levels.WARN, {
+      title = 'CodeAction',
+    })
     return
   end
   -- items for menu
@@ -104,7 +106,9 @@ M.code_actions = function(opts)
     end
   end
   if #menu_items == 0 then
-    print('No code actions available')
+    vim.notify('No code actions available', vim.log.levels.INFO, {
+      title = 'CodeAction',
+    })
     return
   end
   local popup_opts = {
