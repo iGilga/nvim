@@ -117,7 +117,8 @@ telescope.setup({
   },
 })
 
-telescope.load_extension('fzf')
+-- telescope.load_extension('fzf')
+require("telescope").load_extension("zf-native")
 telescope.load_extension('session-lens')
 telescope.load_extension('hop')
 -- require('telescope').load_extension('projects')

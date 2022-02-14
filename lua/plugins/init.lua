@@ -72,7 +72,8 @@ return packer.startup({
       requires = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        -- { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        'natecraddock/telescope-zf-native.nvim',
       },
       config = function()
         require('plugins.telescope')
