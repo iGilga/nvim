@@ -60,7 +60,7 @@ opt.lazyredraw = true
 -- Set completeopt to have a better completion experience
 opt.completeopt = 'menu,menuone,noselect'
 
-o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
 
 -- disable some builtin vim plugins
 local disabled_built_ins = {
@@ -74,6 +74,7 @@ local disabled_built_ins = {
   'netrwSettings',
   'netrwFileHandlers',
   'matchit',
+  'matchparen',
   'tar',
   'tarPlugin',
   'rrhelper',
@@ -82,6 +83,7 @@ local disabled_built_ins = {
   'vimballPlugin',
   'zip',
   'zipPlugin',
+  'spec',
 }
 
 for _, plugin in pairs(disabled_built_ins) do
