@@ -33,7 +33,8 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>')
   -- rename
   buf_set_keymap('i', 'F3', "<cmd>lua require('utils.rename').rename()<cr>")
-  buf_set_keymap('n', '<leader>rr', "<cmd>lua require('utils.rename').rename()<cr>")
+  buf_set_keymap('n', '<leader>gg', "<cmd>lua require('utils.rename').rename()<cr>")
+  -- buf_set_keymap('n', '<leader>gg', "<cmd>Lspsaga rename<cr>")
 
   -- diagnostics
   buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
@@ -45,10 +46,11 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
   -- code actions
-  buf_set_keymap('n', '<leader>ga', "<cmd>lua require('utils.codeaction').code_actions()<cr>")
-  -- buf_map(bufnr, 'n', '<leader>ga', '<cmd>lua require("cosmic-ui").code_actions()<cr>')
-  -- buf_map(bufnr, 'v', '<leader>ga', '<cmd>lua require("cosmic-ui").range_code_actions()<cr>')
+  buf_set_keymap('n', '<leader>ga', "<cmd>lua require('utils.ca').code_action()<cr>")
+  buf_set_keymap('v', '<leader>ga', '<cmd>lua require("utils.ca").range_code_action()<cr>')
 
+  -- buf_set_keymap('n', '<leader>ga', "<cmd>Lspsaga code_action<cr>")
+  -- buf_set_keymap('v', '<leader>ga', '<cmd>Lspsaga range_code_action<cr>')
   -- formatting
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>')
   buf_set_keymap('v', '<leader>gf', '<cmd>lua vim.lsp.buf.range_formatting()<cr>')
@@ -60,12 +62,6 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', '<leader>wd', '<cmd>Telescope diagnostics<cr>')
   buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>')
   buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>')
-  -- buf_map(
-  --   bufnr,
-  --   'n',
-  --   '<leader>wl',
-  --   '<cmd>lua require("cosmic.utils.logger"):log(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>'
-  -- )
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
