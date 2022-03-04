@@ -307,7 +307,13 @@ return packer.startup({
       disable = true,
     })
 
-    use('rcarriga/nvim-notify')
+    use({
+      'rcarriga/nvim-notify',
+      config = function()
+        require('notify').setup()
+        vim.notify = require('notify')
+      end,
+    })
 
     use('MunifTanjim/nui.nvim')
 
