@@ -46,8 +46,8 @@ local on_attach = function(_, bufnr)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
 
   -- code actions
-  buf_set_keymap('n', '<leader>ga', "<cmd>lua require('utils.ca').code_action()<cr>")
-  buf_set_keymap('v', '<leader>ga', '<cmd>lua require("utils.ca").range_code_action()<cr>')
+  buf_set_keymap('n', '<leader>ga', '<cmd>lua require("utils.codeaction").code_action()<cr>')
+  buf_set_keymap('v', '<leader>ga', '<cmd>lua require("utils.codeaction").range_code_action()<cr>')
 
   -- buf_set_keymap('n', '<leader>ga', "<cmd>Lspsaga code_action<cr>")
   -- buf_set_keymap('v', '<leader>ga', '<cmd>Lspsaga range_code_action<cr>')
@@ -74,7 +74,6 @@ end
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require('utils.sign')
-
 
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
