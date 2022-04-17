@@ -45,7 +45,7 @@ opt.ignorecase = true
 -- Tab size options
 opt.expandtab = true
 opt.smarttab = true
-opt.tabstop = 8
+opt.tabstop = indent
 opt.shiftwidth = indent
 -- o.softtabstop = indent
 opt.smartindent = true
