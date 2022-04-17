@@ -19,8 +19,8 @@ nnoremap({ '<leader>s', ':w<cr>' })
 
 -- barbar.nvim
 local opts = { silent = true }
-nnoremap({ '<A-;>', ':BufferNext<cr>', opts })
-nnoremap({ '<A-l>', ':BufferPrevious<cr>', opts })
+nnoremap({ 'nn', ':BufferNext<cr>', opts })
+nnoremap({ 'hh', ':BufferPrevious<cr>', opts })
 nnoremap({ '<A-1>', ':BufferGoto 1<cr>', opts })
 nnoremap({ '<A-2>', ':BufferGoto 2<cr>', opts })
 nnoremap({ '<A-3>', ':BufferGoto 3<cr>', opts })
