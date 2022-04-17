@@ -10,7 +10,7 @@ function M.init(use, config)
       })
       vim.cmd('colorscheme kanagawa')
     end,
-    disable = config.theme ~= 'kanagawa'
+    disable = config.theme ~= 'kanagawa',
   })
 
   use({
