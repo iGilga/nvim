@@ -1,4 +1,7 @@
 local lsp = vim.lsp
+local Input = require('nui.input')
+local event = require('nui.utils.autocmd').event
+
 local Text = require('nui.text')
 
 local M = {}
@@ -7,7 +10,7 @@ local config = {
   border = {
     highlight = 'FloatBorder',
     style = 'rounded',
-    title = 'Rename',
+    title = '[Rename]',
     title_align = 'left',
     title_hl = 'FloatBorder',
   },
@@ -49,49 +52,28 @@ local utils = {
       prompt_backspace(prompt)
     end)
   end,
-  get_relative_path = function(file_path)
-    local plenary_path = require('plenary.path')
-    local parsed_path, _ = file_path:gsub('file://', '')
-    local path = plenary_path:new(parsed_path)
-    local relative_path = path:make_relative(vim.fn.getcwd())
-    return './' .. relative_path
-  end,
 }
-local rename_handler = function(...)
-  local result
-  local method
-  local err = select(1, ...)
-  local is_new = not select(4, ...) or type(select(4, ...)) ~= 'number'
-  if is_new then
-    method = select(3, ...).method
-    result = select(2, ...)
-  else
-    method = select(2, ...)
-    result = select(3, ...)
+local rename_handler = function(err, result, ctx, _)
+  if err then
+    vim.notify(("Error running LSP query '%s': %s"):format(ctx.method, err), vim.log.levels.ERROR, {
+      title = 'Cosmic-UI',
+    })
   end
 
-  if err then
-    print(("Error running LSP query '%s': %s"):format(method, err))
+  if not result then
     return
   end
 
-  local new_word = ''
-  if result and result.changes then
-    local msg = {}
-    for f, c in pairs(result.changes) do
-      new_word = c[1].newText
-      table.insert(msg, ('%d changes -> %s'):format(#c, utils.get_relative_path(f)))
-    end
-    local currName = vim.fn.expand('<cword>')
-    print(msg)
-  end
-
-  vim.lsp.handlers[method](...)
+  vim.lsp.util.apply_workspace_edit(result)
+  local total_files = vim.tbl_count(result.documentChanges[1].edits)
+  vim.notify(
+    ('Changed %s time%s.'):format(total_files, total_files > 1 and 's' or ''),
+    vim.log.levels.INFO,
+    { title = 'Rename' }
+  )
 end
 
 M.rename = function(popup_opts, opts)
-  local Input = require('nui.input')
-  local event = require('nui.utils.autocmd').event
   local curr_name = vim.fn.expand('<cword>')
 
   local width = 25
