@@ -1,13 +1,15 @@
 local nullls = require('null-ls')
 
 local has_eslint_config = function(utils)
-  return utils.root_has_file('.eslintrc')
-    or utils.root_has_file('.eslintrc.json')
-    or utils.root_has_file('.eslintrc.js')
-    or utils.root_has_file('package.json')
-    or utils.root_has_file('.eslintrc.cjs')
-    or utils.root_has_file('.eslintrc.yaml')
-    or utils.root_has_file('.eslintrc.yml')
+  local files = {
+    '.eslintrc',
+    '.eslintrc.json',
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+  }
+  return utils.has_file(files) or utils.root_has_file(files)
 end
 
 local sources = {
