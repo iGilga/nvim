@@ -1,5 +1,16 @@
 local setup = {
-  ensure_installed = 'maintained',
+  ensure_installed = {
+    'bash',
+    'css',
+    'html',
+    'javascript',
+    'jsdoc',
+    'json',
+    'lua',
+    'markdown',
+    'scss',
+    'yaml',
+  },
   highlight = {
     enable = true,
     use_languagetree = true,
@@ -9,6 +20,10 @@ local setup = {
   },
   autotag = {
     enable = true,
+  },
+  context_commentstring = {
+    enable = true,
+    enable_autocmd = false,
   },
   refactor = {
     highlight_definitions = { enable = true },
