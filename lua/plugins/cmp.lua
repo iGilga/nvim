@@ -36,10 +36,7 @@ local setup = {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
     ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
     ['<S-Enter>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-    ['<S-Backspace>'] = cmp.mapping({
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    }),
+    ['<C-e>'] = cmp.mapping.close(),
     -- disabled for autopairs mapping
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
@@ -70,10 +67,10 @@ local setup = {
     ghost_text = true,
   },
   sources = {
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
-    { name = 'buffer' },
     { name = 'luasnip' },
+    { name = 'nvim_lua' },
+    { name = 'nvim_lsp', max_item_count = 25 },
+    { name = 'buffer', keyword_length = 5 },
     { name = 'path' },
   },
   formatting = get_formatting(),
