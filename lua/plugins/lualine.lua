@@ -1,20 +1,48 @@
 local lualine = require('lualine')
+local logger = require('utils.logger')
+
+local function getSessionName()
+  if vim.v.this_session then
+    local session = vim.v.this_session
+    local splitSessionPath = vim.split(session, '%%')
+    local sessionName = splitSessionPath[#splitSessionPath]:gsub('%.vim', '')
+    if sessionName == nil or sessionName == '' then
+      return '[No Session]'
+    end
+    return '[S]' .. sessionName
+  end
+end
 
 local config = {
   options = {
+    icons_enabled = true,
     disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree' },
+    globalstatus = true,
+    component_separators = { left = '|', right = '|' },
+    section_separators = { left = '', right = ''},
   },
   sections = {
-    -- lualine_c = {
-    -- },
-    lualine_x = {
-      { require('auto-session-library').current_session_name },
-      'encoding',
-      'fileformat',
-      'filetype',
-    },
+    lualine_a = { {
+      'mode',
+      fmt = function(str)
+        return str:sub(1, 1)
+      end,
+    } },
+    lualine_b = { { getSessionName }, { 'filename', file_status = true } },
+    lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
+    lualine_x = { 'encoding', 'filetype' },
+    lualine_y = { { 'branch', icon = '', 'diff' } },
+    lualine_z = { 'location' },
   },
-  extensions = { 'fzf' },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { 'filename' },
+    lualine_x = { 'location' },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  extensions = { 'quickfix', 'fzf' },
 }
 
 lualine.setup(config)
