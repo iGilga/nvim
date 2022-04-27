@@ -1,4 +1,5 @@
 local nullls = require('null-ls')
+-- local defaultAttach = require('lsp.servers.default').on_attach
 
 local has_eslint_config = function(utils)
   local files = {
@@ -8,6 +9,7 @@ local has_eslint_config = function(utils)
     '.eslintrc.cjs',
     '.eslintrc.yaml',
     '.eslintrc.yml',
+    -- 'package.json',
   }
   return utils.has_file(files) or utils.root_has_file(files)
 end
@@ -32,7 +34,19 @@ local sources = {
   }),
 }
 
+-- local function on_attachCustom(client)
+--   if client.resolved_capabilities.document_formatting then
+--     vim.cmd([[
+--             augroup LspFormatting
+--                 autocmd! * <buffer>
+--                 autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
+--             augroup END
+--             ]])
+--   end
+-- end
+
 local setup = {
+  -- on_attach = defaultAttach,
   sources = sources,
 }
 
