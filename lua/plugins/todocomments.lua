@@ -3,6 +3,6 @@ local nnoremap = require('utils.keymap').nnoremap
 
 local setup = {}
 
-nnoremap({ '<leader>ft', ':TODOTelescope<cr>' })
+nnoremap({ '<leader>ft', ':TodoTelescope<cr>' })
 
-require('todo').setup(setup)
+require('todo-comments').setup(setup)
