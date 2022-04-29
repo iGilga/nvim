@@ -6,13 +6,9 @@ function M.merge(...)
   return vim.tbl_deep_extend('force', ...)
 end
 
-function M.can_client_format(client_name)
-  if config.lsp.servers[client_name] == true then
-    return true
-  end
-
-  if vim.tbl_contains(vim.tbl_keys(config.lsp.servers), client_name) and config.lsp.servers[client_name] then
-    return (config.lsp.servers[client_name].format == true)
+function M.isClientFormat(clientName)
+  if config.lsp.servers[clientName] then
+    return (config.lsp.servers[clientName].formatter == true)
   end
 
   return true
