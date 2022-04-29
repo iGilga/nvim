@@ -4,19 +4,11 @@ local event = require('nui.utils.autocmd').event
 
 local Text = require('nui.text')
 
-local M = {}
+local config = require('config').rename
+local u = require('utils')
+local logger = require('utils.logger')
 
-local config = {
-  border = {
-    highlight = 'FloatBorder',
-    style = 'rounded',
-    title = '[Rename]',
-    title_align = 'left',
-    title_hl = 'FloatBorder',
-  },
-  prompt = '> ',
-  prompt_hl = 'Comment',
-}
+local M = {}
 
 local map = function(input, lhs, rhs)
   input:map('i', lhs, rhs, { noremap = true }, false)
@@ -33,55 +25,57 @@ local prompt_backspace = function(prompt)
   end
 end
 
-local utils = {
-  merge = function(...)
-    return vim.tbl_deep_extend('force', ...)
-  end,
-  default_mappings = function(input)
-    local prompt = input._.prompt._length
+local mappings = function(input)
+  local prompt = input._.prompt._length
 
-    map(input, '<ESC>', function()
-      input.input_props.on_close()
-    end)
+  map(input, '<ESC>', function()
+    input.input_props.on_close()
+  end)
 
-    map(input, '<C-c>', function()
-      input.input_props.on_close()
-    end)
+  map(input, '<C-c>', function()
+    input.input_props.on_close()
+  end)
 
-    map(input, '<BS>', function()
-      prompt_backspace(prompt)
-    end)
-  end,
-}
+  map(input, '<BS>', function()
+    prompt_backspace(prompt)
+  end)
+end
+
 local rename_handler = function(err, result, ctx, _)
   if err then
-    vim.notify(("Error running LSP query '%s': %s"):format(ctx.method, err), vim.log.levels.ERROR, {
-      title = 'Cosmic-UI',
+    logger.error(("Error running LSP query '%s': %s"):format(ctx.method, err), {
+      title = '[LSP]Rename',
     })
   end
 
-  if not result then
-    return
+  if result and result.changes then
+    local params = ctx.params
+    local uri = params.textDocument.uri
+    local client = lsp.get_client_by_id(ctx.client_id)
+    lsp.util.apply_workspace_edit(result, client.offset_encoding)
+    local countChanges = #result.changes[uri]
+    -- local msg = ('%s -> %s [%s]%d'):format(params.currName, params.newName, u.get_relative_path(uri), countChanges)
+    -- logger.info(msg, { title = '[LSP]Rename' }
+    -- )
+    local msg = ('[LSP]Rename: %s -> %s [%s][%d]'):format(
+      params.currName,
+      params.newName,
+      u.get_relative_path(uri),
+      countChanges
+    )
+    logger.minfo(msg)
   end
-
-  vim.lsp.util.apply_workspace_edit(result)
-  local total_files = vim.tbl_count(result.documentChanges[1].edits)
-  vim.notify(
-    ('Changed %s time%s.'):format(total_files, total_files > 1 and 's' or ''),
-    vim.log.levels.INFO,
-    { title = 'Rename' }
-  )
 end
 
 M.rename = function(popup_opts, opts)
-  local curr_name = vim.fn.expand('<cword>')
+  local currName = vim.fn.expand('<cword>')
 
   local width = 25
-  if #curr_name > width then
-    width = #curr_name
+  if #currName > width then
+    width = #currName
   end
 
-  popup_opts = utils.merge({
+  popup_opts = {
     position = {
       row = 1,
       col = 0,
@@ -99,27 +93,28 @@ M.rename = function(popup_opts, opts)
         top_align = config.border.title_align,
       },
     },
-  }, popup_opts or {})
+  }
 
-  opts = utils.merge({
+  opts = {
     prompt = Text(config.prompt, config.prompt_hl),
-    default_value = curr_name,
-    on_submit = function(new_name)
-      if not (new_name and #new_name > 0) or new_name == curr_name then
+    default_value = currName,
+    on_submit = function(newName)
+      if not (newName and #newName > 0) or newName == currName then
         return
       end
       local params = lsp.util.make_position_params()
-      params.newName = new_name
+      params.currName = currName
+      params.newName = newName
       lsp.buf_request(0, 'textDocument/rename', params, rename_handler)
     end,
-  }, opts or {})
+  }
 
   local input = Input(popup_opts, opts)
 
   -- mount/open the component
   input:mount()
 
-  utils.default_mappings(input)
+  mappings(input)
 
   -- unmount component when cursor leaves buffer
   input:on(event.BufLeave, function()
