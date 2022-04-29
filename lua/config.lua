@@ -78,7 +78,6 @@ M.plugins = {
 }
 
 M.disablePlugins = {
-  'trouble.nvim',
   'better-escape.nvim',
   'nvim-cursorline',
 }
