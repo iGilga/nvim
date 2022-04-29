@@ -1,14 +1,7 @@
 local nnoremap = require('utils.keymap').nnoremap
-
+local u = require('utils')
 local telescope = require('telescope')
 local actions = require('telescope.actions')
-
-local trouble = require('trouble.providers.telescope')
-
-P = function(v)
-  print(vim.inspect(v))
-  return v
-end
 
 if pcall(require, 'plenary') then
   RELOAD = require('plenary.reload').reload_module
@@ -19,16 +12,41 @@ if pcall(require, 'plenary') then
   end
 end
 
+local padding = { padding = 1 }
+local wideVertical = {
+  sorting_strategy = 'ascending',
+  layout_strategy = 'vertical',
+  layout_config = {
+    anchor = 'N',
+    width = { padding = 6 },
+    height = { padding = 1 },
+    preview_height = 0.65,
+  },
+}
+
+local wideHorizontal = {
+  sorting_strategy = 'ascending',
+  layout_strategy = 'horizontal',
+  layout_config = {
+    anchor = 'N',
+    width = { padding = 6 },
+    height = { padding = 1 },
+    preview_width = 0.65,
+  },
+}
+
 telescope.setup({
   defaults = {
+    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
     file_ignore_patterns = {
+      'node_modules',
       '.git/',
     },
     mappings = {
       i = {
         ['<esc>'] = actions.close,
         ['<c-h>'] = 'which_key',
-        ['<c-n>'] = trouble.open_with_trouble,
+        -- ['<c-n>'] = trouble.open_with_trouble,
         ['<c-l>'] = R('telescope').extensions.hop.hop, -- hop.hop_toggle_selection
         ['<c-o>'] = function(prompt_bufnr)
           local opts = {
@@ -39,7 +57,15 @@ telescope.setup({
         end,
       },
       n = {
-        ['<c-n>'] = trouble.open_with_trouble,
+        ['<c-h>'] = 'which_key',
+        ['<c-l>'] = R('telescope').extensions.hop.hop, -- hop.hop_toggle_selection
+        ['<c-o>'] = function(prompt_bufnr)
+          local opts = {
+            callback = actions.toggle_selection,
+            loop_callback = actions.send_selected_to_qflist,
+          }
+          telescope.extensions.hop._hop_loop(prompt_bufnr, opts)
+        end,
       },
     },
   },
@@ -109,19 +135,24 @@ telescope.setup({
       -- jump to entry where hoop loop was started from
       reset_selection = true,
     },
-    project = {
-      base_dir = {
-        '~/project',
-      },
-    },
+  },
+  pickers = {
+    find_files = u.merge(wideHorizontal, {}),
+    live_grep = u.merge(wideHorizontal, {}),
+    diagnostics = u.merge(wideHorizontal, {}),
+    lsp_references = u.merge(wideHorizontal, {}),
+    help_tags = u.merge(wideHorizontal, {}),
+    buffers = u.merge(wideHorizontal, {}),
   },
 })
 
 -- telescope.load_extension('fzf')
-require("telescope").load_extension("zf-native")
+telescope.load_extension('zf-native')
 telescope.load_extension('session-lens')
 telescope.load_extension('hop')
--- require('telescope').load_extension('projects')
+telescope.load_extension('notify')
+require('telescope').load_extension('lazygit')
+require('telescope').load_extension('projects')
 
 -- mapping
 nnoremap({ '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>" })
@@ -130,8 +161,15 @@ nnoremap({ '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>" }
 nnoremap({ '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
 nnoremap({ '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>" })
 
+nnoremap({ '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>" })
+
+nnoremap({
+  '<leader>tn',
+  "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
+})
+
 nnoremap({ '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>' })
 nnoremap({ '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>' })
 
-nnoremap({ '<leader>sl', "<cmd>:lua require('session-lens').search_session()<cr>" })
--- nnoremap({ '<leader>fd', '<cmd>:Telescope projects<cr>' })
+nnoremap({ '<leader>sl', ':Telescope session-lens search_session<cr>' })
+nnoremap({ '<leader>fd', '<cmd>:Telescope projects<cr>' })
