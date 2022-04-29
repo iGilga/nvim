@@ -139,6 +139,7 @@ telescope.setup({
   pickers = {
     find_files = u.merge(wideHorizontal, {}),
     live_grep = u.merge(wideHorizontal, {}),
+    grep_string = u.merge(wideHorizontal, {}),
     diagnostics = u.merge(wideHorizontal, {}),
     lsp_references = u.merge(wideHorizontal, {}),
     help_tags = u.merge(wideHorizontal, {}),

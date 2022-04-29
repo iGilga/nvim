@@ -166,7 +166,7 @@ return packer.startup({
     })
 
     use({
-      'folke/todo-comments.nvim',
+      'AmeerTaweel/todo.nvim',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
         require('plugins.todocomments')
