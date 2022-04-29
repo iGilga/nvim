@@ -1,11 +1,11 @@
+local config = require('config')
 local k = require('utils.keymap')
 local noremap = k.noremap
 local nnoremap = k.nnoremap
 local tnoremap = k.tnoremap
 
 -- map the leader key
-vim.g.mapleader = k.t('<Space>')
---k.nmap {"<Space>", "<Leader>"}
+vim.g.mapleader = config.leader
 
 -- remapping from basic vim to jkl;
 noremap({ 'l', 'h' })
@@ -17,10 +17,13 @@ nnoremap({ '<leader>q', ':q<cr>' })
 nnoremap({ '<c-q>', ':qa<cr>' })
 nnoremap({ '<leader>s', ':w<cr>' })
 
+-- reset highlight
+nnoremap({ '<F5>', ':nohl<cr>' })
+
 -- barbar.nvim
 local opts = { silent = true }
-nnoremap({ 'nn', ':BufferNext<cr>', opts })
-nnoremap({ 'hh', ':BufferPrevious<cr>', opts })
+nnoremap({ '<A-right>', ':BufferNext<cr>', opts })
+nnoremap({ '<A-left>', ':BufferPrevious<cr>', opts })
 nnoremap({ '<A-1>', ':BufferGoto 1<cr>', opts })
 nnoremap({ '<A-2>', ':BufferGoto 2<cr>', opts })
 nnoremap({ '<A-3>', ':BufferGoto 3<cr>', opts })
@@ -42,7 +45,9 @@ nnoremap({ '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>" })
 nnoremap({ '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>" })
 
 nnoremap({ '<leader>ss', ':SaveSession<cr>' })
-nnoremap({ '<leader>sl', ':silent Telescope session-lens search_session' })
 
 tnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
 nnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
+
+-- LazyGit
+nnoremap({ '<leader>ll', ':LazyGit<cr>' })
