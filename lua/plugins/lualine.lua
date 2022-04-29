@@ -19,7 +19,7 @@ local config = {
     disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree' },
     globalstatus = true,
     component_separators = { left = '|', right = '|' },
-    section_separators = { left = '', right = ''},
+    section_separators = { left = '', right = '' },
   },
   sections = {
     lualine_a = { {
