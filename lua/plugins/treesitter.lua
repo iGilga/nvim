@@ -1,16 +1,6 @@
+local config = require('config').plugins.treesitter
 local setup = {
-  ensure_installed = {
-    'bash',
-    'css',
-    'html',
-    'javascript',
-    'jsdoc',
-    'json',
-    'lua',
-    'markdown',
-    'scss',
-    'yaml',
-  },
+  ensure_installed = config.ensure_installed,
   highlight = {
     enable = true,
     use_languagetree = true,
