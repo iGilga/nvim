@@ -78,3 +78,13 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
   g['loaded_' .. plugin] = 1
 end
+
+-- enable autostart for co-- dashboard-nvim
+g.dashboard_default_executive = 'telescope'
+
+g.bufferline = {
+  add_in_buffer_number_order = true,
+}
+
+g.lazygit_floating_window_corner_chars = { '┌', '┐', '└', '┘' }
+g.lazygit_floating_window_scaling_factor = 0.9
