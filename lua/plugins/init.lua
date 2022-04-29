@@ -1,14 +1,12 @@
-local present, pluginPacker = pcall(require, 'plugins.packer')
+local ok, pluginPacker = pcall(require, 'plugins.packer')
 
-if not present then
+if not ok then
   return false
 end
 
 local packer = pluginPacker.packer
-
-local config = {
-  theme = 'kanagawa',
-}
+local config = require('config')
+local u = require('utils')
 
 return packer.startup({
   function(use)
@@ -20,44 +18,42 @@ return packer.startup({
     })
 
     -- load theme
-    require('themes.plugins').init(use, config)
+    require('theme.plugins').init(use, config)
+
+    use({
+      'rcarriga/nvim-notify',
+      config = function()
+        require('utils.logger').init()
+      end,
+    })
 
     -- lsp-config
     use({
       'neovim/nvim-lspconfig',
       config = function()
-        require('plugins.lsp')
+        require('lsp')
       end,
       requires = {
-        {
-          'williamboman/nvim-lsp-installer',
-          config = function()
-            local lspinstaller = require('nvim-lsp-installer')
-            lspinstaller.settings({
-              ui = {
-                icons = {
-                  server_installed = '✓',
-                  server_pending = '➜',
-                  server_uninstalled = '✗',
-                },
-              },
-            })
-          end,
-        },
+        { 'b0o/SchemaStore.nvim' },
+        { 'williamboman/nvim-lsp-installer' },
+        { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
         {
           'jose-elias-alvarez/null-ls.nvim',
           config = function()
             require('plugins.null-ls')
           end,
           after = 'nvim-lspconfig',
+          disable = false,
         },
       },
+      event = 'BufWinEnter',
     })
     -- syntax code
     use({
       'nvim-treesitter/nvim-treesitter',
       requires = {
         'windwp/nvim-ts-autotag',
+        'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-refactor',
       },
       run = ':TSUpdate',
@@ -72,8 +68,8 @@ return packer.startup({
       requires = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        -- { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         'natecraddock/telescope-zf-native.nvim',
+        { 'kdheepak/lazygit.nvim' },
       },
       config = function()
         require('plugins.telescope')
@@ -94,22 +90,7 @@ return packer.startup({
       'hoob3rt/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true },
       config = function()
-        require('lualine').setup({
-          options = {
-            disabled_filetypes = { 'NnnExplorer', 'NnnPicker' },
-          },
-          sections = {
-            -- lualine_c = {
-            -- },
-            lualine_x = {
-              { require('auto-session-library').current_session_name },
-              'encoding',
-              'fileformat',
-              'filetype',
-            },
-          },
-          extensions = { 'fzf' },
-        })
+        require('plugins.lualine')
       end,
     })
 
@@ -143,6 +124,7 @@ return packer.startup({
           after = 'nvim-cmp',
         },
       },
+      event = 'InsertEnter',
     })
 
     -- aka easymotion
@@ -160,7 +142,9 @@ return packer.startup({
       config = function()
         require('nnn').setup({
           explorer = { session = 'local' },
-          picker = { style = { border = 'rounded' }, session = 'local' },
+          picker = {
+            session = 'local',
+          },
         })
       end,
     })
@@ -189,30 +173,6 @@ return packer.startup({
       end,
     })
 
-    use({
-      'folke/trouble.nvim',
-      requires = 'kyazdani42/nvim-web-devicons',
-      config = function()
-        require('trouble').setup({})
-        vim.api.nvim_set_keymap('n', '<leader>xx', '<cmd>Trouble<cr>', { silent = true, noremap = true })
-        vim.api.nvim_set_keymap(
-          'n',
-          '<leader>xw',
-          '<cmd>Trouble workspace_diagnostics<cr>',
-          { silent = true, noremap = true }
-        )
-        vim.api.nvim_set_keymap(
-          'n',
-          '<leader>xd',
-          '<cmd>Trouble document_diagnostics<cr>',
-          { silent = true, noremap = true }
-        )
-        vim.api.nvim_set_keymap('n', '<leader>xl', '<cmd>Trouble loclist<cr>', { silent = true, noremap = true })
-        vim.api.nvim_set_keymap('n', '<leader>xq', '<cmd>Trouble quickfix<cr>', { silent = true, noremap = true })
-        vim.api.nvim_set_keymap('n', 'gR', '<cmd>Trouble lsp_references<cr>', { silent = true, noremap = true })
-      end,
-    })
-
     -- indentline
     use({
       'lukas-reineke/indent-blankline.nvim',
@@ -221,7 +181,7 @@ return packer.startup({
           char_list = { '|', '¦', '┆', '┊' },
           show_current_context = true,
           space_char_blankline = ' ',
-          buftype_exclude = { 'terminal', 'prompt', 'nofile', 'help' },
+          buftype_exclude = { 'terminal', 'prompt', 'nofile' },
           filetype_exclude = { 'help', 'packer', 'lspinfo', 'dashboard', 'NnnExplorer', 'NnnPicker' },
         })
       end,
@@ -257,11 +217,7 @@ return packer.startup({
     use({
       'folke/twilight.nvim',
       config = function()
-        require('twilight').setup({
-          -- your configuration comes here
-          -- or leave it empty to use the default settings
-          -- refer to the configuration section below
-        })
+        require('twilight').setup({})
       end,
     })
 
@@ -281,6 +237,7 @@ return packer.startup({
         require('plugins.autosession')
       end,
     })
+
     use({
       'rmagatti/session-lens',
       requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
@@ -288,31 +245,10 @@ return packer.startup({
         require('plugins.sessionlens')
       end,
     })
+
     use({
       'yamatsum/nvim-cursorline',
-      disable = true,
-    })
-
-    use({
-      'tami5/lspsaga.nvim',
-      config = function()
-        local signs = { Error = ' ', Warn = ' ', Hint = ' ', Info = ' ' }
-        require('lspsaga').setup({
-          error_sign = signs.Error,
-          warn_sign = signs.Warn,
-          hint_sign = signs.Hint,
-          infor_sign = signs.Info,
-        })
-      end,
-      disable = true,
-    })
-
-    use({
-      'rcarriga/nvim-notify',
-      config = function()
-        require('notify').setup()
-        vim.notify = require('notify')
-      end,
+      disable = u.isDisable('nvim-cursorline'),
     })
 
     use('MunifTanjim/nui.nvim')
@@ -322,24 +258,18 @@ return packer.startup({
       config = function()
         require('better_escape').setup()
       end,
-      disable = true,
+      disable = u.isDisable('better-escape.nvim'),
     })
 
     use({
       'LudoPinelli/comment-box.nvim',
       config = function()
-        local keymap = vim.api.nvim_set_keymap
-
-        keymap('n', '<Leader>cl', "<Cmd>lua require('comment-box').lbox()<CR>", {})
-        keymap('v', '<Leader>cl', "<Cmd>lua require('comment-box').lbox()<CR>", {})
-
-        keymap('n', '<Leader>cc', "<Cmd>lua require('comment-box').cbox()<CR>", {})
-        keymap('v', '<Leader>cc', "<Cmd>lua require('comment-box').cbox()<CR>", {})
-
-        keymap('n', '<Leader>ci', "<Cmd>lua require('comment-box').line()<CR>", {})
-        keymap('i', '<-l>', "<Cmd>lua require('comment-box').line()<CR>", {})
+        require('plugins.comment-box')
       end,
     })
+
+    use('kdheepak/lazygit.nvim')
+
     if pluginPacker.first_install then
       packer.sync()
     end
