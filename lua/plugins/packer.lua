@@ -1,17 +1,17 @@
-local present, packer = pcall(require, 'packer')
+local ok, packer = pcall(require, 'packer')
 
 local first_install = false
 
-if not present then
+if not ok then
   local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
   print('Cloning packer...')
   vim.fn.delete(install_path, 'rf')
   vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
   vim.cmd('packadd packer.nvim')
-  present, packer = pcall(require, 'packer')
+  ok, packer = pcall(require, 'packer')
 
-  if present then
+  if ok then
     print('packer.nvim cloned.')
     first_install = true
   else
@@ -19,15 +19,20 @@ if not present then
   end
 end
 
+local config = require('config')
+
 packer.init({
+  -- compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
+  -- compile_on_sync = true,
+  -- auto_clean = true,
   display = {
     open_fn = function()
-      return require('packer.util').float({ border = 'single' })
+      return require('packer.util').float({ border = config.border })
     end,
-    prompt_border = 'rounded',
+    prompt_border = config.border,
   },
   git = {
-    clone_timeout = 800,
+    clone_timeout = 10000,
   },
 })
 
