@@ -1,37 +1,40 @@
 local c = vim.cmd
-local ok, kanagawa = pcall(require, 'kanagawa.colors')
+local ok, kanagawa = pcall(require, 'theme.color.kanagawa')
 
 if not ok then
   return false
 end
 
-local colors = kanagawa.setup()
+local colors = kanagawa.colors
 
 local bg = function(group, color)
   c('highlight  ' .. group .. ' guibg=' .. color)
 end
 
 local fg = function(group, color)
-  c('highlight ' .. group .. ' guifg=' .. color)
+  c('hi ' .. group .. ' guifg=' .. color)
 end
 
-local bgfg = function (group, bgColor, fgColor)
+local bgfg = function(group, bgColor, fgColor)
   c('highlight ' .. group .. ' guibg=' .. bgColor .. ' guifg=' .. fgColor)
 end
 
-fg('NotifyINFOBorder', colors.autumnGreen)
-fg('NotifyINFOIcon', colors.autumnGreen)
-fg('NotifyINFOTitle', colors.autumnGreen)
-fg('NotifyINFOBody', colors.fujiWhite)
+fg('NotifyINFOBorder', colors.green)
+fg('NotifyINFOIcon', colors.green)
+fg('NotifyINFOTitle', colors.green)
+fg('NotifyINFOBody', colors.white)
 
-fg('NotifyWARNBorder', colors.autumnYellow)
-fg('NotifyWARNIcon', colors.autumnYellow)
-fg('NotifyWARNTitle', colors.autumnYellow)
+fg('NotifyWARNBorder', colors.yellow)
+fg('NotifyWARNIcon', colors.yellow)
+fg('NotifyWARNTitle', colors.yellow)
+fg('NotifyWARNBody', colors.white)
 
-fg('NotifyERRORBorder', colors.autumnRed)
-fg('NotifyERRORIcon', colors.autumnRed)
-fg('NotifyERRORTitle', colors.autumnRed)
+fg('NotifyERRORBorder', colors.red)
+fg('NotifyERRORIcon', colors.red)
+fg('NotifyERRORTitle', colors.red)
+fg('NotifyERRORTBody', colors.white)
 
-fg('NotifyTRACEBorder', colors.surimiOrange)
-fg('NotifyTRACEIcon', colors.surimiOrange)
-fg('NotifyTRACETitle', colors.surimiOrange)
+fg('NotifyTRACEBorder', colors.purple)
+fg('NotifyTRACEIcon', colors.purple)
+fg('NotifyTRACETitle', colors.purple)
+fg('NotifyTRACETBody', colors.white)
