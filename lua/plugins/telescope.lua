@@ -169,6 +169,7 @@ nnoremap({
   "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
 })
 
+nnoremap({ '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>' })
 nnoremap({ '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>' })
 nnoremap({ '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>' })
 
