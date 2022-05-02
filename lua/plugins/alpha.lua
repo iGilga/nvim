@@ -35,7 +35,7 @@ dashboard.section.buttons.val = {
   button('Space s l', '  Open session', ':Telescope session-lens search_session<cr>'),
   button('Space f f', '  Find file', ':Telescope find_files<cr>'),
   -- button('Space t o', '  Recently opened files'),
-  button('Ctrl t', '  File browsr', '<cmd>:NnnPicker<cr>'),
+  button('Ctrl h', '  File browsr', '<cmd>:NnnPicker<cr>'),
   -- button('Space f l l', '  Find repo', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>"),
   button('Space l l', '  Open repo', ':LazyGit<cr>'),
   button('Space c n', '  New file', ':ene <BAR> startinsert <cr>'),
