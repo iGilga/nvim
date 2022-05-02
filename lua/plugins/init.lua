@@ -182,7 +182,7 @@ return packer.startup({
           show_current_context = true,
           space_char_blankline = ' ',
           buftype_exclude = { 'terminal', 'prompt', 'nofile' },
-          filetype_exclude = { 'help', 'packer', 'lspinfo', 'dashboard', 'NnnExplorer', 'NnnPicker' },
+          filetype_exclude = { 'help', 'packer', 'lspinfo', 'alpha', 'NnnExplorer', 'NnnPicker' },
         })
       end,
     })
@@ -223,11 +223,11 @@ return packer.startup({
 
     -- dashboard
     use({
-      'glepnir/dashboard-nvim',
+      'goolord/alpha-nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' },
       config = function()
-        require('plugins.dashboard')
+        require('plugins.alpha')
       end,
-      -- disable = true,
     })
 
     -- auto-session
