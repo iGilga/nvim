@@ -35,7 +35,7 @@ return packer.startup({
       end,
       requires = {
         { 'b0o/SchemaStore.nvim' },
-        { 'williamboman/nvim-lsp-installer' },
+        -- { 'williamboman/nvim-lsp-installer' },
         { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
         {
           'jose-elias-alvarez/null-ls.nvim',
