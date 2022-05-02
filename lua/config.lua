@@ -19,7 +19,6 @@ M.lsp = {
     graphql = {},
     html = {},
     jsonls = {},
-    remark_ls = {},
     sumneko_lua = {},
     tsserver = {},
     yamlls = {},
