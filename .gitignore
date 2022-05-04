@@ -1,4 +1,7 @@
+sessions
+nvim
 plugin/packer_compiled.lua
 .luarc.json
 Session.vim
 test.lua
+
