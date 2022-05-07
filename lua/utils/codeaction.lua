@@ -36,34 +36,12 @@ end
 local function onChange(actionList)
   return function(item, menu)
     local pos = index_of(actionList, item)
-    local text = '(' .. tostring(pos) .. '/' .. #actionList .. ')'
+    local text = '[' .. tostring(pos) .. '/' .. #actionList .. ']'
     menu.border:set_text('bottom', ntext(text, config.border.bottom_hl), 'right')
   end
 end
 
-local function onSubmit(item)
-  local action = item.ctx.command
-  local client = item.ctx.client
-
-  if
-    not action.edit
-    and client
-    and type(client.resolved_capabilities.code_action) == 'table'
-    and client.resolved_capabilities.code_action.resolveProvider
-  then
-    client.request('codeAction/resolve', action, function(err, resolvedAction)
-      if err then
-        logger.error(err.code .. ': ' .. err.message)
-        return
-      end
-      applyAction(resolvedAction, client)
-    end)
-  else
-    applyAction(action, client)
-  end
-end
-
-local function window(itemList, actionList)
+local function window(itemList, actionList, onSubmit)
   local popup_opts = {
     position = {
       row = 1,
@@ -99,14 +77,36 @@ local function window(itemList, actionList)
   })
 end
 
+local function onSubmit(item)
+  local action = item.ctx.command
+  local client = item.ctx.client
+
+  if
+    not action.edit
+    and client
+    and type(client.resolved_capabilities.code_action) == 'table'
+    and client.resolved_capabilities.code_action.resolveProvider
+  then
+    client.request('codeAction/resolve', action, function(err, resolvedAction)
+      if err then
+        logger.error(err.code .. ': ' .. err.message)
+        return
+      end
+      applyAction(resolvedAction, client)
+    end)
+  else
+    applyAction(action, client)
+  end
+end
+
 local function codeActionCallback(results)
   if not results then
-    logger.error('No results from textDocument/codeAction', vim.log.levels.WARN, {
+    logger.warn('No results from textDocument/codeAction', {
       title = '[Lsp]Code Action',
     })
     return
   end
-
+P(results)
   local itemList = {}
   local actionList = {}
 
@@ -128,6 +128,13 @@ local function codeActionCallback(results)
         table.insert(actionList, item)
       end
     end
+  end
+
+  if #actionList == 0 then
+    logger.warn('No code actions available', {
+      title = '[Lsp]Code Action',
+    })
+    return
   end
 
   local menu = window(itemList, actionList, onSubmit)
