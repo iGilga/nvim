@@ -16,7 +16,6 @@ local index_of = function(tbl, item)
 end
 
 local function applyAction(action, client)
-  P(action)
   local isCommand = type(action.command) == 'table'
   if action.edit then
     lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
@@ -106,7 +105,7 @@ local function codeActionCallback(results)
     })
     return
   end
-P(results)
+
   local itemList = {}
   local actionList = {}
 
