@@ -161,6 +161,7 @@ nnoremap({ '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>"
 nnoremap({ '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>" })
 nnoremap({ '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
 nnoremap({ '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>" })
+nnoremap({ '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>" })
 
 nnoremap({ '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>" })
 
