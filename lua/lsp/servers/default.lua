@@ -15,7 +15,6 @@ function M.on_attach(client, bufnr)
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   end
-
   require('lsp.mapping').init(client, bufnr)
 end
 
@@ -45,5 +44,9 @@ M.capabilities = capabilities
 M.autostart = true
 
 M.single_file_support = true
+
+M.flags = {
+  debounce_text_changes = 300,
+}
 
 return M
