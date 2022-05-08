@@ -20,15 +20,11 @@ M.lsp = {
     html = {},
     jsonls = {},
     sumneko_lua = {},
-    tsserver = {},
+    tsserver = {
+      formatting = false,
+    },
     yamlls = {},
   },
-}
-
-M.formatter = {
-  eslint = false,
-  sumneko_lua = false,
-  tsserver = false,
 }
 
 M.rename = {
