@@ -8,10 +8,10 @@ end
 
 function M.isClientFormat(clientName)
   if config.lsp.servers[clientName] then
-    return (config.lsp.servers[clientName].formatter == true)
+    return (config.lsp.servers[clientName].format == true)
   end
 
-  return true
+  return false
 end
 
 function M.isDisable(plugin)
