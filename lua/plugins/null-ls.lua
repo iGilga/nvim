@@ -57,7 +57,7 @@ local sources = {
     disabled_filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
   }),
   formatting.shfmt.with({
-    extra_args = { "-sr" }
+    extra_args = { '-sr' },
   }),
   formatting.stylua.with({
     extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
