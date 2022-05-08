@@ -62,6 +62,7 @@ local sources = {
   formatting.stylua.with({
     extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
   }),
+  formatting.taplo,
 }
 
 -- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
