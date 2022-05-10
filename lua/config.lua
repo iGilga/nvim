@@ -60,6 +60,7 @@ M.plugins = {
     ensure_installed = {
       'bash',
       'css',
+      'dockerfile',
       'html',
       'javascript',
       'jsdoc',
@@ -67,6 +68,7 @@ M.plugins = {
       'lua',
       'markdown',
       'scss',
+      'toml',
       'yaml',
     },
   },
