@@ -1,4 +1,3 @@
-local c = vim.cmd
 local ok, kanagawa = pcall(require, 'theme.color.kanagawa')
 
 if not ok then
