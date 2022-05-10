@@ -1,4 +1,9 @@
-local colors = require('theme.color.kanagawa')
+local ok, kanagawa = pcall(require, 'theme.color.kanagawa')
+
+if not ok then
+  return false
+end
+
 local nnoremap = require('utils.keymap').nnoremap
 
 local setup = {
