@@ -16,6 +16,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- vim.api.nvim_create_autocmd("BufNewFile", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 
 -- Enable spell checking for certain file types
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = { '*.md', '*.tex' }, command = 'setlocal spell' })
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = { '*.md', '*.tex' }, command = 'setlocal spell' })
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, { command = ':lua require("lazygit.utils").project_root_dir()' })
