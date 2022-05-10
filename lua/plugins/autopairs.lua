@@ -10,7 +10,7 @@ npairs.setup({
 
 npairs.add_rules({
   npairs.add_rules({
-    Rule(' ', ' ')
+    Rule(' ', ' ', { '-markdown' })
       :with_pair(function(opts)
         local pair = opts.line:sub(opts.col - 1, opts.col)
         return vim.tbl_contains({ '()', '{}', '[]' }, pair)
@@ -47,7 +47,7 @@ npairs.add_rules({
       :with_del(cond.none())
       :use_key(']'),
   }),
-  Rule('%(.*%)%s*%=>$', ' {  }', { 'typescript', 'typescriptreact', 'javascript' })
+  Rule('%(.*%)%s*%=>$', ' {  }', { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' })
     :use_regex(true)
     :set_end_pair_length(2),
   Rule('=', '', { '-vim', '-sh' })
