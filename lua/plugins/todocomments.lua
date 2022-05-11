@@ -4,6 +4,8 @@ if not ok then
   return false
 end
 
+local colors = kanagawa.colors
+
 local nnoremap = require('utils.keymap').nnoremap
 
 local setup = {
@@ -27,7 +29,21 @@ local setup = {
       alt = { 'HACK', 'hack' },
     },
   },
+  colors = {
+    error = { colors.red },
+    warning = { colors.yellow },
+    info = { colors.green },
+    hint = { colors.blue },
+    default = { 'Identifier', '#7C3AED' },
+  },
 }
+
+-- todo: todo
+-- note: note
+-- fix: fix
+-- warn: warn
+-- optim: optim
+-- hack: hack
 
 nnoremap({ '<leader>ft', ':TodoTelescope<cr>' })
 
