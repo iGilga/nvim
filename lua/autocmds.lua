@@ -19,3 +19,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, { pattern = { '*.md', '*.tex' }, command = 'setlocal spell' })
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, { command = ':lua require("lazygit.utils").project_root_dir()' })
+
+local wrap_md_group = vim.api.nvim_create_augroup("Markdown Wrap Settings", { clear = true })
+
+vim.api.nvim_create_autocmd('BufEnter', {
+  pattern = { '*.md' },
+  group = wrap_md_group,
+  command = 'setlocal wrap',
+})
