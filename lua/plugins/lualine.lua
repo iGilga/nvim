@@ -1,5 +1,4 @@
 local lualine = require('lualine')
-local logger = require('utils.logger')
 
 local function getSessionName()
   if vim.v.this_session then
@@ -13,8 +12,12 @@ local function getSessionName()
   end
 end
 
+local custom_kanagawa = require('lualine.themes.kanagawa')
+custom_kanagawa.normal.c = { bg = "#2A2A37", fg = "#C8C093" }
+
 local config = {
   options = {
+    theme = custom_kanagawa,
     icons_enabled = true,
     disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree' },
     globalstatus = true,
