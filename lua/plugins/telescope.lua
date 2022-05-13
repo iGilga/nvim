@@ -12,7 +12,6 @@ if pcall(require, 'plenary') then
   end
 end
 
-local padding = { padding = 1 }
 local wideVertical = {
   sorting_strategy = 'ascending',
   layout_strategy = 'vertical',
@@ -37,9 +36,43 @@ local wideHorizontal = {
 
 telescope.setup({
   defaults = {
-    borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+    vimgrep_arguments = {
+      'rg',
+      '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--no-ignore',
+      '--smart-case',
+      '--hidden',
+    },
+    prompt_prefix = "   ",
+    results_title = false,
+    selection_caret = '  ',
+    entry_prefix = '  ',
+    selection_strategy = 'reset',
+    -- sorting_strategy = 'ascending',
+    layout_strategy = 'horizontal',
+    set_env = { ['COLORTERM'] = 'truecolor' },
+    layout_config = {
+      horizontal = {
+        -- prompt_position = 'top',
+        width = { padding = 8 },
+        height = { padding = 2 },
+        preview_width = 0.65,
+      },
+    },
+    borderchars = { ' ' },
+    -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+    color_devicons = true,
+    path_display = { 'absolute' },
+    use_less = true,
+    winblend = 0,
+    border = {},
     file_ignore_patterns = {
-      'node_modules',
+      'node_modules/',
+      'vendor/',
       '.git/',
     },
     mappings = {
@@ -137,13 +170,13 @@ telescope.setup({
     },
   },
   pickers = {
-    find_files = u.merge(wideHorizontal, {}),
-    live_grep = u.merge(wideHorizontal, {}),
-    grep_string = u.merge(wideHorizontal, {}),
-    diagnostics = u.merge(wideHorizontal, {}),
-    lsp_references = u.merge(wideHorizontal, {}),
-    help_tags = u.merge(wideHorizontal, {}),
-    buffers = u.merge(wideHorizontal, {}),
+    -- find_files = u.merge(wideHorizontal, {}),
+    --   live_grep = u.merge(wideHorizontal, {}),
+    --   grep_string = u.merge(wideHorizontal, {}),
+    --   diagnostics = u.merge(wideHorizontal, {}),
+    --   lsp_references = u.merge(wideHorizontal, {}),
+    --   help_tags = u.merge(wideHorizontal, {}),
+    --   buffers = u.merge(wideHorizontal, {}),
   },
 })
 
