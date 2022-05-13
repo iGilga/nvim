@@ -18,7 +18,7 @@ return packer.startup({
     })
 
     -- load theme
-    require('theme.plugins').init(use, config)
+    require('theme').init(use, config)
 
     use({
       'rcarriga/nvim-notify',
@@ -181,7 +181,7 @@ return packer.startup({
           show_current_context = true,
           space_char_blankline = ' ',
           buftype_exclude = { 'terminal', 'prompt', 'nofile' },
-          filetype_exclude = { 'help', 'packer', 'lspinfo', 'alpha', 'NnnExplorer', 'NnnPicker' },
+          filetype_exclude = { 'help', 'packer', 'lspinfo', 'alpha', 'NnnExplorer', 'NnnPicker', 'markdown' },
         })
       end,
     })
@@ -268,6 +268,18 @@ return packer.startup({
     })
 
     use('kdheepak/lazygit.nvim')
+
+    -- markdown
+    use({ 'ellisonleao/glow.nvim', branch = 'main' })
+
+    use({
+      'iamcco/markdown-preview.nvim',
+      run = 'cd app && npm install',
+      setup = function()
+        vim.g.mkdp_filetypes = { 'markdown' }
+      end,
+      ft = { 'markdown' },
+    })
 
     if pluginPacker.first_install then
       packer.sync()
