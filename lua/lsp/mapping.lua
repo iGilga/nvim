@@ -10,7 +10,6 @@ function M.init(client, bufnr)
     end
     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
   end
-
   -- diagnostics
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
   buf_set_keymap('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>')
@@ -50,6 +49,7 @@ function M.init(client, bufnr)
   --   buf_set_keymap('n', '<leader>go',':TSLspOrganize<cr>')
   --   buf_set_keymap('n', '<leader>gi',':TSLspImportAll<cr>')
   -- end
+  print('Loaded mapping for', client.name)
 end
 
 return M
