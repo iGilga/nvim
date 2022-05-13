@@ -1,3 +1,3 @@
-P = function(x)
-  print(vim.inspect(x))
+P = function(...)
+  vim.pretty_print(...)
 end
