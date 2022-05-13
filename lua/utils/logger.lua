@@ -8,7 +8,7 @@ if ok then
     on_open = function(win)
       vim.api.nvim_win_set_config(win, { border = { ' ' } })
     end,
-    timeout = 1000,
+    timeout = 2000,
   })
   vim.notify = load_notify
 end
