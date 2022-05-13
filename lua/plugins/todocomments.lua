@@ -32,8 +32,8 @@ local setup = {
   colors = {
     error = { colors.red },
     warning = { colors.yellow },
-    info = { colors.green },
-    hint = { colors.blue },
+    info = { colors.blue },
+    hint = { colors.green },
     default = { 'Identifier', '#7C3AED' },
   },
 }
