@@ -1,11 +1,10 @@
 local setup = {
-  previewer = false,
+  prompt_title = '',
   initial_mode = 'normal',
   theme_conf = {
     borderchars = {
-      prompt = { '─', '│', ' ', '│', '┌', '┐', '│', '│' },
-      results = { '─', '│', '─', '│', '├', '┤', '┘', '└' },
-      preview = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
+      prompt = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
+      results = { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' },
     },
   },
 }
