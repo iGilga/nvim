@@ -1,6 +1,4 @@
 local levels = vim.log.levels
-local config = require('config')
-local u = require('utils')
 
 local ok, load_notify = pcall(require, 'notify')
 
@@ -8,9 +6,9 @@ if ok then
   load_notify.setup({
     stages = 'fade',
     on_open = function(win)
-      vim.api.nvim_win_set_config(win, { border = config.border })
+      vim.api.nvim_win_set_config(win, { border = { ' ' } })
     end,
-    timeout = 2000,
+    timeout = 1000,
   })
   vim.notify = load_notify
 end
