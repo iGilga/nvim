@@ -35,7 +35,7 @@ end
 local function onChange(actionList)
   return function(item, menu)
     local pos = index_of(actionList, item)
-    local text = '[' .. tostring(pos) .. '/' .. #actionList .. ']'
+    local text = ' ' .. tostring(pos) .. '/' .. #actionList .. ' '
     menu.border:set_text('bottom', ntext(text, config.border.bottom_hl), 'right')
   end
 end
@@ -47,6 +47,7 @@ local function window(itemList, actionList, onSubmit)
       col = 0,
     },
     relative = 'cursor',
+    highlight = config.highlight or 'Normal:Normal',
     border = {
       highlight = config.border.highlight,
       style = config.border.style,
@@ -54,7 +55,7 @@ local function window(itemList, actionList, onSubmit)
         top = ntext(config.border.title, config.border.title_hl),
         top_align = config.border.title_align,
       },
-      padding = { 0, 1 },
+      padding = { 1, 1 },
     },
     wim_options = {
       winhighlight = 'Normal:Normal',
@@ -112,7 +113,7 @@ local function codeActionCallback(results)
   for client_id, response in pairs(results) do
     if response.result and not vim.tbl_isempty(response.result) then
       local client = lsp.get_client_by_id(client_id)
-      table.insert(itemList, nmenu.separator(ntext('(' .. client.name .. ')', 'Comment')))
+      table.insert(itemList, nmenu.separator(ntext('(' .. client.name .. ')', 'NuiSeparator')))
       for _, action in ipairs(response.result) do
         local title = action.title
         local item = nmenu.item(action.title)
