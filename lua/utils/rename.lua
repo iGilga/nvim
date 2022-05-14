@@ -10,6 +10,8 @@ local logger = require('utils.logger')
 
 local M = {}
 
+local minWidth = config.min_width or 30
+
 local map = function(input, lhs, rhs)
   input:map('i', lhs, rhs, { noremap = true }, false)
 end
@@ -70,7 +72,7 @@ end
 M.rename = function(popup_opts, opts)
   local currName = vim.fn.expand('<cword>')
 
-  local width = 25
+  local width = minWidth
   if #currName > width then
     width = #currName
   end
@@ -85,13 +87,16 @@ M.rename = function(popup_opts, opts)
       height = 2,
     },
     relative = 'cursor',
+    highlight = config.highlight or 'Normal:Normal',
     border = {
       highlight = config.border.highlight,
       style = config.border.style,
+      char = ' ',
       text = {
         top = Text(config.border.title, config.border.title_hl),
         top_align = config.border.title_align,
       },
+      padding = { 1, 0 },
     },
   }
 
