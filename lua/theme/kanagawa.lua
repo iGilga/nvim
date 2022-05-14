@@ -2,9 +2,20 @@ local u = require('utils')
 local theme = require('kanagawa.colors').setup()
 
 local customColors = {
+  bg0 = '#2A2A37',
   bg1 = '#1b1b24', --darkly
   bg2 = '#181820', --darkly
   green1 = '#52674a', --darkly
+  grey1 = '#22222C',
+  grey2 = '#252530',
+  grey3 = '#282834',
+  grey4 = '#2B2B37',
+  grey5 = '#2E2E3B',
+  grey6 = '#31313F',
+  grey7 = '#343443',
+  dark1 = '#1D1D26',
+  dark2 = '#1B1B23',
+  dark3 = '#191920',
 }
 
 local colors = {
@@ -12,21 +23,22 @@ local colors = {
   black = theme.oldWhite,
   bg = theme.sumiInk1,
   bg_dark = theme.sumiInk0,
-  bg_highlight = theme.sumiInk2,
+  bg_light = theme.sumiInk2,
   red = theme.autumnRed,
   blue = theme.dragonBlue,
   green = theme.autumnGreen,
   yellow = theme.autumnYellow,
   purple = theme.sakuraPink,
   gray = theme.sumiInk4,
+  selection = theme.sumiInk3,
 }
 
 local telescope = {
   matching = theme.roninYellow,
-  preview = customColors.bg2,
-  prompt = customColors.green1,
-  results = customColors.bg1,
-  selection = customColors.green1,
+  preview = customColors.dark2,
+  prompt = colors.selection,
+  results = customColors.grey4,
+  selection = colors.selection,
   title = { bg = customColors.green1, fg = colors.black },
 }
 
@@ -61,8 +73,8 @@ local notifyGroup = {
 }
 
 local TelescopeGroup = {
-  TelescopePromptTitle = { bg = telescope.prompt, fg = telescope.prompt },
-  TelescopePromptCounter = { fg = colors.black },
+  TelescopePromptTitle = telescope.title,
+  TelescopePromptCounter = { fg = colors.gray },
   TelescopePromptNormal = { bg = telescope.prompt, fg = colors.white },
   TelescopePromptBorder = { bg = telescope.prompt },
   TelescopeResultsTitle = telescope.title,
@@ -71,26 +83,43 @@ local TelescopeGroup = {
   TelescopePreviewTitle = telescope.title,
   TelescopePreviewNormal = { bg = telescope.preview },
   TelescopePreviewBorder = { bg = telescope.preview },
-  TelescopeSelection = { bg = telescope.selection },
-  TelescopeMatching = { fg = telescope.matching },
+  TelescopeSelection = { link = 'CursorLine' },
+  -- TelescopeMatching = { fg = telescope.matching },
   TelescopePromptPrefix = { fg = colors.black },
+  -- TelescopeResultsFileIcon = { bg = telescope.results, fg = colors.black },
 }
 
-local alphaGroup = {
+local CustomCmp = {
+  CmpDocumentation = { bg = customColors.dark2 },
+  CmpDocumentationBorder = { bg = customColors.dark2 },
+  CmpCompletion = { bg = customColors.grey4 },
+  CmpCompletionBorder = { bg = customColors.grey4 },
+}
+
+local customAlpha = {
   AlphaHeader = { fg = colors.green },
   AlphaShortcuts = { fg = colors.bg, bg = colors.green },
   AlphaButton = { fg = colors.white },
   AlphaIcon = { fg = colors.green },
 }
 
-local todoGroup = {
+local customTodo = {
   TodoLabel = { bg = colors.bg, fg = colors.blue },
   NoteLabel = { bg = colors.bg, fg = colors.green },
   FixLabel = { bg = colors.bg, fg = colors.red },
   WarnLabel = { bg = colors.bg, fg = colors.yellow },
 }
 
-local overrides = u.merge(notifyGroup, TelescopeGroup, alphaGroup, todoGroup)
+local customNui = {
+  NuiNormal = { bg = customColors.dark2, fg = colors.white },
+  NuiBorder = { bg = customColors.dark2, fg = customColors.dark2 },
+  NuiTitle = { bg = customColors.green1, fg = colors.black },
+  NuiPrompt = { fg = colors.black },
+  NuiBottom = { fg = colors.gray },
+  NuiSeparator = { fg = colors.gray },
+}
+
+local overrides = u.merge(notifyGroup, TelescopeGroup, CustomCmp, customAlpha, customTodo, customNui)
 
 local M = {}
 
