@@ -28,31 +28,35 @@ M.lsp = {
 }
 
 M.rename = {
+  min_width = 40,
   border = {
-    highlight = 'FloatBorder',
-    style = M.border,
-    title = '[Rename]',
+    highlight = 'NuiBorder',
+    style = 'solid',
+    title = ' Rename ',
     title_align = 'center',
-    title_hl = 'FloatBorder',
+    title_hl = 'NuiTitle',
   },
   prompt = '> ',
-  prompt_hl = 'Comment',
+  prompt_hl = 'NuiPrompt',
+  highlight = "Normal:NuiNormal",
 }
 
 M.codeAction = {
   min_width = 40,
   border = {
-    bottom_hl = 'FloatBorder',
-    highlight = 'FloatBorder',
-    style = M.border,
-    title = '[Code Actions]',
+    bottom_hl = 'NuiBottom',
+    highlight = 'NuiBorder',
+    style = 'solid',
+    title = ' Code Actions ',
     title_align = 'center',
-    title_hl = 'FloatBorder',
+    title_hl = 'NuiTitle',
   },
   separator = {
     char = ' ',
     text_align = 'center',
+    highlight = 'NuiSeparator'
   },
+  highlight = "Normal:NuiNormal",
 }
 
 M.plugins = {
