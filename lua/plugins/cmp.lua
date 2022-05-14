@@ -74,6 +74,18 @@ local setup = {
     { name = 'path' },
   },
   formatting = get_formatting(),
+  window = {
+    documentation = {
+      -- Example: border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
+      border = { ' ' },
+      winhighlight = 'Normal:CmpDocumentation,FloatBorder:CmpDocumentationBorder,Search:None',
+    },
+    completion = {
+      -- border = { ' ' },
+      -- border = {' ', ' ', ' ', '', ' ', ' ', ' ', ''},
+      winhighlight = 'Normal:CmpCompletion,FloatBorder:CmpCompletionBorder,Search:None',
+    },
+  },
 }
 
 vim.cmd([[
