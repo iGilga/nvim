@@ -143,6 +143,7 @@ return packer.startup({
           explorer = { session = 'local' },
           picker = {
             session = 'local',
+            style = { border = 'solid' },
           },
         })
       end,
@@ -176,16 +177,9 @@ return packer.startup({
     use({
       'lukas-reineke/indent-blankline.nvim',
       config = function()
-        require('indent_blankline').setup({
-          char_list = { '|', '¦', '┆', '┊' },
-          show_current_context = true,
-          space_char_blankline = ' ',
-          buftype_exclude = { 'terminal', 'prompt', 'nofile' },
-          filetype_exclude = { 'help', 'packer', 'lspinfo', 'alpha', 'NnnExplorer', 'NnnPicker', 'markdown' },
-        })
+        require('plugins.indentblankline')
       end,
     })
-
     -- git column signs
     use({
       'lewis6991/gitsigns.nvim',
@@ -279,6 +273,7 @@ return packer.startup({
         vim.g.mkdp_filetypes = { 'markdown' }
       end,
       ft = { 'markdown' },
+      disable = true,
     })
 
     if pluginPacker.first_install then
