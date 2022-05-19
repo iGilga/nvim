@@ -43,13 +43,13 @@ local telescope = {
 }
 
 local notify = {
-  border = { bg = colors.bg_dark },
+  border = { bg = colors.dark2 },
   info = { fg = colors.green },
   warn = { fg = colors.yellow },
   error = { fg = colors.red },
   hint = { fg = colors.purple },
   body = function(color)
-    return { fg = color, bg = colors.bg_dark }
+    return { fg = color, bg = colors.dark2 }
   end,
 }
 
@@ -90,10 +90,10 @@ local TelescopeGroup = {
 }
 
 local CustomCmp = {
-  CmpDocumentation = { bg = customColors.dark2 },
-  CmpDocumentationBorder = { bg = customColors.dark2 },
-  CmpCompletion = { bg = customColors.grey4 },
-  CmpCompletionBorder = { bg = customColors.grey4 },
+  CmpDocumentation = { bg = customColors.dark3 },
+  CmpDocumentationBorder = { bg = customColors.dark3 },
+  CmpCompletion = { bg = customColors.dark1 },
+  CmpCompletionBorder = { bg = customColors.dark1 },
 }
 
 local customAlpha = {
@@ -119,7 +119,18 @@ local customNui = {
   NuiSeparator = { fg = colors.gray },
 }
 
-local overrides = u.merge(notifyGroup, TelescopeGroup, CustomCmp, customAlpha, customTodo, customNui)
+local customNnn = {
+  NnnNormal = { link = 'NormalFloat' },
+  -- NnnNormalNC = { link = 'NormalFloat' },
+  NnnBorder = { link = 'FloatBorder' },
+}
+
+local custom = {
+  NormalFloat = { fg = colors.white, bg = customColors.dark2 },
+  FloatBorder = { fg = colors.gray, bg = customColors.dark2 },
+}
+
+local overrides = u.merge(custom, notifyGroup, TelescopeGroup, CustomCmp, customAlpha, customTodo, customNui, customNnn)
 
 local M = {}
 
