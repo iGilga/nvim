@@ -13,7 +13,7 @@ M.lsp = {
     dockerls = {},
     eslint = {
       opts = {
-        autostart = false,
+        autostart = true,
       },
     },
     graphql = {},
