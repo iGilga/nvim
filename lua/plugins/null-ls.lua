@@ -36,7 +36,7 @@ local sources = {
     -- end,
   }),
   formatting.shfmt.with({
-    extra_args = { '-sr' },
+    extra_args = { '-sr', '-i', '2', '-ci' },
   }),
   formatting.stylua.with({
     extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
