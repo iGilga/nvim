@@ -3,44 +3,50 @@ local defaultOnAttach = require('lsp.servers.default').on_attach
 local config = require('config')
 local M = {}
 
--- M.init_options = require('nvim-lsp-ts-utils').init_options
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-function M.on_attach(client, bufnr)
-  defaultOnAttach(client, bufnr)
-
-  -- local tsUtils = require('nvim-lsp-ts-utils')
-  --
-  -- tsUtils.setup({
-  --   debug = false,
-  --   disable_commands = false,
-  --   enable_import_on_completion = true,
-  --
-  --   -- import all
-  --   import_all_timeout = 5000, -- ms
-  --   import_all_priorities = {
-  --     buffers = 4, -- loaded buffer names
-  --     buffer_content = 3, -- loaded buffer content
-  --     local_files = 2, -- git files or files with relative path markers
-  --     same_file = 1, -- add to existing import statement
-  --   },
-  --   import_all_scan_buffers = 100,
-  --   import_all_select_source = false,
-  --
-  --   -- inlay hints
-  --   auto_inlay_hints = true,
-  --   inlay_hints_highlight = 'Comment',
-  --
-  --   -- update imports on file move
-  --   update_imports_on_move = true,
-  --   require_confirmation_on_move = false,
-  --   watch_dir = nil,
-  --
-  --   -- filter diagnostics
-  --   filter_out_diagnostics_by_severity = {},
-  --   filter_out_diagnostics_by_code = {},
-  -- })
-  --
-  -- tsUtils.setup_client(client)
+local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if ok then
+  capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 end
 
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.preselectSupport = true
+capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
+capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
+capabilities.textDocument.completion.completionItem.deprecatedSupport = true
+capabilities.textDocument.completion.completionItem.commitCharactersSupport = true
+capabilities.textDocument.completion.completionItem.tagSupport = { valueSet = { 1 } }
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    'documentation',
+    'detail',
+    'additionalTextEdits',
+  }
+}
+capabilities.textDocument.codeAction = {
+  dynamicRegistration = false,
+  codeActionLiteralSupport = {
+    codeActionKind = {
+      valueSet = {
+        "",
+        "quickfix",
+        "refactor",
+        "refactor.extract",
+        "refactor.inline",
+        "refactor.rewrite",
+        "source",
+        "source.organizeImports",
+      },
+    },
+  },
+}
+
+local function on_attach(client, bufnr)
+  defaultOnAttach(client, bufnr)
+end
+
+
+M.capabilities = capabilities
+M.on_attach = on_attach
 return M
