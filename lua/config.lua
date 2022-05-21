@@ -2,7 +2,8 @@ local M = {}
 
 M.theme = 'kanagawa'
 
-M.border = 'single'
+M.border = { ' ' }
+M.style = 'solid'
 
 M.leader = ' '
 
@@ -31,14 +32,14 @@ M.rename = {
   min_width = 40,
   border = {
     highlight = 'NuiBorder',
-    style = 'solid',
+    style = M.style,
     title = ' Rename ',
     title_align = 'center',
     title_hl = 'NuiTitle',
   },
   prompt = '> ',
   prompt_hl = 'NuiPrompt',
-  highlight = "Normal:NuiNormal",
+  highlight = 'Normal:NuiNormal',
 }
 
 M.codeAction = {
@@ -46,7 +47,7 @@ M.codeAction = {
   border = {
     bottom_hl = 'NuiBottom',
     highlight = 'NuiBorder',
-    style = 'solid',
+    style = M.style,
     title = ' Code Actions ',
     title_align = 'center',
     title_hl = 'NuiTitle',
@@ -54,9 +55,9 @@ M.codeAction = {
   separator = {
     char = ' ',
     text_align = 'center',
-    highlight = 'NuiSeparator'
+    highlight = 'NuiSeparator',
   },
-  highlight = "Normal:NuiNormal",
+  highlight = 'Normal:NuiNormal',
 }
 
 M.plugins = {
