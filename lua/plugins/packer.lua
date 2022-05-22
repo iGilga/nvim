@@ -27,9 +27,9 @@ packer.init({
   -- auto_clean = true,
   display = {
     open_fn = function()
-      return require('packer.util').float({ border = 'solid' })
+      return require('packer.util').float({ border = config.border })
     end,
-    prompt_border = 'solid',
+    prompt_border = config.border,
   },
   git = {
     clone_timeout = 10000,
