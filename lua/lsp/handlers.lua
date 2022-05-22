@@ -15,9 +15,7 @@ lsp.handlers['textDocument/formatting'] = function(_, result, ctx)
   if result and not vim.tbl_isempty(result) then
     local client = lsp.get_client_by_id(ctx.client_id)
     lsp.util.apply_text_edits(result, ctx.bufnr, client.offset_encoding)
-    local msg = ('[LSP][%s]Formatting done'):format(client.name)
-    -- local msg = '[LSP]Formatting done.'
-    logger.minfo(msg)
+    logger.minfo(('[LSP][%s]'):format(client.name), 'Formatting done')
   end
 end
 

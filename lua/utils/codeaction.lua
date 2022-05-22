@@ -15,19 +15,24 @@ local index_of = function(tbl, item)
   end
 end
 
+local info = function(name, msg)
+  local title = ('[LSP][%s]Code Action'):format(name)
+  logger.minfo(title, msg)
+end
+
 local function applyAction(action, client)
   local isCommand = type(action.command) == 'table'
   if action.edit then
     lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
-    logger.info(('[%s]%s'):format(client.name, action.title), { title = '[LSP]Code Action' })
+    info(client.name, action.title)
   end
   if action.command then
     if isCommand then
       lsp.buf.execute_command(action.command)
-      logger.info(('[%s]%s'):format(client.name, action.title), { title = '[LSP]Code Action' })
+      info(client.name, action.title)
     else
       lsp.buf.execute_command(action)
-      logger.info(('[%s]%s'):format(client.name, action.title), { title = '[LSP]Code Action' })
+      info(client.name, action.title)
     end
   end
 end
