@@ -6,7 +6,9 @@ if ok then
   load_notify.setup({
     stages = 'fade',
     on_open = function(win)
-      vim.api.nvim_win_set_config(win, { border = { ' ' } })
+      P(win)
+      -- [ "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" ]
+      vim.api.nvim_win_set_config(win, { border = { '', ' ', '', '', '', ' ', '', '' } })
     end,
     timeout = 2000,
   })
@@ -16,18 +18,27 @@ end
 local namespace = vim.api.nvim_create_namespace('nvim-notify')
 
 local customRender = function(bufnr, notif, highlights)
-  local left_icon = notif.icon .. ' '
-  local message = { string.rep(' ', 3) .. notif.message[1] }
-  vim.api.nvim_buf_set_lines(bufnr, 1, -1, false, message)
+  local hlSign = 'Notify' .. notif.level .. 'Sign'
+  local title = notif.message[2]
+  local message = notif.message[1]
+  vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, { '', '' })
   vim.api.nvim_buf_set_extmark(bufnr, namespace, 0, 0, {
     virt_text = {
+      { ' ', hlSign },
       { ' ' },
-      { left_icon, highlights.icon },
-      { notif.message[2], highlights.icon },
+      { title, highlights.icon },
+    },
+    priority = 10,
+    virt_text_win_col = 0,
+  })
+  vim.api.nvim_buf_set_extmark(bufnr, namespace, 1, 0, {
+    virt_text = {
+      { ' ', hlSign },
+      { ' ' },
+      { message, highlights.body },
     },
     priority = 50,
     virt_text_win_col = 0,
-    hl_group = highlights.body,
   })
 end
 
@@ -47,18 +58,18 @@ M.error = function(text, opt)
   vim.notify(text, levels.WARN, opt)
 end
 
-local renderOption = { render = customRender }
+local customOption = { render = customRender }
 
 M.minfo = function(title, message)
-  vim.notify({ message, title }, 'info', renderOption)
+  vim.notify({ message, title }, 'info', customOption)
 end
 
 M.mwarn = function(title, message)
-  vim.notify({ message, title }, 'warn', renderOption)
+  vim.notify({ message, title }, 'warn', customOption)
 end
 
 M.merror = function(title, message)
-  vim.notify({ message, title }, 'error', renderOption)
+  vim.notify({ message, title }, 'error', customOption)
 end
 
 return M
