@@ -1,3 +1,5 @@
+local config = require('config')
+
 local signs = {
   Error = ' ',
   Warn = ' ',
@@ -16,7 +18,7 @@ vim.diagnostic.config = {
   update_in_insert = false,
   severity_sort = true,
   float = {
-    border = 'rounded',
+    border = config.border,
     focusable = false,
     source = 'always',
   },
