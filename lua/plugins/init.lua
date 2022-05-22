@@ -126,6 +126,19 @@ return packer.startup({
       event = 'InsertEnter',
     })
 
+    use({
+      'ray-x/lsp_signature.nvim',
+      config = function()
+        require('lsp_signature').setup({
+          bind = true,
+          handler_opts = {
+            border = config.border,
+          },
+        })
+      end,
+      after = 'nvim-lspconfig',
+    })
+
     -- aka easymotion
     use({
       'phaazon/hop.nvim',
