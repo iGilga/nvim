@@ -17,9 +17,17 @@ M.lsp = {
         autostart = true,
       },
     },
-    graphql = {},
+    graphql = {
+      opts = {
+        autostart = false,
+      },
+    },
     html = {},
-    jsonls = {},
+    jsonls = {
+      opts = {
+        autostart = false,
+      },
+    },
     sumneko_lua = {},
     tsserver = {
       formatting = false,
