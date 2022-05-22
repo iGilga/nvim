@@ -1,5 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
+local config = require('config')
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -33,9 +34,9 @@ local setup = {
     end,
   },
   mapping = {
-    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-u>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<S-Enter>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+    ['<S-Enter>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     -- disabled for autopairs mapping
     ['<CR>'] = cmp.mapping.confirm({
@@ -76,13 +77,10 @@ local setup = {
   formatting = get_formatting(),
   window = {
     documentation = {
-      -- Example: border = {'┌', '─', '┐', '│', '┘', '─', '└', '│'},
-      border = { ' ' },
+      border = config.style,
       winhighlight = 'Normal:CmpDocumentation,FloatBorder:CmpDocumentationBorder,Search:None',
     },
     completion = {
-      -- border = { ' ' },
-      -- border = {' ', ' ', ' ', '', ' ', ' ', ' ', ''},
       winhighlight = 'Normal:CmpCompletion,FloatBorder:CmpCompletionBorder,Search:None',
     },
   },
