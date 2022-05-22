@@ -7,7 +7,7 @@ local Text = require('nui.text')
 local config = require('config').rename
 local u = require('utils')
 local logger = require('utils.logger')
-
+local title = '[LSP]Rename'
 local M = {}
 
 local minWidth = config.min_width or 30
@@ -45,9 +45,7 @@ end
 
 local renameCallback = function(err, result, ctx, _)
   if err then
-    logger.error(("Error running LSP query '%s': %s"):format(ctx.method, err), {
-      title = '[LSP]Rename',
-    })
+    logger.error(("Error running LSP query '%s': %s"):format(ctx.method, err), title)
   end
 
   if result and result.changes then
@@ -57,8 +55,7 @@ local renameCallback = function(err, result, ctx, _)
     lsp.util.apply_workspace_edit(result, client.offset_encoding)
     local count = #result.changes[uri]
     local msg = ('%s -> %s [%s][%d]'):format(p.curName, p.newName, u.getRelativePath(uri), count)
-    local title = '[LSP]Rename'
-    logger.minfo(title, msg)
+    logger.info(msg, title)
   end
 end
 

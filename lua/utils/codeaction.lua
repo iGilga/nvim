@@ -7,6 +7,14 @@ local event = require('nui.utils.autocmd').event
 
 local minWidth = config.min_width or 0
 
+local title = function(name)
+  if name then
+    return ('[LSP][%s]Code Action'):format(name)
+  else
+    return '[LSP]Code Action'
+  end
+end
+
 local index_of = function(tbl, item)
   for i, value in ipairs(tbl) do
     if value == item then
@@ -15,24 +23,19 @@ local index_of = function(tbl, item)
   end
 end
 
-local info = function(name, msg)
-  local title = ('[LSP][%s]Code Action'):format(name)
-  logger.minfo(title, msg)
-end
-
 local function applyAction(action, client)
   local isCommand = type(action.command) == 'table'
   if action.edit then
     lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
-    info(client.name, action.title)
+    logger.info(action.title, title(client.name))
   end
   if action.command then
     if isCommand then
       lsp.buf.execute_command(action.command)
-      info(client.name, action.title)
+      logger.info(action.title, title(client.name))
     else
       lsp.buf.execute_command(action)
-      info(client.name, action.title)
+      logger.info(action.title, title(client.name))
     end
   end
 end
@@ -94,7 +97,7 @@ local function onSubmit(item)
   then
     client.request('codeAction/resolve', action, function(err, resolvedAction)
       if err then
-        logger.error(err.code .. ': ' .. err.message)
+        logger.error(err.code .. ': ' .. err.message, title(client.name))
         return
       end
       applyAction(resolvedAction, client)
@@ -106,9 +109,7 @@ end
 
 local function codeActionCallback(results)
   if not results then
-    logger.warn('No results from textDocument/codeAction', {
-      title = '[Lsp]Code Action',
-    })
+    logger.warn('No results from textDocument/codeAction', title())
     return
   end
 
@@ -136,9 +137,7 @@ local function codeActionCallback(results)
   end
 
   if #actionList == 0 then
-    logger.warn('No code actions available', {
-      title = '[Lsp]Code Action',
-    })
+    logger.warn('No code actions available', title())
     return
   end
 

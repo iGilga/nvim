@@ -23,7 +23,7 @@ return packer.startup({
     use({
       'rcarriga/nvim-notify',
       config = function()
-        require('utils.logger').init()
+        require('utils.logger')
       end,
     })
 
