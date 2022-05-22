@@ -48,28 +48,35 @@ local notify = {
   warn = { fg = colors.yellow },
   error = { fg = colors.red },
   hint = { fg = colors.purple },
-  getColors = function(color)
+  getColorByFG = function(color)
     return { fg = color, bg = customColors.dark3 }
   end,
+  getcolorByBG = function (color)
+    return { bg = color }
+  end
 }
 
 local notifyGroup = {
-  NotifyINFOBorder = notify.getColors(colors.green),
+  NotifyINFOBorder = notify.getColorByFG(colors.green),
   NotifyINFOIcon = notify.info,
   NotifyINFOTitle = notify.info,
-  NotifyINFOBody = notify.getColors(colors.black),
-  NotifyWARNBorder = notify.getColors(colors.yellow),
+  NotifyINFOBody = notify.getColorByFG(colors.black),
+  NotifyWARNBorder = notify.getColorByFG(colors.yellow),
   NotifyWARNIcon = notify.warn,
   NotifyWARNTitle = notify.warn,
-  NotifyWARNBody = notify.getColors(colors.black),
-  NotifyERRORBorder =  notify.getColors(colors.red),
+  NotifyWARNBody = notify.getColorByFG(colors.black),
+  NotifyERRORBorder =  notify.getColorByFG(colors.red),
   NotifyERRORIcon = notify.error,
   NotifyERRORTitle = notify.error,
-  NotifyERRORBody = notify.getColors(colors.black),
-  NotifyTRACEBorder = notify.getColors(colors.purple),
+  NotifyERRORBody = notify.getColorByFG(colors.black),
+  NotifyTRACEBorder = notify.getColorByFG(colors.purple),
   NotifyTRACEIcon = notify.hint,
   NotifyTRACETitle = notify.hint,
-  NotifyTRACEBody = notify.getColors(colors.black),
+  NotifyTRACEBody = notify.getColorByFG(colors.black),
+  NotifyINFOSign = notify.getcolorByBG(colors.green),
+  NotifyWARNSign = notify.getcolorByBG(colors.yellow),
+  NotifyERRORSign = notify.getcolorByBG(colors.red),
+  NotifyTRACESign = notify.getcolorByBG(colors.purple),
 }
 
 local TelescopeGroup = {
