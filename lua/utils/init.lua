@@ -18,7 +18,7 @@ function M.isDisable(plugin)
   return vim.tbl_contains(config.disablePlugins, plugin)
 end
 
-function M.get_relative_path(file_path)
+function M.getRelativePath(file_path)
   local plenary_path = require('plenary.path')
   local parsed_path, _ = file_path:gsub('file://', '')
   local path = plenary_path:new(parsed_path)

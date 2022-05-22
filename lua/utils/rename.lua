@@ -43,7 +43,7 @@ local mappings = function(input)
   end)
 end
 
-local rename_handler = function(err, result, ctx, _)
+local renameCallback = function(err, result, ctx, _)
   if err then
     logger.error(("Error running LSP query '%s': %s"):format(ctx.method, err), {
       title = '[LSP]Rename',
@@ -51,30 +51,23 @@ local rename_handler = function(err, result, ctx, _)
   end
 
   if result and result.changes then
-    local params = ctx.params
-    local uri = params.textDocument.uri
+    local p = ctx.params
+    local uri = p.textDocument.uri
     local client = lsp.get_client_by_id(ctx.client_id)
     lsp.util.apply_workspace_edit(result, client.offset_encoding)
-    local countChanges = #result.changes[uri]
-    -- local msg = ('%s -> %s [%s]%d'):format(params.currName, params.newName, u.get_relative_path(uri), countChanges)
-    -- logger.info(msg, { title = '[LSP]Rename' }
-    -- )
-    local msg = ('[LSP]Rename: %s -> %s [%s][%d]'):format(
-      params.currName,
-      params.newName,
-      u.get_relative_path(uri),
-      countChanges
-    )
-    logger.minfo(msg)
+    local count = #result.changes[uri]
+    local msg = ('%s -> %s [%s][%d]'):format(p.curName, p.newName, u.getRelativePath(uri), count)
+    local title = '[LSP]Rename'
+    logger.minfo(title, msg)
   end
 end
 
 M.rename = function(popup_opts, opts)
-  local currName = vim.fn.expand('<cword>')
+  local curName = vim.fn.expand('<cword>')
 
   local width = minWidth
-  if #currName > width then
-    width = #currName
+  if #curName > width then
+    width = #curName
   end
 
   popup_opts = {
@@ -102,15 +95,15 @@ M.rename = function(popup_opts, opts)
 
   opts = {
     prompt = Text(config.prompt, config.prompt_hl),
-    default_value = currName,
+    default_value = curName,
     on_submit = function(newName)
-      if not (newName and #newName > 0) or newName == currName then
+      if not (newName and #newName > 0) or newName == curName then
         return
       end
       local params = lsp.util.make_position_params()
-      params.currName = currName
+      params.curName = curName
       params.newName = newName
-      lsp.buf_request(0, 'textDocument/rename', params, rename_handler)
+      lsp.buf_request(0, 'textDocument/rename', params, renameCallback)
     end,
   }
 
