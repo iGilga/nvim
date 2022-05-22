@@ -22,8 +22,8 @@ nnoremap({ '<F5>', ':nohl<cr>' })
 
 -- barbar.nvim
 local opts = { silent = true }
-nnoremap({ '<a-8>', ':BufferNext<cr>', opts })
-nnoremap({ '<a-7>', ':BufferPrevious<cr>', opts })
+nnoremap({ '<a-;>', ':BufferNext<cr>', opts })
+nnoremap({ '<a-l>', ':BufferPrevious<cr>', opts })
 -- nnoremap({ '<A-0>', ':BufferGotoLast<cr>', opts })
 nnoremap({ 'ts', ':BufferClose<cr>', opts })
 nnoremap({ 'tt', ':BufferPick<cr>', opts })
