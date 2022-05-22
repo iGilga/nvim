@@ -19,7 +19,6 @@ local setup = {
     highlight_definitions = { enable = true },
     smart_rename = {
       enable = true,
-      keymaps = { smart_rename = 'grr' },
     },
   },
 }
