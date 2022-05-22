@@ -128,11 +128,11 @@ return packer.startup({
 
     use({
       'ray-x/lsp_signature.nvim',
-      config = function()
+      config = function(config)
         require('lsp_signature').setup({
           bind = true,
           handler_opts = {
-            border = config.border,
+            border = config.style,
           },
         })
       end,
