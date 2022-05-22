@@ -57,19 +57,19 @@ local notifyGroup = {
   NotifyINFOBorder = notify.getColors(colors.green),
   NotifyINFOIcon = notify.info,
   NotifyINFOTitle = notify.info,
-  NotifyINFOBody = notify.getColors(colors.green),
+  NotifyINFOBody = notify.getColors(colors.black),
   NotifyWARNBorder = notify.getColors(colors.yellow),
   NotifyWARNIcon = notify.warn,
   NotifyWARNTitle = notify.warn,
-  NotifyWARNBody = notify.getColors(colors.yellow),
+  NotifyWARNBody = notify.getColors(colors.black),
   NotifyERRORBorder =  notify.getColors(colors.red),
   NotifyERRORIcon = notify.error,
   NotifyERRORTitle = notify.error,
-  NotifyERRORBody = notify.getColors(colors.red),
+  NotifyERRORBody = notify.getColors(colors.black),
   NotifyTRACEBorder = notify.getColors(colors.purple),
   NotifyTRACEIcon = notify.hint,
   NotifyTRACETitle = notify.hint,
-  NotifyTRACEBody = notify.getColors(colors.purple),
+  NotifyTRACEBody = notify.getColors(colors.black),
 }
 
 local TelescopeGroup = {
