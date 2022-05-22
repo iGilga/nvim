@@ -48,28 +48,28 @@ local notify = {
   warn = { fg = colors.yellow },
   error = { fg = colors.red },
   hint = { fg = colors.purple },
-  body = function(color)
+  getColors = function(color)
     return { fg = color, bg = customColors.dark3 }
   end,
 }
 
 local notifyGroup = {
-  NotifyINFOBorder = notify.border,
+  NotifyINFOBorder = notify.getColors(colors.green),
   NotifyINFOIcon = notify.info,
   NotifyINFOTitle = notify.info,
-  NotifyINFOBody = notify.body(colors.green),
-  NotifyWARNBorder = notify.border,
+  NotifyINFOBody = notify.getColors(colors.green),
+  NotifyWARNBorder = notify.getColors(colors.yellow),
   NotifyWARNIcon = notify.warn,
   NotifyWARNTitle = notify.warn,
-  NotifyWARNBody = notify.body(colors.yellow),
-  NotifyERRORBorder = notify.border,
+  NotifyWARNBody = notify.getColors(colors.yellow),
+  NotifyERRORBorder =  notify.getColors(colors.red),
   NotifyERRORIcon = notify.error,
   NotifyERRORTitle = notify.error,
-  NotifyERRORBody = notify.body(colors.red),
-  NotifyTRACEBorder = notify.border,
+  NotifyERRORBody = notify.getColors(colors.red),
+  NotifyTRACEBorder = notify.getColors(colors.purple),
   NotifyTRACEIcon = notify.hint,
   NotifyTRACETitle = notify.hint,
-  NotifyTRACEBody = notify.body(colors.purple),
+  NotifyTRACEBody = notify.getColors(colors.purple),
 }
 
 local TelescopeGroup = {
@@ -128,6 +128,7 @@ local customNnn = {
 local custom = {
   NormalFloat = { fg = colors.white, bg = customColors.dark3 },
   FloatBorder = { fg = colors.gray, bg = customColors.dark3 },
+  CBorder = { fg =colors.green, bg = colors.green }
 }
 
 local overrides = u.merge(custom, notifyGroup, TelescopeGroup, CustomCmp, customAlpha, customTodo, customNui, customNnn)
