@@ -35,21 +35,21 @@ local colors = {
 
 local telescope = {
   matching = theme.roninYellow,
-  preview = customColors.dark2,
+  preview = customColors.dark3,
   prompt = colors.selection,
-  results = customColors.grey4,
+  results = customColors.dark2,
   selection = colors.selection,
   title = { bg = customColors.green1, fg = colors.black },
 }
 
 local notify = {
-  border = { bg = colors.dark2 },
+  border = { bg = customColors.dark3 },
   info = { fg = colors.green },
   warn = { fg = colors.yellow },
   error = { fg = colors.red },
   hint = { fg = colors.purple },
   body = function(color)
-    return { fg = color, bg = colors.dark2 }
+    return { fg = color, bg = customColors.dark3 }
   end,
 }
 
@@ -92,8 +92,8 @@ local TelescopeGroup = {
 local CustomCmp = {
   CmpDocumentation = { bg = customColors.dark3 },
   CmpDocumentationBorder = { bg = customColors.dark3 },
-  CmpCompletion = { bg = customColors.dark1 },
-  CmpCompletionBorder = { bg = customColors.dark1 },
+  CmpCompletion = { bg = customColors.dark2 },
+  CmpCompletionBorder = { bg = customColors.dark2 },
 }
 
 local customAlpha = {
@@ -111,8 +111,8 @@ local customTodo = {
 }
 
 local customNui = {
-  NuiNormal = { bg = customColors.dark2, fg = colors.white },
-  NuiBorder = { bg = customColors.dark2, fg = customColors.dark2 },
+  NuiNormal = { bg = customColors.dark3, fg = colors.white },
+  NuiBorder = { bg = customColors.dark3, fg = customColors.dark3 },
   NuiTitle = { bg = customColors.green1, fg = colors.black },
   NuiPrompt = { fg = colors.black },
   NuiBottom = { fg = colors.gray },
@@ -126,8 +126,8 @@ local customNnn = {
 }
 
 local custom = {
-  NormalFloat = { fg = colors.white, bg = customColors.dark2 },
-  FloatBorder = { fg = colors.gray, bg = customColors.dark2 },
+  NormalFloat = { fg = colors.white, bg = customColors.dark3 },
+  FloatBorder = { fg = colors.gray, bg = customColors.dark3 },
 }
 
 local overrides = u.merge(custom, notifyGroup, TelescopeGroup, CustomCmp, customAlpha, customTodo, customNui, customNnn)
