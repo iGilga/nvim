@@ -54,7 +54,7 @@ moduleNotify.setup({
     -- [ "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" ]
     vim.api.nvim_win_set_config(win, { border = { '', ' ', '', '', '', ' ', '', '' } })
   end,
-  timeout = 12000,
+  timeout = 2000,
 })
 vim.notify = moduleNotify
 
