@@ -35,7 +35,7 @@ nnoremap({ 'tl', ':BufferOrderByLanguage<cr>', opts })
 nnoremap({ '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>" })
 nnoremap({ '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>" })
 
-nnoremap({ '<leader>ss', ':SaveSession<cr>' })
+nnoremap({ '<leader>oo', ':SaveSession<cr>' })
 
 tnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
 nnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
