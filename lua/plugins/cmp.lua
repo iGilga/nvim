@@ -70,8 +70,8 @@ local setup = {
   sources = {
     { name = 'luasnip' },
     { name = 'nvim_lua' },
-    { name = 'nvim_lsp', max_item_count = 25 },
-    { name = 'buffer', keyword_length = 5 },
+    { name = 'nvim_lsp', max_item_count = 20 },
+    { name = 'buffer', keyword_length = 3 },
     { name = 'path' },
   },
   formatting = get_formatting(),
