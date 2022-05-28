@@ -43,13 +43,15 @@ function M.init(client, bufnr)
   buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>')
 
   buf_set_keymap('n', '<leader>so', '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>')
-
+  if client.name == 'eslint' then
+    buf_set_keymap('n', '<leader>efa', ':EslintFixAll')
+  end
   -- if client.name == 'tsserver' then
   --   buf_set_keymap('n', '<leader>gr',':TSLspRenameFile<cr>')
   --   buf_set_keymap('n', '<leader>go',':TSLspOrganize<cr>')
   --   buf_set_keymap('n', '<leader>gi',':TSLspImportAll<cr>')
   -- end
-  print('Loaded mapping for', client.name)
+  -- print('Loaded mapping for', client.name)
 end
 
 return M
