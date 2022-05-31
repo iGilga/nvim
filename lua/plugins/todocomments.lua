@@ -6,8 +6,6 @@ end
 
 local colors = kanagawa.colors
 
-local nnoremap = require('utils.keymap').nnoremap
-
 local setup = {
   keywords = {
     TODO = {
@@ -45,6 +43,6 @@ local setup = {
 -- optim: optim
 -- hack: hack
 
-nnoremap({ '<leader>ft', ':TodoTelescope<cr>' })
+vim.keymap.set('n', '<leader>ft', ':TodoTelescope<cr>')
 
 require('todo-comments').setup(setup)

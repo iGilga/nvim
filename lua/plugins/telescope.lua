@@ -1,4 +1,4 @@
-local nnoremap = require('utils.keymap').nnoremap
+local k = vim.keymap
 local u = require('utils')
 local telescope = require('telescope')
 local actions = require('telescope.actions')
@@ -47,18 +47,25 @@ telescope.setup({
       '--smart-case',
       '--hidden',
     },
-    prompt_prefix = " >  ",
+    prompt_prefix = ' >  ',
     results_title = false,
     selection_caret = '  ',
     entry_prefix = '  ',
     selection_strategy = 'reset',
     sorting_strategy = 'ascending',
-    layout_strategy = 'horizontal',
+    -- layout_strategy = 'horizontal',
+    layout_strategy = vim.o.lines > 55 and 'vertical' or 'horizontal',
     set_env = { ['COLORTERM'] = 'truecolor' },
     layout_config = {
       horizontal = {
         prompt_position = 'top',
-        width = { padding = 8 },
+        width = { padding = 2 },
+        height = { padding = 2 },
+        preview_width = 0.65,
+      },
+      vertical = {
+        prompt_position = 'top',
+        width = { padding = 2 },
         height = { padding = 2 },
         preview_width = 0.65,
       },
@@ -189,23 +196,18 @@ require('telescope').load_extension('lazygit')
 require('telescope').load_extension('projects')
 
 -- mapping
-nnoremap({ '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>" })
-nnoremap({ '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>" })
-nnoremap({ '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>" })
-nnoremap({ '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>" })
-nnoremap({ '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>" })
-nnoremap({ '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>" })
 
-nnoremap({ '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>" })
+k.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
+k.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
+k.set('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
+k.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+k.set('n', '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>")
+k.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
+k.set('n', '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>")
+k.set('n', '<leader>tn', "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>")
+k.set('n', '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>')
+k.set('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>')
+k.set('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>')
 
-nnoremap({
-  '<leader>tn',
-  "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
-})
-
-nnoremap({ '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>' })
-nnoremap({ '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>' })
-nnoremap({ '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>' })
-
-nnoremap({ '<leader>sl', ':Telescope session-lens search_session<cr>' })
-nnoremap({ '<leader>fd', '<cmd>:Telescope projects<cr>' })
+k.set('n', '<leader>sl', ':Telescope session-lens search_session<cr>')
+k.set('n', '<leader>fd', '<cmd>:Telescope projects<cr>')

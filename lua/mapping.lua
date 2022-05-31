@@ -1,44 +1,40 @@
 local config = require('config')
-local k = require('utils.keymap')
-local noremap = k.noremap
-local nnoremap = k.nnoremap
-local tnoremap = k.tnoremap
-
+local k = vim.keymap
 -- map the leader key
 vim.g.mapleader = config.leader
 
 -- remapping from basic vim to jkl;
-noremap({ 'l', 'h' })
-noremap({ ';', 'l' })
-noremap({ 'h', ';' })
+k.set('', 'l', 'h')
+k.set('', ';', 'l')
+k.set('', 'h', ';')
 
 -- save and quit
-nnoremap({ '<leader>q', ':q<cr>' })
-nnoremap({ '<c-q>', ':qa<cr>' })
-nnoremap({ '<leader>s', ':w<cr>' })
+k.set('n', '<leader>q', ':q<cr>')
+k.set('n', '<c-q>', ':qa<cr>')
+k.set('n', '<leader>s', ':w<cr>')
 
 -- reset highlight
-nnoremap({ '<F5>', ':nohl<cr>' })
+k.set('n', '<F5>', ':nohl<cr>')
 
 -- barbar.nvim
 local opts = { silent = true }
-nnoremap({ '<a-k>', ':BufferNext<cr>', opts })
-nnoremap({ '<a-j>', ':BufferPrevious<cr>', opts })
+k.set('n', '<a-k>', ':BufferNext<cr>', opts)
+k.set('n', '<a-j>', ':BufferPrevious<cr>', opts)
 -- nnoremap({ '<A-0>', ':BufferGotoLast<cr>', opts })
-nnoremap({ 'ts', ':BufferClose<cr>', opts })
-nnoremap({ 'tt', ':BufferPick<cr>', opts })
-nnoremap({ 'tn', ':BufferOrderByBufferNumber<cr>', opts })
-nnoremap({ 'td', ':BufferOrderByDirectory<cr>', opts })
-nnoremap({ 'tl', ':BufferOrderByLanguage<cr>', opts })
+k.set('n', 'ts', ':BufferClose<cr>', opts)
+k.set('n', 'tt', ':BufferPick<cr>', opts)
+k.set('n', 'tn', ':BufferOrderByBufferNumber<cr>', opts)
+k.set('n', 'td', ':BufferOrderByDirectory<cr>', opts)
+k.set('n', 'tl', ':BufferOrderByLanguage<cr>', opts)
 
 -- hop mapping
-nnoremap({ '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>" })
-nnoremap({ '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>" })
+k.set('n', '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>")
+k.set('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>")
 
-nnoremap({ '<leader>oo', ':SaveSession<cr>' })
+k.set('n', '<leader>oo', ':SaveSession<cr>')
 
-tnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
-nnoremap({ '<c-t>', '<cmd>:NnnPicker<cr>' })
+k.set('t', '<c-t>', '<cmd>:NnnPicker<cr>')
+k.set('n', '<c-t>', '<cmd>:NnnPicker<cr>')
 
 -- LazyGit
-nnoremap({ '<leader>ll', ':LazyGit<cr>' })
+k.set('n', '<leader>ll', ':LazyGit<cr>')
