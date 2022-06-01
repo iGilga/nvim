@@ -3,11 +3,8 @@ local u = require('utils')
 local M = {}
 
 function M.init(client, bufnr)
-  local function buf_set_keymap(mode, lhs, rhs, opts)
+  local function buf_set_keymap(mode, lhs, rhs)
     local options = { noremap = true, silent = true }
-    if opts then
-      options = u.merge(options, opts)
-    end
     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
   end
   -- diagnostics
