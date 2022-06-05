@@ -20,6 +20,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.api.nvim_create_autocmd({ 'BufEnter' }, { command = ':lua require("lazygit.utils").project_root_dir()' })
 
+vim.api.nvim_create_autocmd( 'BufRead' , { pattern = '*/openra/*', command = 'setlocal noexpandtab tabstop=4 shiftwidth=4' })
+
 local wrap_md_group = vim.api.nvim_create_augroup("Markdown Wrap Settings", { clear = true })
 
 vim.api.nvim_create_autocmd('BufEnter', {

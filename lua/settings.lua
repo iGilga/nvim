@@ -45,6 +45,10 @@ local options = {
   updatetime = 250,
   -- wrap = false,
   writebackup = false,
+  listchars = {
+    space = '·',
+    tab = '-->'
+  }
 }
 
 for option, value in pairs(options) do
