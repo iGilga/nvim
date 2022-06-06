@@ -1,6 +1,5 @@
 local lsp = vim.lsp
 local border = require('config').border
--- local get_relative_path = require('utils').get_relative_path
 local logger = require('utils.logger')
 
 lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
