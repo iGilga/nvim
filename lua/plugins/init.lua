@@ -252,8 +252,6 @@ return packer.startup({
     })
     -- Manage git
     use('kdheepak/lazygit.nvim')
-    -- Autoalign
-    use('Vonr/align.nvim')
     -- markdown
     use({ 'ellisonleao/glow.nvim', branch = 'main' })
     use({
