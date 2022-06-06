@@ -4,9 +4,9 @@ local k = vim.keymap
 vim.g.mapleader = config.leader
 
 -- remapping from basic vim to jkl;
-k.set('', 'l', 'h')
-k.set('', ';', 'l')
-k.set('', 'h', ';')
+-- k.set('', 'l', 'h')
+-- k.set('', ';', 'l')
+-- k.set('', 'h', ';')
 
 -- save and quit
 k.set('n', '<leader>q', ':q<cr>')
