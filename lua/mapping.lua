@@ -17,7 +17,7 @@ k.set('n', '<leader>s', ':w<cr>')
 k.set('n', '<F5>', ':nohl<cr>')
 
 -- barbar.nvim
-local opts = { silent = true }
+local opts = { noremap = true, silent = true }
 k.set('n', '<a-k>', ':BufferNext<cr>', opts)
 k.set('n', '<a-j>', ':BufferPrevious<cr>', opts)
 -- nnoremap({ '<A-0>', ':BufferGotoLast<cr>', opts })
