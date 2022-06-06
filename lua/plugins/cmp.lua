@@ -30,12 +30,12 @@ end
 local setup = {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      return luasnip.lsp_expand(args.body)
     end,
   },
   mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-u>'] = cmp.mapping.scroll_docs(4),
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<S-Enter>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.close(),
     -- disabled for autopairs mapping
@@ -53,7 +53,7 @@ local setup = {
       else
         fallback()
       end
-    end, { 'i', 'c' }),
+    end, { 'i', 's' }),
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
@@ -62,7 +62,7 @@ local setup = {
       else
         fallback()
       end
-    end, { 'i', 'c' }),
+    end, { 'i', 's' }),
   },
   experimental = {
     ghost_text = true,
@@ -70,7 +70,7 @@ local setup = {
   sources = {
     { name = 'luasnip' },
     { name = 'nvim_lua' },
-    { name = 'nvim_lsp', max_item_count = 20 },
+    { name = 'nvim_lsp', max_item_count = 15 },
     { name = 'buffer', keyword_length = 3 },
     { name = 'path' },
   },
