@@ -16,17 +16,15 @@ return packer.startup({
       'nathom/filetype.nvim',
       'nvim-lua/plenary.nvim',
     })
-
     -- load theme
     require('theme').init(use, config)
-
+    -- notify
     use({
       'rcarriga/nvim-notify',
       config = function()
         require('utils.logger')
       end,
     })
-
     -- lsp-config
     use({
       'neovim/nvim-lspconfig',
@@ -61,7 +59,6 @@ return packer.startup({
         require('plugins.treesitter')
       end,
     })
-
     -- finder file, code, etc
     use({
       'nvim-telescope/telescope.nvim',
@@ -75,16 +72,13 @@ return packer.startup({
         require('plugins.telescope')
       end,
     })
-
     -- telescope with hop
     use({ 'nvim-telescope/telescope-hop.nvim' })
-
     -- topline
     use({
       'romgrk/barbar.nvim',
       requires = { 'kyazdani42/nvim-web-devicons', opt = true },
     })
-
     --bottomline
     use({
       'hoob3rt/lualine.nvim',
@@ -93,7 +87,6 @@ return packer.startup({
         require('plugins.lualine')
       end,
     })
-
     -- autocomplete
     use({
       'hrsh7th/nvim-cmp',
@@ -126,7 +119,6 @@ return packer.startup({
       },
       event = 'InsertEnter',
     })
-
     use({
       'ray-x/lsp_signature.nvim',
       config = function(config)
@@ -139,7 +131,6 @@ return packer.startup({
       end,
       after = 'nvim-lspconfig',
     })
-
     -- aka easymotion
     use({
       'phaazon/hop.nvim',
@@ -148,7 +139,6 @@ return packer.startup({
         require('hop').setup({})
       end,
     })
-
     -- file manager
     use({
       'luukvbaal/nnn.nvim',
@@ -162,7 +152,6 @@ return packer.startup({
         })
       end,
     })
-
     -- find project for telescope
     use({
       'ahmedkhalf/project.nvim',
@@ -170,7 +159,6 @@ return packer.startup({
         require('project_nvim').setup({})
       end,
     })
-
     -- comment
     use({
       'numToStr/Comment.nvim',
@@ -178,7 +166,6 @@ return packer.startup({
         require('Comment').setup()
       end,
     })
-
     use({
       'folke/todo-comments.nvim',
       requires = 'nvim-lua/plenary.nvim',
@@ -186,7 +173,6 @@ return packer.startup({
         require('plugins.todocomments')
       end,
     })
-
     -- indentline
     use({
       'lukas-reineke/indent-blankline.nvim',
@@ -204,7 +190,6 @@ return packer.startup({
         require('gitsigns').setup()
       end,
     })
-
     -- show keybinds
     use({
       'folke/which-key.nvim',
@@ -212,7 +197,6 @@ return packer.startup({
         require('which-key').setup({})
       end,
     })
-
     -- show colors
     use({
       'norcalli/nvim-colorizer.lua',
@@ -220,14 +204,12 @@ return packer.startup({
         require('plugins.colorizer')
       end,
     })
-
     use({
       'folke/twilight.nvim',
       config = function()
         require('twilight').setup({})
       end,
     })
-
     -- dashboard
     use({
       'goolord/alpha-nvim',
@@ -236,7 +218,6 @@ return packer.startup({
         require('plugins.alpha')
       end,
     })
-
     -- auto-session
     use({
       'rmagatti/auto-session',
@@ -244,7 +225,6 @@ return packer.startup({
         require('plugins.autosession')
       end,
     })
-
     use({
       'rmagatti/session-lens',
       requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
@@ -252,14 +232,11 @@ return packer.startup({
         require('plugins.sessionlens')
       end,
     })
-
     use({
       'yamatsum/nvim-cursorline',
       disable = u.isDisable('nvim-cursorline'),
     })
-
     use('MunifTanjim/nui.nvim')
-
     use({
       'max397574/better-escape.nvim',
       config = function()
@@ -267,19 +244,18 @@ return packer.startup({
       end,
       disable = u.isDisable('better-escape.nvim'),
     })
-
     use({
       'LudoPinelli/comment-box.nvim',
       config = function()
         require('plugins.comment-box')
       end,
     })
-
+    -- Manage git
     use('kdheepak/lazygit.nvim')
-
+    -- Autoalign
+    use('Vonr/align.nvim')
     -- markdown
     use({ 'ellisonleao/glow.nvim', branch = 'main' })
-
     use({
       'iamcco/markdown-preview.nvim',
       run = 'cd app && npm install',
