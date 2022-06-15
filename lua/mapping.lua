@@ -1,40 +1,44 @@
+local is_available = valhalla.is_available
 local config = require('config')
-local k = vim.keymap
+local map = vim.keymap.set
 -- map the leader key
 vim.g.mapleader = config.leader
 
 -- remapping from basic vim to jkl;
--- k.set('', 'l', 'h')
--- k.set('', ';', 'l')
--- k.set('', 'h', ';')
+-- k('', 'l', 'h')
+-- k('', ';', 'l')
+-- k('', 'h', ';')
 
 -- save and quit
-k.set('n', '<leader>q', ':q<cr>')
-k.set('n', '<c-q>', ':qa<cr>')
-k.set('n', '<leader>s', ':w<cr>')
+map('n', '<leader>q', ':q<cr>', { desc = 'quit' })
+map('n', '<c-q>', ':qa<cr>', { desc = 'quit all' })
+map('n', '<leader>s', ':w<cr>', { desc = 'save' })
 
--- reset highlight
-k.set('n', '<F5>', ':nohl<cr>')
+-- r highlight
+map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 
 -- barbar.nvim
-local opts = { noremap = true, silent = true }
-k.set('n', '<a-k>', ':BufferNext<cr>', opts)
-k.set('n', '<a-j>', ':BufferPrevious<cr>', opts)
+local opts = function(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
+
+map('n', '<a-k>', ':BufferNext<cr>', opts('next buffer'))
+map('n', '<a-j>', ':BufferPrevious<cr>', opts('prev buffer'))
 -- nnoremap({ '<A-0>', ':BufferGotoLast<cr>', opts })
-k.set('n', 'ts', ':BufferClose<cr>', opts)
-k.set('n', 'tt', ':BufferPick<cr>', opts)
-k.set('n', 'tn', ':BufferOrderByBufferNumber<cr>', opts)
-k.set('n', 'td', ':BufferOrderByDirectory<cr>', opts)
-k.set('n', 'tl', ':BufferOrderByLanguage<cr>', opts)
+map('n', 'ts', ':BufferClose<cr>', opts('close buffer'))
+map('n', 'tt', ':BufferPick<cr>', opts('pick buffer'))
+map('n', 'tn', ':BufferOrderByBufferNumber<cr>', opts('sort buffer number'))
+map('n', 'td', ':BufferOrderByDirectory<cr>', opts('sort buffer directory'))
+map('n', 'tl', ':BufferOrderByLanguage<cr>', opts('sort buffer language'))
 
 -- hop mapping
-k.set('n', '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>")
-k.set('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>")
+map('n', '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>", { desc = 'motion word' })
+map('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", { desc = 'motion line' })
 
-k.set('n', '<leader>oo', ':SaveSession<cr>')
+map('n', '<leader>oo', ':SaveSession<cr>', { desc = 'save session' })
 
-k.set('t', '<c-t>', '<cmd>:NnnPicker<cr>')
-k.set('n', '<c-t>', '<cmd>:NnnPicker<cr>')
+map('t', '<c-t>', '<cmd>:NnnPicker<cr>', { desc = 'open nnn' })
+map('n', '<c-t>', '<cmd>:NnnPicker<cr>', { desc = 'open nnn' })
 
 -- LazyGit
-k.set('n', '<leader>ll', ':LazyGit<cr>')
+map('n', '<leader>ll', ':LazyGit<cr>', { desc = 'open lazygit' })
