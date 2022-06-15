@@ -1,4 +1,3 @@
-local is_available = valhalla.is_available
 local config = require('config')
 local map = vim.keymap.set
 -- map the leader key
