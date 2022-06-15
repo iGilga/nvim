@@ -1,4 +1,4 @@
-local k = vim.keymap
+local map = vim.keymap.set
 local u = require('utils')
 local telescope = require('telescope')
 local actions = require('telescope.actions')
@@ -73,7 +73,7 @@ telescope.setup({
     borderchars = { ' ' },
     -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
     -- color_devicons = true,
-    path_display = { 'absolute' },
+    path_display = { 'smart' },
     use_less = true,
     winblend = 0,
     border = {},
@@ -86,7 +86,6 @@ telescope.setup({
       i = {
         ['<esc>'] = actions.close,
         ['<c-h>'] = 'which_key',
-        -- ['<c-n>'] = trouble.open_with_trouble,
         ['<c-l>'] = R('telescope').extensions.hop.hop, -- hop.hop_toggle_selection
         ['<c-o>'] = function(prompt_bufnr)
           local opts = {
@@ -187,7 +186,6 @@ telescope.setup({
   },
 })
 
--- telescope.load_extension('fzf')
 telescope.load_extension('zf-native')
 telescope.load_extension('session-lens')
 telescope.load_extension('hop')
@@ -196,18 +194,23 @@ require('telescope').load_extension('lazygit')
 require('telescope').load_extension('projects')
 
 -- mapping
+map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = 'search files' })
+map('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", { desc = 'search word' })
+map('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", { desc = 'search buffers' })
+map('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", { desc = 'search help' })
+-- map('n', '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>", { desc = 'search quickfix' })
+map('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = 'search oldfiles' })
+map('n', '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>", { desc = 'search marks' })
+map('n', '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>", { desc = 'search git repo' })
+map(
+  'n',
+  '<leader>tn',
+  "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
+  { desc = 'search notify' }
+)
+-- map('n', '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>', { desc = 'search files' })
+-- map('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', { desc = 'search files' })
+-- map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>', { desc = 'search files' })
 
-k.set('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>")
-k.set('n', '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>")
-k.set('n', '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>")
-k.set('n', '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>")
-k.set('n', '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>")
-k.set('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
-k.set('n', '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>")
-k.set('n', '<leader>tn', "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>")
-k.set('n', '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>')
-k.set('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>')
-k.set('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>')
-
-k.set('n', '<leader>sl', ':Telescope session-lens search_session<cr>')
-k.set('n', '<leader>fd', '<cmd>:Telescope projects<cr>')
+map('n', '<leader>sl', ':Telescope session-lens search_session<cr>', { desc = 'search sessions' })
+map('n', '<leader>fd', '<cmd>:Telescope projects<cr>', { desc = 'search projects' })
