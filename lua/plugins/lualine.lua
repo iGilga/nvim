@@ -13,15 +13,15 @@ local function getSessionName()
 end
 
 local custom_kanagawa = require('lualine.themes.kanagawa')
-custom_kanagawa.normal.c = { bg = "#2A2A37", fg = "#C8C093" }
+custom_kanagawa.normal.c = { bg = '#2A2A37', fg = '#C8C093' }
 
 local config = {
   options = {
     theme = custom_kanagawa,
     icons_enabled = true,
-    disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree' },
+    disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree', 'alpha' },
     globalstatus = true,
-    component_separators = { left = '|', right = '|' },
+    component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
   },
   sections = {
@@ -31,10 +31,13 @@ local config = {
         return str:sub(1, 1)
       end,
     } },
-    lualine_b = { { getSessionName }, { 'filename', file_status = true } },
-    lualine_c = { { 'diagnostics', sources = { 'nvim_diagnostic' } } },
-    lualine_x = { 'encoding', 'filetype' },
-    lualine_y = { { 'branch', icon = '', 'diff' } },
+    lualine_b = { { 'branch', icon = '' } },
+    lualine_c = {
+      { 'diff', symbols = { added = ' ', modified = '柳', removed = ' ' } },
+      { 'diagnostics', sources = { 'nvim_diagnostic' } },
+    },
+    lualine_x = { 'filetype' },
+    lualine_y = { { getSessionName } },
     lualine_z = { 'location' },
   },
   inactive_sections = {
