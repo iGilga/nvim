@@ -25,6 +25,7 @@ local calendar = {
 }
 
 local footerText = function()
+---@diagnostic disable-next-line: undefined-global
   local plugins = #vim.tbl_keys(packer_plugins)
   local v = vim.version()
   return { string.format(' %d   v%d.%d.%d', plugins, v.major, v.minor, v.patch) }
