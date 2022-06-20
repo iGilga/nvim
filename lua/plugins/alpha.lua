@@ -24,19 +24,20 @@ local calendar = {
   },
 }
 
--- local footerText = function()
---   local plugins = #vim.tbl_keys(packer_plugins)
---   local v = vim.version()
---   return { string.format(' %d   v%d.%d.%d', plugins, v.major, v.minor, v.patch) }
--- end
---
--- local footer = {
---   type = 'text',
---   val = footerText(),
---   opts = {
---     position = 'center',
---   },
--- }
+local footerText = function()
+  local plugins = #vim.tbl_keys(packer_plugins)
+  local v = vim.version()
+  return { string.format(' %d   v%d.%d.%d', plugins, v.major, v.minor, v.patch) }
+end
+
+local footer = {
+  type = 'text',
+  val = footerText(),
+  opts = {
+    position = 'center',
+    hl = 'AlphaHeader',
+  },
+}
 
 local function button(sc, txt, keybind)
   local sc_ = sc:gsub('%s', ''):gsub('SPC', '<leader>')
@@ -88,19 +89,15 @@ local section = {
   header = header,
   calendar = calendar,
   buttons = buttons,
-  -- footer = footer,
+  footer = footer,
 }
 local area = function(offset)
   return { type = 'padding', val = offset }
 end
 
 local paddingSpace = 2
--- header + calendar + buttons + paddings
 local heightContext = #section.header.val + #section.calendar.val + #section.buttons.val + paddingSpace
 local headPadding = math.max(0, math.ceil((vim.fn.winheight('$') - heightContext) * 0.10))
--- local fbp1 = vim.o.lines - hp1 - hContext - #section.footer.val - 3
--- local fbp2 = math.floor((vim.fn.winheight('$') - 2 * hp1 - hContext))
--- local fbp3 = math.max(0, math.max(math.min(0, fbp2), math.min(math.max(0, fbp2), fbp1)))
 
 local opts = {
   layout = {
@@ -110,6 +107,8 @@ local opts = {
     section.calendar,
     area(paddingSpace),
     section.buttons,
+    area(paddingSpace),
+    section.footer,
   },
   opts = {
     -- margin = 50,
@@ -121,7 +120,10 @@ vim.api.nvim_create_augroup('alpha_tabline', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   group = 'alpha_tabline',
   pattern = 'alpha',
-  command = 'set showtabline=0 laststatus=0 noruler',
+  callback = function ()
+    vim.opt.laststatus = 0
+    vim.opt.showtabline = 0
+  end
 })
 
 vim.api.nvim_create_autocmd('FileType', {
@@ -131,11 +133,13 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.api.nvim_create_autocmd('BufUnload', {
       group = 'alpha_tabline',
       buffer = 0,
-      command = 'set showtabline=2 ruler laststatus=3',
+      callback = function ()
+        vim.opt.laststatus = 3
+        vim.opt.showtabline = 2
+      end,
     })
   end,
 })
-
 
 alpha.setup(opts)
 
