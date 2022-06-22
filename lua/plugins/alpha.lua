@@ -25,7 +25,7 @@ local calendar = {
 }
 
 local footerText = function()
----@diagnostic disable-next-line: undefined-global
+  ---@diagnostic disable-next-line: undefined-global
   local plugins = #vim.tbl_keys(packer_plugins)
   local v = vim.version()
   return { string.format(' %d   v%d.%d.%d', plugins, v.major, v.minor, v.patch) }
@@ -53,7 +53,7 @@ local function button(sc, txt, keybind)
     hl_shortcut = 'AlphaShortcuts',
     hl = {
       { 'AlphaIcon', 1, 3 },
-      { 'AlphaButton', 4, 20 }
+      { 'AlphaButton', 4, 20 },
     },
   }
   if keybind then
@@ -74,7 +74,7 @@ end
 local buttons = {
   type = 'group',
   val = {
-    button('Space s l', '  Open session', ':Telescope session-lens search_session<cr>'),
+    button('Space s f', '  Open session', '<cmd>SessionManager! load_session<cr>'),
     button('Space f f', '  Find File', ':Telescope find_files<CR>'),
     button('Space f o', '  Recent File', ':Telescope oldfiles<CR>'),
     button('Space l l', '  Open repo', ':LazyGit<cr>'),
@@ -121,10 +121,10 @@ vim.api.nvim_create_augroup('alpha_tabline', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
   group = 'alpha_tabline',
   pattern = 'alpha',
-  callback = function ()
+  callback = function()
     vim.opt.laststatus = 0
     vim.opt.showtabline = 0
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd('FileType', {
@@ -134,7 +134,7 @@ vim.api.nvim_create_autocmd('FileType', {
     vim.api.nvim_create_autocmd('BufUnload', {
       group = 'alpha_tabline',
       buffer = 0,
-      callback = function ()
+      callback = function()
         vim.opt.laststatus = 3
         vim.opt.showtabline = 2
       end,
@@ -143,5 +143,3 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 alpha.setup(opts)
-
-
