@@ -34,10 +34,16 @@ map('n', 'tl', ':BufferOrderByLanguage<cr>', opts('sort buffer language'))
 map('n', '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>", { desc = 'motion word' })
 map('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", { desc = 'motion line' })
 
-map('n', '<leader>oo', ':SaveSession<cr>', { desc = 'save session' })
-
 map('t', '<c-t>', '<cmd>:NnnPicker<cr>', { desc = 'open nnn' })
 map('n', '<c-t>', '<cmd>:NnnPicker<cr>', { desc = 'open nnn' })
 
 -- LazyGit
 map('n', '<leader>ll', ':LazyGit<cr>', { desc = 'open lazygit' })
+
+map('n', '<leader>sl', '<cmd>SessionManager! load_last_session<cr>', { desc = 'Load last session' })
+map('n', '<leader>oo', '<cmd>SessionManager! save_current_session<cr>', { desc = 'Save this session' })
+map('n', '<leader>od', '<cmd>SessionManager! delete_session<cr>', { desc = 'Delete session' })
+map('n', '<leader>sf', '<cmd>SessionManager! load_session<cr>', { desc = 'Search sessions' })
+map('n', '<leader>o.', '<cmd>SessionManager! load_current_dir_session<cr>', {
+  desc = 'Load current directory session',
+})
