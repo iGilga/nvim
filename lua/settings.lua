@@ -47,8 +47,8 @@ local options = {
   writebackup = false,
   listchars = {
     space = '·',
-    tab = '-->'
-  }
+    tab = '-->',
+  },
 }
 
 for option, value in pairs(options) do
@@ -60,21 +60,27 @@ o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,term
 -- Disable some builtin vim plugins
 local disabled_built_ins = {
   '2html_plugin',
+  'bugreport',
+  'ftplugin',
   'getscript',
   'getscriptPlugin',
   'gzip',
   'logipat',
   'matchit',
-  'matchparen',
   'netrw',
   'netrwFileHandlers',
   'netrwPlugin',
   'netrwSettings',
+  'optwin',
+  'rplugin',
   'rrhelper',
   'spec',
   'spellfile_plugin',
+  'synmenu',
+  'syntax',
   'tar',
   'tarPlugin',
+  'tutor',
   'vimball',
   'vimballPlugin',
   'zip',
@@ -86,7 +92,7 @@ for _, plugin in pairs(disabled_built_ins) do
 end
 
 -- enable autostart for co-- dashboard-nvim
-g.dashboard_default_executive = 'telescope'
+-- g.dashboard_default_executive = 'telescope'
 
 g.bufferline = {
   add_in_buffer_number_order = true,
