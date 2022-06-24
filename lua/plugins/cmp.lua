@@ -17,11 +17,11 @@ local get_formatting = function()
     format = require('lspkind').cmp_format({
       with_text = true,
       menu = {
-        buffer = '[Buffer]',
-        nvim_lsp = '[LSP]',
-        nvim_lua = '[Lua]',
-        path = '[Path]',
-        luasnip = '[LuaSnip]',
+        buffer = '[buffer]',
+        nvim_lsp = '[lsp]',
+        nvim_lua = '[lua]',
+        path = '[path]',
+        luasnip = '[snip]',
       },
     }),
   }
@@ -68,9 +68,9 @@ local setup = {
     ghost_text = true,
   },
   sources = {
+    { name = 'nvim_lsp', max_item_count = 15 },
     { name = 'luasnip' },
     { name = 'nvim_lua' },
-    { name = 'nvim_lsp', max_item_count = 15 },
     { name = 'buffer', keyword_length = 3 },
     { name = 'path' },
   },
