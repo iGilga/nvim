@@ -1,5 +1,4 @@
 local lspconfig = require('lspconfig')
-local u = require('utils')
 local configLsp = require('config').lsp.servers
 local defaultProvider = require('lsp.servers.default')
 
@@ -12,7 +11,7 @@ local function setup(servers)
       serverConfig = pserver
     end
     local userConfig = configLsp[server].opts or {}
-    local opts = u.merge(defaultProvider, serverConfig, userConfig)
+    local opts = valhalla.merge(defaultProvider, serverConfig, userConfig)
 
     lspconfig[server].setup(opts)
   end
