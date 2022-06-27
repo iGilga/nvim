@@ -1,11 +1,3 @@
-local ok, kanagawa = pcall(require, 'theme.color.kanagawa')
-
-if not ok then
-  return false
-end
-
-local colors = kanagawa.colors
-
 local setup = {
   keywords = {
     TODO = {
@@ -28,11 +20,11 @@ local setup = {
     },
   },
   colors = {
-    error = { colors.red },
-    warning = { colors.yellow },
-    info = { colors.blue },
-    hint = { colors.green },
-    default = { 'Identifier', '#7C3AED' },
+    error = { C.red },
+    warning = { C.yellow },
+    info = { C.blue },
+    hint = { C.green },
+    default = { 'Identifier', C.purple },
   },
 }
 
