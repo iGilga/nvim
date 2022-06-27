@@ -1,14 +1,13 @@
 local lualine = require('lualine')
 
 local function getSessionName()
-  if vim.v.this_session then
+  if vim.v.this_session ~= '' then
     local session = vim.v.this_session
-    local splitSessionPath = vim.split(session, '%%')
-    local sessionName = splitSessionPath[#splitSessionPath]:gsub('%.vim', '')
-    if sessionName == nil or sessionName == '' then
-      return '[No Session]'
-    end
+    local splitSessionPath = vim.split(session, '__')
+    local sessionName = splitSessionPath[#splitSessionPath]
     return '[S]' .. sessionName
+  else
+    return ''
   end
 end
 
