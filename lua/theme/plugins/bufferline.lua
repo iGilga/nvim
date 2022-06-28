@@ -1,0 +1,15 @@
+return {
+  -- BufferLineFill = { fg = colors.white, bg = colors.bg_light },
+  -- BufferLineBackground = { fg = colors.white, bg = colors.bg_dark },
+  -- BufferLineBufferVisible = { fg = colors.white, bg = colors.bg_dark },
+  -- BufferLineBufferSelected = { fg = colors.white, bg = colors.bg_light },
+  -- BufferLineSeparator = { fg = colors.green, bg = colors.bg },
+  -- BufferLineSeparatorVisible = { fg = colors.green, bg = colors.bg },
+  -- BufferLineSeparatorSelected = { fg = colors.green, bg = colors.bg },
+  BufferLineModified = { fg = C.yellow, bg = C.bg },
+  BufferLineModifiedVisible = { fg = C.yellow, bg = C.bg },
+  BufferLineModifiedSelected = { fg = C.yellow, bg = C.bg },
+  BufferLinePick = { fg = C.red, bg = C.bg, bold = true },
+  BufferLinePickVisible = { fg = C.red, bg = C.bg, bold = true },
+  BufferLinePickSelected = { fg = C.red, bg = C.bg, bold = true },
+}
