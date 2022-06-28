@@ -3,15 +3,6 @@ local u = require('utils')
 local telescope = require('telescope')
 local actions = require('telescope.actions')
 
-if pcall(require, 'plenary') then
-  RELOAD = require('plenary.reload').reload_module
-
-  R = function(name)
-    RELOAD(name)
-    return require(name)
-  end
-end
-
 local wideVertical = {
   sorting_strategy = 'ascending',
   layout_strategy = 'vertical',
@@ -72,7 +63,6 @@ telescope.setup({
     },
     borderchars = { ' ' },
     -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-    -- color_devicons = true,
     path_display = { 'smart' },
     use_less = true,
     winblend = 0,
@@ -84,27 +74,12 @@ telescope.setup({
     },
     mappings = {
       i = {
+        ['<C-o>'] = { '<esc>', type = 'command' },
         ['<esc>'] = actions.close,
         ['<c-h>'] = 'which_key',
-        ['<c-l>'] = R('telescope').extensions.hop.hop, -- hop.hop_toggle_selection
-        ['<c-o>'] = function(prompt_bufnr)
-          local opts = {
-            callback = actions.toggle_selection,
-            loop_callback = actions.send_selected_to_qflist,
-          }
-          telescope.extensions.hop._hop_loop(prompt_bufnr, opts)
-        end,
       },
       n = {
         ['<c-h>'] = 'which_key',
-        ['<c-l>'] = R('telescope').extensions.hop.hop, -- hop.hop_toggle_selection
-        ['<c-o>'] = function(prompt_bufnr)
-          local opts = {
-            callback = actions.toggle_selection,
-            loop_callback = actions.send_selected_to_qflist,
-          }
-          telescope.extensions.hop._hop_loop(prompt_bufnr, opts)
-        end,
       },
     },
   },
@@ -116,63 +91,11 @@ telescope.setup({
       case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     },
-    hop = {
-      -- the shown `keys` are the defaults, no need to set `keys` if defaults work for you ;)
-      keys = {
-        'a',
-        's',
-        'd',
-        'f',
-        'g',
-        'h',
-        'j',
-        'k',
-        'l',
-        ';',
-        'q',
-        'w',
-        'e',
-        'r',
-        't',
-        'y',
-        'u',
-        'i',
-        'o',
-        'p',
-        'A',
-        'S',
-        'D',
-        'F',
-        'G',
-        'H',
-        'J',
-        'K',
-        'L',
-        ':',
-        'Q',
-        'W',
-        'E',
-        'R',
-        'T',
-        'Y',
-        'U',
-        'I',
-        'O',
-        'P',
-      },
-      -- Highlight groups to link to signs and lines; the below configuration refers to demo
-      -- sign_hl typically only defines foreground to possibly be combined with line_hl
-      sign_hl = { 'WarningMsg', 'Title' },
-      -- optional, typically a table of two highlight groups that are alternated between
-      line_hl = { 'CursorLine', 'Normal' },
-      -- options specific to `hop_loop`
-      -- true temporarily disables Telescope selection highlighting
-      clear_selection_hl = false,
-      -- highlight hopped to entry with telescope selection highlight
-      -- note: mutually exclusive with `clear_selection_hl`
-      trace_entry = true,
-      -- jump to entry where hoop loop was started from
-      reset_selection = true,
+    ['ui-select'] = {
+      require('telescope.themes').get_dropdown({
+        initial_mode = 'normal',
+        borderchars = { ' ' },
+      }),
     },
   },
   pickers = {
@@ -186,9 +109,8 @@ telescope.setup({
   },
 })
 
-telescope.load_extension('zf-native')
-telescope.load_extension('session-lens')
-telescope.load_extension('hop')
+telescope.load_extension('fzf')
+telescope.load_extension('ui-select')
 telescope.load_extension('notify')
 require('telescope').load_extension('lazygit')
 require('telescope').load_extension('projects')
@@ -208,9 +130,8 @@ map(
   "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
   { desc = 'search notify' }
 )
--- map('n', '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>', { desc = 'search files' })
+map('n', '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>', { desc = 'search git files' })
 -- map('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', { desc = 'search files' })
 -- map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>', { desc = 'search files' })
 
-map('n', '<leader>sl', ':Telescope session-lens search_session<cr>', { desc = 'search sessions' })
 map('n', '<leader>fd', '<cmd>:Telescope projects<cr>', { desc = 'search projects' })
