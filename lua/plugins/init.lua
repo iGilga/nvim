@@ -65,24 +65,55 @@ return packer.startup({
       requires = {
         'nvim-lua/popup.nvim',
         'nvim-lua/plenary.nvim',
-        'natecraddock/telescope-zf-native.nvim',
-        { 'kdheepak/lazygit.nvim' },
+        { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+        'kdheepak/lazygit.nvim',
+        'nvim-telescope/telescope-ui-select.nvim',
       },
       config = function()
         require('plugins.telescope')
       end,
     })
-    -- telescope with hop
-    use({ 'nvim-telescope/telescope-hop.nvim' })
-    -- topline
+    -- telescope-zettel
     use({
-      'romgrk/barbar.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+      'https://gitlab.com/thlamb/telescope-zettel.nvim',
+      requires = {
+        { 'nvim-telescope/telescope.nvim' },
+        { 'nvim-lua/plenary.nvim' },
+      },
+      config = function()
+        require('telescope').setup({
+          extensions = {
+            zettel = {
+              zk_path = '~/Documents/Zettel',
+              link_style = 'md', -- or "md"
+              remove_ext = false, -- or false
+            },
+          },
+        })
+        require('telescope').load_extension('zettel')
+      end,
+    })
+    -- bufferline
+    use({
+      'akinsho/bufferline.nvim',
+      tag = 'v2.*',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      config = function()
+        require('plugins.bufferline')
+      end,
+    })
+
+    use({
+      'antoinemadec/FixCursorHold.nvim',
+      event = { 'BufRead', 'BufNewFile' },
+      config = function()
+        vim.g.cursorhold_updatetime = 100
+      end,
     })
     --bottomline
     use({
       'hoob3rt/lualine.nvim',
-      requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+      requires = { 'kyazdani42/nvim-web-devicons' },
       config = function()
         require('plugins.lualine')
       end,
@@ -200,10 +231,32 @@ return packer.startup({
     -- show colors
     use({
       'norcalli/nvim-colorizer.lua',
+      event = { 'BufRead', 'BufNewFile' },
       config = function()
         require('plugins.colorizer')
       end,
     })
+
+    use({
+      'akinsho/nvim-toggleterm.lua',
+      config = function()
+        local setup = {
+          -- size = 10,
+          open_mapping = [[<c-n>]],
+          shading_factor = 2,
+          direction = 'horizontal',
+          float_opts = {
+            border = 'single',
+            highlights = {
+              border = 'Normal',
+              background = 'Normal',
+            },
+          },
+        }
+        require('toggleterm').setup(setup)
+      end,
+    })
+
     use({
       'folke/twilight.nvim',
       config = function()
@@ -218,32 +271,29 @@ return packer.startup({
         require('plugins.alpha')
       end,
     })
-    -- auto-session
+    -- session
     use({
-      'rmagatti/auto-session',
+      'Shatur/neovim-session-manager',
+      cmd = 'SessionManager',
+      event = 'BufWritePost',
       config = function()
-        require('plugins.autosession')
+        require('plugins.sessionmanager')
       end,
     })
-    use({
-      'rmagatti/session-lens',
-      requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
-      config = function()
-        require('plugins.sessionlens')
-      end,
-    })
+
     use({
       'yamatsum/nvim-cursorline',
       disable = u.isDisable('nvim-cursorline'),
     })
     use('MunifTanjim/nui.nvim')
+    -- Smooth escaping
     use({
       'max397574/better-escape.nvim',
       config = function()
         require('better_escape').setup()
       end,
-      disable = u.isDisable('better-escape.nvim'),
     })
+
     use({
       'LudoPinelli/comment-box.nvim',
       config = function()
