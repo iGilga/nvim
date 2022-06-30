@@ -12,7 +12,6 @@ local customRender = function(bufnr, notif, highlights)
   local hlSign = 'Notify' .. notif.level .. 'Sign'
   local title = notif.title[1]
   local message = notif.message
-print(hlSign)
   local set_config = function(text, hl, priority)
     return {
       virt_text = {
