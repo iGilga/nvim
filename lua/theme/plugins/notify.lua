@@ -1,22 +1,16 @@
-return {
-  NotifyINFOBorder = { fg = C.green, bg = C.dark3 },
-  NotifyINFOIcon = { bg = C.green },
-  NotifyINFOTitle = { bg = C.green },
-  NotifyINFOBody = { fg = C.black, bg = C.dark3 },
-  NotifyWARNBorder = { fg = C.black, bg = C.dark3 },
-  NotifyWARNIcon = { fg = C.yellow },
-  NotifyWARNTitle = { fg = C.yellow },
-  NotifyWARNBody = { fg = C.black, bg = C.dark3 },
-  NotifyERRORBorder = { fg = C.red, bg = C.dark3 },
-  NotifyERRORIcon = { fg = C.red, bg = C.dark3 },
-  NotifyERRORTitle = { fg = C.black, bg = C.dark3 },
-  NotifyERRORBody = { fg = C.black, bg = C.dark3 },
-  NotifyTRACEBorder = { fg = C.purple, bg = C.dark3 },
-  NotifyTRACEIcon = { fg = C.purple, bg = C.dark3 },
-  NotifyTRACETitle = { fg = C.black, bg = C.dark3 },
-  NotifyTRACEBody = { fg = C.black, bg = C.dark3 },
-  NotifyINFOSign = { fg = C.green, bg = C.dark3 },
-  NotifyWARNSign = { fg = C.yellow, bg = C.dark3 },
-  NotifyERRORSign = { fg = C.red, bg = C.dark3 },
-  NotifyTRACESign = { fg = C.purple, bg = C.dark3 },
+local colorLevels = {
+  ['INFO'] = C.green,
+  ['WARN'] = C.yellow,
+  ['ERROR'] = C.red,
+  ['TRACE'] = C.purple,
 }
+local notifyHiglighs = {}
+for level, color in pairs(colorLevels) do
+  notifyHiglighs['Notify' .. level .. 'Border'] = { fg = color, bg = C.dark3 }
+  notifyHiglighs['Notify' .. level .. 'Icon'] = { bg = color }
+  notifyHiglighs['Notify' .. level .. 'Title'] = { fg = color }
+  notifyHiglighs['Notify' .. level .. 'Body'] = { fg = C.black, bg = C.dark3 }
+  notifyHiglighs['Notify' .. level .. 'Sign'] = { bg = color }
+end
+
+return notifyHiglighs
