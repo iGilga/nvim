@@ -12,7 +12,7 @@ local customRender = function(bufnr, notif, highlights)
   local hlSign = 'Notify' .. notif.level .. 'Sign'
   local title = notif.title[1]
   local message = notif.message
-
+print(hlSign)
   local set_config = function(text, hl, priority)
     return {
       virt_text = {
@@ -27,7 +27,7 @@ local customRender = function(bufnr, notif, highlights)
   local lines = {}
 
   if not (title == nil or title == '') then
-    lines[1] = set_config(title, highlights.icon, 10)
+    lines[1] = set_config(title, highlights.title, 10)
   end
 
   local count = #lines
@@ -56,6 +56,7 @@ moduleNotify.setup({
   end,
   timeout = 2000,
 })
+
 vim.notify = moduleNotify
 
 local M = {}
