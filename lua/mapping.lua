@@ -46,8 +46,43 @@ map('n', 'te', function()
 end, opts('sort buffer language'))
 
 -- hop mapping
-map('n', '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>", { desc = 'motion word' })
-map('n', '<leader>l', "<cmd>lua require'hop'.hint_lines()<cr>", { desc = 'motion line' })
+map('n', 's', function()
+  return require('hop').hint_char1({ direction = require('hop.hint').HintDirection.AFTER_CURSOR })
+end, { desc = 'Hop char2 after curso' })
+map('n', 'S', function()
+  return require('hop').hint_char1({ direction = require('hop.hint').HintDirection.BEFORE_CURSOR })
+end, { desc = 'Hop char2 before cursor' })
+map('n', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", { desc = 'Hop line skip whitespace' })
+
+map('n', 'f', function()
+  return require('hop').hint_char1({
+    direction = require('hop.hint').HintDirection.AFTER_CURSOR,
+    current_line_only = true,
+  })
+end, { desc = 'hop hint curline' })
+map('n', 'F', function()
+  return require('hop').hint_char1({
+    direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+    current_line_only = true,
+  })
+end, { desc = 'hop hint curline' })
+map('n', 't', function()
+  return require('hop').hint_char1({
+    direction = require('hop.hint').HintDirection.AFTER_CURSOR,
+    current_line_only = true,
+    hint_offset = -1,
+  })
+end, { desc = 'hop hint curline before target' })
+map('n', 'T', function()
+  return require('hop').hint_char1({
+    direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+    current_line_only = true,
+    hint_offset = -1,
+  })
+end, { desc = 'hop hint curline before target' })
+map('n', '<leader>h', function()
+  return require('hop').hint_patterns()
+end, { desc = 'hop hint with pattern' })
 
 -- nnn.nvim
 map('t', '<c-t>', '<cmd>:NnnPicker<cr>', { desc = 'open nnn' })
