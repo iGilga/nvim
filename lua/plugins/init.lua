@@ -167,7 +167,9 @@ return packer.startup({
       'phaazon/hop.nvim',
       as = 'hop',
       config = function()
-        require('hop').setup({})
+        require('hop').setup({
+          create_hl_autocmd = false,
+        })
       end,
     })
     -- file manager
