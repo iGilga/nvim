@@ -12,7 +12,7 @@ return {
   BufferLineModified = { fg = C.yellow, bg = bg },
   -- BufferLineModifiedVisible = { fg = C.yellow, bg = C.bg },
   BufferLineModifiedSelected = { fg = C.yellow, bg = bg_selected },
-  BufferLinePick = { fg = C.red, bg = bg, bold = true },
+  BufferLinePick = { fg = C.peachRed, bg = bg, bold = true },
   -- BufferLinePickVisible = { fg = C.red, bg = C.bg, bold = true },
-  BufferLinePickSelected = { fg = C.red, bg = bg_selected, bold = true },
+  BufferLinePickSelected = { fg = C.peachRed, bg = bg_selected, bold = true },
 }
