@@ -10,10 +10,11 @@ for _, module in ipairs({ 'base' }) do
 end
 
 for plugin, enabled in pairs({
+  -- gitsigns = true,
   alpha = true,
   bufferline = true,
   cmp = true,
-  -- gitsigns = true,
+  hop = true,
   nnn = true,
   notify = true,
   nui = true,
