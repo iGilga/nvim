@@ -3,7 +3,7 @@ local setup = {
   ensure_installed = config.ensure_installed,
   highlight = {
     enable = true,
-    use_languagetree = true,
+    -- use_languagetree = true,
   },
   indent = {
     enable = true,
@@ -51,6 +51,7 @@ local setup = {
         ['[]'] = '@class.outer',
       },
     },
+    additional_vim_regex_highlighting = false,
   },
 }
 
