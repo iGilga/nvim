@@ -315,6 +315,12 @@ return packer.startup({
       ft = { 'markdown' },
       disable = true,
     })
+    use({
+      'sQVe/sort.nvim',
+      config = function()
+        require('sort').setup({})
+      end,
+    })
 
     if pluginPacker.first_install then
       packer.sync()
