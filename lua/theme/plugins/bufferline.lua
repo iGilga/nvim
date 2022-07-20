@@ -3,9 +3,9 @@ return {
 
   BufferLineFill = { fg = C.bg, bg = bg },
   BufferLineBackground = { fg = C.oldWhite, bg = bg },
-  BufferLineBufferSelected = { fg = C.fujiWhite, bg = bg_selected },
+  BufferLineBufferSelected = { fg = C.fujiWhite, bg = bg_selected, bold = true },
   BufferLineDuplicate = { fg = C.fujiGray, bg = bg },
-  BufferLineDuplicateSelected = { fg = C.fujiGray, bg = bg_selected },
+  BufferLineDuplicateSelected = { fg = C.fujiGray, bg = bg_selected, bold = true },
   BufferLineSeparator = { fg = C.bg, bg = bg },
   BufferLineSeparatorSelected = { fg = C.bg, bg = bg_selected },
   BufferLineIndicatorSelected = { fg = C.bg, bg = bg_selected },
