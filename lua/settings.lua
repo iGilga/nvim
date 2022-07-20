@@ -22,7 +22,7 @@ local options = {
   -- Number
   number = true,
   numberwidth = 2,
-  relativenumber = false,
+  relativenumber = true,
   ruler = false,
   scrolloff = 8,
   shiftwidth = indent,
@@ -37,7 +37,7 @@ local options = {
   splitright = true,
   swapfile = false,
   tabstop = 8,
-  termguicolors = true,
+  -- termguicolors = true,
   -- timeout = true,
   timeoutlen = 400,
   undodir = '/tmp/',
