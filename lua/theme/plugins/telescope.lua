@@ -19,7 +19,7 @@ return {
   TelescopePreviewNormal = { bg = telescope.preview },
   TelescopePreviewBorder = { bg = telescope.preview },
   TelescopeSelection = { link = 'CursorLine' },
-  -- TelescopeMatching = { fg = telescope.matching },
+  TelescopeMatching = { fg = telescope.matching },
   TelescopePromptPrefix = { fg = C.black },
   -- TelescopeResultsFileIcon = { bg = telescope.results, fg = colors.black },
 }
