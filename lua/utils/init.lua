@@ -2,10 +2,6 @@ local config = require('config')
 
 local M = {}
 
-function M.merge(...)
-  return vim.tbl_deep_extend('force', ...)
-end
-
 function M.isClientFormat(clientName)
   if config.lsp.servers[clientName] then
     return (config.lsp.servers[clientName].format == true)
