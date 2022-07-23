@@ -3,7 +3,7 @@ return {
 
   BufferLineFill = { fg = C.bg, bg = bg },
   BufferLineBackground = { fg = C.oldWhite, bg = bg },
-  BufferLineBufferSelected = { fg = C.fujiWhite, bg = bg_selected, bold = true },
+  BufferLineBufferSelected = { fg = C.oldWhite, bg = bg_selected, bold = true },
   BufferLineDuplicate = { fg = C.fujiGray, bg = bg },
   BufferLineDuplicateSelected = { fg = C.fujiGray, bg = bg_selected, bold = true },
   BufferLineSeparator = { fg = C.bg, bg = bg },
