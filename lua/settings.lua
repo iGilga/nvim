@@ -18,7 +18,7 @@ local options = {
   ignorecase = true,
   -- inccommand = "split",
   lazyredraw = true,
-  mouse = 'a',
+  -- mouse = 'a',
   -- Number
   number = true,
   numberwidth = 2,
@@ -93,7 +93,7 @@ end
 
 -- enable autostart for co-- dashboard-nvim
 -- g.dashboard_default_executive = 'telescope'
-
+g.indent_blankline_show_trailing_blankline_indent = false
 g.bufferline = {
   add_in_buffer_number_order = true,
 }
