@@ -33,3 +33,13 @@ vim.api.nvim_create_autocmd('BufEnter', {
   group = wrap_md_group,
   command = 'setlocal wrap',
 })
+
+local customSessionGroup = vim.api.nvim_create_augroup('CustomSessionGroup', {})
+
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'SessionSavePost',
+  group = customSessionGroup,
+  callback = function()
+    require('utils.logger').info('Session saved.')
+  end,
+})

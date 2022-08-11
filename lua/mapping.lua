@@ -125,3 +125,22 @@ map('n', '<Leader>bl', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('lin
 map('i', '<M-l>', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
 
 map('n', '<C-x>', ':ColorizerToggle<cr>', opts('Toogle colorizer'))
+
+local opt = { noremap =true, silent = false }
+
+-- Create a new note after asking for its title.
+map("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opt)
+
+-- Open notes.
+map("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opt)
+
+-- Open notes using telescope
+map('n', '<leader>fn', ':Telescope zk notes<cr>')
+
+-- Open notes associated with the selected tags.
+map("n", "<leader>zt", "<Cmd>ZkTags<CR>", opt)
+
+-- Search for the notes matching a given query.
+map("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>", opt)
+-- Search for the notes matching the current visual selection.
+map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opt)

@@ -20,11 +20,11 @@ local setup = {
     },
   },
   colors = {
-    error = { C.red },
-    warning = { C.yellow },
-    info = { C.blue },
-    hint = { C.green },
-    default = { 'Identifier', C.purple },
+    error = { '#C34043' },
+    warning = { '#DCA561' },
+    info = { '#7E9CD8' },
+    hint = { '#76946A' },
+    default = { 'Identifier', '#957FB8' },
   },
 }
 

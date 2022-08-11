@@ -33,7 +33,11 @@ M.lsp = {
     tsserver = {
       formatting = false,
     },
-    yamlls = {},
+    yamlls = {
+      opts = {
+        autostart = false,
+      }
+    },
   },
 }
 
@@ -84,6 +88,7 @@ M.plugins = {
       'json',
       'lua',
       'markdown_inline',
+      'norg',
       'python',
       'rasi',
       'rust',
