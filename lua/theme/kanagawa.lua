@@ -1,6 +1,3 @@
-vim.o.background = 'dark'
-vim.o.termguicolors = true
-
 C = require('theme.colors')
 
 local highlights = {}
