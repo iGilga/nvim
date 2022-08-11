@@ -6,7 +6,7 @@ ls.config.set_config({
   enable_autosnippets = true,
 })
 
-ls.filetype_extend('javascript', { 'html', 'javascriptreact' })
+-- ls.filetype_extend('javascript', { 'html', 'javascriptreact' })
 -- ls.add_snippets(nil, {
 --   all = {},
 --   html = {},
