@@ -36,7 +36,7 @@ M.lsp = {
     yamlls = {
       opts = {
         autostart = false,
-      }
+      },
     },
   },
 }
@@ -87,6 +87,7 @@ M.plugins = {
       'jsdoc',
       'json',
       'lua',
+      'markdown',
       'markdown_inline',
       'norg',
       'python',
