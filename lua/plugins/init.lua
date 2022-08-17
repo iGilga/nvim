@@ -161,6 +161,7 @@ return packer.startup({
         })
       end,
       after = 'nvim-lspconfig',
+      disable = true,
     })
     -- aka easymotion
     use({
@@ -170,6 +171,13 @@ return packer.startup({
         require('hop').setup({
           create_hl_autocmd = false,
         })
+      end,
+    })
+
+    use({
+      'kylechui/nvim-surround',
+      config = function()
+        require('nvim-surround').setup({})
       end,
     })
     -- file manager
@@ -315,6 +323,7 @@ return packer.startup({
       ft = { 'markdown' },
       disable = true,
     })
+
     use({
       'sQVe/sort.nvim',
       config = function()
@@ -322,6 +331,38 @@ return packer.startup({
       end,
     })
 
+    use({
+      'nvim-neorg/neorg',
+      config = function()
+        require('neorg').setup({
+          ['core.defaults'] = {},
+          ['core.norg.dirman'] = {
+            config = {
+              workspaces = {
+                work = '~/notes/work',
+                home = '~/notes/home',
+              },
+            },
+          },
+        })
+      end,
+      requires = 'nvim-lua/plenary.nvim',
+    })
+
+    use({
+      'mickael-menu/zk-nvim',
+      config = function()
+        require('zk').setup({
+          picker = 'select',
+          lsp = {
+            cmd = { 'zk', 'lsp' },
+            name = 'zk',
+          },
+
+          auto_attach = { enabled = true, filetype = { 'markdown' } },
+        })
+      end,
+    })
     if pluginPacker.first_install then
       packer.sync()
     end
