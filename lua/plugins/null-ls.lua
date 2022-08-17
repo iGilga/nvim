@@ -25,9 +25,9 @@ local sources = {
   --   condition = has_eslint_config,
   --   prefer_local = 'node_modules/.bin',
   -- }),
-  diagnostics.yamllint.with({
-    extra_args = { '-d', 'ignore:','mods/' }
-  }),
+  -- diagnostics.yamllint.with({
+    -- extra_args = { '-d', 'ignore:','openra/mods/' }
+  -- }),
   diagnostics.shellcheck,
   -- formatting.eslint_d.with({
   --   condition = has_eslint_config,
