@@ -49,6 +49,7 @@ local options = {
     space = '·',
     tab = '-->',
   },
+  langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz',
 }
 
 for option, value in pairs(options) do
