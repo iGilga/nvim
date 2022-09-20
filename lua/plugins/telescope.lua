@@ -50,14 +50,14 @@ telescope.setup({
     layout_config = {
       horizontal = {
         prompt_position = 'top',
-        width = { padding = 2 },
-        height = { padding = 2 },
+        width = { padding = 0 },
+        height = { padding = 0 },
         preview_width = 0.60,
       },
       vertical = {
         prompt_position = 'top',
-        width = { padding = 2 },
-        height = { padding = 2 },
+        width = { padding = 0 },
+        height = { padding = 0 },
         preview_width = 0.60,
       },
     },
@@ -125,6 +125,7 @@ map('n', '<leader>fl', "<cmd>lua require('telescope.builtin').loclist()<cr>", { 
 map('n', '<leader>fp', "<cmd>lua require('telescope.builtin').commands()<cr>", { desc = 'search commands' })
 map('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = 'search oldfiles' })
 map('n', '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>", { desc = 'search marks' })
+map('n', '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", { desc = 'last telescope' })
 map('n', '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>", { desc = 'search git repo' })
 map(
   'n',
