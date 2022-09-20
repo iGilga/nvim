@@ -50,7 +50,7 @@ npairs.add_rules({
   Rule('%(.*%)%s*%=>$', ' {  }', { 'typescript', 'typescriptreact', 'javascript', 'javascriptreact' })
     :use_regex(true)
     :set_end_pair_length(2),
-  Rule('=', '', { '-vim', '-sh' })
+  Rule('=', '', { '-vim', '-sh', '-cfg', '-conf' })
     :with_pair(cond.not_inside_quote())
     :with_pair(function(opts)
       local last_char = opts.line:sub(opts.col - 1, opts.col - 1)
