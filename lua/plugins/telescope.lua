@@ -1,29 +1,6 @@
 local map = vim.keymap.set
-local u = require('utils')
 local telescope = require('telescope')
 local actions = require('telescope.actions')
-
-local wideVertical = {
-  sorting_strategy = 'ascending',
-  layout_strategy = 'vertical',
-  layout_config = {
-    anchor = 'N',
-    width = { padding = 6 },
-    height = { padding = 1 },
-    preview_height = 0.65,
-  },
-}
-
-local wideHorizontal = {
-  sorting_strategy = 'ascending',
-  layout_strategy = 'horizontal',
-  layout_config = {
-    anchor = 'N',
-    width = { padding = 6 },
-    height = { padding = 1 },
-    preview_width = 0.65,
-  },
-}
 
 telescope.setup({
   defaults = {
