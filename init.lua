@@ -14,17 +14,7 @@ end
 --   require('impatient').enable_profile()
 -- end)
 
--- local ok_filetype, filetype = pcall(require, 'filetype')
---
--- if ok_filetype then
---   filetype.setup({})
--- end
-
 require('settings')
-
-vim.api.nvim_command('filetype plugin indent on')
--- vim.cmd('filetype plugin indent on')
-
 require('global')
 require('plugins')
 require('mapping')
