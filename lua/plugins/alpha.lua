@@ -75,7 +75,7 @@ local buttons = {
   type = 'group',
   val = {
     button('Space s f', '  Open session', '<cmd>SessionManager! load_session<cr>'),
-    button('Space f f', '  Find File', ':Telescope find_files<CR>'),
+    button('Space f f', '  Find File', ':Telescope find_files<CR>'),
     button('Space f o', '  Recent File', ':Telescope oldfiles<CR>'),
     button('Space l l', '  Open repo', ':LazyGit<cr>'),
     button('Ctrl  h  ', '  File browsr', '<cmd>:NnnPicker<cr>'),
