@@ -26,7 +26,7 @@ local sources = {
   --   prefer_local = 'node_modules/.bin',
   -- }),
   -- diagnostics.yamllint.with({
-    -- extra_args = { '-d', 'ignore:','openra/mods/' }
+  -- extra_args = { '-d', 'ignore:','openra/mods/' }
   -- }),
   diagnostics.shellcheck,
   -- formatting.eslint_d.with({
@@ -47,25 +47,8 @@ local sources = {
   formatting.taplo,
 }
 
--- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
-
-local function onAttachCustom(client, bufnr)
-  vim.api.nvim_create_user_command('Format', vim.lsp.buf.formatting, {})
-  -- if client.supports_method('textDocument/formatting') then
-  -- if client.resolved_capabilities.document_formatting then
-  --   vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-  --   vim.api.nvim_create_autocmd('BufWritePre', {
-  --     group = augroup,
-  --     buffer = bufnr,
-  --     -- on 0.8, you should use vim.lsp.buf.format instead
-  --     callback = vim.lsp.buf.formatting,
-  --   })
-  -- end
-end
-
 local setup = {
   debug = false,
-  on_attach = onAttachCustom,
   sources = sources,
 }
 

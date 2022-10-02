@@ -14,14 +14,11 @@ end
 --   require('impatient').enable_profile()
 -- end)
 
-local ok_filetype, filetype = pcall(require, 'filetype')
-
-if ok_filetype then
-  filetype.setup({})
-  -- deactivate vim based filetype detection
-  vim.g.do_filetype_lua = 1
-  vim.g.did_load_filetype = 0
-end
+-- local ok_filetype, filetype = pcall(require, 'filetype')
+--
+-- if ok_filetype then
+--   filetype.setup({})
+-- end
 
 require('settings')
 

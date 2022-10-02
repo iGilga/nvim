@@ -10,7 +10,12 @@ function M.init(client, bufnr)
   -- diagnostics
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', '[lsp] declaration')
   buf_set_keymap('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', '[lsp]search definitions')
-  buf_set_keymap('n', 'gi', '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>', '[lsp]search implementations')
+  buf_set_keymap(
+    'n',
+    'gi',
+    '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>',
+    '[lsp]search implementations'
+  )
   buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', '[lsp]search references')
   buf_set_keymap(
     'n',
@@ -24,7 +29,12 @@ function M.init(client, bufnr)
     '<cmd>lua require("telescope.builtin").diagnostics({bufnr=0})<cr>',
     '[lsp]search diagnostics current buffer'
   )
-  buf_set_keymap('n', '<leader>ge', '<cmd>lua require("telescope.builtin").diagnostics()<cr>', '[lsp]search diagnostics')
+  buf_set_keymap(
+    'n',
+    '<leader>ge',
+    '<cmd>lua require("telescope.builtin").diagnostics()<cr>',
+    '[lsp]search diagnostics'
+  )
   buf_set_keymap('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[lsp]next goto')
   buf_set_keymap('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<cr>', '[lsp]prev goto')
 
@@ -44,7 +54,7 @@ function M.init(client, bufnr)
   )
 
   -- formatting
-  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.formatting()<cr>', '[lsp]formatting')
+  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>', '[lsp]formatting')
   -- buf_set_keymap('v', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>',  'motion line' })
 
   -- -- signature help

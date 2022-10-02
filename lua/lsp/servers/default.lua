@@ -9,17 +9,11 @@ function M.on_attach(client, bufnr)
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
   if u.isClientFormat(client.name) then
-    client.resolved_capabilities.document_formatting = true
-    client.resolved_capabilities.document_range_formatting = true
-    -- on nvim 0.8 instead
-    -- client.server_capabilities.documentFormattingProvider = true
-    -- client.server_capabilities.documentRangeFormattingProvider = true
+    client.server_capabilities.documentFormattingProvider = true
+    client.server_capabilities.documentRangeFormattingProvider = true
   else
-    client.resolved_capabilities.document_formatting = false
-    client.resolved_capabilities.document_range_formatting = false
-    -- on nvim 0.8 instead
-    -- client.server_capabilities.documentFormattingProvider = false
-    -- client.server_capabilities.documentRangeFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end
   require('lsp.mapping').init(client, bufnr)
 end
