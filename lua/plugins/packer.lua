@@ -22,17 +22,12 @@ end
 local config = require('config')
 
 packer.init({
-  -- compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
-  -- compile_on_sync = true,
-  -- auto_clean = true,
+  max_jobs = 50,
   display = {
     open_fn = function()
       return require('packer.util').float({ border = config.border })
     end,
     prompt_border = config.border,
-  },
-  git = {
-    clone_timeout = 10000,
   },
 })
 
