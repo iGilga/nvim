@@ -63,10 +63,7 @@ local function window(itemList, actionList, onSubmit)
         top = ntext(config.border.title, config.border.title_hl),
         top_align = config.border.title_align,
       },
-      padding = { 1, 1 },
-    },
-    wim_options = {
-      winhighlight = 'Normal:Normal',
+      padding = { 0, 1, 1, 1 },
     },
   }
 
@@ -77,7 +74,7 @@ local function window(itemList, actionList, onSubmit)
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
       focus_prev = { 'k', '<Up>', '<S-Tab>' },
-      close = { '<Esc>', '<C-c>' },
+      close = { 'h', '<Esc>', '<C-c>' },
       submit = { '<CR>', '<Space>' },
     },
     on_change = onChange(actionList),
@@ -119,7 +116,7 @@ local function codeActionCallback(results)
   for client_id, response in pairs(results) do
     if response.result and not vim.tbl_isempty(response.result) then
       local client = lsp.get_client_by_id(client_id)
-      table.insert(itemList, nmenu.separator(ntext('(' .. client.name .. ')', 'NuiSeparator')))
+      table.insert(itemList, nmenu.separator(ntext('[' .. client.name .. ']', 'NuiSeparator')))
       for _, action in ipairs(response.result) do
         local title = action.title
         local item = nmenu.item(action.title)
