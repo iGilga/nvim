@@ -54,7 +54,7 @@ function M.init(client, bufnr)
   )
 
   -- formatting
-  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format()<cr>', '[lsp]formatting')
+  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', '[lsp]formatting')
   -- buf_set_keymap('v', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>',  'motion line' })
 
   -- -- signature help
