@@ -45,7 +45,7 @@ return packer.startup({
       },
       event = 'BufWinEnter',
     })
-    -- syntax code
+    -- treesitter
     use({
       'nvim-treesitter/nvim-treesitter',
       requires = {
@@ -53,6 +53,12 @@ return packer.startup({
         'JoosepAlviste/nvim-ts-context-commentstring',
         'nvim-treesitter/nvim-treesitter-refactor',
         'nvim-treesitter/nvim-treesitter-textobjects',
+        {
+          'm-demare/hlargs.nvim',
+          config = function()
+            require('hlargs').setup()
+          end,
+        },
       },
       run = ':TSUpdate',
       config = function()
@@ -140,6 +146,7 @@ return packer.startup({
         { 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp' },
         { 'hrsh7th/cmp-path', after = 'nvim-cmp' },
+        { 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
         {
           'windwp/nvim-autopairs',
           config = function()
@@ -203,12 +210,14 @@ return packer.startup({
     -- comment
     use({
       'numToStr/Comment.nvim',
+      event = 'BufRead',
       config = function()
         require('Comment').setup()
       end,
     })
     use({
       'folke/todo-comments.nvim',
+      event = 'BufRead',
       requires = 'nvim-lua/plenary.nvim',
       config = function()
         require('plugins.todocomments')
@@ -328,6 +337,13 @@ return packer.startup({
       'sQVe/sort.nvim',
       config = function()
         require('sort').setup({})
+      end,
+    })
+
+    use({
+      'monaqa/dial.nvim',
+      config = function()
+        require('plugins.dial')
       end,
     })
 
