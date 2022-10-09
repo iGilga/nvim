@@ -23,6 +23,8 @@ map('n', '<leader>ps', '<cmd>PackerSync<cr>', { desc = 'Packer Sync' })
 map('n', '<leader>pS', '<cmd>PackerStatus<cr>', { desc = 'Packer Status' })
 map('n', '<leader>pu', '<cmd>PackerUpdate<cr>', { desc = 'Packer Update' })
 
+map('n', '<F4>', '<cmd>WhichKey<cr>', { noremap = true, silent = true })
+
 local opts = function(desc)
   return { noremap = true, silent = true, desc = desc }
 end
@@ -129,18 +131,20 @@ map('n', '<C-x>', ':ColorizerToggle<cr>', opts('Toogle colorizer'))
 local opt = { noremap =true, silent = false }
 
 -- Create a new note after asking for its title.
-map("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opt)
+-- map("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opt)
+--
+-- -- Open notes.
+-- map("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opt)
+--
+-- -- Open notes using telescope
+-- map('n', '<leader>fn', ':Telescope zk notes<cr>')
+--
+-- -- Open notes associated with the selected tags.
+-- map("n", "<leader>zt", "<Cmd>ZkTags<CR>", opt)
+--
+-- -- Search for the notes matching a given query.
+-- map("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>", opt)
+-- -- Search for the notes matching the current visual selection.
+-- map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opt)
 
--- Open notes.
-map("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>", opt)
-
--- Open notes using telescope
-map('n', '<leader>fn', ':Telescope zk notes<cr>')
-
--- Open notes associated with the selected tags.
-map("n", "<leader>zt", "<Cmd>ZkTags<CR>", opt)
-
--- Search for the notes matching a given query.
-map("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>", opt)
--- Search for the notes matching the current visual selection.
-map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opt)
+map('n', '<leader>z', "<cmd>lua require('utils.zk').zkcmd()<cr>", opt)
