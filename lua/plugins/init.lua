@@ -56,8 +56,11 @@ return packer.startup({
         {
           'm-demare/hlargs.nvim',
           config = function()
-            require('hlargs').setup()
+            require('hlargs').setup({
+              -- color = '#C8C093'
+            })
           end,
+          disable = true
         },
       },
       run = ':TSUpdate',
