@@ -126,7 +126,7 @@ map('v', '<Leader>bc', "<Cmd>lua require('comment-box').accbox(2)<CR>", opts('ce
 map('n', '<Leader>bl', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
 map('i', '<M-l>', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
 
-map('n', '<C-x>', ':ColorizerToggle<cr>', opts('Toogle colorizer'))
+map('n', '<a-x>', ':ColorizerToggle<cr>', opts('Toogle colorizer'))
 
 local opt = { noremap =true, silent = false }
 
