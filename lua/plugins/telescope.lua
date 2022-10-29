@@ -40,7 +40,7 @@ telescope.setup({
     },
     borderchars = { ' ' },
     -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-    path_display = { 'smart' },
+    path_display = { shorten = 1 },
     use_less = true,
     winblend = 0,
     border = {},
