@@ -48,7 +48,7 @@ local function button(sc, txt, keybind)
     text = txt,
     shortcut = ' ' .. sc .. ' ',
     cursor = 5,
-    width = 34,
+    width = 40,
     align_shortcut = 'right',
     hl_shortcut = 'AlphaShortcuts',
     hl = {
@@ -75,10 +75,11 @@ local buttons = {
   type = 'group',
   val = {
     button('Space s f', '  Open session', '<cmd>SessionManager! load_session<cr>'),
-    button('Space f f', '  Find File', ':Telescope find_files<CR>'),
+    button('Space f f', '  Find File', ':Telescope find_files<CR>'),
     button('Space f o', '  Recent File', ':Telescope oldfiles<CR>'),
     button('Space l l', '  Open repo', ':LazyGit<cr>'),
-    button('Ctrl  h  ', '  File browsr', '<cmd>:NnnPicker<cr>'),
+    button('Ctrl  t  ', '  File browsr', '<cmd>:NnnPicker<cr>'),
+    button('F4', '  Load current session', '<cmd>:SessionManager load_current_dir_session<cr>'),
   },
   opts = {
     position = 'center',
