@@ -37,7 +37,7 @@ local setup = {
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<S-Enter>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.close(),
+    ['<C-;>'] = cmp.mapping.close(),
     -- disabled for autopairs mapping
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
