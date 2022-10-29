@@ -1,34 +1,44 @@
 local config = require('config')
 local map = vim.keymap.set
--- map the leader key
+
+local opts = function(desc)
+  return { noremap = true, silent = true, desc = desc }
+end
+
+--                                ┌────────────┐
+--                                │ Leader key │
+--                                └────────────┘
 vim.g.mapleader = config.leader
 
--- remapping from basic vim to jkl;
--- k('', 'l', 'h')
--- k('', ';', 'l')
--- k('', 'h', ';')
-
--- save and quit
+--                               ┌───────────────┐
+--                               │ Save and quit │
+--                               └───────────────┘
 map('n', '<leader>q', ':q<cr>', { desc = 'quit' })
 map('n', '<c-q>', ':qa<cr>', { desc = 'quit all' })
 map('n', '<leader>s', ':w<cr>', { desc = 'save' })
 
--- r highlight
+--                              ┌─────────────────┐
+--                              │ Clear highlight │
+--                              └─────────────────┘
 map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 
--- Packer
+--                                  ┌────────┐
+--                                  │ Packer │
+--                                  └────────┘
 map('n', '<leader>pc', '<cmd>PackerCompile<cr>', { desc = 'Packer Compile' })
 map('n', '<leader>pi', '<cmd>PackerInstall<cr>', { desc = 'Packer Install' })
 map('n', '<leader>ps', '<cmd>PackerSync<cr>', { desc = 'Packer Sync' })
 map('n', '<leader>pS', '<cmd>PackerStatus<cr>', { desc = 'Packer Status' })
 map('n', '<leader>pu', '<cmd>PackerUpdate<cr>', { desc = 'Packer Update' })
 
-map('n', '<F4>', '<cmd>WhichKey<cr>', { noremap = true, silent = true })
+--                                 ┌──────────┐
+--                                 │ WhichKey │
+--                                 └──────────┘
+map('n', '<F9>', '<cmd>WhichKey<cr>', { noremap = true, silent = true })
 
-local opts = function(desc)
-  return { noremap = true, silent = true, desc = desc }
-end
-
+--                                ┌────────────┐
+--                                │ Bufferline │
+--                                └────────────┘
 map('n', '<a-k>', ':BufferLineCycleNext<cr>', opts('next buffer'))
 map('n', '<a-j>', ':BufferLineCyclePrev<cr>', opts('prev buffer'))
 -- nnoremap({ '<A-0>', ':BufferGotoLast<cr>', opts })
@@ -47,7 +57,9 @@ map('n', 'te', function()
   require('bufferline').sort_buffers_by('extension')
 end, opts('sort buffer language'))
 
--- hop mapping
+--                                    ┌─────┐
+--                                    │ Hop │
+--                                    └─────┘
 map('n', '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>", opts('Hop word'))
 map('n', '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", opts('Hop line skip whitespace'))
 
@@ -92,43 +104,63 @@ map('n', 'T', function()
     hint_offset = -1,
   })
 end, opts('hop hint curline before target'))
+
 map('n', '<leader>h', function()
   return require('hop').hint_patterns()
 end, opts('hop hint with pattern'))
 
--- nnn.nvim
+--                                 ┌──────────┐
+--                                 │ nnn.nvim │
+--                                 └──────────┘
 map('t', '<c-t>', '<cmd>:NnnPicker<cr>', opts('open nnn'))
 map('n', '<c-t>', '<cmd>:NnnPicker<cr>', opts('open nnn'))
 
--- LazyGit
+--                                 ┌───────────┐
+--                                 │ nvim-tree │
+--                                 └───────────┘
+map('n', 'nc', '<cmd>:NvimTreeClose<cr>', opts('open nvim-tree'))
+map('n', 'nn', '<cmd>:NvimTreeFocus<cr>', opts('open nvim-tree'))
+
+--                                  ┌─────────┐
+--                                  │ LazyGit │
+--                                  └─────────┘
 map('n', '<leader>ll', ':LazyGit<cr>', opts('open lazygit'))
 
--- SessionManager
-map('n', '<leader>sl', '<cmd>SessionManager! load_last_session<cr>', opts('Load last session'))
+--                              ┌────────────────┐
+--                              │ SessionManager │
+--                              └────────────────┘
+-- map('n', '<leader>sl', '<cmd>SessionManager! load_last_session<cr>', opts('Load last session'))
 map('n', '<leader>oo', '<cmd>SessionManager! save_current_session<cr>', opts('Save this session'))
 map('n', '<leader>od', '<cmd>SessionManager! delete_session<cr>', opts('Delete session'))
 map('n', '<leader>sf', '<cmd>SessionManager! load_session<cr>', opts('Search sessions'))
-map('n', '<leader>o.', '<cmd>SessionManager! load_current_dir_session<cr>', {
+map('n', '<F4>', '<cmd>SessionManager! load_current_dir_session<cr>', {
   desc = 'Load current directory session',
 })
 
+--                           ┌───────────────────────┐
+--                           │ Telescope with zettel │
+--                           └───────────────────────┘
 map('n', '<leader>zf', ':lua require("telescope").extensions.zettel.find_zettel()<CR>')
 map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels()<CR>')
 
+--                                ┌─────────────┐
+--                                │ Comment box │
+--                                └─────────────┘
 map('n', '<Leader>bb', "<Cmd>lua require('comment-box').lbox(2)<CR>", opts('box'))
 map('v', '<Leader>bb', "<Cmd>lua require('comment-box').lbox(2)<CR>", opts('box'))
-
 -- centered adapted box with centered text
 map('n', '<Leader>bc', "<Cmd>lua require('comment-box').accbox(2)<CR>", opts('centred box'))
 map('v', '<Leader>bc', "<Cmd>lua require('comment-box').accbox(2)<CR>", opts('centred box'))
-
 -- centered line
 map('n', '<Leader>bl', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
-map('i', '<M-l>', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
+-- map('i', '<M-l>', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
 
+--                                 ┌───────────┐
+--                                 │ Colorizer │
+--                                 └───────────┘
 map('n', '<a-x>', ':ColorizerToggle<cr>', opts('Toogle colorizer'))
-
-local opt = { noremap =true, silent = false }
+--      ────────────────────────────────────────────────────────────
+-- local opt = { noremap = true, silent = false }
 
 -- Create a new note after asking for its title.
 -- map("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>", opt)
@@ -147,4 +179,4 @@ local opt = { noremap =true, silent = false }
 -- -- Search for the notes matching the current visual selection.
 -- map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opt)
 
-map('n', '<leader>z', "<cmd>lua require('utils.zk').zkcmd()<cr>", opt)
+map('n', '<leader>z', "<cmd>lua require('utils.zk').zkcmd()<cr>", opts('Menu zettel'))
