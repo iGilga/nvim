@@ -96,6 +96,7 @@ M.plugins = {
     ensure_installed = {
       'bash',
       'c',
+      'c_sharp',
       'cpp',
       'css',
       'dockerfile',
