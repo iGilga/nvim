@@ -79,12 +79,21 @@ telescope.setup({
     },
   },
   pickers = {
-    -- find_files = u.merge(wideHorizontal, {}),
-    --   live_grep = u.merge(wideHorizontal, {}),
-    --   grep_string = u.merge(wideHorizontal, {}),
-    --   diagnostics = u.merge(wideHorizontal, {}),
-    --   help_tags = u.merge(wideHorizontal, {}),
-    --   buffers = u.merge(wideHorizontal, {}),
+    lsp_references = {
+      initial_mode = 'normal',
+      show_line = false,
+    },
+    marks = {
+      layout_config = {
+        horizontal = {
+          -- width = { padding = 10 },
+          -- height = { padding = 5 },
+          width = 0.8,
+          height = 0.9,
+          preview_width = 0.40,
+        },
+      },
+    },
   },
 })
 
