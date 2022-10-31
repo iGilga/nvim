@@ -1,6 +1,7 @@
 local map = vim.keymap.set
 local telescope = require('telescope')
 local actions = require('telescope.actions')
+local action_layout = require('telescope.actions.layout')
 
 telescope.setup({
   defaults = {
@@ -51,12 +52,14 @@ telescope.setup({
     },
     mappings = {
       i = {
-        ['<C-o>'] = { '<esc>', type = 'command' },
+        ['<c-o>'] = { '<esc>', type = 'command' },
         ['<esc>'] = actions.close,
         ['<c-h>'] = 'which_key',
+        ['<c-p>'] = action_layout.toggle_preview,
       },
       n = {
         ['<c-h>'] = 'which_key',
+        ['<c-p>'] = action_layout.toggle_preview,
       },
     },
   },
