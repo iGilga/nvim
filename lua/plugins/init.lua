@@ -77,6 +77,7 @@ return packer.startup({
         { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
         'kdheepak/lazygit.nvim',
         'nvim-telescope/telescope-ui-select.nvim',
+        'nvim-telescope/telescope-symbols.nvim',
       },
       config = function()
         require('plugins.telescope')
