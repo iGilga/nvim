@@ -118,8 +118,8 @@ map('n', '<c-t>', '<cmd>:NnnPicker<cr>', opts('open nnn'))
 --                                 ┌───────────┐
 --                                 │ nvim-tree │
 --                                 └───────────┘
-map('n', 'nc', '<cmd>:NvimTreeClose<cr>', opts('open nvim-tree'))
-map('n', 'nn', '<cmd>:NvimTreeFocus<cr>', opts('open nvim-tree'))
+map('n', '<leader>mc', '<cmd>:NvimTreeClose<cr>', opts('open nvim-tree'))
+map('n', '<leader>m', '<cmd>:NvimTreeFocus<cr>', opts('open nvim-tree'))
 
 --                                  ┌─────────┐
 --                                  │ LazyGit │
