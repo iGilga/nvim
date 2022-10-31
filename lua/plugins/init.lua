@@ -60,7 +60,7 @@ return packer.startup({
               -- color = '#C8C093'
             })
           end,
-          disable = true
+          disable = true,
         },
       },
       run = ':TSUpdate',
@@ -203,6 +203,16 @@ return packer.startup({
         })
       end,
     })
+
+    use({
+      'nvim-tree/nvim-tree.lua',
+      requires = {
+        'nvim-tree/nvim-web-devicons', -- optional, for file icons
+      },
+      config = function()
+        require('plugins.nvimtree')
+      end,
+    })
     -- find project for telescope
     use({
       'ahmedkhalf/project.nvim',
@@ -264,7 +274,7 @@ return packer.startup({
       config = function()
         local setup = {
           -- size = 10,
-          open_mapping = [[<c-n>]],
+          open_mapping = [[<a-n>]],
           shading_factor = 2,
           direction = 'horizontal',
           float_opts = {
