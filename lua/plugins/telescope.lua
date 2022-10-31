@@ -83,7 +83,6 @@ telescope.setup({
     --   live_grep = u.merge(wideHorizontal, {}),
     --   grep_string = u.merge(wideHorizontal, {}),
     --   diagnostics = u.merge(wideHorizontal, {}),
-    --   lsp_references = u.merge(wideHorizontal, {}),
     --   help_tags = u.merge(wideHorizontal, {}),
     --   buffers = u.merge(wideHorizontal, {}),
   },
@@ -106,6 +105,7 @@ map('n', '<leader>fp', "<cmd>lua require('telescope.builtin').commands()<cr>", {
 map('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = 'search oldfiles' })
 map('n', '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>", { desc = 'search marks' })
 map('n', '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", { desc = 'last telescope' })
+map('n', '<leader>fk', "<cmd>lua require('telescope.builtin').keymaps()<cr>", { desc = 'search keymaps' })
 map('n', '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>", { desc = 'search git repo' })
 map(
   'n',
