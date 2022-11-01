@@ -4,7 +4,7 @@ local setup = {
   highlight = {
     enable = true,
     -- use_languagetree = true,
-    additional_vim_regex_highlighting = { "markdown" }
+    additional_vim_regex_highlighting = { 'markdown' },
   },
   indent = {
     enable = true,
@@ -19,6 +19,9 @@ local setup = {
   refactor = {
     highlight_definitions = { enable = true },
     smart_rename = {
+      enable = true,
+    },
+    navigation = {
       enable = true,
     },
   },
