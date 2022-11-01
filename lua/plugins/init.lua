@@ -128,6 +128,15 @@ return packer.startup({
         require('plugins.lualine')
       end,
     })
+    -- tabout.nvim
+    use({
+      'abecodes/tabout.nvim',
+      config = function()
+        require('plugins.tabout')
+      end,
+      wants = { 'nvim-treesitter' }, -- or require if not used so far
+      after = { 'nvim-cmp' }, -- if a completion plugin is using tabs load it before
+    })
     -- autocomplete
     use({
       'hrsh7th/nvim-cmp',
