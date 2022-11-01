@@ -6,14 +6,7 @@ ls.config.set_config({
   enable_autosnippets = true,
 })
 
--- ls.filetype_extend('javascript', { 'html', 'javascriptreact' })
--- ls.add_snippets(nil, {
---   all = {},
---   html = {},
--- })
-
--- ls.add_snippets('javascript', ls.get_snippets('html'))
--- ls.add_snippets('javascriptreact', ls.get_snippets('html'))
--- ls.add_snippets('typescriptreact', ls.get_snippets('html'))
+ls.filetype_set('javascript', { 'javascriptreact' })
+-- ls.filetype_extend('javascript', { 'javascriptreact' })
 
 require('luasnip.loaders.from_vscode').lazy_load()
