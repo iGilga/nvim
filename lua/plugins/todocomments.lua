@@ -35,6 +35,8 @@ local setup = {
 -- optim: optim
 -- hack: hack
 
-vim.keymap.set('n', '<leader>ft', ':TodoTelescope<cr>')
+vim.keymap.set('n', '<leader>ft', ':TodoTelescope<cr>', { desc = "telescope with todo" })
+vim.keymap.set("n", "]t", function() require("todo-comments").jump_next() end, { desc = "next todo comment" })
+vim.keymap.set("n", "[t", function() require("todo-comments").jump_prev() end, { desc = "previous todo comment" })
 
 require('todo-comments').setup(setup)
