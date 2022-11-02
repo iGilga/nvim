@@ -403,6 +403,9 @@ return packer.startup({
         })
       end,
     })
+    -- mini.nvim
+    use('echasnovski/mini.align')
+
     if pluginPacker.first_install then
       packer.sync()
     end
