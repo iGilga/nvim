@@ -36,8 +36,10 @@ local setup = {
   mapping = {
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<S-Enter>'] = cmp.mapping.complete(),
+    -- ['<S-Enter>'] = cmp.mapping.complete(),
+    ["<A-Space>"] = cmp.mapping.complete(),
     ['<C-;>'] = cmp.mapping.close(),
+    ['<C-a>'] = cmp.mapping.abort(),
     -- disabled for autopairs mapping
     ['<CR>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
@@ -46,8 +48,9 @@ local setup = {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_locally_jumpable() then
         luasnip.expand_or_jump()
+        -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
       elseif has_words_before() then
         cmp.complete()
       else
@@ -59,6 +62,7 @@ local setup = {
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
         luasnip.jump(-1)
+        -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
       else
         fallback()
       end
@@ -68,10 +72,10 @@ local setup = {
     ghost_text = true,
   },
   sources = {
-    { name = 'nvim_lsp', max_item_count = 15 },
     { name = 'luasnip' },
-    { name = 'nvim_lua' },
+    { name = 'nvim_lsp', max_item_count = 5 },
     { name = 'buffer', keyword_length = 3 },
+    { name = 'nvim_lua', max_item_count = 5 },
     { name = 'path' },
   },
   formatting = get_formatting(),
