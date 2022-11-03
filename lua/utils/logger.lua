@@ -60,19 +60,38 @@ vim.notify = moduleNotify
 
 local M = {}
 
-M.info = function(text, title)
-  vim.notify(text, levels.INFO, { title = title })
+M.Logger = {}
+M.Logger.__index = M.Logger
+
+local log = function(type, msg, opts)
+  local ok, notify = pcall(require, 'notify')
+  if ok then
+    notify(msg, type, opts)
+  else
+    if vim.tbl_islist(msg) then
+      local tmp_list = msg
+      msg = ''
+      for _, v in pairs(tmp_list) do
+        msg = msg .. v
+      end
+    end
+    vim.notify(msg, type)
+  end
 end
 
-M.warn = function(text, title)
-  vim.notify(text, levels.WARN, { title = title })
+function M.Logger.info(msg, title)
+  log(vim.log.levels.INFO, msg, { title = title })
 end
 
-M.error = function(text, title)
-  vim.notify(text, levels.ERROR, { title = title })
+function M.Logger.warn(msg, title)
+  log(vim.log.levels.WARN, msg, { title = title })
 end
 
-M.hint = function(text, title)
+function M.Logger.error(msg, title)
+  log(vim.log.levels.ERROR, msg, { title = title })
+end
+
+function M.Logger.hint(text, title)
   vim.notify(text, levels.TRACE, { title = title })
 end
 

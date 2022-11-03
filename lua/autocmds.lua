@@ -42,7 +42,7 @@ cmd('User', {
   pattern = 'SessionSavePost',
   group = customSessionGroup,
   callback = function()
-    require('utils.logger').info('Session saved.')
+    require('utils.logger').Logger.info('Session saved.')
   end,
 })
 

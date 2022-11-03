@@ -1,6 +1,6 @@
 local lsp = vim.lsp
 local config = require('config').codeAction
-local logger = require('utils.logger')
+local logger = require('utils.logger').Logger
 local nmenu = require('nui.menu')
 local ntext = require('nui.text')
 local event = require('nui.utils.autocmd').event

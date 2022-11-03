@@ -6,7 +6,7 @@ local Text = require('nui.text')
 
 local config = require('config').rename
 local u = require('utils')
-local logger = require('utils.logger')
+local logger = require('utils.logger').Logger
 local title = '[LSP]Rename'
 local M = {}
 
