@@ -1,10 +1,6 @@
 local cmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
--- local createCommand = vim.api.nvim_create_user_command
--- local logger = require('utils.logger')
--- Auto sync plugins on save of plugins.lua
--- cmd("BufWritePost", { pattern = "plugins.lua", command = "source <afile> | PackerSync" })
---
+
 -- Highlight on yank
 local highlight_group = augroup('YankHighlight', { clear = true })
 cmd('TextYankPost', {
@@ -26,7 +22,7 @@ cmd({ 'BufEnter' }, { command = 'lua require("lazygit.utils").project_root_dir()
 
 -- cmd({ 'BufEnter' }, { command = 'silent! setlocal foldlevel=99' })
 
-cmd('BufRead', { pattern = '*/openra/*', command = 'setlocal noexpandtab tabstop=4 shiftwidth=4' })
+-- cmd('BufRead', { pattern = '*/openra/*', command = 'setlocal noexpandtab tabstop=4 shiftwidth=4' })
 
 local wrap_md_group = augroup('Markdown Wrap Settings', { clear = true })
 
@@ -46,9 +42,10 @@ cmd('User', {
   end,
 })
 
-augroup('alpha_settings', { clear = true })
+local alpha_settings = augroup('alpha_settings', { clear = true })
+
 cmd('User', {
-  group = 'alpha_settings',
+  group = alpha_settings,
   pattern = 'AlphaReady',
   callback = function()
     local ls = vim.opt.laststatus
