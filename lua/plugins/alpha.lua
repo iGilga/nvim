@@ -117,30 +117,5 @@ local opts = {
   },
 }
 
-vim.api.nvim_create_augroup('alpha_tabline', { clear = true })
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'alpha_tabline',
-  pattern = 'alpha',
-  callback = function()
-    vim.opt.laststatus = 0
-    vim.opt.showtabline = 0
-  end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'alpha_tabline',
-  pattern = 'alpha',
-  callback = function()
-    vim.api.nvim_create_autocmd('BufUnload', {
-      group = 'alpha_tabline',
-      buffer = 0,
-      callback = function()
-        vim.opt.laststatus = 3
-        vim.opt.showtabline = 2
-      end,
-    })
-  end,
-})
 
 alpha.setup(opts)
