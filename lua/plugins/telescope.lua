@@ -79,11 +79,15 @@ telescope.setup({
     },
   },
   pickers = {
+    diagnostics = {
+      initial_mode = 'normal',
+    },
     lsp_references = {
       initial_mode = 'normal',
       show_line = false,
     },
     marks = {
+      initial_mode = 'normal',
       layout_config = {
         horizontal = {
           -- width = { padding = 10 },
@@ -113,6 +117,7 @@ map('n', '<leader>fl', "<cmd>lua require('telescope.builtin').loclist()<cr>", { 
 map('n', '<leader>fp', "<cmd>lua require('telescope.builtin').commands()<cr>", { desc = 'search commands' })
 map('n', '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", { desc = 'search oldfiles' })
 map('n', '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>", { desc = 'search marks' })
+map('n', '<leader>fe', "<cmd>lua require('telescope.builtin').registers()<cr>", { desc = 'search resigters' })
 map('n', '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", { desc = 'last telescope' })
 map('n', '<leader>fk', "<cmd>lua require('telescope.builtin').keymaps()<cr>", { desc = 'search keymaps' })
 map('n', '<leader>fll', "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>", { desc = 'search git repo' })
