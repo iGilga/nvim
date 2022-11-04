@@ -6,8 +6,8 @@ return {
   BufferLineBufferVisible = { fg = C.oldWhite, bg = normal },
   BufferLineBufferSelected = { fg = C.oldWhite, bg = normal, bold = true },
   BufferLineDuplicate = { fg = C.fujiGray, bg = dark },
-  BufferLineDuplicateSelected = { fg = C.fujiGray, bg = normal, bold = true },
-  BufferLineDuplicateSelectedVisible = { fg = C.fujiGray, bg = normal, bold = true },
+  BufferLineDuplicateSelected = { fg = C.oldWhite, bg = normal, bold = true },
+  BufferLineDuplicateVisible = { fg = C.oldWhite, bg = normal },
   BufferLineSeparator = { fg = C.bg, bg = dark },
   BufferLineSeparatorSelected = { fg = C.bg, bg = normal },
   BufferLineSeparatorVisible = { fg = C.bg, bg = normal },
@@ -17,6 +17,6 @@ return {
   BufferLineModifiedVisible = { fg = C.yellow, bg = normal },
   BufferLineModifiedSelected = { fg = C.yellow, bg = normal },
   BufferLinePick = { fg = C.peachRed, bg = dark, bold = true },
-  BufferLinePickVisible = { fg = C.red, bg = C.normal, bold = true },
+  BufferLinePickVisible = { fg = C.peachRed, bg = C.normal, bold = true },
   BufferLinePickSelected = { fg = C.peachRed, bg = normal, bold = true },
 }
