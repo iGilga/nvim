@@ -42,8 +42,8 @@ local setup = {
     ['<C-a>'] = cmp.mapping.abort(),
     -- disabled for autopairs mapping
     ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
+      -- behavior = cmp.ConfirmBehavior.Insert,
+      select = false,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
