@@ -30,19 +30,19 @@ local config = {
         return str:sub(1, 1)
       end,
     } },
-    lualine_b = { { 'branch', icon = '' } },
+    lualine_b = { { 'filename' } },
     lualine_c = {
       { 'diff', symbols = { added = ' ', modified = '柳', removed = ' ' } },
       { 'diagnostics', sources = { 'nvim_diagnostic' } },
     },
     lualine_x = { 'filetype' },
-    lualine_y = { { getSessionName } },
+    lualine_y = { { getSessionName }, { 'branch', icon = '' } },
     lualine_z = { 'location' },
   },
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = { 'filename' },
+    lualine_c = {},
     lualine_x = { 'location' },
     lualine_y = {},
     lualine_z = {},
