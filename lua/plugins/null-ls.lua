@@ -3,31 +3,32 @@ local code_actions = nullls.builtins.code_actions
 local diagnostics = nullls.builtins.diagnostics
 local formatting = nullls.builtins.formatting
 
--- local has_eslint_config = function(utils)
---   local files = {
---     '.eslintrc',
---     '.eslintrc.json',
---     '.eslintrc.js',
---     '.eslintrc.cjs',
---     '.eslintrc.yaml',
---     '.eslintrc.yml',
---   }
---   return utils.has_file(files) or utils.root_has_file(files)
--- end
+local has_eslint_config = function(utils)
+  local files = {
+    '.eslintrc',
+    '.eslintrc.json',
+    '.eslintrc.js',
+    '.eslintrc.cjs',
+    '.eslintrc.yaml',
+    '.eslintrc.yml',
+  }
+  return utils.has_file(files) or utils.root_has_file(files)
+end
 
 local sources = {
-  -- code_actions.eslint_d.with({
-  --   condition = has_eslint_config,
-  --   prefer_local = 'node_modules/.bin',
-  -- }),
+  code_actions.eslint_d.with({
+    -- condition = has_eslint_config,
+    prefer_local = 'node_modules/.bin',
+  }),
   code_actions.gitsigns,
-  -- diagnostics.eslint_d.with({
-  --   condition = has_eslint_config,
-  --   prefer_local = 'node_modules/.bin',
-  -- }),
+  diagnostics.eslint_d.with({
+    -- condition = has_eslint_config,
+    prefer_local = 'node_modules/.bin',
+  }),
   -- diagnostics.yamllint.with({
   -- extra_args = { '-d', 'ignore:','openra/mods/' }
   -- }),
+  diagnostics.luacheck,
   diagnostics.shellcheck,
   -- formatting.eslint_d.with({
   --   condition = has_eslint_config,
@@ -48,8 +49,11 @@ local sources = {
 }
 
 local setup = {
-  debug = false,
+  debug = true,
   sources = sources,
+  on_attach = function (client, bufnr)
+    vim.api.nvim_buf_set_keymap(bufnr,'n', '<leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', { desc = '[lsp]formatting' })
+  end
 }
 
 nullls.setup(setup)

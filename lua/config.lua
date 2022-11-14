@@ -13,8 +13,9 @@ M.lsp = {
     cssls = {},
     dockerls = {},
     eslint = {
+      format = false,
       opts = {
-        autostart = true,
+        autostart = false,
       },
     },
     graphql = {
@@ -31,7 +32,10 @@ M.lsp = {
     -- marksman = {},
     sumneko_lua = {},
     tsserver = {
-      formatting = false,
+      opts = {
+        autostart = false,
+      },
+      format = false,
     },
     yamlls = {
       opts = {
