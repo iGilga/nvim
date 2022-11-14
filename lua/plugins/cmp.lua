@@ -48,7 +48,7 @@ local setup = {
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_locally_jumpable() then
+      elseif luasnip.expand_or_jumpable() then
         luasnip.expand_or_jump()
         -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
       elseif has_words_before() then
@@ -72,7 +72,7 @@ local setup = {
     ghost_text = true,
   },
   sources = {
-    { name = 'luasnip' },
+    { name = 'luasnip', max_item_count = 15 },
     { name = 'nvim_lsp', max_item_count = 5 },
     { name = 'buffer', keyword_length = 3 },
     { name = 'nvim_lua', max_item_count = 5 },
