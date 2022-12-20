@@ -18,10 +18,10 @@ local get_formatting = function()
       with_text = true,
       menu = {
         buffer = '[buffer]',
+        luasnip = '[snip]',
         nvim_lsp = '[lsp]',
         nvim_lua = '[lua]',
         path = '[path]',
-        luasnip = '[snip]',
       },
     }),
   }
@@ -37,7 +37,7 @@ local setup = {
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
     -- ['<S-Enter>'] = cmp.mapping.complete(),
-    ["<A-Space>"] = cmp.mapping.complete(),
+    ['<A-Space>'] = cmp.mapping.complete(),
     ['<C-;>'] = cmp.mapping.close(),
     ['<C-a>'] = cmp.mapping.abort(),
     -- disabled for autopairs mapping
@@ -73,9 +73,9 @@ local setup = {
   },
   sources = {
     { name = 'luasnip', max_item_count = 15 },
-    { name = 'nvim_lsp', max_item_count = 5 },
+    { name = 'nvim_lsp', max_item_count = 7 },
     { name = 'buffer', keyword_length = 3 },
-    { name = 'nvim_lua', max_item_count = 5 },
+    { name = 'nvim_lua', max_item_count = 7 },
     { name = 'path' },
   },
   formatting = get_formatting(),
