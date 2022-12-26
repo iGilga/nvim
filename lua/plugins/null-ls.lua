@@ -2,7 +2,7 @@ local nullls = require('null-ls')
 local code_actions = nullls.builtins.code_actions
 local diagnostics = nullls.builtins.diagnostics
 local formatting = nullls.builtins.formatting
-
+local on_attach = require('lsp.servers.default') 
 local has_eslint_config = function(utils)
   local files = {
     '.eslintrc',
@@ -11,24 +11,24 @@ local has_eslint_config = function(utils)
     '.eslintrc.cjs',
     '.eslintrc.yaml',
     '.eslintrc.yml',
+    'package.json',
   }
   return utils.has_file(files) or utils.root_has_file(files)
 end
 
 local sources = {
   code_actions.eslint_d.with({
-    -- condition = has_eslint_config,
-    prefer_local = 'node_modules/.bin',
+    condition = has_eslint_config,
+    -- prefer_local = 'node_modules/.bin',
   }),
   code_actions.gitsigns,
   diagnostics.eslint_d.with({
-    -- condition = has_eslint_config,
-    prefer_local = 'node_modules/.bin',
+    condition = has_eslint_config,
+    -- prefer_local = 'node_modules/.bin',
   }),
-  -- diagnostics.yamllint.with({
-  -- extra_args = { '-d', 'ignore:','openra/mods/' }
-  -- }),
-  diagnostics.luacheck,
+  diagnostics.yamllint.with({
+    extra_args = { '-d', 'ignore:', 'openra/mods/' },
+  }),
   diagnostics.shellcheck,
   -- formatting.eslint_d.with({
   --   condition = has_eslint_config,
@@ -51,9 +51,15 @@ local sources = {
 local setup = {
   debug = true,
   sources = sources,
-  on_attach = function (client, bufnr)
-    vim.api.nvim_buf_set_keymap(bufnr,'n', '<leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', { desc = '[lsp]formatting' })
-  end
+  on_attach = function(client, bufnr)
+    vim.api.nvim_buf_set_keymap(
+      bufnr,
+      'n',
+      '<leader>f',
+      '<cmd>lua vim.lsp.buf.format({async=true})<cr>',
+      { desc = '[lsp]formatting' }
+    )
+  end,
 }
 
 nullls.setup(setup)
