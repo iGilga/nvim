@@ -23,6 +23,7 @@ if ok then
       'additionalTextEdits',
     },
   }
+
   capabilities.textDocument.codeAction = {
     dynamicRegistration = false,
     codeActionLiteralSupport = {
@@ -44,8 +45,60 @@ end
 
 local function on_attach(client, bufnr)
   defaultOnAttach(client, bufnr)
+  -- local function buf_set_option(...)
+  --   vim.api.nvim_buf_set_option(bufnr, ...)
+  -- end
+  --
+  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
+
+local handlers = {
+  -- ['textDocument/publishDiagnostics'] = vim.lsp.with(
+  --   vim.lsp.diagnostic.on_publish_diagnostics,
+  --   { signs = function() end }
+  -- ),
+  -- ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = EcoVim.ui.float.border }),
+  -- ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = EcoVim.ui.float.border }),
+  -- ['textDocument/definition'] = function(err, result, method, ...)
+  --   if vim.tbl_islist(result) and #result > 1 then
+  --     local filtered_result = filter(result, filterReactDTS)
+  --     return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
+  --   end
+  --
+  --   vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
+  -- end,
+}
+
+local settings = {
+  tsserver = {
+    typescript = {
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = false,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+    javascript = {
+      diagnostics = false,
+      inlayHints = {
+        includeInlayParameterNameHints = 'all',
+        includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+        includeInlayFunctionParameterTypeHints = true,
+        includeInlayVariableTypeHints = false,
+        includeInlayPropertyDeclarationTypeHints = true,
+        includeInlayFunctionLikeReturnTypeHints = false,
+        includeInlayEnumMemberValueHints = true,
+      },
+    },
+  },
+}
 
 M.capabilities = capabilities
 M.on_attach = on_attach
+-- M.handlers = handlers
+-- M.settings = settings
 return M

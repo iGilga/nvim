@@ -12,17 +12,17 @@ M.lsp = {
     bashls = {},
     cssls = {},
     dockerls = {},
-    eslint = {
-      format = false,
-      opts = {
-        autostart = false,
-      },
-    },
-    graphql = {
-      opts = {
-        autostart = false,
-      },
-    },
+    -- eslint = {
+    --   format = false,
+    --   opts = {
+    --     autostart = false,
+    --   },
+    -- },
+    -- graphql = {
+    --   opts = {
+    --     autostart = false,
+    --   },
+    -- },
     html = {},
     jsonls = {
       opts = {
@@ -30,18 +30,20 @@ M.lsp = {
       },
     },
     -- marksman = {},
-    sumneko_lua = {},
+    sumneko_lua = {
+      format = false,
+    },
     tsserver = {
       opts = {
-        autostart = false,
+        autostart = true,
       },
       format = false,
     },
-    yamlls = {
-      opts = {
-        autostart = false,
-      },
-    },
+    -- yamlls = {
+    --   opts = {
+    --     autostart = false,
+    --   },
+    -- },
   },
 }
 

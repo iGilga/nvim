@@ -2,7 +2,8 @@ local nullls = require('null-ls')
 local code_actions = nullls.builtins.code_actions
 local diagnostics = nullls.builtins.diagnostics
 local formatting = nullls.builtins.formatting
-local on_attach = require('lsp.servers.default') 
+local on_attach = require('lsp.servers.default')
+local u = require('utils')
 local has_eslint_config = function(utils)
   local files = {
     '.eslintrc',
@@ -17,17 +18,19 @@ local has_eslint_config = function(utils)
 end
 
 local sources = {
-  code_actions.eslint_d.with({
-    condition = has_eslint_config,
+  -- code_actions.eslint_d.with({
+    -- condition = has_eslint_config,
     -- prefer_local = 'node_modules/.bin',
-  }),
+  -- }),
   code_actions.gitsigns,
-  diagnostics.eslint_d.with({
-    condition = has_eslint_config,
+  -- diagnostics.eslint_d.with({
+    -- diagnostics_format = '[#{s}] #{m}\n(#{c})',
+    -- diagnostics_format = '#{m}\n(#{c})',
+    -- condition = has_eslint_config,
     -- prefer_local = 'node_modules/.bin',
-  }),
+  -- }),
   diagnostics.yamllint.with({
-    extra_args = { '-d', 'ignore:', 'openra/mods/' },
+    -- extra_args = { '-d', 'ignore:', 'openra/mods/' },
   }),
   diagnostics.shellcheck,
   -- formatting.eslint_d.with({
@@ -48,17 +51,27 @@ local sources = {
   formatting.taplo,
 }
 
+-- local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+
 local setup = {
-  debug = true,
+  -- debug = true,
   sources = sources,
   on_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
-      'n',
-      '<leader>f',
-      '<cmd>lua vim.lsp.buf.format({async=true})<cr>',
-      { desc = '[lsp]formatting' }
-    )
+    -- if u.isClientFormat(client.name) then
+    --   print(client.name)
+    --   client.server_capabilities.documentFormattingProvider = false
+    --   client.server_capabilities.documentRangeFormattingProvider = false
+    -- end
+    if client.supports_method('textDocument/formatting') then
+      -- vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_buf_set_keymap(
+        bufnr,
+        'n',
+        '<leader>f',
+        '<cmd>lua vim.lsp.buf.format({async=true})<cr>',
+        { desc = '[lsp]formatting' }
+      )
+    end
   end,
 }
 
