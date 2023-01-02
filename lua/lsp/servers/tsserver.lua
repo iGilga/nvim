@@ -1,6 +1,7 @@
 local u = require('utils')
 local defaultOnAttach = require('lsp.servers.default').on_attach
 local config = require('config')
+
 local M = {}
 
 local capabilities = {}
@@ -97,8 +98,8 @@ local settings = {
   },
 }
 
-M.capabilities = capabilities
-M.on_attach = on_attach
+-- M.capabilities = capabilities
+-- M.on_attach = on_attach
 -- M.handlers = handlers
 -- M.settings = settings
 return M
