@@ -11,6 +11,7 @@ require('mason').setup({
 local lsp = require('lspconfig')
 local mason_lsp = require('mason-lspconfig')
 local mason_nullls = require('mason-null-ls')
+local configLsp = require('config').lsp.servers
 local defaultConfig = require('lsp.servers.default')
 
 --  ┌──────────────────────────────────────────────────────────┐
@@ -32,12 +33,15 @@ mason_lsp.setup({
 })
 mason_lsp.setup_handlers({
   function(serverName)
-    local serverConfig = {}
+    local serverConfig, userConfig = {}, {}
     local ok, pserver = pcall(require, 'lsp.servers.' .. serverName)
     if ok then
       serverConfig = pserver
     end
-    local opts = valhalla.merge(defaultConfig, serverConfig)
+    if configLsp[serverName] then
+      userConfig = configLsp[serverName].opts or {}
+    end
+    local opts = valhalla.merge(defaultConfig, serverConfig, userConfig)
     lsp[serverName].setup(opts)
   end,
 })

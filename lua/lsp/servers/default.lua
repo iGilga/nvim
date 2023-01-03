@@ -1,5 +1,3 @@
-local u = require('utils')
-
 local M = {}
 
 function M.on_attach(client, bufnr)
@@ -8,10 +6,14 @@ function M.on_attach(client, bufnr)
   end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  if u.isClientFormat(client.name) then
+  if valhalla.isClientFormat(client.name) then
+    client.server_capabilities.document_formatting = true
+    client.server_capabilities.document_range_formatting = true
     client.server_capabilities.documentFormattingProvider = true
     client.server_capabilities.documentRangeFormattingProvider = true
   else
+    client.server_capabilities.document_formatting = false
+    client.server_capabilities.document_range_formatting = false
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end
@@ -24,10 +26,10 @@ if ok then
   capabilities = cmp_nvim_lsp.default_capabilities()
 end
 
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-  properties = { 'documentation', 'detail', 'additionalTextEdits' },
-}
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- capabilities.textDocument.completion.completionItem.resolveSupport = {
+--   properties = { 'documentation', 'detail', 'additionalTextEdits' },
+-- }
 
 M.capabilities = capabilities
 
@@ -40,12 +42,12 @@ M.capabilities = capabilities
 --     or util.root_pattern('tsconfig.json')(fname)
 -- end
 
-M.autostart = true
+-- M.autostart = true
 
-M.single_file_support = true
+-- M.single_file_support = true
 
 M.flags = {
-  debounce_text_changes = 300,
+  debounce_text_changes = 200,
 }
 
 return M
