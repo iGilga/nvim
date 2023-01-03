@@ -25,25 +25,42 @@ return packer.startup({
       end,
     })
     -- lsp-config
+    -- use({
+    --   'neovim/nvim-lspconfig',
+    --   config = function()
+    --     require('lsp')
+    --   end,
+    --   requires = {
+    --     { 'b0o/SchemaStore.nvim' },
+    --     { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
+    --     {
+    --       'jose-elias-alvarez/null-ls.nvim',
+    --       config = function()
+    --         require('plugins.null-ls')
+    --       end,
+    --       after = 'nvim-lspconfig',
+    --       disable = true,
+    --     },
+    --   },
+    --   disable = true,
+    --   event = 'BufWinEnter',
+    -- })
+
     use({
-      'neovim/nvim-lspconfig',
-      config = function()
-        require('lsp')
-      end,
+      'williamboman/mason.nvim',
       requires = {
+
+        { 'neovim/nvim-lspconfig' },
+        { 'jose-elias-alvarez/null-ls.nvim' },
         { 'b0o/SchemaStore.nvim' },
-        { 'jose-elias-alvarez/nvim-lsp-ts-utils' },
-        {
-          'jose-elias-alvarez/null-ls.nvim',
-          config = function()
-            require('plugins.null-ls')
-          end,
-          after = 'nvim-lspconfig',
-          disable = false,
-        },
+        { 'williamboman/mason-lspconfig.nvim' },
+        { 'jayp0521/mason-null-ls.nvim' },
       },
-      event = 'BufWinEnter',
+      config = function()
+        require('lsp.mason')
+      end,
     })
+
     -- treesitter
     use({
       'nvim-treesitter/nvim-treesitter',
