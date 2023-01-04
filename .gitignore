@@ -4,4 +4,5 @@ plugin/packer_compiled.lua
 .luarc.json
 Session.vim
 test.lua
+lazy-lock.json
 
