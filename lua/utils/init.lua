@@ -11,7 +11,7 @@ function M.isClientFormat(clientName)
 end
 
 function M.isDisable(plugin)
-  return vim.tbl_contains(config.disablePlugins, plugin)
+  return not vim.tbl_contains(config.disablePlugins, plugin)
 end
 
 function M.getRelativePath(file_path)
