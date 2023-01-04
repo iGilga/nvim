@@ -16,7 +16,7 @@ end
 
 require('settings')
 require('global')
-require('plugins')
+require('plugins.lazy')
 require('mapping')
 require('commands')
 require('autocmds')
