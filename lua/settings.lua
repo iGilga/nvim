@@ -92,6 +92,11 @@ for _, plugin in pairs(disabled_built_ins) do
   g['loaded_' .. plugin] = 1
 end
 
+--                                ┌────────────┐
+--                                │ Leader key │
+--                                └────────────┘
+vim.g.mapleader = '<space>'
+
 -- enable autostart for co-- dashboard-nvim
 -- g.dashboard_default_executive = 'telescope'
 g.indent_blankline_show_trailing_blankline_indent = false

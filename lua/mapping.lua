@@ -1,14 +1,8 @@
-local config = require('config')
 local map = vim.keymap.set
 
 local opts = function(desc)
   return { noremap = true, silent = true, desc = desc }
 end
-
---                                ┌────────────┐
---                                │ Leader key │
---                                └────────────┘
-vim.g.mapleader = config.leader
 
 --                               ┌───────────────┐
 --                               │ Save and quit │

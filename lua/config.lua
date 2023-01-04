@@ -5,8 +5,6 @@ M.theme = 'kanagawa'
 M.border = { ' ' }
 M.style = 'solid'
 
-M.leader = ' '
-
 M.lsp = {
   servers = {
     bashls = {},
