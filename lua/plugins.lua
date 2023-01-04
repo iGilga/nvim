@@ -16,7 +16,12 @@ return packer.startup({
       'nvim-lua/plenary.nvim',
     })
     -- load theme
-    require('theme').init(use, config)
+  use({
+    'rebelot/kanagawa.nvim',
+    config = function()
+      require('theme.kanagawa').init()
+    end,
+  })
     -- notify
     use({
       'rcarriga/nvim-notify',
