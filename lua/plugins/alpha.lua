@@ -26,9 +26,13 @@ local calendar = {
 
 local footerText = function()
   ---@diagnostic disable-next-line: undefined-global
-  local plugins = #vim.tbl_keys(packer_plugins)
   local v = vim.version()
-  return { string.format(' %d   v%d.%d.%d', plugins, v.major, v.minor, v.patch) }
+  local lazy_ok, lazy = pcall(require, 'lazy')
+  if lazy_ok then
+    return { string.format(' %d   v%d.%d.%d', lazy.stats().count, v.major, v.minor, v.patch) }
+  else
+    return { string.format(' v%d.%d.%d', v.major, v.minor, v.patch) }
+  end
 end
 
 local footer = {
@@ -116,6 +120,5 @@ local opts = {
     -- margin = 50,
   },
 }
-
 
 alpha.setup(opts)
