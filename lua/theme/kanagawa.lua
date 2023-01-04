@@ -25,14 +25,15 @@ end
 
 local M = {}
 
-function M.setup(name)
+function M.init()
   local setup = {
     globalStatus = true,
     overrides = highlights,
   }
   local kanagawa = require('kanagawa')
   kanagawa.setup(setup)
-  vim.api.nvim_command(('colorscheme %s'):format(name))
+  vim.api.nvim_command('colorscheme kanagawa')
+  -- vim.api.nvim_command(('colorscheme %s'):format(name))
 end
 
 return M
