@@ -1,4 +1,5 @@
 local nullls = require('null-ls')
+local mason_nullls = require('mason-null-ls')
 local command_resolver = require('null-ls.helpers.command_resolver')
 local code_actions = nullls.builtins.code_actions
 local diagnostics = nullls.builtins.diagnostics
@@ -24,13 +25,13 @@ local sources = {
     dynamic_command = command_resolver.from_yarn_pnp(),
   }),
   code_actions.gitsigns,
-  diagnostics.eslint_d.with({
-    -- diagnostics_format = '[#{s}] #{m}\n(#{c})',
-    diagnostics_format = '#{m}\n(#{c})',
-    condition = has_eslint_config,
-    -- prefer_local = 'node_modules/.bin',
-    dynamic_command = command_resolver.from_yarn_pnp(),
-  }),
+  -- diagnostics.eslint_d.with({
+  --   -- diagnostics_format = '[#{s}] #{m}\n(#{c})',
+  --   diagnostics_format = '#{m}\n(#{c})',
+  --   condition = has_eslint_config,
+  --   -- prefer_local = 'node_modules/.bin',
+  --   dynamic_command = command_resolver.from_yarn_pnp(),
+  -- }),
   diagnostics.yamllint.with({
     -- extra_args = { '-d', 'ignore:', 'openra/mods/' },
   }),
@@ -45,7 +46,7 @@ local sources = {
     extra_args = { '-sr', '-i', '2', '-ci' },
   }),
   formatting.stylua.with({
-    extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
+    -- extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
   }),
 }
 
@@ -73,4 +74,15 @@ local setup = {
   end,
 }
 
+--  ┌──────────────────────────────────────────────────────────┐
+--  │ Settings null-ls                                         │
+--  └──────────────────────────────────────────────────────────┘
+mason_nullls.setup({
+  ensure_installed = { 'eslint_d', 'stylua', 'prettierd', 'shfmt', 'gitsigns' },
+  automatic_installation = false,
+  automatic_setup = true, -- Recommended, but optional
+})
+
 nullls.setup(setup)
+
+mason_nullls.setup_handlers()
