@@ -23,17 +23,40 @@ return {
   },
   -- mason
   {
+    'williamboman/mason.nvim',
+    cmd = {
+      'Mason',
+      'MasonInstall',
+      'MasonUninstall',
+      'MasonUninstallAll',
+      'MasonLog',
+    },
+    config = function()
+      require('plugins.mason')
+    end,
+  },
+  {
     'neovim/nvim-lspconfig',
+    event = 'BufReadPre',
     dependencies = {
-      { 'williamboman/mason.nvim' },
-      { 'jose-elias-alvarez/null-ls.nvim' },
+      { 'hrsh7th/cmp-nvim-lsp' },
       { 'b0o/SchemaStore.nvim' },
       { 'williamboman/mason-lspconfig.nvim' },
+    },
+    config = function()
+      require('plugins.lsp')
+    end,
+  },
+  {
+    'jose-elias-alvarez/null-ls.nvim',
+    event = 'BufReadPre',
+    dependencies = {
       { 'jayp0521/mason-null-ls.nvim' },
     },
     config = function()
-      require('lsp.mason')
+      require('plugins.null-ls')
     end,
+    enable = false,
   },
   -- treesitter
   {
@@ -54,6 +77,8 @@ return {
       },
     },
     build = ':TSUpdate',
+    event = 'BufReadPost',
+    cmd = 'TSUpdate',
     config = function()
       require('plugins.treesitter')
     end,
@@ -61,14 +86,15 @@ return {
   -- finder file, code, etc
   {
     'nvim-telescope/telescope.nvim',
+    lazy = false,
     dependencies = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
       'kdheepak/lazygit.nvim',
       'nvim-telescope/telescope-ui-select.nvim',
       'nvim-telescope/telescope-symbols.nvim',
+      'rcarriga/nvim-notify',
     },
+    cmd = 'Telescope',
     config = function()
       require('plugins.telescope')
     end,
@@ -96,8 +122,9 @@ return {
   -- bufferline
   {
     'akinsho/bufferline.nvim',
+    event = 'BufAdd',
+    -- event = 'bufReadPre',
     version = 'v2.*',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
     config = function()
       require('plugins.bufferline')
     end,
@@ -113,7 +140,7 @@ return {
   --bottomline
   {
     'hoob3rt/lualine.nvim',
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    lazy = false,
     config = function()
       require('plugins.lualine')
     end,
@@ -131,53 +158,80 @@ return {
   },
   -- autocomplete
   {
-    'hrsh7th/nvim-cmp',
+    'L3MON4D3/LuaSnip',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+    },
     config = function()
-      require('plugins.cmp')
+      require('plugins.luasnip')
     end,
+  },
+
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     dependencies = {
       { 'onsails/lspkind-nvim' },
+      { 'hrsh7th/cmp-buffer' },
+      { 'hrsh7th/cmp-nvim-lsp' },
+      { 'hrsh7th/cmp-path' },
+      { 'hrsh7th/cmp-nvim-lsp-signature-help' },
+      { 'hrsh7th/cmp-nvim-lua' },
+      { 'saadparwaiz1/cmp_luasnip' },
+      { 'hrsh7th/cmp-cmdline' },
       {
-        'L3MON4D3/LuaSnip',
+        'windwp/nvim-autopairs',
         config = function()
-          require('plugins.luasnip')
+          require('plugins.autopairs')
         end,
       },
     },
-    { 'rafamadriz/friendly-snippets' },
-    { 'hrsh7th/cmp-nvim-lsp' },
-    { 'saadparwaiz1/cmp_luasnip' },
-    { 'hrsh7th/cmp-buffer' },
-    { 'hrsh7th/cmp-nvim-lua' },
-    { 'hrsh7th/cmp-path' },
-    { 'hrsh7th/cmp-cmdline' },
-    {
-      'windwp/nvim-autopairs',
-      config = function()
-        require('plugins.autopairs')
-      end,
-    },
-    event = 'InsertEnter',
-  },
-  {
-    'ray-x/lsp_signature.nvim',
-    config = function(config)
-      require('lsp_signature').setup({
-        bind = true,
-        handler_opts = {
-          border = config.style,
-        },
-      })
+    config = function()
+      require('plugins.cmp')
     end,
-    enable = false,
   },
+  -- {
+  --   'hrsh7th/nvim-cmp',
+  --   event = 'InsertEnter',
+  --   dependencies = {
+  --     { 'onsails/lspkind-nvim' },
+  --     {
+  --       'L3MON4D3/LuaSnip',
+  --       config = function()
+  --         require('plugins.luasnip')
+  --       end,
+  --     },
+  --   },
+  --   { 'rafamadriz/friendly-snippets' },
+  --   { 'hrsh7th/cmp-nvim-lsp' },
+  --   { 'saadparwaiz1/cmp_luasnip' },
+  --   { 'hrsh7th/cmp-buffer' },
+  --   { 'hrsh7th/cmp-nvim-lua' },
+  --   { 'hrsh7th/cmp-path' },
+  --   { 'hrsh7th/cmp-cmdline' },
+  --   config = function()
+  --     require('plugins.cmp')
+  --   end,
+  -- },
+  -- {
+  --   'ray-x/lsp_signature.nvim',
+  --   config = function(config)
+  --     require('lsp_signature').setup({
+  --       bind = true,
+  --       handler_opts = {
+  --         border = config.style,
+  --       },
+  --     })
+  --   end,
+  --   enable = false,
+  -- },
   -- aka easymotion
   {
     'phaazon/hop.nvim',
-    as = 'hop',
+    name = 'hop',
     config = function()
       require('hop').setup({
-        create_hl_autocmd = false,
+        -- create_hl_autocmd = false,
       })
     end,
   },
@@ -191,6 +245,7 @@ return {
   -- file manager
   {
     'luukvbaal/nnn.nvim',
+    cmd = 'NnnPicker',
     config = function()
       require('nnn').setup({
         explorer = { session = 'local' },
@@ -204,6 +259,10 @@ return {
 
   {
     'nvim-tree/nvim-tree.lua',
+    cmd = {
+      'NvimTreeClose',
+      'NvimTreeFocus',
+    },
     dependencies = {
       'nvim-tree/nvim-web-devicons', -- optional, for file icons
     },
@@ -212,12 +271,12 @@ return {
     end,
   },
   -- find project for telescope
-  {
-    'ahmedkhalf/project.nvim',
-    config = function()
-      require('project_nvim').setup({})
-    end,
-  },
+  -- {
+  --   'ahmedkhalf/project.nvim',
+  --   config = function()
+  --     require('project_nvim').setup({})
+  --   end,
+  -- },
   -- comment
   {
     'numToStr/Comment.nvim',
@@ -230,15 +289,23 @@ return {
   },
   {
     'folke/todo-comments.nvim',
-    event = 'BufRead',
+    cmd = { 'TodoTelescope' },
+    event = 'BufReadPost',
     dependencies = 'nvim-lua/plenary.nvim',
     config = function()
       require('plugins.todocomments')
     end,
+    -- stylua: ignore
+    keys = {
+      { "]t", function() require("todo-comments").jump_next() end, desc = "Next todo comment" },
+      { "[t", function() require("todo-comments").jump_prev() end, desc = "Previous todo comment" },
+      { "<leader>ft", "<cmd>TodoTelescope<cr>", desc = "Todo Telescope" },
+    },
   },
   -- indentline
   {
     'lukas-reineke/indent-blankline.nvim',
+    event = 'BufReadPre',
     config = function()
       require('plugins.indentblankline')
     end,
@@ -290,14 +357,12 @@ return {
       require('toggleterm').setup(setup)
     end,
   },
-
   {
     'ThePrimeagen/harpoon',
     config = function()
       require('harpoon').setup()
     end,
   },
-
   {
     'folke/twilight.nvim',
     config = function()
@@ -307,8 +372,9 @@ return {
   -- dashboard
   {
     'goolord/alpha-nvim',
-    lazy = false,
-    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    event = 'VimEnter',
+    -- lazy = false,
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('plugins.alpha')
     end,
@@ -322,7 +388,6 @@ return {
       require('plugins.sessionmanager')
     end,
   },
-
   {
     'yamatsum/nvim-cursorline',
     enable = u.isDisable('nvim-cursorline'),
@@ -334,7 +399,6 @@ return {
       require('better_escape').setup()
     end,
   },
-
   {
     'LudoPinelli/comment-box.nvim',
     config = function()
@@ -354,21 +418,18 @@ return {
     ft = { 'markdown' },
     enable = false,
   },
-
   {
     'sQVe/sort.nvim',
     config = function()
       require('sort').setup({})
     end,
   },
-
   {
     'monaqa/dial.nvim',
     config = function()
       require('plugins.dial')
     end,
   },
-
   {
     'nvim-neorg/neorg',
     config = function()
@@ -386,7 +447,6 @@ return {
     end,
     dependencies = 'nvim-lua/plenary.nvim',
   },
-
   {
     'mickael-menu/zk-nvim',
     config = function()
