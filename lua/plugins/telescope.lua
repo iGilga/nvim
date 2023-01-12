@@ -100,6 +100,7 @@ telescope.setup({
     },
   },
 })
+
 telescope.load_extension('fzf')
 telescope.load_extension('ui-select')
 telescope.load_extension('notify')
@@ -109,8 +110,8 @@ if ok then
   telescope.load_extension('harpoon')
 end
 
-telescope.load_extension('lazygit')
-telescope.load_extension('projects')
+-- telescope.load_extension('lazygit')
+-- telescope.load_extension('projects')
 
 -- mapping
 map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = 'search files' })
