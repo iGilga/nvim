@@ -18,7 +18,7 @@ local config = {
   options = {
     theme = custom_kanagawa,
     icons_enabled = true,
-    disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree', 'alpha' },
+    disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NVimTree', 'alpha', 'lazy', 'dashboard' },
     globalstatus = true,
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
