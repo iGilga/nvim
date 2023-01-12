@@ -27,7 +27,7 @@ M.lsp = {
     },
     tsserver = {
       opts = {
-        autostart = false,
+        autostart = true,
       },
       format = false,
     },
