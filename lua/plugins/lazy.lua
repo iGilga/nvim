@@ -6,9 +6,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup('plugins5', {
-  defaults = { lazy = true, version = '*' },
-  install = { colorscheme = { 'nightfox' } },
+  defaults = { lazy = true },
   performance = {
+    cache = { enabled = true },
     rtp = {
       disabled_plugins = {
         'gzip',
@@ -21,5 +21,8 @@ require('lazy').setup('plugins5', {
         'zipPlugin',
       },
     },
+  },
+  ui = {
+        size = { width = 0.8, height = 0.9 },
   },
 })
