@@ -16,6 +16,8 @@ local setup = {
     'NnnExplorer',
     'NnnPicker',
     'markdown',
+    'lazy',
+    'dashboard',
   },
 }
 
