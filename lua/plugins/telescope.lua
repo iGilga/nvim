@@ -52,7 +52,7 @@ telescope.setup({
     },
     mappings = {
       i = {
-        ['<c-o>'] = { '<esc>', type = 'command' },
+        ['jj'] = { '<esc>', type = 'command' },
         ['<esc>'] = actions.close,
         ['<c-h>'] = 'which_key',
         ['<c-p>'] = action_layout.toggle_preview,
