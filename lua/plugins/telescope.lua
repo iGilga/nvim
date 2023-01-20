@@ -112,7 +112,7 @@ local function setup()
   end
 
   -- telescope.load_extension('lazygit')
-  telescope.load_extension('projects')
+  -- telescope.load_extension('projects')
 
   -- mapping
   map('n', '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", { desc = 'search files' })
@@ -143,7 +143,7 @@ local function setup()
   map('n', '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', { desc = 'search files' })
   map('n', '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>', { desc = 'search files' })
 
-  map('n', '<leader>fd', '<cmd>:Telescope projects<cr>', { desc = 'search projects' })
+  -- map('n', '<leader>fd', '<cmd>:Telescope projects<cr>', { desc = 'search projects' })
 end
 
 return {
