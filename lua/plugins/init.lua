@@ -1,5 +1,3 @@
-local u = require('utils')
-
 return {
   { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
