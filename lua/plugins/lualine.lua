@@ -1,5 +1,3 @@
-local lualine = require('lualine')
-
 local function getSessionName()
   if vim.v.this_session ~= '' then
     local session = vim.v.this_session
@@ -14,7 +12,7 @@ end
 local custom_kanagawa = require('lualine.themes.kanagawa')
 custom_kanagawa.normal.c = { bg = '#2A2A37', fg = '#C8C093' }
 
-local config = {
+local setup = {
   options = {
     theme = custom_kanagawa,
     icons_enabled = true,
@@ -50,4 +48,8 @@ local config = {
   extensions = { 'quickfix', 'fzf' },
 }
 
-lualine.setup(config)
+return {
+  'hoob3rt/lualine.nvim',
+  lazy = false,
+  config = setup,
+}

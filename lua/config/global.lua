@@ -1,4 +1,4 @@
-local config = require('config')
+local config = require('config.user')
 
 P = function(...)
   vim.pretty_print(...)

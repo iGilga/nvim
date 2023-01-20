@@ -122,9 +122,4 @@ M.plugins = {
   },
 }
 
-M.disablePlugins = {
-  'better-escape.nvim',
-  'nvim-cursorline',
-}
-
 return M

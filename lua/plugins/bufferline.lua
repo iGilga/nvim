@@ -14,4 +14,10 @@ local setup = {
   },
 }
 
-require('bufferline').setup(setup)
+return {
+  'akinsho/bufferline.nvim',
+  event = 'BufAdd',
+  -- event = 'bufReadPre',
+  version = 'v2.*',
+  config = setup,
+}

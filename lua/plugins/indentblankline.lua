@@ -2,23 +2,32 @@ local setup = {
   char_list = { '|', '¦', '┆', '┊' },
   show_current_context = true,
   -- show_current_context_start = true,
-  -- space_char_blankline = ' ',
+  space_char_blankline = ' ',
   buftype_exclude = {
-    'terminal',
-    'prompt',
     'nofile',
+    'prompt',
+    'terminal',
   },
   filetype_exclude = {
-    'help',
-    'packer',
-    'lspinfo',
-    'alpha',
     'NnnExplorer',
     'NnnPicker',
-    'markdown',
-    'lazy',
+    'NvimTree',
+    'alpha',
     'dashboard',
+    'help',
+    'lazy',
+    'lspinfo',
+    'markdown',
+    'packer',
   },
 }
 
-require('indent_blankline').setup(setup)
+return {
+  'lukas-reineke/indent-blankline.nvim',
+  name = 'indent_blankline',
+  event = 'BufReadPre',
+  init = function()
+    vim.g.indent_blankline_show_trailing_blankline_indent = false
+  end,
+  config = setup,
+}

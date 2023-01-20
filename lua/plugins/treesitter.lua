@@ -1,17 +1,35 @@
-local config = require('config').plugins.treesitter
 local setup = {
-  ensure_installed = config.ensure_installed,
+  ensure_installed = {
+    'bash',
+    'c',
+    'c_sharp',
+    'cpp',
+    'css',
+    'dockerfile',
+    'help',
+    'html',
+    'javascript',
+    'jsdoc',
+    'json',
+    'lua',
+    'markdown',
+    'markdown_inline',
+    'norg',
+    'python',
+    'rasi',
+    'rust',
+    'scss',
+    'toml',
+    'yaml',
+  },
   highlight = {
     enable = true,
     -- use_languagetree = true,
     additional_vim_regex_highlighting = { 'markdown' },
   },
-  indent = {
-    enable = true,
-  },
-  autotag = {
-    enable = true,
-  },
+  autopairs = { enable = true },
+  indent = { enable = true },
+  autotag = { enable = true },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
@@ -76,4 +94,30 @@ local setup = {
   },
 }
 
-require('nvim-treesitter.configs').setup(setup)
+return {
+  'nvim-treesitter/nvim-treesitter',
+  dependencies = {
+    -- 'windwp/nvim-ts-autoversion',
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    'nvim-treesitter/nvim-treesitter-refactor',
+    'nvim-treesitter/nvim-treesitter-context',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+    {
+      'm-demare/hlargs.nvim',
+      config = function()
+        require('hlargs').setup({
+          -- color = '#C8C093'
+        })
+      end,
+      enable = false,
+    },
+  },
+  build = ':TSUpdate',
+  event = 'BufReadPost',
+  cmd = 'TSUpdate',
+  opts = setup,
+  config = function(_, opts)
+    require('nvim-treesitter.configs').setup(opts)
+    require('treesitter-context').setup({})
+  end,
+}

@@ -1,6 +1,6 @@
 local u = require('utils')
 local defaultOnAttach = require('lsp.servers.default').on_attach
-local config = require('config')
+local config = require('config.user')
 
 local M = {}
 

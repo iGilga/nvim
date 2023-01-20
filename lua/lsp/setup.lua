@@ -1,5 +1,5 @@
 local lspconfig = require('lspconfig')
-local configLsp = require('config').lsp.servers
+local configLsp = require('config.user').lsp.servers
 local defaultProvider = require('lsp.servers.default')
 
 local function setup(servers)

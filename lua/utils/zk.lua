@@ -1,6 +1,6 @@
 local Menu = require('nui.menu')
 local ntext = require('nui.text')
-local config = require('config').zettel
+local config = require('config.user').zettel
 
 M = {}
 

@@ -99,10 +99,8 @@ vim.g.mapleader = ' '
 
 -- enable autostart for co-- dashboard-nvim
 -- g.dashboard_default_executive = 'telescope'
-g.indent_blankline_show_trailing_blankline_indent = false
+-- g.indent_blankline_show_trailing_blankline_indent = false
 g.bufferline = {
   add_in_buffer_number_order = true,
 }
 
-g.lazygit_floating_window_corner_chars = { '┌', '┐', '└', '┘' }
-g.lazygit_floating_window_scaling_factor = 1

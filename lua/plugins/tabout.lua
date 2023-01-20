@@ -19,4 +19,11 @@ local setup = {
   exclude = {}, -- tabout will ignore these filetypes
 }
 
-require('tabout').setup(setup)
+return {
+  'abecodes/tabout.nvim',
+  dependencies = {
+    'nvim-treesitter',
+    'nvim-cmp',
+  },
+  config = setup,
+}
