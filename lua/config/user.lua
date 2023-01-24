@@ -53,7 +53,7 @@ M.rename = {
     title_align = 'center',
     title_hl = 'NuiTitle',
   },
-  prompt = '> ',
+  prompt = ' > ',
   prompt_hl = 'NuiPrompt',
   highlight = 'Normal:NuiNormal',
 }

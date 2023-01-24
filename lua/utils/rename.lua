@@ -70,11 +70,10 @@ M.rename = function(popup_opts, opts)
   popup_opts = {
     position = {
       row = 1,
-      col = 0,
+      col = -3,
     },
     size = {
       width = width,
-      height = 2,
     },
     relative = 'cursor',
     highlight = config.highlight or 'Normal:Normal',
@@ -82,11 +81,7 @@ M.rename = function(popup_opts, opts)
       highlight = config.border.highlight,
       style = config.border.style,
       char = ' ',
-      text = {
-        top = Text(config.border.title, config.border.title_hl),
-        top_align = config.border.title_align,
-      },
-      padding = { 1, 0 },
+      padding = { -1, -1 },
     },
   }
 
