@@ -32,7 +32,7 @@ local function setup()
   vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     pattern = { '*.js', '*.jsx' },
     callback = function()
-      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>a', mdial.inc_normal('javascript'), { noremap = true })
+      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>a', mdial.inc_normal('javascript'), { noremap = true, desc = 'dial for js' })
     end,
   })
 end
