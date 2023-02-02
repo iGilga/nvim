@@ -109,7 +109,7 @@ return {
           -- color = '#C8C093'
         })
       end,
-      enable = false,
+      enabled = false,
     },
   },
   build = ':TSUpdate',
