@@ -57,6 +57,7 @@ local function setup()
           ['<esc>'] = actions.close,
           ['<c-h>'] = 'which_key',
           ['<c-p>'] = action_layout.toggle_preview,
+          ["<C-f>"] = actions.smart_send_to_qflist + actions.open_qflist,
         },
         n = {
           ['<c-h>'] = 'which_key',
