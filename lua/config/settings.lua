@@ -95,7 +95,7 @@ end
 --                                ┌────────────┐
 --                                │ Leader key │
 --                                └────────────┘
-vim.g.mapleader = ' '
+g.mapleader = ' '
 
 -- enable autostart for co-- dashboard-nvim
 -- g.dashboard_default_executive = 'telescope'
