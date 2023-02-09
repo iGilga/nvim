@@ -18,6 +18,7 @@ local function setup()
     nui = true,
     telescope = true,
     todo = true,
+    illuminate = true,
   }) do
     if enabled then
       highlights = vim.tbl_deep_extend('force', highlights, require('theme.plugins.' .. plugin))
