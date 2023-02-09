@@ -1,5 +1,5 @@
 return {
-  { 'nvim-lua/plenary.nvim' },
+  -- { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
   -- {
   --   'antoinemadec/FixCursorHold.nvim',
@@ -17,8 +17,17 @@ return {
   --   end,
   -- },
   {
-    'yamatsum/nvim-cursorline',
-    enabled = false,
+    'RRethy/vim-illuminate',
+    event = 'BufReadPost',
+    config = function()
+      require('illuminate').configure({
+        providers = {
+          'lsp',
+          -- 'treesitter'
+        },
+        under_cursor = false,
+      })
+    end,
   },
   {
     'max397574/better-escape.nvim',
