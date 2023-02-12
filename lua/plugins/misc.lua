@@ -57,4 +57,14 @@ return {
     end,
     dependencies = 'nvim-lua/plenary.nvim',
   },
+  {
+    'gennaro-tedesco/nvim-jqx',
+    ft = { 'json', 'yaml' },
+    config = true,
+    -- config = function()
+    --   require('nvim-jqx.config').use_quickfix = false
+    -- end,
+    -- JqxList
+    -- JqxQuery
+  },
 }
