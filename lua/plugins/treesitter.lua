@@ -1,9 +1,6 @@
 local setup = {
   ensure_installed = {
     'bash',
-    'c',
-    'c_sharp',
-    'cpp',
     'css',
     'dockerfile',
     'help',
@@ -15,8 +12,8 @@ local setup = {
     'markdown',
     'markdown_inline',
     'norg',
-    'python',
     'rasi',
+    'regex',
     'rust',
     'scss',
     'toml',
