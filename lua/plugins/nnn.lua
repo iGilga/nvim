@@ -3,9 +3,9 @@ return {
   'luukvbaal/nnn.nvim',
   cmd = 'NnnPicker',
   config = {
-    explorer = { session = 'local' },
+    explorer = { session = 'shared' },
     picker = {
-      session = 'local',
+      session = 'shared',
       style = { border = 'solid' },
     },
   },
