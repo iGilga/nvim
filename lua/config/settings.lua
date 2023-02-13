@@ -43,7 +43,7 @@ local options = {
   -- undodir = '/tmp/',
   undofile = true,
   updatetime = 250,
-  -- wrap = false,
+  wrap = false,
   writebackup = false,
   listchars = {
     space = '·',
@@ -57,40 +57,6 @@ for option, value in pairs(options) do
 end
 
 o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal'
-
--- Disable some builtin vim plugins
-local disabled_built_ins = {
-  '2html_plugin',
-  'bugreport',
-  'ftplugin',
-  'getscript',
-  'getscriptPlugin',
-  'gzip',
-  'logipat',
-  'matchit',
-  'netrw',
-  'netrwFileHandlers',
-  'netrwPlugin',
-  'netrwSettings',
-  'optwin',
-  'rplugin',
-  'rrhelper',
-  'spec',
-  'spellfile_plugin',
-  'synmenu',
-  'syntax',
-  'tar',
-  'tarPlugin',
-  'tutor',
-  'vimball',
-  'vimballPlugin',
-  'zip',
-  'zipPlugin',
-}
-
-for _, plugin in pairs(disabled_built_ins) do
-  g['loaded_' .. plugin] = 1
-end
 
 --                                ┌────────────┐
 --                                │ Leader key │
