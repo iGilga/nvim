@@ -17,6 +17,9 @@ return {
   --   end,
   -- },
   {
+    'chentoast/marks.nvim',
+  },
+  {
     'RRethy/vim-illuminate',
     event = 'BufReadPost',
     config = function()
@@ -24,6 +27,13 @@ return {
         providers = {
           'lsp',
           -- 'treesitter'
+        },
+        filetype_denylist = {
+          'NvimTree',
+          'lazy',
+          'norg',
+          'toggleterm',
+          'TelescopePrompt',
         },
         under_cursor = false,
       })
