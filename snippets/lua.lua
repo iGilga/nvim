@@ -16,7 +16,7 @@ return {
     fmt(
       [[
       local function {}({})
-              {}
+        {}
       end
       ]],
       { i(1, 'name'), i(2, 'args'), i(0) }
