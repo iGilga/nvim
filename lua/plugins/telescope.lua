@@ -53,7 +53,6 @@ local function setup()
       },
       mappings = {
         i = {
-          ['jj'] = { '<esc>', type = 'command' },
           ['<esc>'] = actions.close,
           ['<c-h>'] = 'which_key',
           ['<c-p>'] = action_layout.toggle_preview,
