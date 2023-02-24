@@ -20,11 +20,6 @@ map('n', '<leader>s', ':w<cr>', { desc = 'save' })
 --                              └─────────────────┘
 map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 
---                                 ┌──────────┐
---                                 │ WhichKey │
---                                 └──────────┘
-map('n', '<F9>', '<cmd>WhichKey<cr>', { noremap = true, silent = true })
-
 --                                ┌────────────┐
 --                                │ Bufferline │
 --                                └────────────┘
