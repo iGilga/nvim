@@ -39,13 +39,6 @@ map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 --                              ┌────────────────┐
 --                              │ SessionManager │
 --                              └────────────────┘
--- map('n', '<leader>sl', '<cmd>SessionManager! load_last_session<cr>', opts('Load last session'))
-map('n', '<leader>oo', '<cmd>SessionManager! save_current_session<cr>', opts('Save this session'))
-map('n', '<leader>od', '<cmd>SessionManager! delete_session<cr>', opts('Delete session'))
-map('n', '<leader>sf', '<cmd>SessionManager! load_session<cr>', opts('Search sessions'))
-map('n', '<F4>', '<cmd>SessionManager! load_current_dir_session<cr>', {
-  desc = 'Load current directory session',
-})
 
 --                           ┌───────────────────────┐
 --                           │ Telescope with zettel │
