@@ -4,6 +4,10 @@ local opts = function(desc)
   return { noremap = true, silent = true, desc = desc }
 end
 
+map('i', 'jk', '<ESC>', { noremap = true, silent = true })
+map('i', 'jj', '<ESC>', { noremap = true, silent = true })
+map('i', 'kj', '<ESC>', { noremap = true, silent = true })
+
 --                               ┌───────────────┐
 --                               │ Save and quit │
 --                               └───────────────┘
@@ -16,15 +20,6 @@ map('n', '<leader>s', ':w<cr>', { desc = 'save' })
 --                              └─────────────────┘
 map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 
---                                  ┌────────┐
---                                  │ Packer │
---                                  └────────┘
-map('n', '<leader>pc', '<cmd>PackerCompile<cr>', { desc = 'Packer Compile' })
-map('n', '<leader>pi', '<cmd>PackerInstall<cr>', { desc = 'Packer Install' })
-map('n', '<leader>ps', '<cmd>PackerSync<cr>', { desc = 'Packer Sync' })
-map('n', '<leader>pS', '<cmd>PackerStatus<cr>', { desc = 'Packer Status' })
-map('n', '<leader>pu', '<cmd>PackerUpdate<cr>', { desc = 'Packer Update' })
-
 --                                 ┌──────────┐
 --                                 │ WhichKey │
 --                                 └──────────┘
@@ -33,20 +28,25 @@ map('n', '<F9>', '<cmd>WhichKey<cr>', { noremap = true, silent = true })
 --                                ┌────────────┐
 --                                │ Bufferline │
 --                                └────────────┘
+map('n', 'tt', ':BufferLinePick<cr>', opts('pick buffer'))
 map('n', '<a-k>', ':BufferLineCycleNext<cr>', opts('next buffer'))
 map('n', '<a-j>', ':BufferLineCyclePrev<cr>', opts('prev buffer'))
--- nnoremap({ '<A-0>', ':BufferGotoLast<cr>', opts })
+
+-- close buffer
 map('n', 'ts', ':BufferLinePickClose<cr>', opts('close buffer'))
 map('n', 'tss', ':bdelete<cr>', opts('close buffer'))
-map('n', 'tt', ':BufferLinePick<cr>', opts('pick buffer'))
+
+-- sorting
 map('n', 'tn', function()
   require('bufferline').sort_buffers_by(function(buf_a, buf_b)
     return buf_a.id < buf_b.id
   end)
 end, opts('sort buffer number'))
+
 map('n', 'td', function()
   require('bufferline').sort_buffers_by('directory')
 end, opts('sort buffer directory'))
+
 map('n', 'te', function()
   require('bufferline').sort_buffers_by('extension')
 end, opts('sort buffer language'))
@@ -136,18 +136,6 @@ map('n', '<F4>', '<cmd>SessionManager! load_current_dir_session<cr>', {
 --                           └───────────────────────┘
 map('n', '<leader>zf', ':lua require("telescope").extensions.zettel.find_zettel()<CR>')
 map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels()<CR>')
-
---                                ┌─────────────┐
---                                │ Comment box │
---                                └─────────────┘
-map('n', '<Leader>bb', "<Cmd>lua require('comment-box').lbox(2)<CR>", opts('box'))
-map('v', '<Leader>bb', "<Cmd>lua require('comment-box').lbox(2)<CR>", opts('box'))
--- centered adapted box with centered text
-map('n', '<Leader>bc', "<Cmd>lua require('comment-box').accbox(2)<CR>", opts('centred box'))
-map('v', '<Leader>bc', "<Cmd>lua require('comment-box').accbox(2)<CR>", opts('centred box'))
--- centered line
-map('n', '<Leader>bl', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
--- map('i', '<M-l>', "<Cmd>lua require('comment-box').cline(1)<CR>", opts('line'))
 
 --                                 ┌───────────┐
 --                                 │ Colorizer │
