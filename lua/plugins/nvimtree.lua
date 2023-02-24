@@ -26,8 +26,8 @@ local function setup()
 end
 
 local keys = {
-  { 'n', '<leader>mc', '<cmd>:NvimTreeClose<cr>', desc = 'open nvim-tree' },
-  { 'n', '<leader>m', '<cmd>:NvimTreeFocus<cr>', desc = 'open nvim-tree' },
+  { '<leader>mc', '<cmd>:NvimTreeClose<cr>', desc = 'open nvim-tree' },
+  { '<leader>m', '<cmd>:NvimTreeFocus<cr>', desc = 'open nvim-tree' },
 }
 return {
   'nvim-tree/nvim-tree.lua',

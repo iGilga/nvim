@@ -1,7 +1,7 @@
 -- file manager
 local keys = {
-  { 't', '<c-t>', '<cmd>:NnnPicker<cr>', desc = 'open nnn' },
-  { 'n', '<c-t>', '<cmd>:NnnPicker<cr>', desc = 'open nnn' },
+  {  '<c-t>', '<cmd>:NnnPicker<cr>', desc = 'open nnn', mode = 't' },
+  {  '<c-t>', '<cmd>:NnnPicker<cr>', desc = 'open nnn' },
 }
 return {
   'luukvbaal/nnn.nvim',
