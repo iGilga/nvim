@@ -35,7 +35,6 @@ map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 --                                  ┌─────────┐
 --                                  │ LazyGit │
 --                                  └─────────┘
-map('n', '<leader>ll', ':LazyGit<cr>', opts('open lazygit'))
 
 --                              ┌────────────────┐
 --                              │ SessionManager │
