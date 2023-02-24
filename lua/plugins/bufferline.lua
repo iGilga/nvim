@@ -14,10 +14,45 @@ local setup = {
   },
 }
 
+local keys = {
+  { 'tt', ':BufferLinePick<cr>', { desc = 'pick buffer' } },
+  { '<a-k>', ':BufferLineCycleNext<cr>', { desc = 'next buffer' } },
+  { '<a-j>', ':BufferLineCyclePrev<cr>', { desc = 'prev buffer' } },
+  -- close buffer
+  { 'ts', ':BufferLinePickClose<cr>', { desc = { 'close buffer' } } },
+  { 'tss', ':bdelete<cr>', { desc = 'close buffer' } },
+  -- sorting
+  {
+    'tn',
+    function()
+      require('bufferline').sort_buffers_by(function(buf_a, buf_b)
+        return buf_a.id < buf_b.id
+      end)
+    end,
+    { desc = 'sort buffer number' },
+  },
+
+  {
+    'td',
+    function()
+      require('bufferline').sort_buffers_by('directory')
+    end,
+    { desc = 'sort buffer directory' },
+  },
+
+  {
+    'te',
+    function()
+      require('bufferline').sort_buffers_by('extension')
+    end,
+    { desc = 'sort buffer language' },
+  },
+}
+
 return {
   'akinsho/bufferline.nvim',
   event = 'BufAdd',
-  -- event = 'bufReadPre',
   version = 'v2.*',
+  keys = keys,
   config = setup,
 }
