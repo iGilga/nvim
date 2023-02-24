@@ -15,12 +15,12 @@ local setup = {
 }
 
 local keys = {
-  { 'tt', ':BufferLinePick<cr>', { desc = 'pick buffer' } },
-  { '<a-k>', ':BufferLineCycleNext<cr>', { desc = 'next buffer' } },
-  { '<a-j>', ':BufferLineCyclePrev<cr>', { desc = 'prev buffer' } },
+  { 'tt', ':BufferLinePick<cr>', desc = '[bufferline]Pick buffer' },
+  { '<a-k>', ':BufferLineCycleNext<cr>', desc = '[bufferline]Next buffer' },
+  { '<a-j>', ':BufferLineCyclePrev<cr>', desc = '[bufferline]Prev buffer' },
   -- close buffer
-  { 'ts', ':BufferLinePickClose<cr>', { desc = { 'close buffer' } } },
-  { 'tss', ':bdelete<cr>', { desc = 'close buffer' } },
+  { 'ts', ':BufferLinePickClose<cr>', desc = '[bufferline]Close buffer' },
+  { 'tss', ':bdelete<cr>', desc = '[bufferline]Close buffer' },
   -- sorting
   {
     'tn',
@@ -29,7 +29,7 @@ local keys = {
         return buf_a.id < buf_b.id
       end)
     end,
-    { desc = 'sort buffer number' },
+    desc = '[bufferline]Sort buffer number',
   },
 
   {
@@ -37,7 +37,7 @@ local keys = {
     function()
       require('bufferline').sort_buffers_by('directory')
     end,
-    { desc = 'sort buffer directory' },
+    desc = '[bufferline]Sort buffer directory',
   },
 
   {
@@ -45,7 +45,7 @@ local keys = {
     function()
       require('bufferline').sort_buffers_by('extension')
     end,
-    { desc = 'sort buffer language' },
+    desc = '[bufferline]Sort buffer language',
   },
 }
 
