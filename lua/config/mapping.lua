@@ -31,8 +31,6 @@ map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 --                                 ┌───────────┐
 --                                 │ nvim-tree │
 --                                 └───────────┘
-map('n', '<leader>mc', '<cmd>:NvimTreeClose<cr>', opts('open nvim-tree'))
-map('n', '<leader>m', '<cmd>:NvimTreeFocus<cr>', opts('open nvim-tree'))
 
 --                                  ┌─────────┐
 --                                  │ LazyGit │

@@ -22,18 +22,22 @@ local function setup()
     --   update_root = true,
     -- },
   }
-
   require('nvim-tree').setup(setup)
 end
 
+local keys = {
+  { 'n', '<leader>mc', '<cmd>:NvimTreeClose<cr>', desc = 'open nvim-tree' },
+  { 'n', '<leader>m', '<cmd>:NvimTreeFocus<cr>', desc = 'open nvim-tree' },
+}
 return {
   'nvim-tree/nvim-tree.lua',
   cmd = {
     'NvimTreeClose',
     'NvimTreeFocus',
   },
+  keys = keys,
   dependencies = {
-    'nvim-tree/nvim-web-devicons', -- optional, for file icons
+    'nvim-tree/nvim-web-devicons',
   },
   config = setup,
 }
