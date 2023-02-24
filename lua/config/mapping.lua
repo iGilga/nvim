@@ -27,8 +27,6 @@ map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 --                                 ┌──────────┐
 --                                 │ nnn.nvim │
 --                                 └──────────┘
-map('t', '<c-t>', '<cmd>:NnnPicker<cr>', opts('open nnn'))
-map('n', '<c-t>', '<cmd>:NnnPicker<cr>', opts('open nnn'))
 
 --                                 ┌───────────┐
 --                                 │ nvim-tree │
