@@ -20,35 +20,12 @@ map('n', '<leader>s', ':w<cr>', { desc = 'save' })
 --                              └─────────────────┘
 map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 
---                                    ┌─────┐
---                                    │ Hop │
---                                    └─────┘
-
---                                 ┌──────────┐
---                                 │ nnn.nvim │
---                                 └──────────┘
-
---                                 ┌───────────┐
---                                 │ nvim-tree │
---                                 └───────────┘
-
---                                  ┌─────────┐
---                                  │ LazyGit │
---                                  └─────────┘
-
---                              ┌────────────────┐
---                              │ SessionManager │
---                              └────────────────┘
-
 --                           ┌───────────────────────┐
 --                           │ Telescope with zettel │
 --                           └───────────────────────┘
 map('n', '<leader>zf', ':lua require("telescope").extensions.zettel.find_zettel()<CR>')
 map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels()<CR>')
 
---                                 ┌───────────┐
---                                 │ Colorizer │
---                                 └───────────┘
 --      ────────────────────────────────────────────────────────────
 -- local opt = { noremap = true, silent = false }
 
