@@ -49,7 +49,6 @@ map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels
 --                                 ┌───────────┐
 --                                 │ Colorizer │
 --                                 └───────────┘
-map('n', '<a-x>', ':ColorizerToggle<cr>', opts('Toogle colorizer'))
 --      ────────────────────────────────────────────────────────────
 -- local opt = { noremap = true, silent = false }
 

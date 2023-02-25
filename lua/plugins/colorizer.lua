@@ -25,6 +25,9 @@ local setup = {
 
 return {
   'NvChad/nvim-colorizer.lua',
-  event = 'BufReadPre',
+  -- event = 'BufReadPre',
+  keys = {
+    { '<a-x>', ':ColorizerToggle<cr>', desc = 'Toogle colorizer', { silent = true } },
+  },
   config = setup,
 }
