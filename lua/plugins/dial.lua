@@ -1,10 +1,7 @@
-local function keys()
-  local mdial = require('dial.map')
-  return {
-    { '<C-a>', mdial.inc_normal(), { noremap = true, desc = 'dial increment' } },
-    { '<C-x>', mdial.dec_normal(), { noremap = true, desc = 'dial decrement' } },
-  }
-end
+local keys = {
+  { '<C-a>', require('dial.map').inc_normal(), desc = '[dial]Increment' },
+  { '<C-x>', require('dial.map').dec_normal(), desc = '[dial]Decrement' },
+}
 
 local function setup()
   local augend = require('dial.augend')
@@ -32,7 +29,13 @@ local function setup()
   vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     pattern = { '*.js', '*.jsx' },
     callback = function()
-      vim.api.nvim_buf_set_keymap(0, 'n', '<leader>a', mdial.inc_normal('javascript'), { noremap = true, desc = 'dial for js' })
+      vim.api.nvim_buf_set_keymap(
+        0,
+        'n',
+        '<leader>a',
+        mdial.inc_normal('javascript'),
+        { noremap = true, desc = '[dial]Change condition for js and jsx' }
+      )
     end,
   })
 end
