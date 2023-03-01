@@ -2,7 +2,7 @@
 return {
   'kdheepak/lazygit.nvim',
   keys = {
-    { 'n', '<leader>ll', ':LazyGit<cr>', desc = 'open lazygit' },
+    { '<leader>ll', ':LazyGit<cr>', desc = 'open lazygit' },
   },
   init = function()
     vim.g.lazygit_floating_window_corner_chars = { '┌', '┐', '└', '┘' }
