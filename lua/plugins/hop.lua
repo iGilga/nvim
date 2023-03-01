@@ -1,6 +1,6 @@
 local keys = {
   { '<leader>w', "<cmd>lua require'hop'.hint_words()<cr>", desc = 'Hop word' },
-  { '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", desc = 'Hop line skip whitespace' },
+  -- { '<leader>l', "<cmd>lua require'hop'.hint_lines_skip_whitespace()<cr>", desc = 'Hop line skip whitespace', { noremap = true } },
   {
     's',
     function()
