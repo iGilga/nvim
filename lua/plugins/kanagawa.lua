@@ -8,7 +8,7 @@ local function setup()
   end
 
   for plugin, enabled in pairs({
-    -- gitsigns = true,
+    gitsigns = false,
     alpha = true,
     bufferline = true,
     cmp = true,
@@ -19,6 +19,7 @@ local function setup()
     telescope = true,
     todo = true,
     illuminate = true,
+    marks = true,
   }) do
     if enabled then
       highlights = vim.tbl_deep_extend('force', highlights, require('theme.plugins.' .. plugin))
