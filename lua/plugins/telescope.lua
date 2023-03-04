@@ -151,6 +151,12 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'kdheepak/lazygit.nvim' },
+    -- {
+    --   'ahmedkhalf/project.nvim',
+    --   config = function()
+    --     require('project_nvim').setup({})
+    --   end,
+    -- },
     { 'nvim-telescope/telescope-symbols.nvim' },
     { 'rcarriga/nvim-notify' },
   },

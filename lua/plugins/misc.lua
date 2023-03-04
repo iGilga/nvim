@@ -1,23 +1,10 @@
 return {
   -- { 'nvim-lua/plenary.nvim' },
   { 'MunifTanjim/nui.nvim' },
-  -- {
-  --   'antoinemadec/FixCursorHold.nvim',
-  --   event = { 'BufRead', 'BufNewFile' },
-  --   config = function()
-  --     vim.g.cursorhold_updatetime = 100
-  --   end,
-  -- },
-
-  -- find project for telescope
-  -- {
-  --   'ahmedkhalf/project.nvim',
-  --   config = function()
-  --     require('project_nvim').setup({})
-  --   end,
-  -- },
   {
     'chentoast/marks.nvim',
+    lazy = false,
+    config = true,
   },
   {
     'RRethy/vim-illuminate',
