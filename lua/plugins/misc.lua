@@ -51,37 +51,6 @@ return {
     end,
   },
   {
-    'nvim-neorg/neorg',
-    ft = 'norg',
-    config = function()
-      require('neorg').setup({
-        load = {
-          ['core.defaults'] = {},
-          ['core.norg.completion'] = { config = { 'nvim-cmp' } },
-          ['core.norg.concealer'] = {
-            config = {
-              icon_preset = 'varied',
-              folds = false,
-              dim_code_blocks = {
-                enabled = true,
-                padding = { left = 1 },
-              },
-            },
-          },
-          ['core.norg.dirman'] = {
-            config = {
-              workspaces = {
-                work = '~/notes/work',
-                home = '~/notes/home',
-              },
-            },
-          },
-        },
-      })
-    end,
-    dependencies = 'nvim-lua/plenary.nvim',
-  },
-  {
     'gennaro-tedesco/nvim-jqx',
     ft = { 'json', 'yaml' },
     config = true,
