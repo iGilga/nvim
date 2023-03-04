@@ -12,6 +12,7 @@ local function setup()
       'bashls',
       'cssls',
       'dockerls',
+      'emmet_ls',
       'graphql',
       'html',
       'jsonls',
