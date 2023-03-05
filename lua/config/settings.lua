@@ -2,7 +2,6 @@ local g, o, opt = vim.g, vim.o, vim.opt
 local indent = 2
 
 local options = {
-  background = 'dark',
   backup = false,
   backupdir = '~/.nvim/backup/',
   clipboard = 'unnamedplus',
