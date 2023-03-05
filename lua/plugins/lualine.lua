@@ -3,7 +3,7 @@ local function getSessionName()
     local session = vim.v.this_session
     local splitSessionPath = vim.split(session, '__')
     local sessionName = splitSessionPath[#splitSessionPath]
-    return '[S]' .. sessionName
+    return '神' .. sessionName
   else
     return ''
   end
