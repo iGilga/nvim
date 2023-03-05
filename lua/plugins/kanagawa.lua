@@ -41,4 +41,5 @@ return {
   lazy = false,
   priority = 1000,
   config = setup,
+  build = 'KanagawaCompile',
 }
