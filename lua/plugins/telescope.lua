@@ -110,8 +110,7 @@ local function setup()
   if ok then
     telescope.load_extension('harpoon')
   end
-  -- telescope.load_extension('lazygit')
-  -- telescope.load_extension('projects')
+  telescope.load_extension('lazygit')
 end
 
 local keys = {
@@ -140,7 +139,6 @@ local keys = {
   { '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>', desc = '[telescope]Search git files' },
   { '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', desc = '[telescope]Search files' },
   { '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>', desc = '[telescope]Search files' },
-  -- { '<leader>fd', '<cmd>:Telescope projects<cr>', desc = '[telescope]Search projects' },
 }
 
 return {
@@ -151,12 +149,6 @@ return {
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     { 'nvim-telescope/telescope-ui-select.nvim' },
     { 'kdheepak/lazygit.nvim' },
-    -- {
-    --   'ahmedkhalf/project.nvim',
-    --   config = function()
-    --     require('project_nvim').setup({})
-    --   end,
-    -- },
     { 'nvim-telescope/telescope-symbols.nvim' },
     { 'rcarriga/nvim-notify' },
   },
