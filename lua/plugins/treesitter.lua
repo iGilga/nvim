@@ -92,7 +92,7 @@ return {
       enabled = false,
     },
   },
-  -- build = ':TSUpdate',
+  build = ':TSUpdate',
   event = 'BufReadPost',
   cmd = 'TSUpdate',
   opts = setup,
