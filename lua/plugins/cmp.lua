@@ -77,6 +77,7 @@ local function setup()
       { name = 'nvim_lsp', max_item_count = 7 },
       { name = 'buffer', keyword_length = 3 },
       { name = 'nvim_lua', max_item_count = 7 },
+      { name = 'neorg' },
       { name = 'path' },
     },
     formatting = get_formatting(),
@@ -90,10 +91,6 @@ local function setup()
       },
     },
   }
-
-  vim.cmd([[
-  autocmd FileType TelescopePrompt lua require('cmp').setup.buffer { enabled = false }
-]])
 
   cmp.setup(setup)
 
@@ -115,7 +112,8 @@ end
 
 return {
   'hrsh7th/nvim-cmp',
-  event = {'InsertEnter', 'CmdlineEnter'},
+  event = { 'InsertEnter', 'CmdlineEnter' },
+  branch = 'main',
   dependencies = {
     { 'onsails/lspkind-nvim' },
     { 'hrsh7th/cmp-buffer' },
