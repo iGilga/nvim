@@ -1,18 +1,20 @@
-local colors = require('kanagawa.colors').setup()
+local colors = require('kanagawa.colors').setup({theme = 'wave'})
+
+local palettes = colors.palette
 
 local customColors = {
-  white = colors.fujiWhite,
-  black = colors.oldWhite,
-  bg = colors.sumiInk1,
-  bg_dark = colors.sumiInk0,
-  bg_light = colors.sumiInk2,
-  red = colors.autumnRed,
-  blue = colors.dragonBlue,
-  green = colors.autumnGreen,
-  yellow = colors.autumnYellow,
-  purple = colors.sakuraPink,
-  gray = colors.sumiInk4,
-  selection = colors.sumiInk3,
+  white = palettes.fujiWhite,
+  black = palettes.oldWhite,
+  bg = palettes.sumiInk1,
+  bg_dark = palettes.sumiInk0,
+  bg_light = palettes.sumiInk2,
+  red = palettes.autumnRed,
+  blue = palettes.dragonBlue,
+  green = palettes.autumnGreen,
+  yellow = palettes.autumnYellow,
+  purple = palettes.sakuraPink,
+  gray = palettes.sumiInk4,
+  selection = palettes.sumiInk3,
   bg0 = '#2A2A37',
   bg1 = '#1b1b24', --darkly
   bg2 = '#181820', --darkly
@@ -29,4 +31,4 @@ local customColors = {
   dark3 = '#191920',
 }
 
-return valhalla.merge(colors, customColors)
+return valhalla.merge(palettes, customColors)
