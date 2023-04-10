@@ -75,26 +75,23 @@ local function setup()
     end,
   }
 
+  nullls.setup(setup)
   --  ┌──────────────────────────────────────────────────────────┐
   --  │ Settings null-ls                                         │
   --  └──────────────────────────────────────────────────────────┘
   mason_nullls.setup({
     ensure_installed = { 'eslint_d', 'stylua', 'prettierd', 'shfmt', 'gitsigns' },
-    automatic_installation = false,
+    -- automatic_installation = true,
     automatic_setup = true, -- Recommended, but optional
+    handlers = {},
   })
-
-  nullls.setup(setup)
-
-  mason_nullls.setup_handlers()
 end
 
-return
-{
+return {
   'jose-elias-alvarez/null-ls.nvim',
   event = 'BufReadPre',
   dependencies = {
-    { 'jayp0521/mason-null-ls.nvim' },
+    { 'jay-babu/mason-null-ls.nvim' },
   },
   config = setup,
 }
