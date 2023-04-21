@@ -49,6 +49,7 @@ local options = {
     tab = '-->',
   },
   langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz',
+  foldlevelstart = 99,
 }
 
 for option, value in pairs(options) do
