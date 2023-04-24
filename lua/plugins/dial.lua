@@ -1,6 +1,18 @@
 local keys = {
-  { '<C-a>', require('dial.map').inc_normal(), desc = '[dial]Increment' },
-  { '<C-x>', require('dial.map').dec_normal(), desc = '[dial]Decrement' },
+  {
+    '<C-a>',
+    function()
+      require('dial.map').inc_normal()
+    end,
+    desc = '[dial]Increment',
+  },
+  {
+    '<C-x>',
+    function()
+      require('dial.map').dec_normal()
+    end,
+    desc = '[dial]Decrement',
+  },
 }
 
 local function setup()
@@ -32,7 +44,7 @@ local function setup()
       vim.api.nvim_buf_set_keymap(
         0,
         'n',
-        '<leader>a',
+        '<C-s>',
         mdial.inc_normal('javascript'),
         { noremap = true, desc = '[dial]Change condition for js and jsx' }
       )
