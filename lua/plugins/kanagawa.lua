@@ -28,11 +28,24 @@ local function setup()
 
   local setup = {
     globalStatus = true,
-    overrides = highlights,
+    overrides = function ()
+      return highlights
+    end,
+    colors = {
+      theme = {
+        all = {
+          ui = {
+            bg_gutter = "none"
+          }
+        }
+      }
+    },
+    theme = 'wave',
   }
   local kanagawa = require('kanagawa')
   kanagawa.setup(setup)
   vim.api.nvim_command('colorscheme kanagawa')
+  -- kanagawa.load("wave")
   -- vim.api.nvim_command(('colorscheme %s'):format(name))
 end
 
@@ -40,6 +53,7 @@ return {
   'rebelot/kanagawa.nvim',
   lazy = false,
   priority = 1000,
+  cmd = 'KanagawaCompile',
+  -- build = 'KanagawaCompile',
   config = setup,
-  build = 'KanagawaCompile',
 }
