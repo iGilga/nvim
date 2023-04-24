@@ -3,7 +3,7 @@ local theme = require("kanagawa.colors").setup({ theme = 'wave' }).theme
 local kanagawa = {}
 
 kanagawa.normal = {
-  a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
+  a = { bg = theme.syn.fun, fg = theme.ui.bg_m3, gui = "bold" },
   b = { bg = theme.diff.change, fg = theme.syn.fun },
   c = { bg = theme.ui.bg, fg = theme.ui.fg_dim },
 }
