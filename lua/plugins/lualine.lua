@@ -9,12 +9,11 @@ local function getSessionName()
   end
 end
 
-local custom_kanagawa = require('lualine.themes.kanagawa')
-custom_kanagawa.normal.c = { bg = '#1F1F28', fg = '#C8C093' }
+local custom_theme = require('theme.lualine')
 
 local setup = {
   options = {
-    theme = custom_kanagawa,
+    theme = custom_theme,
     icons_enabled = true,
     disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NvimTree', 'alpha', 'lazy', 'dashboard', 'mason' },
     globalstatus = true,
@@ -34,9 +33,8 @@ local setup = {
     },
     lualine_x = {
       { 'diff', symbols = { added = ' ', modified = '柳', removed = ' ' } },
-      { 'branch', icon = '' },
     },
-    lualine_y = { 'filetype' },
+    lualine_y = { { 'branch', icon = '' }, 'filetype' },
     lualine_z = { 'location' },
   },
   inactive_sections = {
@@ -53,5 +51,6 @@ local setup = {
 return {
   'hoob3rt/lualine.nvim',
   lazy = false,
+  priority = 500,
   config = setup,
 }
