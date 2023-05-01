@@ -50,6 +50,7 @@ local options = {
   },
   langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz',
   foldlevelstart = 99,
+  conceallevel = 2,
 }
 
 for option, value in pairs(options) do
