@@ -54,5 +54,5 @@ return {
   event = 'BufAdd',
   version = 'v2.*',
   keys = keys,
-  config = setup,
+  opts = setup,
 }

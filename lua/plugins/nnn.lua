@@ -7,7 +7,7 @@ return {
   'luukvbaal/nnn.nvim',
   cmd = 'NnnPicker',
   keys = keys,
-  config = {
+  opts = {
     explorer = { session = 'shared' },
     picker = {
       session = 'shared',

@@ -25,5 +25,5 @@ return {
     'nvim-treesitter',
     'nvim-cmp',
   },
-  config = setup,
+  opts = setup,
 }

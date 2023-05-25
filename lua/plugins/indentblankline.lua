@@ -29,5 +29,5 @@ return {
   init = function()
     vim.g.indent_blankline_show_trailing_blankline_indent = false
   end,
-  config = setup,
+  opts = setup,
 }

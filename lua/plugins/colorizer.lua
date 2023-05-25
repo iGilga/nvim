@@ -29,5 +29,5 @@ return {
   keys = {
     { '<a-x>', ':ColorizerToggle<cr>', desc = 'Toogle colorizer', { silent = true } },
   },
-  config = setup,
+  opts = setup,
 }
