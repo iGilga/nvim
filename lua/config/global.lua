@@ -1,7 +1,7 @@
 local config = require('config.user')
 
 P = function(...)
-  vim.pretty_print(...)
+  vim.print(...)
 end
 
 _G.valhalla = {}
