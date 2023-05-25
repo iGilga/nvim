@@ -32,7 +32,8 @@ local setup = {
       { 'diagnostics', sources = { 'nvim_diagnostic' } },
     },
     lualine_x = {
-      { 'diff', symbols = { added = ' ', modified = '柳', removed = ' ' } },
+      -- { 'diff', symbols = { added = ' ', modified = ' ', removed = ' ' } },
+      { 'diff', symbols = { added = '󰐖 ', modified = '󱗜 ', removed = '󰍵 ' } },
     },
     lualine_y = { { 'branch', icon = '' }, 'filetype' },
     lualine_z = { 'location' },
@@ -52,5 +53,5 @@ return {
   'hoob3rt/lualine.nvim',
   lazy = false,
   priority = 500,
-  config = setup,
+  opts = setup,
 }
