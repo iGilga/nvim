@@ -30,9 +30,9 @@ local function setup()
     local v = vim.version()
     local lazy_ok, lazy = pcall(require, 'lazy')
     if lazy_ok then
-      return { string.format(' %d   v%d.%d.%d', lazy.stats().count, v.major, v.minor, v.patch) }
+      return { string.format('󰂘 %d 󰚅 %d.%d.%d', lazy.stats().count, v.major, v.minor, v.patch) }
     else
-      return { string.format(' v%d.%d.%d', v.major, v.minor, v.patch) }
+      return { string.format('󰚅 %d.%d.%d', v.major, v.minor, v.patch) }
     end
   end
 
@@ -52,12 +52,12 @@ local function setup()
       position = 'center',
       text = txt,
       shortcut = ' ' .. sc .. ' ',
-      cursor = 5,
+      cursor = 2,
       width = 40,
       align_shortcut = 'right',
       hl_shortcut = 'AlphaShortcuts',
       hl = {
-        { 'AlphaIcon', 1, 3 },
+        { 'AlphaIcon', 1, 4 },
         { 'AlphaButton', 4, 20 },
       },
     }
@@ -79,12 +79,12 @@ local function setup()
   local buttons = {
     type = 'group',
     val = {
-      button('Space s f', '  Open session', '<cmd>SessionManager! load_session<cr>'),
-      button('Space f f', '  Find File', ':Telescope find_files<CR>'),
-      button('Space f o', '  Recent File', ':Telescope oldfiles<CR>'),
-      button('Space l l', '  Open repo', ':LazyGit<cr>'),
-      button('Ctrl  t  ', '  File browsr', '<cmd>:NnnPicker<cr>'),
-      button('F4', '  Load current session', '<cmd>:SessionManager load_current_dir_session<cr>'),
+      button('Space s f', '󰪺 Open session', '<cmd>SessionManager! load_session<cr>'),
+      button('Space f f', '󰈞 Find File', ':Telescope find_files<CR>'),
+      button('Space f o', '󰈙 Recent File', ':Telescope oldfiles<CR>'),
+      button('Space l l', '󰊢 Open repo', ':LazyGit<cr>'),
+      button('Ctrl  t  ', '󰉋 File browsr', '<cmd>:NnnPicker<cr>'),
+      button('F4', '󰁯 Load current session', '<cmd>:SessionManager load_current_dir_session<cr>'),
     },
     opts = {
       position = 'center',
