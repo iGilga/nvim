@@ -33,8 +33,9 @@ function M.init(client, bufnr)
     '<cmd>lua require("telescope.builtin").diagnostics()<cr>',
     '[lsp]search diagnostics'
   )
-  buf_set_keymap('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[lsp]next goto')
-  buf_set_keymap('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<cr>', '[lsp]prev goto')
+  buf_set_keymap('n', 'do', '<cmd>lua vim.diagnostic.open_float()<cr>', '[lsp]open float')
+  buf_set_keymap('n', 'd[', '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[lsp]next goto')
+  buf_set_keymap('n', 'd]', '<cmd>lua vim.diagnostic.goto_next()<cr>', '[lsp]prev goto')
 
   -- rename
   buf_set_keymap('n', '<leader>gg', "<cmd>lua require('utils.rename').rename()<cr>", '[lsp]rename')
