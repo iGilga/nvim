@@ -2,16 +2,16 @@ local function setup()
   local setup = {
     keywords = {
       FIX = {
-        icon = ' ',
+        icon = '',
         color = 'error',
         alt = { 'fix', 'FIXME', 'BUG', 'fixme', 'bug' },
       },
-      TODO = { icon = ' ', color = 'info', alt = { 'todo' } },
-      HACK = { icon = ' ', color = 'warning', alt = { 'hack' } },
-      WARN = { icon = ' ', color = 'warning', alt = { 'warn' } },
-      PERF = { icon = ' ', color = 'perf', alt = { 'perf' } },
-      NOTE = { icon = ' ', color = 'hint', alt = { 'note', 'INFO', 'info' } },
-      TEST = { icon = 'ﭧ ', color = 'test', alt = { 'test' } },
+      TODO = { icon = '', color = 'info', alt = { 'todo' } },
+      HACK = { icon = '', color = 'warning', alt = { 'hack' } },
+      WARN = { icon = '', color = 'warning', alt = { 'warn' } },
+      PERF = { icon = '󰅒', color = 'perf', alt = { 'perf' } },
+      NOTE = { icon = '󰍨', color = 'hint', alt = { 'note', 'INFO', 'info' } },
+      TEST = { icon = '󰙨', color = 'test', alt = { 'test' } },
     },
     colors = {
       error = { '#C34043' },
