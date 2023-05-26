@@ -1,4 +1,4 @@
--- local config = require('config.user')
+local config = require('config.user')
 
 local signs = {
   Error = '󰅚',
@@ -15,11 +15,11 @@ end
 vim.diagnostic.config({
   underline = true,
   signs = true,
-  -- float = {
-  -- border = config.border,
-  -- focusable = false,
-  -- source = 'always',
-  -- },
+  float = {
+    border = config.border,
+    focusable = false,
+    source = 'always',
+  },
   virtual_text = {
     spacing = 1,
     -- source = 'always',
