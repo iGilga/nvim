@@ -17,7 +17,7 @@ vim.diagnostic.config({
   signs = true,
   float = {
     border = config.border,
-    focusable = false,
+    -- focusable = false,
     source = 'always',
   },
   virtual_text = {
