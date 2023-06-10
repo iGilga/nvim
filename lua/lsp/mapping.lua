@@ -5,7 +5,9 @@ function M.init(client, bufnr)
     local options = { noremap = true, silent = true, desc = desc or '' }
     vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
   end
-  -- diagnostics
+--  ┌──────────────────────────────────────────────────────────┐
+--  │                       diagnostics                        │
+--  └──────────────────────────────────────────────────────────┘
   buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', '[lsp] declaration')
   buf_set_keymap('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', '[lsp]search definitions')
   buf_set_keymap(
@@ -37,13 +39,19 @@ function M.init(client, bufnr)
   buf_set_keymap('n', 'd[', '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[lsp]next goto')
   buf_set_keymap('n', 'd]', '<cmd>lua vim.diagnostic.goto_next()<cr>', '[lsp]prev goto')
 
-  -- rename
+--  ┌──────────────────────────────────────────────────────────┐
+--  │                          rename                          │
+--  └──────────────────────────────────────────────────────────┘
   buf_set_keymap('n', '<leader>gg', "<cmd>lua require('utils.rename').rename()<cr>", '[lsp]rename')
 
-  -- hover
+--  ┌──────────────────────────────────────────────────────────┐
+--  │                          hover                           │
+--  └──────────────────────────────────────────────────────────┘
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', '[lsp]hover')
 
-  -- code actions
+--  ┌──────────────────────────────────────────────────────────┐
+--  │                       code actions                       │
+--  └──────────────────────────────────────────────────────────┘
   buf_set_keymap('n', '<leader>ga', '<cmd>lua require("utils.codeaction").code_action()<cr>', '[lsp]code actions')
   buf_set_keymap(
     'v',
@@ -52,14 +60,18 @@ function M.init(client, bufnr)
     '[lsp]code actions on selected'
   )
 
-  -- formatting
+--  ┌──────────────────────────────────────────────────────────┐
+--  │                        formatting                        │
+--  └──────────────────────────────────────────────────────────┘
   buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', '[lsp]formatting')
   -- buf_set_keymap('v', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>',  'motion line' })
 
   -- -- signature help
   -- buf_set_keymap('n', '<C-K>', '<cmd>lua require("lsp_signature").signature()<cr>')
 
-  -- lsp workspace
+--  ┌──────────────────────────────────────────────────────────┐
+--  │                      lsp workspace                       │
+--  └──────────────────────────────────────────────────────────┘
   buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', '[lsp]add ws folder')
   buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', '[lsp]remove ws folder')
 
