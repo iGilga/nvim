@@ -6,6 +6,9 @@ local function setup()
   local diagnostics = nullls.builtins.diagnostics
   local formatting = nullls.builtins.formatting
 
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │ Settings null-ls                                         │
+  --  └──────────────────────────────────────────────────────────┘
   local has_eslint_config = function(utils)
     local files = {
       '.eslintrc',
@@ -22,27 +25,23 @@ local function setup()
   local sources = {
     code_actions.eslint_d.with({
       condition = has_eslint_config,
-      -- prefer_local = 'node_modules/.bin',
-      dynamic_command = command_resolver.from_yarn_pnp(),
+      only_local = 'node_modules/.bin',
     }),
     code_actions.gitsigns,
-    -- diagnostics.eslint_d.with({
-    --   -- diagnostics_format = '[#{s}] #{m}\n(#{c})',
-    --   diagnostics_format = '#{m}\n(#{c})',
-    --   condition = has_eslint_config,
-    --   -- prefer_local = 'node_modules/.bin',
-    --   dynamic_command = command_resolver.from_yarn_pnp(),
+    diagnostics.eslint_d.with({
+      condition = has_eslint_config,
+      only_local = 'node_modules/.bin',
+    }),
+    -- diagnostics.eslint.with({
+      -- condition = function(utils)
+      --   return utils.root_has_file('.pnp.cjs')
+      -- end,
+      -- dynamic_command = command_resolver.from_yarn_pnp(),
     -- }),
     diagnostics.yamllint.with({
-      -- extra_args = { '-d', 'ignore:', 'openra/mods/' },
     }),
     diagnostics.shellcheck,
-    formatting.prettierd.with({
-      -- condition = function()
-      --   return not has_prettier_config
-      -- end,
-      dynamic_command = command_resolver.from_yarn_pnp(),
-    }),
+    formatting.prettierd,
     formatting.shfmt.with({
       extra_args = { '-sr', '-i', '2', '-ci' },
     }),
@@ -78,7 +77,7 @@ local function setup()
 
   nullls.setup(setup)
   --  ┌──────────────────────────────────────────────────────────┐
-  --  │ Settings null-ls                                         │
+  --  │ Settings null-ls for mason                               │
   --  └──────────────────────────────────────────────────────────┘
   mason_nullls.setup({
     ensure_installed = { 'eslint_d', 'stylua', 'prettierd', 'shfmt', 'gitsigns' },
