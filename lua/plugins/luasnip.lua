@@ -22,6 +22,7 @@ local function setup()
   })
 
   ls.filetype_set('javascript', { 'javascriptreact' })
+  ls.filetype_extend('javascriptreact', { 'html' })
   -- ls.filetype_extend('javascript', { 'javascriptreact' })
 
   require('luasnip.loaders.from_vscode').lazy_load()
