@@ -1,5 +1,13 @@
+local capabilities = {}
+local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+if ok then
+  capabilities = cmp_nvim_lsp.default_capabilities()
+end
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
 return {
-  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+  capabilities = capabilities,
+  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'styl' },
   init_options = {
     html = {
       options = {
