@@ -7,7 +7,20 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 return {
   capabilities = capabilities,
-  filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less', 'styl' },
+  filetypes = {
+    'css',
+    'eruby',
+    'html',
+    'javascript',
+    'javascriptreact',
+    'less',
+    'sass',
+    'scss',
+    'svelte',
+    'pug',
+    'typescriptreact',
+    'vue',
+  },
   init_options = {
     html = {
       options = {
