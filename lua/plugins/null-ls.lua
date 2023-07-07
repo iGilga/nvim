@@ -17,18 +17,18 @@ local function setup()
       '.eslintrc.cjs',
       '.eslintrc.yaml',
       '.eslintrc.yml',
-      'package.json',
+      -- 'package.json',
     }
     return utils.has_file(files) or utils.root_has_file(files)
   end
 
   local sources = {
-    code_actions.eslint_d.with({
+    code_actions.eslint.with({
       condition = has_eslint_config,
       only_local = 'node_modules/.bin',
     }),
     code_actions.gitsigns,
-    diagnostics.eslint_d.with({
+    diagnostics.eslint.with({
       condition = has_eslint_config,
       only_local = 'node_modules/.bin',
     }),
@@ -80,7 +80,7 @@ local function setup()
   --  │ Settings null-ls for mason                               │
   --  └──────────────────────────────────────────────────────────┘
   mason_nullls.setup({
-    ensure_installed = { 'eslint_d', 'stylua', 'prettierd', 'shfmt', 'gitsigns' },
+    ensure_installed = { 'stylua', 'prettierd', 'shfmt' },
     -- automatic_installation = true,
     automatic_setup = true, -- Recommended, but optional
     handlers = {},
