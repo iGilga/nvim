@@ -1,7 +1,6 @@
 local function setup()
   local setup = {
     view = {
-      hide_root_folder = true,
       signcolumn = 'no',
     },
     filters = {
@@ -9,6 +8,7 @@ local function setup()
     },
     renderer = {
       group_empty = true,
+      root_folder_label = false,
     },
     actions = {
       expand_all = {
