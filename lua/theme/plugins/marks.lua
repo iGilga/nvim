@@ -1,3 +1,3 @@
 return {
-  MarkSignHL = { fg = C.gray },
+  MarkSignHL = { fg = C.fujiGray },
 }
