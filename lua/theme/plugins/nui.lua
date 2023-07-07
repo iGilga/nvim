@@ -3,6 +3,6 @@ return {
   NuiBorder = { bg = C.dark3, fg = C.dark3 },
   NuiTitle = { bg = C.green1, fg = C.black },
   NuiPrompt = { fg = C.green1 },
-  NuiBottom = { fg = C.gray },
-  NuiSeparator = { fg = C.gray },
+  NuiBottom = { fg = C.fujiGray },
+  NuiSeparator = { fg = C.fujiGray },
 }
