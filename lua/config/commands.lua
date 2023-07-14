@@ -2,12 +2,23 @@ vim.api.nvim_create_user_command('Format', function()
   vim.lsp.buf.format({ async = true })
 end, { desc = 'Format file with LSP' })
 
-vim.api.nvim_create_user_command('DiagnosticToggle', function ()
+vim.api.nvim_create_user_command('DiagnosticToggle', function()
   local config = vim.diagnostic.config
   local vt = config().virtual_text
-  config {
+  config({
     virtual_text = not vt,
     underline = not vt,
     -- signs = not vt,
-  }
+  })
 end, { desc = 'toggle diagnostic' })
+
+local isAbs = false
+vim.api.nvim_create_user_command('AbsToggle', function()
+  if isAbs then
+    vim.o.statuscolumn = '%s %r'
+    isAbs = false
+  else
+    vim.o.statuscolumn = '%s %l %r'
+    isAbs = true
+  end
+end, {})
