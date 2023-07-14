@@ -2,15 +2,17 @@ local keys = {
   {
     '<C-a>',
     function()
-      require('dial.map').inc_normal()
+      return require('dial.map').inc_normal()
     end,
+    expr = true,
     desc = '[dial]Increment',
   },
   {
     '<C-x>',
     function()
-      require('dial.map').dec_normal()
+      return require('dial.map').dec_normal()
     end,
+    expr = true,
     desc = '[dial]Decrement',
   },
 }
