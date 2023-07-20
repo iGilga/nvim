@@ -46,4 +46,9 @@ return {
     -- JqxList
     -- JqxQuery
   },
+  {
+    'nacro90/numb.nvim',
+    lazy = false,
+    config = true,
+  },
 }
