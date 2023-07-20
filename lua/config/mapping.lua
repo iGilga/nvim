@@ -7,7 +7,7 @@ end
 map('i', 'jk', '<ESC>', { noremap = true, silent = true })
 map('i', 'jj', '<ESC>', { noremap = true, silent = true })
 map('i', 'kj', '<ESC>', { noremap = true, silent = true })
-
+map('n', '<leader>;','<C-w><C-w>', { noremap = true, silent =true })
 --                               ┌───────────────┐
 --                               │ Save and quit │
 --                               └───────────────┘
