@@ -15,7 +15,7 @@ local setup = {
   options = {
     theme = custom_theme,
     icons_enabled = true,
-    disabled_filetypes = { 'NnnExplorer', 'NnnPicker', 'packer', 'NvimTree', 'alpha', 'lazy', 'dashboard', 'mason' },
+    disabled_filetypes = { statusline = { 'help', 'TelescopePrompt', 'alpha' } },
     globalstatus = true,
     component_separators = { left = '', right = '' },
     section_separators = { left = '', right = '' },
