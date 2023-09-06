@@ -1,6 +1,9 @@
 local setup = {
   ensure_installed = {
     'bash',
+    'c',
+    -- 'cmake',
+    'cpp',
     'css',
     'dockerfile',
     'help',
@@ -11,12 +14,15 @@ local setup = {
     'lua',
     'markdown',
     'markdown_inline',
+    -- 'meson',
     'norg',
+    'python',
     'rasi',
     'regex',
     'rust',
     'scss',
     'toml',
+    -- 'tsx',
     'yaml',
   },
   highlight = {
@@ -41,6 +47,24 @@ local setup = {
     },
   },
   textobjects = {
+    select = {
+      enable = true,
+      lookahead = true,
+      keymaps = {
+        ['af'] = '@function.outer',
+        ['if'] = '@function.inner',
+        ['aa'] = '@assignment.outer',
+        ['ia'] = '@assignment.inner',
+        ['ab'] = '@block.outer',
+        ['ib'] = '@block.inner',
+        ['ac'] = '@class.outer',
+        ['ic'] = '@class.inner',
+        ['ap'] = '@parameter.outer',
+        ['ip'] = '@parameter.inner',
+        ['ah'] = '@call.outer',
+        ['ih'] = '@call.inner',
+      },
+    },
     swap = {
       enable = true,
       swap_next = {
