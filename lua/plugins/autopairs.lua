@@ -12,7 +12,17 @@ local function setup()
     -- },
     -- map_bs = false,
     -- map_cr = false,
-    -- enable_check_bracket_line = false,
+    fast_wrap = {
+      map = '<C-w>',
+      chars = { '{', '[', '(', '"', "'", '`' },
+      pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+      end_key = '$',
+      keys = 'qwertyuiopzxcvbnmasdfghjkl',
+      check_comma = true,
+      manual_position = true,
+      highlight = 'Search',
+      highlight_grey = 'Comment', -- enable_check_bracket_line = false,
+    },
   })
 
   npairs.add_rules({
