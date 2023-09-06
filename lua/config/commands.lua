@@ -22,3 +22,22 @@ vim.api.nvim_create_user_command('AbsToggle', function()
     isAbs = true
   end
 end, {})
+
+local isEmmet = true
+local emmetConfig
+vim.api.nvim_create_user_command('Emmet', function()
+  if isEmmet then
+    local clients = vim.lsp.get_active_clients()
+    for _, client in pairs(clients) do
+      if client.name == 'emmet_ls' then
+        emmetConfig = client.config
+        vim.lsp.stop_client(client.id)
+        isEmmet = false
+      end
+    end
+  else
+    -- vim.print(emmetConfig)
+    vim.lsp.start(emmetConfig)
+    isEmmet = true
+  end
+end, {})
