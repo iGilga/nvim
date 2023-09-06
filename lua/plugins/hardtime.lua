@@ -2,6 +2,7 @@ return {
   'm4xshen/hardtime.nvim',
   event = 'VeryLazy',
   opts = {
-    disabled_filetypes = { 'qf', 'netrw', 'NvimTree', 'lazy', 'mason', 'oil', 'TelescopePrompt', 'help' },
+    allow_different_key = true,
+    disabled_filetypes = { 'qf', 'netrw', 'NvimTree', 'lazy', 'mason', 'oil', 'TelescopePrompt', 'help', ' lspinfo' },
   },
 }
