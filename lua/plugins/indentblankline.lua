@@ -24,7 +24,7 @@ local setup = {
 
 return {
   'lukas-reineke/indent-blankline.nvim',
-  name = 'indent_blankline',
+  name = 'ibl',
   event = 'BufReadPre',
   init = function()
     vim.g.indent_blankline_show_trailing_blankline_indent = false
