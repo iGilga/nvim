@@ -3,8 +3,8 @@ return {
   build = ':Neorg sync-parsers',
   cmd = 'Neorg',
   keys = {
-  { '<leader>n', '<cmd>:Neorg<cr>', desc = '[Neorg]Open menu' },
-  { '<leader>nc', '<cmd>:Neorg return<cr>', desc = '[Neorg]Close neorg' },
+    { '<leader>n', '<cmd>:Neorg<cr>', desc = '[Neorg]Open menu' },
+    { '<leader>nc', '<cmd>:Neorg return<cr>', desc = '[Neorg]Close neorg' },
   },
   opts = {
     load = {
@@ -13,6 +13,11 @@ return {
       ['core.export.markdown'] = {},
       ['core.completion'] = { config = { engine = 'nvim-cmp' } },
       ['core.concealer'] = {},
+      ['core.qol.todo_items'] = {
+        config = {
+          create_todo_parents = true,
+        },
+      },
       ['core.dirman'] = {
         config = {
           default_workspace = 'coding',
