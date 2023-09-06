@@ -98,7 +98,7 @@ local settings = {
   },
 }
 
--- M.capabilities = capabilities
+M.capabilities = capabilities
 -- M.on_attach = on_attach
 -- M.handlers = handlers
 -- M.settings = settings
