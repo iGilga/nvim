@@ -18,7 +18,7 @@ local function setup()
       format = require('lspkind').cmp_format({
         with_text = true,
         menu = {
-          buffer = '[buffer]',
+          buffer = '[buf]',
           luasnip = '[snip]',
           nvim_lsp = '[lsp]',
           nvim_lua = '[lua]',
@@ -74,9 +74,9 @@ local function setup()
     },
     sources = {
       { name = 'luasnip', max_item_count = 15 },
-      { name = 'nvim_lsp', max_item_count = 7 },
       { name = 'buffer', keyword_length = 3 },
-      { name = 'nvim_lua', max_item_count = 7 },
+      { name = 'nvim_lsp', max_item_count = 7 },
+      -- { name = 'nvim_lua', max_item_count = 7 },
       { name = 'neorg' },
       { name = 'path' },
     },
