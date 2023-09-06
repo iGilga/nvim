@@ -42,7 +42,7 @@ local function setup()
       },
       borderchars = { ' ' },
       -- borderchars = { '─', '│', '─', '│', '┌', '┐', '┘', '└' },
-      path_display = { shorten = 1 },
+      path_display = { truncate = 3 },
       use_less = true,
       winblend = 0,
       border = {},
@@ -126,7 +126,11 @@ local keys = {
   { '<leader>fe', "<cmd>lua require('telescope.builtin').registers()<cr>", desc = '[telescope]Search resigters' },
   { '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", desc = '[telescope]Last telescope' },
   { '<leader>fk', "<cmd>lua require('telescope.builtin').keymaps()<cr>", desc = '[telescope]Search keymaps' },
-  { '<leader>fw', "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>", desc = '[telescope]Search current buffer' },
+  {
+    '<leader>fw',
+    "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>",
+    desc = '[telescope]Search current buffer',
+  },
   {
     '<leader>fll',
     "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>",
