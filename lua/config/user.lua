@@ -21,9 +21,11 @@ M.lsp = {
       --   autostart = false,
       -- },
     },
-    -- marksman = {},
-    sumneko_lua = {
+    lua_ls = {
       format = false,
+    },
+    rust_analyzer = {
+      format = true,
     },
     tsserver = {
       opts = {
