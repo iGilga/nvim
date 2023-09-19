@@ -13,6 +13,8 @@ for type, icon in pairs(signs) do
 end
 
 vim.diagnostic.config({
+  update_in_instert = true,
+  severity_sort = true,
   underline = true,
   signs = true,
   float = {
@@ -25,8 +27,7 @@ vim.diagnostic.config({
     -- source = 'always',
     prefix = '󰝤',
     -- format = function(diagnostic)
-    -- P(diagnostic)
-    -- return string.format('[%s]%s', diagnostic.source, diagnostic.message)
+    --   return string.format('[%s]%s', diagnostic.source, diagnostic.message)
     -- end,
   },
 })
