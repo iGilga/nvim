@@ -3,6 +3,16 @@ return {
   event = 'VeryLazy',
   opts = {
     allow_different_key = true,
-    disabled_filetypes = { 'qf', 'netrw', 'NvimTree', 'lazy', 'mason', 'oil', 'TelescopePrompt', 'help', ' lspinfo' },
+    disabled_filetypes = {
+      'qf',
+      'netrw',
+      'NvimTree',
+      'lazy',
+      'mason',
+      'oil',
+      'TelescopePrompt',
+      'help',
+      'LspInfo',
+    },
   },
 }
