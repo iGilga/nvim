@@ -10,22 +10,22 @@ lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_hel
   border = border,
 })
 
-lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
-  signs = true,
-  update_in_insert = false,
-  underline = true,
-  severity_sort = true,
-  -- code_action_icon = signs.LightBulb,
-  float = {
-    focusable = false,
-    style = 'minimal',
-    border = border,
-    source = 'always',
-    header = '',
-    prefix = '',
-  },
-})
+-- lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
+--   virtual_text = false,
+--   signs = true,
+--   update_in_insert = false,
+--   underline = true,
+--   severity_sort = true,
+--   -- code_action_icon = signs.LightBulb,
+--   float = {
+--     focusable = false,
+--     style = 'minimal',
+--     border = border,
+--     source = 'always',
+--     header = '',
+--     prefix = '',
+--   },
+-- })
 
 lsp.handlers['textDocument/formatting'] = function(_, result, ctx)
   if result and not vim.tbl_isempty(result) then
