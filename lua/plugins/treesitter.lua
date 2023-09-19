@@ -2,11 +2,9 @@ local setup = {
   ensure_installed = {
     'bash',
     'c',
-    -- 'cmake',
     'cpp',
     'css',
     'dockerfile',
-    'help',
     'html',
     'javascript',
     'jsdoc',
@@ -14,7 +12,6 @@ local setup = {
     'lua',
     'markdown',
     'markdown_inline',
-    -- 'meson',
     'norg',
     'python',
     'rasi',
@@ -22,7 +19,7 @@ local setup = {
     'rust',
     'scss',
     'toml',
-    -- 'tsx',
+    'tsx',
     'yaml',
   },
   highlight = {
