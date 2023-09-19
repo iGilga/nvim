@@ -24,6 +24,11 @@ M.lsp = {
     lua_ls = {
       format = false,
     },
+    emmet_ls = {
+      opts = {
+        autostart = false,
+      },
+    },
     rust_analyzer = {
       format = true,
     },
