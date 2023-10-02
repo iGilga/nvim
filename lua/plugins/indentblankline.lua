@@ -1,24 +1,27 @@
 local setup = {
-  char_list = { '|', '¦', '┆', '┊' },
-  show_current_context = true,
-  -- show_current_context_start = true,
-  space_char_blankline = ' ',
-  buftype_exclude = {
-    'nofile',
-    'prompt',
-    'terminal',
+  indent = {
+    -- char = { '|', '¦', '┆', '┊' },
   },
-  filetype_exclude = {
-    'NnnExplorer',
-    'NnnPicker',
-    'NvimTree',
-    'alpha',
-    'dashboard',
-    'help',
-    'lazy',
-    'lspinfo',
-    'markdown',
-    'packer',
+  exclude = {
+    filetypes = {
+      'alpha',
+      'checkhealth',
+      'dashboard',
+      'gitcommit',
+      'help',
+      'help',
+      'lazy',
+      'lspinfo',
+      'man',
+      'markdown',
+      'packer',
+      'norg',
+      '',
+    },
+  },
+  scope = {
+    enabled = true,
+    show_start = true,
   },
 }
 
@@ -26,8 +29,5 @@ return {
   'lukas-reineke/indent-blankline.nvim',
   name = 'ibl',
   event = 'BufReadPre',
-  init = function()
-    vim.g.indent_blankline_show_trailing_blankline_indent = false
-  end,
   opts = setup,
 }
