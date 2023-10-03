@@ -1,22 +1,28 @@
-local dark, normal = C.bg_dark, C.bg
-return {
+local M = {}
 
-  BufferLineFill = { fg = dark, bg = dark },
-  BufferLineBackground = { fg = C.fujiGray, bg = dark },
-  BufferLineBufferVisible = { fg = C.oldWhite, bg = normal },
-  BufferLineBufferSelected = { fg = C.oldWhite, bg = normal, bold = true },
-  BufferLineDuplicate = { fg = C.fujiGray, bg = dark },
-  BufferLineDuplicateSelected = { fg = C.oldWhite, bg = normal, bold = true },
-  BufferLineDuplicateVisible = { fg = C.oldWhite, bg = normal },
-  BufferLineSeparator = { fg = C.bg, bg = dark },
-  BufferLineSeparatorSelected = { fg = C.bg, bg = normal },
-  BufferLineSeparatorVisible = { fg = C.bg, bg = normal },
-  BufferLineIndicatorSelected = { fg = C.bg, bg = normal },
-  BufferLineIndicatorVisible = { fg = C.bg, bg = normal },
-  BufferLineModified = { fg = C.yellow, bg = dark },
-  BufferLineModifiedVisible = { fg = C.yellow, bg = normal },
-  BufferLineModifiedSelected = { fg = C.yellow, bg = normal },
-  BufferLinePick = { fg = C.peachRed, bg = dark, bold = true },
-  BufferLinePickVisible = { fg = C.peachRed, bg = C.normal, bold = true },
-  BufferLinePickSelected = { fg = C.peachRed, bg = normal, bold = true },
-}
+function M.hl(colors)
+  local p = colors.palette
+  local dark, normal = p.sumiInk0, p.sumiInk1
+  return {
+    BufferLineFill = { fg = dark, bg = dark },
+    BufferLineBackground = { fg = p.fujiGray, bg = dark },
+    BufferLineBufferVisible = { fg = p.oldWhite, bg = normal },
+    BufferLineBufferSelected = { fg = p.oldWhite, bg = normal, bold = true },
+    BufferLineDuplicate = { fg = p.fujiGray, bg = dark },
+    BufferLineDuplicateSelected = { fg = p.oldWhite, bg = normal, bold = true },
+    BufferLineDuplicateVisible = { fg = p.oldWhite, bg = normal },
+    BufferLineSeparator = { fg = normal, bg = dark },
+    BufferLineSeparatorSelected = { fg = normal, bg = normal },
+    BufferLineSeparatorVisible = { fg = normal, bg = normal },
+    BufferLineIndicatorSelected = { fg = normal, bg = normal },
+    BufferLineIndicatorVisible = { fg = normal, bg = normal },
+    BufferLineModified = { fg = p.autumnYellow, bg = dark },
+    BufferLineModifiedVisible = { fg = p.autumnYellow, bg = normal },
+    BufferLineModifiedSelected = { fg = p.autumnYellow, bg = normal },
+    BufferLinePick = { fg = p.peachRed, bg = dark, bold = true },
+    BufferLinePickVisible = { fg = p.peachRed, bg = normal, bold = true },
+    BufferLinePickSelected = { fg = p.peachRed, bg = normal, bold = true },
+  }
+end
+
+return M

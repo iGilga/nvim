@@ -1,5 +1,11 @@
-return {
-  IlluminatedWordText = { fg = C.bg, bg = C.green, bold = true },
-  IlluminatedWordRead = { fg = C.bg, bg = C.yellow, bold = true },
-  IlluminatedWordWrite = { fg = C.bg, bg = C.red, bold = true },
-}
+local M = {}
+function M.hl(colors)
+  local p = colors.palette
+  return {
+    IlluminatedWordText = { fg = p.sumiInk1, bg = p.autumnGreen, bold = true },
+    IlluminatedWordRead = { fg = p.sumiInk1, bg = p.autumnYellow, bold = true },
+    IlluminatedWordWrite = { fg = p.sumiInk1, bg = p.autumnRed, bold = true },
+  }
+end
+
+return M

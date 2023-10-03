@@ -1,8 +1,14 @@
-return {
-  NuiNormal = { bg = C.dark3, fg = C.white },
-  NuiBorder = { bg = C.dark3, fg = C.dark3 },
-  NuiTitle = { bg = C.green1, fg = C.black },
-  NuiPrompt = { fg = C.green1 },
-  NuiBottom = { fg = C.fujiGray },
-  NuiSeparator = { fg = C.fujiGray },
-}
+local M = {}
+function M.hl(colors)
+  local p = colors.palette
+  return {
+    NuiNormal = { bg = p.dark3, fg = p.fujiWhite },
+    NuiBorder = { bg = p.dark3, fg = p.dark3 },
+    NuiTitle = { bg = p.green1, fg = p.oldWhite },
+    NuiPrompt = { fg = p.green1 },
+    NuiBottom = { fg = p.fujiGray },
+    NuiSeparator = { fg = p.fujiGray },
+  }
+end
+
+return M
