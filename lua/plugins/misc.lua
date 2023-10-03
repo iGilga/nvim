@@ -16,7 +16,6 @@ return {
           -- 'treesitter'
         },
         filetype_denylist = {
-          'NvimTree',
           'lazy',
           'norg',
           'toggleterm',
