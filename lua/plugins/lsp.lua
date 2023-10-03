@@ -12,7 +12,7 @@ local function setup()
       'bashls',
       'cssls',
       'dockerls',
-      -- 'emmet_ls',
+      -- 'emmet-language-server',
       -- 'graphql',
       'html',
       'jsonls',
@@ -23,6 +23,7 @@ local function setup()
       'yamlls',
     },
   })
+
   mason_lsp.setup_handlers({
     function(serverName)
       local serverConfig, userConfig = {}, {}
