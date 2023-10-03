@@ -44,9 +44,9 @@ local function setup()
     formatting.shfmt.with({
       extra_args = { '-sr', '-i', '2', '-ci' },
     }),
-    formatting.stylua.with({
-      -- extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
-    }),
+    -- formatting.stylua.with({
+    -- extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
+    -- }),
     formatting.xmlformat,
   }
 
@@ -87,7 +87,7 @@ local function setup()
 end
 
 return {
-  'jose-elias-alvarez/null-ls.nvim',
+  'nvimtools/none-ls.nvim',
   event = 'BufReadPre',
   dependencies = {
     { 'jay-babu/mason-null-ls.nvim' },

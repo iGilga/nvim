@@ -22,9 +22,9 @@ M.lsp = {
       -- },
     },
     lua_ls = {
-      format = false,
+      format = true,
     },
-    emmet_ls = {
+    ['emmet-language-server'] = {
       opts = {
         autostart = false,
       },
