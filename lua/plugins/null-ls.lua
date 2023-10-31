@@ -1,7 +1,6 @@
 local function setup()
   local nullls = require('null-ls')
   local mason_nullls = require('mason-null-ls')
-  local command_resolver = require('null-ls.helpers.command_resolver')
   local code_actions = nullls.builtins.code_actions
   local diagnostics = nullls.builtins.diagnostics
   local formatting = nullls.builtins.formatting
@@ -32,44 +31,32 @@ local function setup()
       condition = has_eslint_config,
       only_local = 'node_modules/.bin',
     }),
-    -- diagnostics.eslint.with({
-    -- condition = function(utils)
-    --   return utils.root_has_file('.pnp.cjs')
-    -- end,
-    -- dynamic_command = command_resolver.from_yarn_pnp(),
-    -- }),
     diagnostics.yamllint.with({}),
     diagnostics.shellcheck,
     formatting.prettierd,
     formatting.shfmt.with({
       extra_args = { '-sr', '-i', '2', '-ci' },
     }),
-    -- formatting.stylua.with({
-    -- extra_args = { '--config-path', vim.fn.expand('~/.config/nvim/lintercfg/stylua.toml') },
-    -- }),
     formatting.xmlformat,
   }
 
-  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
+  local augroup = vim.api.nvim_create_augroup('NullFormatting', { clear = true })
 
   local setup = {
     sources = sources,
     on_attach = function(client, bufnr)
-      -- if u.isClientFormat(client.name) then
-      --   print(client.name)
-      --   client.server_capabilities.documentFormattingProvider = false
-      --   client.server_capabilities.documentRangeFormattingProvider = false
-      -- end
-      if client.supports_method('textDocument/formatting') then
-        vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          group = augroup,
-          desc = 'null-ls autoformat on save',
-          buffer = bufnr,
-          callback = function()
-            vim.lsp.buf.format()
-          end,
-        })
+      if not valhalla.isClientFormat(client.name) then
+        if client.supports_method('textDocument/formatting') then
+          vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            group = augroup,
+            desc = 'null-ls autoformat on save',
+            buffer = bufnr,
+            callback = function()
+              vim.lsp.buf.format()
+            end,
+          })
+        end
       end
     end,
   }
@@ -79,18 +66,16 @@ local function setup()
   --  │ Settings null-ls for mason                               │
   --  └──────────────────────────────────────────────────────────┘
   mason_nullls.setup({
-    ensure_installed = { 'stylua', 'prettierd', 'shfmt' },
+    ensure_installed = { 'prettierd', 'shfmt' },
     -- automatic_installation = true,
     automatic_setup = true, -- Recommended, but optional
-    handlers = {},
   })
 end
 
 return {
   'nvimtools/none-ls.nvim',
   event = 'BufReadPre',
-  dependencies = {
-    { 'jay-babu/mason-null-ls.nvim' },
-  },
+  dependencies = {},
   config = setup,
+  enabled = false,
 }
