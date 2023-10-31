@@ -1,84 +1,91 @@
 local M = {}
 
-function M.init(client, bufnr)
+function M.init(client)
   local function buf_set_keymap(mode, lhs, rhs, desc)
     local options = { noremap = true, silent = true, desc = desc or '' }
-    vim.api.nvim_buf_set_keymap(bufnr, mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options)
   end
---  ┌──────────────────────────────────────────────────────────┐
---  │                       diagnostics                        │
---  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', '[lsp] declaration')
-  buf_set_keymap('n', 'gd', '<cmd>lua require("telescope.builtin").lsp_definitions()<cr>', '[lsp]search definitions')
+
+  local telescope = require('telescope.builtin')
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │                       diagnostics                        │
+  --  └──────────────────────────────────────────────────────────┘
+  buf_set_keymap('n', 'gD', vim.lsp.buf.declaration, '[lsp] declaration')
+  buf_set_keymap('n', 'gd', telescope.lsp_definitions, '[lsp]search definitions')
   buf_set_keymap(
     'n',
     'gi',
-    '<cmd>lua require("telescope.builtin").lsp_implementations()<cr>',
+    telescope.lsp_implementations,
     '[lsp]search implementations'
   )
-  buf_set_keymap('n', 'gr', '<cmd>lua require("telescope.builtin").lsp_references()<cr>', '[lsp]search references')
+  buf_set_keymap('n', 'gr', telescope.lsp_references, '[lsp]search references')
   buf_set_keymap(
     'n',
     'gt',
-    '<cmd>lua require("telescope.builtin").lsp_type_definitions()<cr>',
+    telescope.lsp_type_definitions,
     '[lsp]search type definitions'
   )
   buf_set_keymap(
     'n',
     'ge',
-    '<cmd>lua require("telescope.builtin").diagnostics({bufnr=0})<cr>',
+    function()
+      telescope.diagnostics({ bufnr = 0 })
+    end,
     '[lsp]search diagnostics current buffer'
   )
   buf_set_keymap(
     'n',
     '<leader>ge',
-    '<cmd>lua require("telescope.builtin").diagnostics()<cr>',
+    telescope.diagnostics,
     '[lsp]search diagnostics'
   )
-  buf_set_keymap('n', 'do', '<cmd>lua vim.diagnostic.open_float()<cr>', '[lsp]open float')
-  buf_set_keymap('n', 'd[', '<cmd>lua vim.diagnostic.goto_prev()<cr>', '[lsp]next goto')
-  buf_set_keymap('n', 'd]', '<cmd>lua vim.diagnostic.goto_next()<cr>', '[lsp]prev goto')
+  buf_set_keymap('n', 'do', vim.diagnostic.open_float, '[lsp]open float')
+  buf_set_keymap('n', 'd[', vim.diagnostic.goto_prev, '[lsp]next goto')
+  buf_set_keymap('n', 'd]', vim.diagnostic.goto_next, '[lsp]prev goto')
 
---  ┌──────────────────────────────────────────────────────────┐
---  │                          rename                          │
---  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>gg', "<cmd>lua require('utils.rename').rename()<cr>", '[lsp]rename')
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │                          rename                          │
+  --  └──────────────────────────────────────────────────────────┘
+  buf_set_keymap('n', '<leader>gg', require('utils.rename').rename, '[lsp]rename')
 
---  ┌──────────────────────────────────────────────────────────┐
---  │                          hover                           │
---  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', '[lsp]hover')
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │                          hover                           │
+  --  └──────────────────────────────────────────────────────────┘
+  buf_set_keymap('n', 'K', vim.lsp.buf.hover, '[lsp]hover')
 
---  ┌──────────────────────────────────────────────────────────┐
---  │                       code actions                       │
---  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>ga', '<cmd>lua require("utils.codeaction").code_action()<cr>', '[lsp]code actions')
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │                       code actions                       │
+  --  └──────────────────────────────────────────────────────────┘
+  buf_set_keymap('n', '<leader>ga', require("utils.codeaction").code_action, '[lsp]code actions')
   buf_set_keymap(
     'v',
     '<leader>ga',
-    '<cmd>lua require("utils.codeaction").range_code_action()<cr>',
+    require("utils.codeaction").range_code_action,
     '[lsp]code actions on selected'
   )
 
---  ┌──────────────────────────────────────────────────────────┐
---  │                        formatting                        │
---  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>f', '<cmd>lua vim.lsp.buf.format({async=true})<cr>', '[lsp]formatting')
-  -- buf_set_keymap('v', '<leader>f', '<cmd>lua vim.lsp.buf.range_formatting()<cr>',  'motion line' })
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │                        formatting                        │
+  --  └──────────────────────────────────────────────────────────┘
+  -- buf_set_keymap('n', '<leader>f', 'vim.lsp.buf.format', '[lsp]formatting')
+  buf_set_keymap('n', '<leader>f', function()
+    require('conform').format({ async = true, lsp_fallback = true })
+  end, '[lsp]formatting')
+  -- buf_set_keymap('v', '<leader>f', 'vim.lsp.buf.range_formatting',  'motion line' })
 
   -- -- signature help
-  -- buf_set_keymap('n', '<C-K>', '<cmd>lua require("lsp_signature").signature()<cr>')
+  -- buf_set_keymap('n', '<C-K>', 'require("lsp_signature").signature')
 
---  ┌──────────────────────────────────────────────────────────┐
---  │                      lsp workspace                       │
---  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>', '[lsp]add ws folder')
-  buf_set_keymap('n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>', '[lsp]remove ws folder')
+  --  ┌──────────────────────────────────────────────────────────┐
+  --  │                      lsp workspace                       │
+  --  └──────────────────────────────────────────────────────────┘
+  buf_set_keymap('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, '[lsp]add ws folder')
+  buf_set_keymap('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, '[lsp]remove ws folder')
 
   buf_set_keymap(
     'n',
     '<leader>so',
-    '<cmd>lua require("telescope.builtin").lsp_document_symbols()<cr>',
+    require("telescope.builtin").lsp_document_symbols,
     '[lsp]search document symbols'
   )
   if client.name == 'eslint' then
