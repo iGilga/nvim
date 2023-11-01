@@ -24,10 +24,6 @@ vim.diagnostic.config({
   },
   virtual_text = {
     spacing = 1,
-    -- source = 'always',
     prefix = '󰝤',
-    -- format = function(diagnostic)
-    --   return string.format('[%s]%s', diagnostic.source, diagnostic.message)
-    -- end,
   },
 })
