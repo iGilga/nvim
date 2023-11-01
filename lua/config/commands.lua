@@ -29,7 +29,8 @@ vim.api.nvim_create_user_command('Emmet', function()
   if isEmmet then
     local clients = vim.lsp.get_active_clients()
     for _, client in pairs(clients) do
-      if client.name == 'emmet_ls' then
+      print(client.name)
+      if client.name == 'emmet_language_server' then
         emmetConfig = client.config
         vim.lsp.stop_client(client.id)
         isEmmet = false
