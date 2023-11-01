@@ -6,18 +6,12 @@ function M.on_attach(client, bufnr)
   end
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-  if valhalla.isClientFormat(client.name) then
-    client.server_capabilities.document_formatting = true
-    client.server_capabilities.document_range_formatting = true
-    client.server_capabilities.documentFormattingProvider = true
-    client.server_capabilities.documentRangeFormattingProvider = true
-  else
-    client.server_capabilities.document_formatting = false
-    client.server_capabilities.document_range_formatting = false
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-  end
-  require('lsp.mapping').init(client, bufnr)
+
+  -- if client.supports_method('textDocument/inlayHint') then
+  --   vim.lsp.inlay_hint(bufnr, true)
+  -- end
+
+  require('lsp.mapping').init(client)
 end
 
 local capabilities = {}
