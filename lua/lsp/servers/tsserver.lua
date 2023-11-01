@@ -45,6 +45,10 @@ if ok then
 end
 
 local function on_attach(client, bufnr)
+  -- client.server_capabilities.document_formatting = true
+  -- client.server_capabilities.document_range_formatting = true
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.documentRangeFormattingProvider = false
   defaultOnAttach(client, bufnr)
   -- local function buf_set_option(...)
   --   vim.api.nvim_buf_set_option(bufnr, ...)
@@ -99,7 +103,7 @@ local settings = {
 }
 
 M.capabilities = capabilities
--- M.on_attach = on_attach
+M.on_attach = on_attach
 -- M.handlers = handlers
 -- M.settings = settings
 return M
