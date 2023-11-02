@@ -13,12 +13,12 @@ local function setup()
       'cssls',
       'dockerls',
       -- 'emmet-language-server',
-      -- 'graphql',
+      'graphql',
       'html',
       'jsonls',
       'lua_ls',
       'rust_analyzer',
-      -- 'tailwindcss',
+      'tailwindcss',
       'tsserver',
       'yamlls',
     },
@@ -26,18 +26,15 @@ local function setup()
 
   mason_lsp.setup_handlers({
     function(serverName)
-      local serverConfig, userConfig = {}, {}
-      local ok, pserver = pcall(require, 'lsp.servers.' .. serverName)
+      local opts = defaultConfig
+      local ok, serverConfig = pcall(require, 'lsp.servers.' .. serverName)
       if ok then
-        serverConfig = pserver
+        opts = valhalla.merge(opts, serverConfig)
       end
-      if configLsp[serverName] then
-        userConfig = configLsp[serverName].opts or {}
-      end
-      local opts = valhalla.merge(defaultConfig, serverConfig, userConfig)
       lsp[serverName].setup(opts)
     end,
   })
+
   --  ┌──────────────────────────────────────────────────────────┐
   --  │ Settings ui                                              │
   --  └──────────────────────────────────────────────────────────┘
@@ -51,6 +48,7 @@ return {
   dependencies = {
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'b0o/SchemaStore.nvim' },
+    -- 'mason.nvim',
     { 'williamboman/mason-lspconfig.nvim' },
   },
   config = setup,
