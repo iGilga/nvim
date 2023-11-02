@@ -24,10 +24,10 @@ M.lsp = {
     lua_ls = {
       format = true,
     },
-    ['emmet-language-server'] = {
-      opts = {
-        autostart = false,
-      },
+    ['emmet_language_server'] = {
+      --   opts = {
+      --     autostart = false,
+      --   },
     },
     rust_analyzer = {
       format = true,
