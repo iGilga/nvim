@@ -4,7 +4,21 @@ local event = require('nui.utils.autocmd').event
 
 local Text = require('nui.text')
 
-local config = require('config.user').rename
+local config = {
+  min_width = 40,
+  border = {
+    highlight = 'NuiBorder',
+    style = 'solid',
+    title = ' Rename ',
+    title_align = 'center',
+    title_hl = 'NuiTitle',
+  },
+  prompt = ' > ',
+  prompt_hl = 'NuiPrompt',
+  highlight = 'Normal:NuiNormal',
+}
+
+-- local config = require('config.user').rename
 local u = require('utils')
 local logger = require('utils.logger').Logger
 local title = '[LSP]Rename'

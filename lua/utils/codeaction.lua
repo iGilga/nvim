@@ -1,11 +1,26 @@
 local lsp = vim.lsp
-local config = require('config.user').codeAction
 local logger = require('utils.logger').Logger
 local nmenu = require('nui.menu')
 local ntext = require('nui.text')
 local event = require('nui.utils.autocmd').event
 
-local minWidth = config.min_width or 0
+local config = {
+  min_width = 40,
+  border = {
+    bottom_hl = 'NuiBottom',
+    highlight = 'NuiBorder',
+    style = 'solid',
+    title = ' Code Actions ',
+    title_align = 'center',
+    title_hl = 'NuiTitle',
+  },
+  separator = {
+    char = ' ',
+    text_align = 'center',
+    highlight = 'NuiSeparator',
+  },
+  highlight = 'Normal:NuiNormal',
+}
 
 local title = function(name)
   if name then
@@ -69,7 +84,7 @@ local function window(itemList, actionList, onSubmit)
 
   return nmenu(popup_opts, {
     lines = itemList,
-    min_width = minWidth,
+    min_width = config.min_width,
     separator = config.separator,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
@@ -87,10 +102,10 @@ local function onSubmit(item)
   local client = item.ctx.client
 
   if
-    not action.edit
-    and client
-    and type(client.server_capabilities.codeAction) == 'table'
-    and client.server_capabilities.codeAction.resolveProvider
+      not action.edit
+      and client
+      and type(client.server_capabilities.codeAction) == 'table'
+      and client.server_capabilities.codeAction.resolveProvider
   then
     client.request('codeAction/resolve', action, function(err, resolvedAction)
       if err then
@@ -126,7 +141,7 @@ local function codeActionCallback(results)
           clientName = client and client.name or '',
           command = action,
         }
-        minWidth = math.max(minWidth, #title, 30)
+        -- minWidth = math.max(config.min_width, #title, 30)
         table.insert(itemList, item)
         table.insert(actionList, item)
       end

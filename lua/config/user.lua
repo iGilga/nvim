@@ -1,7 +1,5 @@
 local M = {}
 
-M.theme = 'kanagawa'
-
 M.border = { ' ' }
 M.style = 'solid'
 
@@ -99,34 +97,6 @@ M.zettel = {
     highlight = 'NuiSeparator',
   },
   highlight = 'Normal:NuiNormal',
-}
-
-M.plugins = {
-  treesitter = {
-    ensure_installed = {
-      'bash',
-      'c',
-      'c_sharp',
-      'cpp',
-      'css',
-      'dockerfile',
-      'help',
-      'html',
-      'javascript',
-      'jsdoc',
-      'json',
-      'lua',
-      'markdown',
-      'markdown_inline',
-      'norg',
-      'python',
-      'rasi',
-      'rust',
-      'scss',
-      'toml',
-      'yaml',
-    },
-  },
 }
 
 return M
