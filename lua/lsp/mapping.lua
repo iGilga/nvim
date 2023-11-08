@@ -33,6 +33,7 @@ function M.init(client)
     end,
     '[lsp]search diagnostics current buffer'
   )
+  buf_set_keymap('n', 'gs', telescope.lsp_document_symbols, '[lsp]Document symbols')
   buf_set_keymap(
     'n',
     '<leader>ge',
