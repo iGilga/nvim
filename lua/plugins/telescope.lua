@@ -66,10 +66,10 @@ local function setup()
     },
     extensions = {
       fzf = {
-        fuzzy = true, -- false will only do exact matching
+        fuzzy = true,                   -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        case_mode = 'smart_case', -- or "ignore_case" or "respect_case"
+        override_file_sorter = true,    -- override the file sorter
+        case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
       ['ui-select'] = {
@@ -104,28 +104,35 @@ local function setup()
 
   telescope.load_extension('fzf')
   telescope.load_extension('ui-select')
-  telescope.load_extension('notify')
+
+  local ok, _ = pcall(require, 'notify')
+  if ok then
+    telescope.load_extension('notify')
+  end
 
   local ok, _ = pcall(require, 'harpoon')
   if ok then
     telescope.load_extension('harpoon')
   end
-  telescope.load_extension('lazygit')
+  local ok, _ = pcall(require, 'lazygit')
+  if ok then
+    telescope.load_extension('lazygit')
+  end
 end
 
 local keys = {
   { '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = '[telescope]Search files' },
-  { '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>", desc = '[telescope]Search word' },
-  { '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>", desc = '[telescope]Search buffers' },
-  { '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>", desc = '[telescope]Search help' },
-  { '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>", desc = '[telescope]Search quickfix' },
-  { '<leader>fl', "<cmd>lua require('telescope.builtin').loclist()<cr>", desc = '[telescope]Search loclist' },
-  { '<leader>fp', "<cmd>lua require('telescope.builtin').commands()<cr>", desc = '[telescope]Search commands' },
-  { '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>", desc = '[telescope]Search oldfiles' },
-  { '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>", desc = '[telescope]Search marks' },
-  { '<leader>fe', "<cmd>lua require('telescope.builtin').registers()<cr>", desc = '[telescope]Search resigters' },
-  { '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>", desc = '[telescope]Last telescope' },
-  { '<leader>fk', "<cmd>lua require('telescope.builtin').keymaps()<cr>", desc = '[telescope]Search keymaps' },
+  { '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>",  desc = '[telescope]Search word' },
+  { '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>",    desc = '[telescope]Search buffers' },
+  { '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>",  desc = '[telescope]Search help' },
+  { '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>",   desc = '[telescope]Search quickfix' },
+  { '<leader>fl', "<cmd>lua require('telescope.builtin').loclist()<cr>",    desc = '[telescope]Search loclist' },
+  { '<leader>fp', "<cmd>lua require('telescope.builtin').commands()<cr>",   desc = '[telescope]Search commands' },
+  { '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>",   desc = '[telescope]Search oldfiles' },
+  { '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>",      desc = '[telescope]Search marks' },
+  { '<leader>fe', "<cmd>lua require('telescope.builtin').registers()<cr>",  desc = '[telescope]Search resigters' },
+  { '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>",     desc = '[telescope]Last telescope' },
+  { '<leader>fk', "<cmd>lua require('telescope.builtin').keymaps()<cr>",    desc = '[telescope]Search keymaps' },
   {
     '<leader>fw',
     "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>",
@@ -141,9 +148,9 @@ local keys = {
     "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
     desc = '[telescope]Search notify',
   },
-  { '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>', desc = '[telescope]Search git files' },
+  { '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>',    desc = '[telescope]Search git files' },
   { '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', desc = '[telescope]Search files' },
-  { '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>', desc = '[telescope]Search files' },
+  { '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>',   desc = '[telescope]Search files' },
 }
 
 return {
