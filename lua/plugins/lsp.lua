@@ -48,8 +48,9 @@ return {
   dependencies = {
     { 'hrsh7th/cmp-nvim-lsp' },
     { 'b0o/SchemaStore.nvim' },
-    -- 'mason.nvim',
-    { 'williamboman/mason-lspconfig.nvim' },
+    { "folke/neodev.nvim",   opts = {} },
+    'mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
   },
   config = setup,
 }
