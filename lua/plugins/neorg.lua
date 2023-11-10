@@ -3,7 +3,7 @@ return {
   build = ':Neorg sync-parsers',
   cmd = 'Neorg',
   keys = {
-    { '<leader>n', '<cmd>:Neorg<cr>', desc = '[Neorg]Open menu' },
+    { '<leader>n',  '<cmd>:Neorg<cr>',        desc = '[Neorg]Open menu' },
     { '<leader>nc', '<cmd>:Neorg return<cr>', desc = '[Neorg]Close neorg' },
   },
   opts = {
@@ -27,7 +27,8 @@ return {
           },
         },
       },
+      ['core.integrations.telescope'] = {},
     },
   },
-  dependencies = { { 'nvim-lua/plenary.nvim' } },
+  dependencies = { { 'nvim-lua/plenary.nvim' }, 'nvim-neorg/neorg-telescope' },
 }
