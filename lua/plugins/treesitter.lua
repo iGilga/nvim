@@ -30,10 +30,6 @@ local setup = {
   autopairs = { enable = true },
   indent = { enable = true },
   autotag = { enable = true },
-  context_commentstring = {
-    enable = true,
-    enable_autocmd = false,
-  },
   refactor = {
     highlight_definitions = { enable = true },
     smart_rename = {
@@ -101,7 +97,6 @@ return {
   'nvim-treesitter/nvim-treesitter',
   dependencies = {
     -- 'windwp/nvim-ts-autoversion',
-    'JoosepAlviste/nvim-ts-context-commentstring',
     'nvim-treesitter/nvim-treesitter-refactor',
     'nvim-treesitter/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-textobjects',
