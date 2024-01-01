@@ -34,6 +34,7 @@ local function setup()
         return luasnip.lsp_expand(args.body)
       end,
     },
+    preselect = cmp.PreselectMode.None,
     mapping = {
       ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -51,7 +52,7 @@ local function setup()
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
           luasnip.expand_or_jump()
-        -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+          -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
         elseif has_words_before() then
           cmp.complete()
         else
@@ -63,7 +64,7 @@ local function setup()
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
           luasnip.jump(-1)
-        -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+          -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
         else
           fallback()
         end
@@ -72,14 +73,15 @@ local function setup()
     experimental = {
       ghost_text = true,
     },
-    sources = {
-      { name = 'luasnip', max_item_count = 15 },
-      { name = 'buffer', keyword_length = 3 },
+    sources = cmp.config.sources({
+      { name = 'luasnip',  max_item_count = 10, priority = 20 },
       { name = 'nvim_lsp', max_item_count = 7 },
       -- { name = 'nvim_lua', max_item_count = 7 },
       { name = 'neorg' },
       { name = 'path' },
-    },
+    }, {
+      { name = 'buffer', keyword_length = 3 },
+    }),
     formatting = get_formatting(),
     window = {
       documentation = {
