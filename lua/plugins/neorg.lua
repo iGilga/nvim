@@ -28,6 +28,11 @@ return {
         },
       },
       ['core.integrations.telescope'] = {},
+      ['core.keybinds'] = {
+        config = {
+          neorg_leader = ' ',
+        }
+      }
     },
   },
   dependencies = { { 'nvim-lua/plenary.nvim' }, 'nvim-neorg/neorg-telescope' },
