@@ -22,24 +22,12 @@ return { {
       require('conform').format({ async = true, lsp_fallback = true })
     end, {})
 
-    vim.api.nvim_create_user_command("FormatDisable", function(args)
-      if args.bang then
-        vim.b.disable_autofarmat = true
-      else
-        vim.g.disable_autofarmat = true
-      end
-    end, {
-      desc = "Disable autoformat-on-save", bang = true,
-    })
+    vim.api.nvim_create_user_command("FormatToggle", function()
+      vim.g.disable_autoformat = not vim.g.disable_autoformat
+      vim.notify(('Autoformat: %s'):format(tostring(not vim.g.disable_autoformat)), 2)
+    end, { desc = "Toggleable autoformat" })
 
-    vim.api.nvim_create_user_command("FormatEnable", function()
-      vim.b.disable_autofarmat = false
-      vim.g.disable_autofarmat = false
-    end, {
-      desc = "Re-enable autoformat-on-save"
-    })
-
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
   opts = {
     formatters_by_ft = {
@@ -52,20 +40,17 @@ return { {
       if bufname:match("/node_modules/") then
         return
       end
-      if vim.g.disable_autofarmat or vim.b.disable_autofarmat then
+      if vim.g.disable_autoformat then
         return
       end
       return { timeout_ms = 500, lsp_fallback = true }
     end,
     formatters = {
-      -- prettierd = {}
+      shfmt = {
+        inherit = false,
+        command = "shfmt",
+        args = { "-i", "2", "-filename", "$FILENAME" },
+      }
     }
   },
-  config = function(_, opts)
-    local conform = require('conform')
-    conform.setup(opts)
-    -- conform.formatters.shfmt = {
-    --
-    -- }
-  end
 } }
