@@ -37,7 +37,6 @@ vim.api.nvim_create_user_command('Emmet', function()
       end
     end
   else
-    -- vim.print(emmetConfig)
     vim.lsp.start(emmetConfig)
     isEmmet = true
   end
