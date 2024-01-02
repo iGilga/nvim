@@ -1,19 +1,20 @@
-return { {
-  'WhoIsSethDaniel/mason-tool-installer.nvim',
-  cmd = {
-    'MasonToolsInstall', 'MasonToolsUpdate', 'MasonToolsClean'
-  },
-  event = { 'BufWritePre' },
-  opts = {
-    ensure_installed = {
-      'prettierd',
-      'shfmt',
-    }
-  },
-  config = function(_, opts)
-    require('mason-tool-installer').setup(opts)
-  end
-}, {
+return {
+  {
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    cmd = {
+      'MasonToolsInstall', 'MasonToolsUpdate', 'MasonToolsClean'
+    },
+    event = { 'BufWritePre' },
+    opts = {
+      ensure_installed = {
+        'prettierd',
+        'shfmt',
+      }
+    },
+    config = function(_, opts)
+      require('mason-tool-installer').setup(opts)
+    end
+  }, {
   'stevearc/conform.nvim',
   event = { "BufWritePre" },
   cmd = 'ConformInfo',
