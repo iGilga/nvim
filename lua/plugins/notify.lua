@@ -14,7 +14,7 @@ local function setup()
     local set_config = function(text, hl, priority)
       return {
         virt_text = {
-          { ' ', hlSign },
+          { ' ',  hlSign },
           { ' ' },
           { text, hl },
         },
@@ -44,12 +44,11 @@ local function setup()
       vim.api.nvim_buf_set_extmark(bufnr, namespace, i - 1, 0, lines[i])
     end
   end
-
+  ---@diagnostic disable-next-line:missing-fields
   moduleNotify.setup({
     stages = 'fade',
     render = customRender,
     on_open = function(win)
-      -- [ "╔", "═" ,"╗", "║", "╝", "═", "╚", "║" ]
       vim.api.nvim_win_set_config(win, { border = { '', ' ', '', '', '', ' ', '', '' } })
     end,
     timeout = 1000,
