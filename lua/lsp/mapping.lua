@@ -10,20 +10,20 @@ function M.init(client)
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                       diagnostics                        │
   --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', 'gD', vim.lsp.buf.declaration, '[lsp] declaration')
-  buf_set_keymap('n', 'gd', telescope.lsp_definitions, '[lsp]search definitions')
+  buf_set_keymap('n', 'gD', vim.lsp.buf.declaration, '[lsp]Declaration')
+  buf_set_keymap('n', 'gd', telescope.lsp_definitions, '[lsp]Search definitions')
   buf_set_keymap(
     'n',
     'gi',
     telescope.lsp_implementations,
     '[lsp]search implementations'
   )
-  buf_set_keymap('n', 'gr', telescope.lsp_references, '[lsp]search references')
+  buf_set_keymap('n', 'gr', telescope.lsp_references, '[lsp]Search references')
   buf_set_keymap(
     'n',
     'gt',
     telescope.lsp_type_definitions,
-    '[lsp]search type definitions'
+    '[lsp]Search type definitions'
   )
   buf_set_keymap(
     'n',
@@ -31,7 +31,7 @@ function M.init(client)
     function()
       telescope.diagnostics({ bufnr = 0 })
     end,
-    '[lsp]search diagnostics current buffer'
+    '[lsp]Search diagnostics current buffer'
   )
   buf_set_keymap('n', 'gs', telescope.lsp_document_symbols, '[lsp]Document symbols')
   buf_set_keymap(
@@ -40,14 +40,14 @@ function M.init(client)
     telescope.diagnostics,
     '[lsp]search diagnostics'
   )
-  buf_set_keymap('n', 'do', vim.diagnostic.open_float, '[lsp]open float')
-  buf_set_keymap('n', 'd[', vim.diagnostic.goto_prev, '[lsp]next goto')
-  buf_set_keymap('n', 'd]', vim.diagnostic.goto_next, '[lsp]prev goto')
+  buf_set_keymap('n', 'do', vim.diagnostic.open_float, '[lsp]Open float')
+  buf_set_keymap('n', 'd[', vim.diagnostic.goto_prev, '[lsp]Next goto')
+  buf_set_keymap('n', 'd]', vim.diagnostic.goto_next, '[lsp]Prev goto')
 
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                          rename                          │
   --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>gg', require('utils.rename').rename, '[lsp]rename')
+  buf_set_keymap('n', '<leader>gg', require('utils.rename').rename, '[lsp]Rename')
 
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                          hover                           │
@@ -57,12 +57,12 @@ function M.init(client)
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                       code actions                       │
   --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>ga', require("utils.codeaction").code_action, '[lsp]code actions')
+  buf_set_keymap('n', '<leader>ga', require("utils.codeaction").code_action, '[lsp]Code actions')
   buf_set_keymap(
     'v',
     '<leader>ga',
     require("utils.codeaction").range_code_action,
-    '[lsp]code actions on selected'
+    '[lsp]Code actions on selected'
   )
 
   --  ┌──────────────────────────────────────────────────────────┐
@@ -71,7 +71,7 @@ function M.init(client)
   -- buf_set_keymap('n', '<leader>f', 'vim.lsp.buf.format', '[lsp]formatting')
   buf_set_keymap('n', '<leader>f', function()
     require('conform').format({ async = true, lsp_fallback = true })
-  end, '[lsp]formatting')
+  end, '[lsp]Formatting')
   -- buf_set_keymap('v', '<leader>f', 'vim.lsp.buf.range_formatting',  'motion line' })
 
   -- -- signature help
