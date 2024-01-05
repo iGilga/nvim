@@ -7,7 +7,7 @@ end
 map('i', 'jk', '<ESC>', { noremap = true, silent = true })
 map('i', 'jj', '<ESC>', { noremap = true, silent = true })
 map('i', 'kj', '<ESC>', { noremap = true, silent = true })
-map('n', '<leader>;','<C-w><C-w>', { noremap = true, silent =true })
+map('n', '<leader>;', '<C-w><C-w>', { noremap = true, silent = true })
 --                               ┌───────────────┐
 --                               │ Save and quit │
 --                               └───────────────┘
@@ -23,8 +23,8 @@ map('n', '<F5>', ':nohl<cr>', { desc = 'no highlights' })
 --                           ┌───────────────────────┐
 --                           │ Telescope with zettel │
 --                           └───────────────────────┘
-map('n', '<leader>zf', ':lua require("telescope").extensions.zettel.find_zettel()<CR>')
-map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels()<CR>')
+-- map('n', '<leader>zf', ':lua require("telescope").extensions.zettel.find_zettel()<CR>')
+-- map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels()<CR>')
 
 --      ────────────────────────────────────────────────────────────
 -- local opt = { noremap = true, silent = false }
@@ -46,4 +46,4 @@ map('n', '<leader>zg', ':lua require("telescope").extensions.zettel.grep_zettels
 -- -- Search for the notes matching the current visual selection.
 -- map("v", "<leader>zf", ":'<,'>ZkMatch<CR>", opt)
 
-map('n', '<leader>z', "<cmd>lua require('utils.zk').zkcmd()<cr>", opts('Menu zettel'))
+-- map('n', '<leader>z', "<cmd>lua require('utils.zk').zkcmd()<cr>", opts('Menu zettel'))
