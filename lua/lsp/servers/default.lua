@@ -7,9 +7,11 @@ function M.on_attach(client, bufnr)
 
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- if client.supports_method('textDocument/inlayHint') then
-  --   vim.lsp.inlay_hint(bufnr, true)
-  -- end
+  if vim.fn.has("nvim-0.10.0") == 1 then
+    if client.supports_method('textDocument/inlayHint') and vim.lsp.inlay_hint.is_enabled then
+      vim.lsp.inlay_hint.enable(bufnr, true)
+    end
+  end
 
   require('lsp.mapping').init(client)
 end
