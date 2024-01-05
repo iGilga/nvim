@@ -120,38 +120,38 @@ local function setup()
   end
 end
 
-local keys = {
-  { '<leader>ff', "<cmd>lua require('telescope.builtin').find_files()<cr>", desc = '[telescope]Search files' },
-  { '<leader>fg', "<cmd>lua require('telescope.builtin').live_grep()<cr>",  desc = '[telescope]Search word' },
-  { '<leader>fb', "<cmd>lua require('telescope.builtin').buffers()<cr>",    desc = '[telescope]Search buffers' },
-  { '<leader>fh', "<cmd>lua require('telescope.builtin').help_tags()<cr>",  desc = '[telescope]Search help' },
-  { '<leader>fq', "<cmd>lua require('telescope.builtin').quickfix()<cr>",   desc = '[telescope]Search quickfix' },
-  { '<leader>fl', "<cmd>lua require('telescope.builtin').loclist()<cr>",    desc = '[telescope]Search loclist' },
-  { '<leader>fp', "<cmd>lua require('telescope.builtin').commands()<cr>",   desc = '[telescope]Search commands' },
-  { '<leader>fo', "<cmd>lua require('telescope.builtin').oldfiles()<cr>",   desc = '[telescope]Search oldfiles' },
-  { '<leader>fm', "<cmd>lua require('telescope.builtin').marks()<cr>",      desc = '[telescope]Search marks' },
-  { '<leader>fe', "<cmd>lua require('telescope.builtin').registers()<cr>",  desc = '[telescope]Search resigters' },
-  { '<leader>fr', "<cmd>lua require('telescope.builtin').resume()<cr>",     desc = '[telescope]Last telescope' },
-  { '<leader>fk', "<cmd>lua require('telescope.builtin').keymaps()<cr>",    desc = '[telescope]Search keymaps' },
-  {
-    '<leader>fw',
-    "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>",
-    desc = '[telescope]Search current buffer',
-  },
-  {
-    '<leader>fll',
-    "<cmd>lua require('telescope').extensions.lazygit.lazygit()<cr>",
-    desc = '[telescope]Search git repo',
-  },
-  {
-    '<leader>tn',
-    "<cmd>lua require('telescope').extensions.notify.notify({layout_strategy='vertical'})<cr>",
-    desc = '[telescope]Search notify',
-  },
-  { '<leader>gf', '<cmd>lua require("telescope.builtin").git_files()<cr>',    desc = '[telescope]Search git files' },
-  { '<leader>gb', '<cmd>lua require("telescope.builtin").git_bcommits()<cr>', desc = '[telescope]Search files' },
-  { '<leader>gs', '<cmd>lua require("telescope.builtin").git_status()<cr>',   desc = '[telescope]Search files' },
-}
+local keys = function()
+  local ts = require('telescope')
+  local tsb = require('telescope.builtin')
+  local keys = {
+    { '<leader>ff', tsb.find_files,                desc = '[telescope]Search files' },
+    { '<leader>fg', tsb.live_grep,                 desc = '[telescope]Search word' },
+    { '<leader>fb', tsb.buffers,                   desc = '[telescope]Search buffers' },
+    { '<leader>fh', tsb.help_tags,                 desc = '[telescope]Search help' },
+    { '<leader>fq', tsb.quickfix,                  desc = '[telescope]Search quickfix' },
+    { '<leader>fl', tsb.loclist,                   desc = '[telescope]Search loclist' },
+    { '<leader>fp', tsb.commands,                  desc = '[telescope]Search commands' },
+    { '<leader>fo', tsb.oldfiles,                  desc = '[telescope]Search oldfiles' },
+    { '<leader>fm', tsb.marks,                     desc = '[telescope]Search marks' },
+    { '<leader>fe', tsb.registers,                 desc = '[telescope]Search resigters' },
+    { '<leader>fr', tsb.resume,                    desc = '[telescope]Last telescope' },
+    { '<leader>fk', tsb.keymaps,                   desc = '[telescope]Search keymaps' },
+    { '<leader>fw', tsb.current_buffer_fuzzy_find, desc = '[telescope]Search current buffer', },
+    { '<leader>gf', tsb.git_files,                 desc = '[telescope]Git files' },
+    { '<leader>gb', tsb.git_bcommits,              desc = '[telescope]Git bcommits' },
+    { '<leader>gs', tsb.git_status,                desc = '[telescope]Git status' },
+  }
+  if ts.extensions.notify then
+    table.insert(keys, {
+      '<leader>tn',
+      function()
+        ts.extensions.notify.notify({ layout_strategy = 'vertical' })
+      end,
+      desc = '[telescope]Search notify',
+    })
+  end
+  return keys
+end
 
 return {
   'nvim-telescope/telescope.nvim',

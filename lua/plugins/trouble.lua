@@ -2,39 +2,45 @@ return {
   "folke/trouble.nvim",
   cmd = { "TroubleToggle", "Trouble" },
   opts = { use_diagnostic_signs = true },
-  keys = {
-    { "<leader>xx", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostics (Trouble)" },
-    { "<leader>xX", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics (Trouble)" },
-    { "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List (Trouble)" },
-    { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix List (Trouble)" },
-    { "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "Refetence List (Trouble)" },
-    {
-      "[q",
-      function()
-        if require("trouble").is_open() then
-          require("trouble").previous({ skip_groups = true, jump = true })
-        else
-          local ok, err = pcall(vim.cmd.cprev)
-          if not ok then
-            vim.notify(err, vim.log.levels.ERROR)
+  keys = function()
+    local tb = require('trouble')
+    return {
+      { '<leader>xx', tb.toggle },
+      {
+        "<leader>xd",
+        function()
+          tb.toggle('document_diagnostics')
+        end,
+        desc = "Document Diagnostics (Trouble)"
+      },
+      {
+        '<leader>xw',
+        function()
+          tb.toggle('workspace_diagnostics')
+        end,
+        desc = "Workspace Diagnostics (Trouble)"
+      },
+      { "<leader>xl", function() tb.toggle('loclist') end,        desc = "Location List (Trouble)" },
+      { "<leader>xq", function() tb.toggle('quickfix') end,       desc = "Quickfix List (Trouble)" },
+      { "<leader>xr", function() tb.toggle('lsp_references') end, desc = "Refetence List (Trouble)" },
+      {
+        "[q",
+        function()
+          if tb.is_open() then
+            tb.previous({ skip_groups = true, jump = true })
           end
-        end
-      end,
-      desc = "Previous trouble/quickfix item",
-    },
-    {
-      "]q",
-      function()
-        if require("trouble").is_open() then
-          require("trouble").next({ skip_groups = true, jump = true })
-        else
-          local ok, err = pcall(vim.cmd.cnext)
-          if not ok then
-            vim.notify(err, vim.log.levels.ERROR)
+        end,
+        desc = "Previous trouble/quickfix item",
+      },
+      {
+        "]q",
+        function()
+          if tb.is_open() then
+            tb.next({ skip_groups = true, jump = true })
           end
-        end
-      end,
-      desc = "Next trouble/quickfix item",
-    },
-  },
+        end,
+        desc = "Next trouble/quickfix item",
+      },
+    }
+  end
 }
