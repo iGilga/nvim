@@ -8,7 +8,6 @@ local signs = {
 }
 
 if vim.fn.has("nvim-0.9.0") == 1 then
-  print('DiagnosticSign')
   for type, icon in pairs(signs) do
     local hl = 'DiagnosticSign' .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
