@@ -29,7 +29,6 @@ local function setup()
     local hls = {}
     for plugin, enabled in pairs({
       alpha = true,
-      bufferline = true,
       cmp = true,
       hop = true,
       ibl = true,
@@ -61,11 +60,17 @@ local function setup()
   -- vim.api.nvim_command(('colorscheme %s'):format(name))
 end
 
-return {
+return { {
   'rebelot/kanagawa.nvim',
   lazy = false,
   priority = 1000,
   cmd = 'KanagawaCompile',
   -- build = 'KanagawaCompile',
   config = setup,
+}, {
+  'nvim-tree/nvim-web-devicons',
+  opts = {
+    color_icons = false
+  }
+}
 }
