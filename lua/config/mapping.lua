@@ -11,9 +11,10 @@ map('n', '<leader>;', '<C-w><C-w>', { noremap = true, silent = true })
 --                               ┌───────────────┐
 --                               │ Save and quit │
 --                               └───────────────┘
-map('n', '<leader>q', ':q<cr>', { desc = 'quit' })
+map('n', '<leader>qq', ':q<cr>', { desc = 'quit' })
 map('n', '<c-q>', ':qa<cr>', { desc = 'quit all' })
-map('n', '<leader>s', ':w<cr>', { desc = 'save' })
+map('n', '<leader>ss', ':w<cr>', { desc = 'save' })
+map('n', '<F9>', ':w<cr>', { desc = 'save' })
 
 --                              ┌─────────────────┐
 --                              │ Clear highlight │
