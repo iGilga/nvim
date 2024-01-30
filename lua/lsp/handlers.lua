@@ -1,41 +1,18 @@
-local lsp = vim.lsp
-local border = require('config.user').border
-local logger = require('utils.logger').Logger
+-- local lsp = vim.lsp
+-- local border = require('config.user').border
+-- local logger = require('utils.logger').Logger
 
-lsp.handlers['textDocument/hover'] = lsp.with(lsp.handlers.hover, {
-  border = border,
-})
 
-lsp.handlers['textDocument/signatureHelp'] = lsp.with(lsp.handlers.signature_help, {
-  border = border,
-})
+-- lsp.handlers['textDocument/formatting'] = function(_, result, ctx)
+--   if result and not vim.tbl_isempty(result) then
+--     local client = lsp.get_client_by_id(ctx.client_id)
+--     lsp.util.apply_text_edits(result, ctx.bufnr, client.offset_encoding)
+--     logger.info('Formatting done', ('[LSP][%s]'):format(client.name))
+--   end
+-- end
 
--- lsp.handlers['textDocument/publishDiagnostics'] = lsp.with(lsp.diagnostic.on_publish_diagnostics, {
---   virtual_text = false,
---   signs = true,
---   update_in_insert = false,
---   underline = true,
---   severity_sort = true,
---   -- code_action_icon = signs.LightBulb,
---   float = {
---     focusable = false,
---     style = 'minimal',
---     border = border,
---     source = 'always',
---     header = '',
---     prefix = '',
---   },
--- })
+-- fix: no work definition
 
-lsp.handlers['textDocument/formatting'] = function(_, result, ctx)
-  if result and not vim.tbl_isempty(result) then
-    local client = lsp.get_client_by_id(ctx.client_id)
-    lsp.util.apply_text_edits(result, ctx.bufnr, client.offset_encoding)
-    logger.info('Formatting done', ('[LSP][%s]'):format(client.name))
-  end
-end
-
--- TODO no work
 -- lsp.handlers['textDocument/definition'] = function(_, result, ctx)
 --   P(ctx)
 --   if not result or vim.tbl_isempty(result) then
