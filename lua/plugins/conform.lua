@@ -28,7 +28,7 @@ return {
       vim.notify(('Autoformat: %s'):format(tostring(not vim.g.disable_autoformat)), 2)
     end, { desc = "Toggleable autoformat" })
 
-    -- vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
   opts = {
     formatters_by_ft = {
