@@ -2,11 +2,11 @@ return {
   {
     'folke/zen-mode.nvim',
     cmd = 'ZenMode',
-    config = true,
+    opts = {},
   },
   {
     'folke/twilight.nvim',
     cmd = 'Twilight',
-    config = true,
+    opts = {},
   },
 }
