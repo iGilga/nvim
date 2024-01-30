@@ -10,13 +10,13 @@ function M.init(client)
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                       diagnostics                        │
   --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', 'gD', vim.lsp.buf.declaration, '[lsp]Declaration')
+  buf_set_keymap('n', 'gD', vim.lsp.buf.declaration, '[lsp]Goto declaration')
   buf_set_keymap('n', 'gd', telescope.lsp_definitions, '[lsp]Search definitions')
   buf_set_keymap(
     'n',
     'gi',
     telescope.lsp_implementations,
-    '[lsp]search implementations'
+    '[lsp]Search implementations'
   )
   buf_set_keymap('n', 'gr', telescope.lsp_references, '[lsp]Search references')
   buf_set_keymap(
