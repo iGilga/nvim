@@ -26,6 +26,7 @@ local function setup()
   -- ls.filetype_extend('javascript', { 'javascriptreact' })
 
   require('luasnip.loaders.from_vscode').lazy_load()
+  ---@diagnostic disable-next-line: assign-type-mismatch
   require('luasnip.loaders.from_lua').lazy_load({ paths = './snippets' })
 end
 
