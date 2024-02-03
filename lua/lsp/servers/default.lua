@@ -1,3 +1,7 @@
+local u = require('utils')
+local logger = require('utils.logger').Logger
+local border = require('config.user').border
+
 local M = {}
 
 function M.on_attach(client, bufnr)
@@ -22,33 +26,11 @@ if ok then
   capabilities = cmp_nvim_lsp.default_capabilities()
 end
 
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
--- capabilities.textDocument.completion.completionItem.resolveSupport = {
---   properties = { 'documentation', 'detail', 'additionalTextEdits' },
--- }
-
 M.capabilities = capabilities
-
--- M.root_dir = function(fname)
---   local util = require('lspconfig').util
---   return util.root_pattern('.git')(fname)
---     or util.root_pattern('tsconfig.base.json')(fname)
---     -- or util.root_pattern('package.json')(fname)
---     or util.root_pattern('.eslintrc.js')(fname)
---     or util.root_pattern('tsconfig.json')(fname)
--- end
-
--- M.autostart = true
-
--- M.single_file_support = true
 
 M.flags = {
   debounce_text_changes = 200,
 }
-
-local u = require('utils')
-local logger = require('utils.logger').Logger
-local border = require('config.user').border
 
 M.handlers = {
   ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
@@ -63,9 +45,16 @@ M.handlers = {
       local p = ctx.params
       local client = vim.lsp.get_client_by_id(ctx.client_id)
       vim.lsp.util.apply_workspace_edit(result, client.offset_encoding)
-      for _, c in ipairs(result.documentChanges) do
-        local msg = ('%s [%s][%d]'):format(p.newName, u.getRelativePath(c.textDocument.uri), #c.edits)
-        logger.info(msg, '[LSP]Rename')
+      if result.documentChanges then
+        for _, c in ipairs(result.documentChanges) do
+          local msg = ('%s [%s][%d]'):format(p.newName, u.getRelativePath(c.textDocument.uri), #c.edits)
+          logger.info(msg, '[LSP]Rename')
+        end
+      elseif result.changes then
+        for k, c in pairs(result.changes) do
+          local msg = ('%s [%s][%d]'):format(p.newName, u.getRelativePath(k), #c)
+          logger.info(msg, '[LSP]Rename')
+        end
       end
     end
   end,
