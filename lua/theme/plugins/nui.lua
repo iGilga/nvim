@@ -8,6 +8,7 @@ function M.hl(colors)
     NuiPrompt = { fg = p.green1 },
     NuiBottom = { fg = p.fujiGray },
     NuiSeparator = { fg = p.fujiGray },
+    NuiText = { fg = p.fujiWhite }
   }
 end
 
