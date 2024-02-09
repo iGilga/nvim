@@ -72,12 +72,12 @@ local function setup()
         case_mode = 'smart_case',       -- or "ignore_case" or "respect_case"
         -- the default case_mode is "smart_case"
       },
-      ['ui-select'] = {
-        require('telescope.themes').get_dropdown({
-          initial_mode = 'normal',
-          borderchars = { ' ' },
-        }),
-      },
+      -- ['ui-select'] = {
+      --   require('telescope.themes').get_dropdown({
+      --     initial_mode = 'normal',
+      --     borderchars = { ' ' },
+      --   }),
+      -- },
     },
     pickers = {
       diagnostics = {
@@ -103,7 +103,7 @@ local function setup()
   })
 
   telescope.load_extension('fzf')
-  telescope.load_extension('ui-select')
+  -- telescope.load_extension('ui-select')
 
   local ok, _ = pcall(require, 'notify')
   if ok then
