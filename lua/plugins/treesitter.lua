@@ -21,6 +21,7 @@ local setup = {
     'toml',
     'tsx',
     'yaml',
+    'hyprlang',
   },
   highlight = {
     enable = true,
@@ -100,6 +101,7 @@ return {
     'nvim-treesitter/nvim-treesitter-refactor',
     'nvim-treesitter/nvim-treesitter-context',
     'nvim-treesitter/nvim-treesitter-textobjects',
+    'luckasRanarison/tree-sitter-hyprlang',
     {
       'm-demare/hlargs.nvim',
       config = function()
