@@ -5,7 +5,7 @@ local ntext = require('nui.text')
 local event = require('nui.utils.autocmd').event
 
 local config = {
-  min_width = 40,
+  min_width = 50,
   border = {
     bottom_hl = 'NuiBottom',
     highlight = 'NuiBorder',
@@ -15,8 +15,8 @@ local config = {
     title_hl = 'NuiTitle',
   },
   separator = {
-    char = ' ',
-    text_align = 'center',
+    char = '',
+    text_align = 'left',
     highlight = 'NuiSeparator',
   },
   highlight = 'Normal:NuiNormal',
@@ -66,11 +66,11 @@ end
 local function window(itemList, actionList, onSubmit)
   local popup_opts = {
     position = {
-      row = 1,
+      row = 3,
       col = 0,
     },
     relative = 'cursor',
-    highlight = config.highlight or 'Normal:Normal',
+    highlight = config.highlight,
     border = {
       highlight = config.border.highlight,
       style = config.border.style,
@@ -85,7 +85,7 @@ local function window(itemList, actionList, onSubmit)
   return nmenu(popup_opts, {
     lines = itemList,
     min_width = config.min_width,
-    separator = config.separator,
+    -- separator = config.separator,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
       focus_prev = { 'k', '<Up>', '<S-Tab>' },
@@ -131,7 +131,8 @@ local function codeActionCallback(results)
   for client_id, response in pairs(results) do
     if response.result and not vim.tbl_isempty(response.result) then
       local client = lsp.get_client_by_id(client_id)
-      table.insert(itemList, nmenu.separator(ntext('[' .. client.name .. ']', 'NuiSeparator')))
+      table.insert(itemList,
+        nmenu.separator(ntext('[' .. client.name .. ']', config.separator.highlight), config.separator))
       for _, action in ipairs(response.result) do
         local title = action.title
         local item = nmenu.item(action.title)
