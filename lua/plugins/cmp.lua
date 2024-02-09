@@ -51,10 +51,10 @@ local function setup()
         if cmp.visible() then
           cmp.select_next_item()
         elseif luasnip.expand_or_jumpable() then
-          luasnip.expand_or_jump()
-          -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
-        elseif has_words_before() then
-          cmp.complete()
+          -- luasnip.expand_or_jump()
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump', true, true, true), '')
+          -- elseif has_words_before() then
+          -- cmp.complete()
         else
           fallback()
         end
@@ -63,8 +63,8 @@ local function setup()
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-          -- vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
+          -- luasnip.jump(-1)
+          vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-jump-prev', true, true, true), '')
         else
           fallback()
         end
