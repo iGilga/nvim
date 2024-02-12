@@ -13,6 +13,7 @@ return {
       'TelescopePrompt',
       'help',
       'LspInfo',
+      'lspinfo',
     },
   },
 }
