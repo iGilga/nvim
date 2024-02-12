@@ -104,8 +104,8 @@ local function onSubmit(item)
   if
       not action.edit
       and client
-      and type(client.server_capabilities.codeAction) == 'table'
-      and client.server_capabilities.codeAction.resolveProvider
+      and type(client.server_capabilities.codeActionProvider) == 'table'
+      and client.server_capabilities.codeActionProvider.resolveProvider
   then
     client.request('codeAction/resolve', action, function(err, resolvedAction)
       if err then
