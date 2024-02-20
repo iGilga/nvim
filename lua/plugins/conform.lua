@@ -9,6 +9,7 @@ return {
       ensure_installed = {
         'prettierd',
         'shfmt',
+        'emmet-language-server',
       }
     },
     config = function(_, opts)
