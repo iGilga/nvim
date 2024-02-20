@@ -8,7 +8,7 @@ local event = require('nui.utils.autocmd').event
 local config = {
   min_width = 80,
   text = {
-    hl_gray = 'NuiBottom'
+    hl_gray = 'NuiGrayText'
   },
   border = {
     style = 'solid',
@@ -27,6 +27,9 @@ local config = {
 local function get_prompt_text(prompt, default_prompt)
   local prompt_text = prompt or default_prompt
   if prompt_text:sub(-1) == ":" then
+    prompt_text = prompt_text:sub(1, -2)
+  end
+  if prompt_text:sub(-1) == " " then
     prompt_text = prompt_text:sub(1, -2)
   end
   return prompt_text
