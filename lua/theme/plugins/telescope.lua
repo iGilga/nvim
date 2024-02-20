@@ -12,7 +12,7 @@ function M.hl(colors)
 
   return {
     TelescopePromptTitle = telescope.title,
-    TelescopePromptCounter = { fg = p.sumiInk4 },
+    TelescopePromptCounter = { fg = p.fujiGray },
     TelescopePromptNormal = { bg = telescope.prompt, fg = p.fujiWhite },
     TelescopePromptBorder = { bg = telescope.prompt },
     TelescopeResultsTitle = telescope.title,
