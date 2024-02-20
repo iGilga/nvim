@@ -1,18 +1,4 @@
-local config = require('config.user')
-
 local M = {}
-
-function M.isClientFormat(clientName)
-  if config.lsp.servers[clientName] then
-    return (config.lsp.servers[clientName].format == true)
-  end
-
-  return false
-end
-
-function M.isDisable(plugin)
-  return not vim.tbl_contains(config.disablePlugins, plugin)
-end
 
 function M.getRelativePath(file_path)
   local plenary_path = require('plenary.path')

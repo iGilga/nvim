@@ -1,7 +1,6 @@
 local function setup()
   local lsp = require('lspconfig')
   local mason_lsp = require('mason-lspconfig')
-  local configLsp = require('config.user').lsp.servers
   local defaultConfig = require('lsp.servers.default')
 
   --  ┌──────────────────────────────────────────────────────────┐
@@ -41,7 +40,6 @@ local function setup()
   --  ┌──────────────────────────────────────────────────────────┐
   --  │ Settings ui                                              │
   --  └──────────────────────────────────────────────────────────┘
-  require('lsp.handlers')
   require('lsp.diagnostics')
 end
 
