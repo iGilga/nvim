@@ -49,7 +49,7 @@ local options = {
     tab = '-->',
   },
   langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz',
-  foldlevelstart = 99,
+  -- foldlevelstart = 99,
   conceallevel = 2,
 }
 
@@ -70,4 +70,3 @@ g.mapleader = ' '
 g.bufferline = {
   add_in_buffer_number_order = true,
 }
-
