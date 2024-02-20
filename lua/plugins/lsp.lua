@@ -11,7 +11,6 @@ local function setup()
       'bashls',
       'cssls',
       'dockerls',
-      -- 'emmet-language-server',
       'graphql',
       'html',
       'jsonls',
@@ -23,9 +22,16 @@ local function setup()
     },
   })
 
+  local blocklist = {
+    ['rust_analyzer'] = true,
+    ['emmet_language_server'] = true,
+    ['graphql'] = true,
+    ['tailwindcss'] = true,
+  }
+
   mason_lsp.setup_handlers({
     function(serverName)
-      if serverName == 'rust_analyzer' then
+      if blocklist[serverName] then
         return
       end
       local opts = defaultConfig
