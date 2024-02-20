@@ -26,6 +26,9 @@ local function setup()
 
   mason_lsp.setup_handlers({
     function(serverName)
+      if serverName == 'rust_analyzer' then
+        return
+      end
       local opts = defaultConfig
       local ok, serverConfig = pcall(require, 'lsp.servers.' .. serverName)
       if ok then
