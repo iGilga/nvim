@@ -23,8 +23,8 @@ local function setup()
       entry_prefix = '  ',
       selection_strategy = 'reset',
       sorting_strategy = 'ascending',
-      layout_strategy = 'horizontal',
-      -- layout_strategy = vim.o.lines > 55 and 'vertical' or 'horizontal',
+      -- layout_strategy = 'horizontal',
+      layout_strategy = vim.o.lines > 55 and 'vertical' or 'horizontal',
       set_env = { ['COLORTERM'] = 'truecolor' },
       layout_config = {
         horizontal = {
@@ -34,10 +34,9 @@ local function setup()
           preview_width = 0.65,
         },
         vertical = {
-          prompt_position = 'top',
           width = { padding = 0 },
           height = { padding = 0 },
-          preview_width = 0.65,
+          preview_height = 0.60,
         },
       },
       borderchars = { ' ' },
@@ -82,6 +81,11 @@ local function setup()
     pickers = {
       diagnostics = {
         initial_mode = 'normal',
+        layout_config = {
+          horizontal = {
+            preview_width = 0.40,
+          },
+        },
       },
       lsp_references = {
         initial_mode = 'normal',
@@ -91,9 +95,7 @@ local function setup()
         initial_mode = 'normal',
         layout_config = {
           horizontal = {
-            -- width = { padding = 10 },
-            -- height = { padding = 5 },
-            width = 0.8,
+            width = { padding = 20 },
             height = 0.9,
             preview_width = 0.40,
           },
