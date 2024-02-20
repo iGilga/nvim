@@ -22,6 +22,7 @@ local config = {
     align = 'center',
     hl = 'NuiSeparator',
   },
+  hl = 'NormalFloat:NuiNormal,FloatBorder:NuiBorder',
 }
 
 local function get_prompt_text(prompt, default_prompt)
@@ -47,7 +48,7 @@ local function build_popup_opts(title)
       }
     },
     win_options = {
-      winhighlight = 'NormalFloat:NuiNormal,FloatBorder:NuiBorder',
+      winhighlight = config.hl,
     },
     zindex = 999,
   }
