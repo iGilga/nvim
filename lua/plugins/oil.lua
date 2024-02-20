@@ -1,23 +1,14 @@
-local keys = {
+local keys = function()
+  local oil = require('oil')
+  return
   {
-    '<leader>m',
-    function()
-      require('oil').open()
-    end,
-    desc = 'open nvim-tree',
-  },
-  {
-    '<leader>mc',
-    function()
-      require('oil').close()
-    end,
-    desc = 'open nvim-tree',
-  },
-}
+    { '<leader>m',  oil.open,  desc = 'open oil', },
+    { '<leader>mc', oil.close, desc = 'close oil', },
+  }
+end
 return {
   'stevearc/oil.nvim',
   keys = keys,
   opts = {},
-  -- Optional dependencies
   dependencies = { 'nvim-tree/nvim-web-devicons' },
 }
