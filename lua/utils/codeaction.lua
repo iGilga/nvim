@@ -6,20 +6,22 @@ local event = require('nui.utils.autocmd').event
 
 local config = {
   min_width = 50,
+  title = {
+    text = ' Code Actions ',
+    align = 'center',
+    hl = 'NuiTitle',
+  },
+  bottom = {
+    hl = 'NuiBottom',
+  },
   border = {
-    bottom_hl = 'NuiBottom',
-    highlight = 'NuiBorder',
     style = 'solid',
-    title = ' Code Actions ',
-    title_align = 'center',
-    title_hl = 'NuiTitle',
   },
   separator = {
     char = '',
     text_align = 'left',
-    highlight = 'NuiSeparator',
+    hl = 'NuiSeparator',
   },
-  highlight = 'Normal:NuiNormal',
 }
 
 local title = function(name)
@@ -59,7 +61,7 @@ local function onChange(actionList)
   return function(item, menu)
     local pos = index_of(actionList, item)
     local text = ' ' .. tostring(pos) .. '/' .. #actionList .. ' '
-    menu.border:set_text('bottom', ntext(text, config.border.bottom_hl), 'right')
+    menu.border:set_text('bottom', ntext(text, config.bottom.hl), 'right')
   end
 end
 
@@ -70,22 +72,22 @@ local function window(itemList, actionList, onSubmit)
       col = 0,
     },
     relative = 'cursor',
-    highlight = config.highlight,
     border = {
-      highlight = config.border.highlight,
       style = config.border.style,
       text = {
-        top = ntext(config.border.title, config.border.title_hl),
-        top_align = config.border.title_align,
+        top = ntext(config.title.text, config.title.hl),
+        top_align = config.title.align,
       },
       padding = { 0, 1, 1, 1 },
     },
+    win_options = {
+      winhighlight = 'NormalFloat:NuiNormal,FloatBorder:NuiBorder',
+    },
   }
 
-  return nmenu(popup_opts, {
+  local menu_opts = {
     lines = itemList,
     min_width = config.min_width,
-    -- separator = config.separator,
     keymap = {
       focus_next = { 'j', '<Down>', '<Tab>' },
       focus_prev = { 'k', '<Up>', '<S-Tab>' },
@@ -94,7 +96,9 @@ local function window(itemList, actionList, onSubmit)
     },
     on_change = onChange(actionList),
     on_submit = onSubmit,
-  })
+  }
+
+  return nmenu(popup_opts, menu_opts)
 end
 
 local function onSubmit(item)
@@ -132,7 +136,7 @@ local function codeActionCallback(results)
     if response.result and not vim.tbl_isempty(response.result) then
       local client = lsp.get_client_by_id(client_id)
       table.insert(itemList,
-        nmenu.separator(ntext('[' .. client.name .. ']', config.separator.highlight), config.separator))
+        nmenu.separator(ntext('[' .. client.name .. ']', config.separator.hl), config.separator))
       for _, action in ipairs(response.result) do
         local title = action.title
         local item = nmenu.item(action.title)
