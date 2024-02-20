@@ -5,7 +5,7 @@ local ntext = require('nui.text')
 local event = require('nui.utils.autocmd').event
 
 local config = {
-  min_width = 50,
+  min_width = 60,
   title = {
     text = ' Code Actions ',
     align = 'center',
@@ -22,6 +22,7 @@ local config = {
     text_align = 'left',
     hl = 'NuiSeparator',
   },
+  hl = 'NormalFloat:NuiNormal,FloatBorder:NuiBorder',
 }
 
 local title = function(name)
@@ -81,7 +82,7 @@ local function window(itemList, actionList, onSubmit)
       padding = { 0, 1, 1, 1 },
     },
     win_options = {
-      winhighlight = 'NormalFloat:NuiNormal,FloatBorder:NuiBorder',
+      winhighlight = config.hl,
     },
   }
 
