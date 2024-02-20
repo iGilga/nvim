@@ -79,6 +79,13 @@ local function setup()
       -- },
     },
     pickers = {
+      live_grep = {
+        layout_config = {
+          horizontal = {
+            preview_width = 0.45,
+          }
+        }
+      },
       diagnostics = {
         initial_mode = 'normal',
         layout_config = {
