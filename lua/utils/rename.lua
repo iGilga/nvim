@@ -5,22 +5,19 @@ local event = require('nui.utils.autocmd').event
 local Text = require('nui.text')
 
 local config = {
-  min_width = 40,
+  min_width = 20,
   border = {
-    highlight = 'NuiBorder',
+    hl = 'NuiBorder',
     style = 'solid',
-    title = ' Rename ',
-    title_align = 'center',
-    title_hl = 'NuiTitle',
   },
-  prompt = ' > ',
-  prompt_hl = 'NuiPrompt',
-  highlight = 'Normal:NuiNormal',
+  prompt = {
+    sign = ' > ',
+    hl = 'NuiPrompt',
+  },
+  hl = 'NormalFloat:NuiNormal',
 }
 
 local M = {}
-
-local minWidth = config.min_width or 30
 
 local map = function(input, lhs, rhs)
   input:map('i', lhs, rhs, { noremap = true }, false)
@@ -53,10 +50,7 @@ end
 
 M.rename = function(popup_opts, opts)
   local curName = vim.fn.expand('<cword>')
-  local width = minWidth
-  if #curName > width then
-    width = #curName
-  end
+  local width = #curName + config.min_width
   popup_opts = {
     position = {
       row = 1,
@@ -66,16 +60,18 @@ M.rename = function(popup_opts, opts)
       width = width,
     },
     relative = 'cursor',
-    highlight = config.highlight,
     border = {
-      highlight = config.border.highlight,
+      highlight = config.border.hl,
       style = config.border.style,
       char = ' ',
       padding = { -1, -1 },
     },
+    win_options = {
+      winhighlight = config.hl,
+    },
   }
   opts = {
-    prompt = Text(config.prompt, config.prompt_hl),
+    prompt = Text(config.prompt.sign, config.prompt.hl),
     default_value = curName,
     on_submit = function(newName)
       if not (newName and #newName > 0) or newName == curName then
