@@ -119,10 +119,6 @@ local function setup()
     telescope.load_extension('notify')
   end
 
-  local ok, _ = pcall(require, 'harpoon')
-  if ok then
-    telescope.load_extension('harpoon')
-  end
   local ok, _ = pcall(require, 'lazygit')
   if ok then
     telescope.load_extension('lazygit')
