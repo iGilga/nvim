@@ -1,6 +1,4 @@
-local u = require('utils')
 local defaultOnAttach = require('lsp.servers.default').on_attach
-local config = require('config.user')
 
 local M = {}
 
@@ -50,28 +48,9 @@ local function on_attach(client, bufnr)
   client.server_capabilities.documentFormattingProvider = false
   client.server_capabilities.documentRangeFormattingProvider = false
   defaultOnAttach(client, bufnr)
-  -- local function buf_set_option(...)
-  --   vim.api.nvim_buf_set_option(bufnr, ...)
-  -- end
-  --
-  -- buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 end
 
 local handlers = {
-  -- ['textDocument/publishDiagnostics'] = vim.lsp.with(
-  --   vim.lsp.diagnostic.on_publish_diagnostics,
-  --   { signs = function() end }
-  -- ),
-  -- ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = EcoVim.ui.float.border }),
-  -- ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = EcoVim.ui.float.border }),
-  -- ['textDocument/definition'] = function(err, result, method, ...)
-  --   if vim.tbl_islist(result) and #result > 1 then
-  --     local filtered_result = filter(result, filterReactDTS)
-  --     return vim.lsp.handlers['textDocument/definition'](err, filtered_result, method, ...)
-  --   end
-  --
-  --   vim.lsp.handlers['textDocument/definition'](err, result, method, ...)
-  -- end,
 }
 
 local settings = {
@@ -104,6 +83,6 @@ local settings = {
 
 M.capabilities = capabilities
 M.on_attach = on_attach
--- M.handlers = handlers
--- M.settings = settings
+M.handlers = handlers
+M.settings = settings
 return M
