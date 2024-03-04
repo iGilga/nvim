@@ -30,7 +30,16 @@ return {
   {
     "chrisgrieser/nvim-origami",
     event = "BufReadPost",
-    opts = true,
+    keys = function()
+      local origami = require("origami")
+      return {
+        { '<A>h', origami.h },
+        { '<A>l', origami.l }
+      }
+    end,
+    opts = {
+      setupFoldKeymaps = false
+    },
   },
   {
     "kevinhwang91/nvim-ufo",
