@@ -35,7 +35,7 @@ return {
         extensions = {
           zettel = {
             zk_path = '~/Documents/Zettel',
-            link_style = 'md', -- or "md"
+            link_style = 'md',  -- or "md"
             remove_ext = false, -- or false
           },
         },

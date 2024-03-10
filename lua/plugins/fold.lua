@@ -1,7 +1,7 @@
 local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
-  local hlgroup = "NonText"
+  local hlgroup = 'NonText'
   local newVirtText = {}
-  local suffix = "   " .. tostring(endLnum - lnum)
+  local suffix = '   ' .. tostring(endLnum - lnum)
   local sufWidth = vim.fn.strdisplaywidth(suffix)
   local targetWidth = width - sufWidth
   local curWidth = 0
@@ -16,7 +16,7 @@ local function foldTextFormatter(virtText, lnum, endLnum, width, truncate)
       table.insert(newVirtText, { chunkText, hlGroup })
       chunkWidth = vim.fn.strdisplaywidth(chunkText)
       if curWidth + chunkWidth < targetWidth then
-        suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
+        suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
       end
       break
     end
@@ -28,10 +28,10 @@ end
 
 return {
   {
-    "chrisgrieser/nvim-origami",
-    event = "BufReadPost",
+    'chrisgrieser/nvim-origami',
+    event = 'BufReadPost',
     keys = function()
-      local origami = require("origami")
+      local origami = require('origami')
       return {
         { '<A>h', origami.h },
         { '<A>l', origami.l }
@@ -42,16 +42,16 @@ return {
     },
   },
   {
-    "kevinhwang91/nvim-ufo",
+    'kevinhwang91/nvim-ufo',
     dependencies = { 'kevinhwang91/promise-async' },
-    event = "VimEnter",
+    event = 'VimEnter',
     keys = function()
-      local ufo = require("ufo")
+      local ufo = require('ufo')
       return {
         { 'zm', ufo.closeAllFolds,                                                       desc = '[ufo] close all folds' },
         { 'zk', ufo.goPreviousClosedFold,                                                desc = '[ufo] goto prev fold' },
         { 'zj', ufo.goNextClosedFold,                                                    desc = '[ufo] goto next fold' },
-        { 'zr', function() return ufo.openFoldsExceptKinds { "comment", "imports" } end, desc = '[ufo] open all folds' },
+        { 'zr', function() return ufo.openFoldsExceptKinds { 'comment', 'imports' } end, desc = '[ufo] open all folds' },
         { 'zR', function() return ufo.openFoldsExceptKinds {} end,                       desc = '[ufo] open all folds' },
         { 'z1', function() return ufo.closeFoldsWith(1) end,                             desc = '[ufo] close l1 folds' },
         { 'z2', function() return ufo.closeFoldsWith(2) end,                             desc = '[ufo] close l1 folds' },
@@ -65,7 +65,7 @@ return {
     end,
     opts = {
       provider_selector = function(_, ft, _)
-        local lspwithOutFolding = { "markdown", "sh", "css", "html" }
+        local lspwithOutFolding = { 'markdown', 'sh', 'css', 'html' }
         if vim.tbl_contains(lspwithOutFolding, ft) then
           return { 'treesitter', 'indent' }
         end

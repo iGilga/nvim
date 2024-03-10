@@ -36,11 +36,6 @@ return {
   {
     'gennaro-tedesco/nvim-jqx',
     ft = { 'json', 'yaml' },
-    -- config = function()
-    --   require('nvim-jqx.config').use_quickfix = false
-    -- end,
-    -- JqxList
-    -- JqxQuery
   },
   {
     'nacro90/numb.nvim',

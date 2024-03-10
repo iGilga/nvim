@@ -5,10 +5,10 @@ local config = require('config.user').zettel
 M = {}
 
 local cmd_list = {
-  { title = 'Open notes', cmd = ':ZkNotes' },
+  { title = 'Open notes',           cmd = ':ZkNotes' },
   { title = 'Open notes with tags', cmd = ':ZkTags' },
-  { title = 'Create note', cmd = ':ZkNew' },
-  { title = 'Index note', cmd = ':ZkIndex' },
+  { title = 'Create note',          cmd = ':ZkNew' },
+  { title = 'Index note',           cmd = ':ZkIndex' },
 }
 
 -- local cmd_list = {

@@ -22,10 +22,10 @@ require('lazy').setup('plugins', {
         'getscriptPlugin',
         'gzip',
         'logipat',
-        -- NOT UNCOMMENT FOLLOWING 2 ROW, 
+        -- NOT UNCOMMENT FOLLOWING 2 ROW,
         -- OTHERWISE NOT WORK HIGHLIGHT WITH PAIR {} AND ()!!!!!
         -- 'matchit', NOT UNCOMMENT
-        -- 'matchparen', NOT UNCOMMENT, FUCKER. 
+        -- 'matchparen', NOT UNCOMMENT, FUCKER.
         'netrw',
         'netrwFileHandlers',
         'netrwPlugin',

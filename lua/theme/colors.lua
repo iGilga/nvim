@@ -1,4 +1,4 @@
-local colors = require('kanagawa.colors').setup({theme = 'wave'})
+local colors = require('kanagawa.colors').setup({ theme = 'wave' })
 
 local palettes = colors.palette
 
@@ -16,8 +16,8 @@ local customColors = {
   gray = palettes.sumiInk4,
   selection = palettes.sumiInk3,
   bg0 = '#2A2A37',
-  bg1 = '#1b1b24', --darkly
-  bg2 = '#181820', --darkly
+  bg1 = '#1b1b24',    --darkly
+  bg2 = '#181820',    --darkly
   green1 = '#52674a', --darkly
   grey1 = '#22222C',
   grey2 = '#252530',

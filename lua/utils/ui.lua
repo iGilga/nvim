@@ -27,10 +27,10 @@ local config = {
 
 local function get_prompt_text(prompt, default_prompt)
   local prompt_text = prompt or default_prompt
-  if prompt_text:sub(-1) == ":" then
+  if prompt_text:sub(-1) == ':' then
     prompt_text = prompt_text:sub(1, -2)
   end
-  if prompt_text:sub(-1) == " " then
+  if prompt_text:sub(-1) == ' ' then
     prompt_text = prompt_text:sub(1, -2)
   end
   return prompt_text
@@ -101,7 +101,7 @@ local function build_menu_opts(title, lines, on_done)
 end
 
 local function buildOptions(items, opts, on_done)
-  local title = get_prompt_text(opts.prompt, "Select item")
+  local title = get_prompt_text(opts.prompt, 'Select item')
   local format_item = build_format_item(opts, title)
   local menu_items = build_lines(items, format_item)
 
@@ -112,7 +112,7 @@ end
 
 local function override_ui_select()
   ---@diagnostic disable-next-line: undefined-field
-  local UISelect = nmenu:extend("UISelect")
+  local UISelect = nmenu:extend('UISelect')
 
   function UISelect:init(items, opts, on_done)
     local popup_options, menu_options = buildOptions(items, opts, on_done)

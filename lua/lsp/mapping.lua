@@ -57,11 +57,11 @@ function M.init(client)
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                       code actions                       │
   --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>ga', require("utils.codeaction").code_action, '[lsp]Code actions')
+  buf_set_keymap('n', '<leader>ga', require('utils.codeaction').code_action, '[lsp]Code actions')
   buf_set_keymap(
     'v',
     '<leader>ga',
-    require("utils.codeaction").range_code_action,
+    require('utils.codeaction').range_code_action,
     '[lsp]Code actions on selected'
   )
 
@@ -86,7 +86,7 @@ function M.init(client)
   buf_set_keymap(
     'n',
     '<leader>so',
-    require("telescope.builtin").lsp_document_symbols,
+    require('telescope.builtin').lsp_document_symbols,
     '[lsp]search document symbols'
   )
   if client.name == 'eslint' then

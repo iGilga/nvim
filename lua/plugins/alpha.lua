@@ -57,7 +57,7 @@ local function setup()
       align_shortcut = 'right',
       hl_shortcut = 'AlphaShortcuts',
       hl = {
-        { 'AlphaIcon', 1, 4 },
+        { 'AlphaIcon',   1, 4 },
         { 'AlphaButton', 4, 20 },
       },
     }

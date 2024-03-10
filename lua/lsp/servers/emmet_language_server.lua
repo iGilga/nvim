@@ -1,7 +1,7 @@
 return {
   autostart = false,
-  filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug",
-    "typescriptreact", "vue" },
+  filetypes = { 'css', 'eruby', 'html', 'javascript', 'javascriptreact', 'less', 'sass', 'scss', 'svelte', 'pug',
+    'typescriptreact', 'vue' },
   -- Read more about this options in the [vscode docs](https://code.visualstudio.com/docs/editor/emmet#_emmet-configuration).
   -- **Note:** only the options listed in the table are supported.
   init_options = {
@@ -12,7 +12,7 @@ return {
     --- @type boolean Defaults to `true`
     showAbbreviationSuggestions = true,
     --- @type "always" | "never" Defaults to `"always"`
-    showExpandedAbbreviation = "always",
+    showExpandedAbbreviation = 'always',
     --- @type boolean Defaults to `false`
     showSuggestionsAsSnippets = false,
     --- @type table<string, any> [Emmet Docs](https://docs.emmet.io/customization/syntax-profiles/)
