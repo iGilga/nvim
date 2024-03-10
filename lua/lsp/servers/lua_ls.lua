@@ -1,12 +1,17 @@
 return {
   cmd = { 'lua-language-server' },
-  settings = {
-    Lua = {
+  on_init = function(client)
+    local path = client.workspace_folders[1].name
+    if vim.loop.fs_fstat(path .. '/.luarc.json') or vim.loop.fs_fstat(path .. '/.luarc.jsonc') then
+      return
+    end
+
+    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
         version = 'LuaJIT',
         path = { 'lua/?.lua', 'lua/?/init.lua' },
       },
-      completion = { keywordSnippet = 'Replace', callSnippet = 'Replace' },
+      completion = { callSnippet = 'Replace' },
       diagnostics = {
         enable = true,
         globals = {
@@ -19,16 +24,21 @@ return {
           'pending',
           'use',
         },
+        disable = {
+          'lowercase-global',
+        },
         workspace = {
+          checkThirdParty = false,
           library = {
-            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-            [vim.fn.expand('config' .. '/lua')] = true,
-            -- [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+            vim.env.VIMRUNTIME,
+            '${3rd}/luv/library',
+            '${3rd}/busted/library',
           },
-          maxPreload = 100000,
-          preloadFileSize = 10000,
         },
       },
-    },
+    })
+  end,
+  settings = {
+    Lua = {},
   },
 }
