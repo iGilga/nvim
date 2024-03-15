@@ -49,7 +49,6 @@ local options = {
     tab = '-->',
   },
   langmap = 'ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz',
-  -- foldlevelstart = 99,
   conceallevel = 2,
 }
 
