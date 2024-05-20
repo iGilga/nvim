@@ -72,7 +72,7 @@ local keys = function()
 end
 
 return {
-  'akinsho/bufferline.nvim',
+  'Theyashsawarkar/bufferline.nvim',
   dependencies = {
     'nvim-tree/nvim-web-devicons',
   },
