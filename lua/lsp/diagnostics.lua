@@ -27,9 +27,8 @@ vim.diagnostic.config({
     }
   },
   float = {
-    border = config.border,
     -- focusable = false,
-    source = 'always',
+    source = 'if_many',
   },
   virtual_text = {
     spacing = 1,
