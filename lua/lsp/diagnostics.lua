@@ -1,5 +1,3 @@
-local config = require('config.user')
-
 local signs = {
   Error = '󰅚',
   Warn = '󰀪',
