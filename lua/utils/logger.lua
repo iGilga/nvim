@@ -10,7 +10,7 @@ local log = function(type, msg, opts)
   if ok then
     notify(msg, type, opts)
   else
-    if vim.tbl_islist(msg) then
+    if vim.islist(msg) then
       local tmp_list = msg
       msg = ''
       for _, v in pairs(tmp_list) do
