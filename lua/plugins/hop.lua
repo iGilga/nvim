@@ -61,13 +61,6 @@ local keys = {
     end,
     desc = 'hop hint curline before target',
   },
-  {
-    '<leader>h',
-    function()
-      return require('hop').hint_patterns()
-    end,
-    desc = 'hop hint with pattern',
-  },
 }
 return {
   'phaazon/hop.nvim',
