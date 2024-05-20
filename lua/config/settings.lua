@@ -36,7 +36,6 @@ local options = {
   splitright = true,
   swapfile = false,
   tabstop = 8,
-  termguicolors = true,
   -- timeout = true,
   timeoutlen = 400,
   -- undodir = '/tmp/',
