@@ -5,19 +5,9 @@ local border = require('config.user').border
 local M = {}
 
 function M.on_attach(client, bufnr)
-  local function buf_set_option(...)
-    vim.api.nvim_buf_set_option(bufnr, ...)
-  end
+  vim.api.nvim_set_option_value('omnifunc', 'v:lua.lsp.omnifunc', { buf = bufnr })
 
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  if vim.fn.has('nvim-0.10.0') == 1 then
-    if client.supports_method('textDocument/inlayHint') and vim.lsp.inlay_hint.is_enabled then
-      vim.lsp.inlay_hint.enable(bufnr, true)
-    end
-  end
-
-  require('lsp.mapping').init(client)
+  require('lsp.mapping').init(client, bufnr)
 end
 
 local capabilities = {}
@@ -44,6 +34,10 @@ M.handlers = {
     if result and not vim.tbl_isempty(result) then
       local p = ctx.params
       local client = vim.lsp.get_client_by_id(ctx.client_id)
+      if client == nil then
+        logger.error('Cant find client', '[LSP]')
+        return
+      end
       vim.lsp.util.apply_workspace_edit(result, client.offset_encoding)
       if result.documentChanges then
         for _, c in ipairs(result.documentChanges) do
@@ -59,9 +53,9 @@ M.handlers = {
     end
   end,
   ['textDocument/definition'] = function(_, result, ctx)
-    P(result)
-    P(ctx)
-  end
+    -- P(result)
+    -- P(ctx)
+  end,
 }
 
 return M
