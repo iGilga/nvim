@@ -1,12 +1,7 @@
 return {
   cmd = { 'lua-language-server' },
-  on_init = function(client)
-    local path = client.workspace_folders[1].name
-    if vim.loop.fs_fstat(path .. '/.luarc.json') or vim.loop.fs_fstat(path .. '/.luarc.jsonc') then
-      return
-    end
-
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+  settings = {
+    Lua = {
       runtime = {
         version = 'LuaJIT',
         path = { 'lua/?.lua', 'lua/?/init.lua' },
@@ -31,14 +26,11 @@ return {
           checkThirdParty = false,
           library = {
             vim.env.VIMRUNTIME,
-            '${3rd}/luv/library',
-            '${3rd}/busted/library',
+            -- '${3rd}/luv/library',
+            -- '${3rd}/busted/library',
           },
         },
       },
-    })
-  end,
-  settings = {
-    Lua = {},
+    },
   },
 }
