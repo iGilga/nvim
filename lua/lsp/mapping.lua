@@ -1,6 +1,8 @@
+local logger = require('utils.logger').Logger
+
 local M = {}
 
-function M.init(client)
+function M.init(client, bufnr)
   local function buf_set_keymap(mode, lhs, rhs, desc)
     local options = { noremap = true, silent = true, desc = desc or '' }
     vim.keymap.set(mode, lhs, rhs, options)
@@ -41,9 +43,15 @@ function M.init(client)
     '[lsp]search diagnostics'
   )
   buf_set_keymap('n', 'do', vim.diagnostic.open_float, '[lsp]Open float')
-  buf_set_keymap('n', 'd[', vim.diagnostic.goto_prev, '[lsp]Next goto')
-  buf_set_keymap('n', 'd]', vim.diagnostic.goto_next, '[lsp]Prev goto')
 
+  if client.supports_method('textDocument/inlayHint') then
+    buf_set_keymap('n', '<leader>h', function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
+        local msg = ('Inlay hint %s'):format(vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) and 'enabled' or 'disabled')
+        logger.info(msg, '[LSP]')
+      end,
+      '[lsp]Toggle inlay hint')
+  end
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                          rename                          │
   --  └──────────────────────────────────────────────────────────┘
