@@ -96,25 +96,28 @@ local function setup()
       :with_del(cond.none()),
   })
 
-  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-  local handlers = require('nvim-autopairs.completion.handlers')
-  local cmp = require('cmp')
-  cmp.event:on(
-    'confirm_done',
-    cmp_autopairs.on_confirm_done({
-      filetypes = {
-        ['*'] = {
-          ['('] = {
-            kind = {
-              cmp.lsp.CompletionItemKind.Function,
-              cmp.lsp.CompletionItemKind.Method,
+  local ok, cmp = pcall(require, 'cmp')
+  if ok then
+    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+    local handlers = require('nvim-autopairs.completion.handlers')
+    cmp.event:on(
+      'confirm_done',
+      cmp_autopairs.on_confirm_done({
+        filetypes = {
+          ['*'] = {
+            ['('] = {
+              kind = {
+                cmp.lsp.CompletionItemKind.Function,
+                cmp.lsp.CompletionItemKind.Method,
+              },
+              handler = handlers['*'],
             },
-            handler = handlers['*'],
           },
         },
-      },
-    })
-  )
+      })
+    )
+  end
+
 
   local isPairs = true;
   vim.api.nvim_create_user_command('AutopairsToggle', function()
