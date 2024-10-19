@@ -3,6 +3,7 @@ function M.hl(colors)
   return {
     CursorLineNr = { bg = colors.palette.sumiInk5 },
     CursorLineSign = { bg = colors.palette.sumiInk5 },
+    ['@string.special.url'] = { undercurl = false, underline = true },
     -- NormalFloat = { fg = colors.palette.fujiWhite, bg = colors.palette.dark3 },
     -- FloatBorder = { fg = colors.palette.sumiInk4, bg = colors.palette.dark3 },
     -- CBorder = { fg = colors.palette.autumnGreen, bg = colors.palette.autumnGreen },
