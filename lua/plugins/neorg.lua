@@ -1,7 +1,8 @@
 return {
   'nvim-neorg/neorg',
-  build = ':Neorg sync-parsers',
-  cmd = 'Neorg',
+  lazy = false,
+  version = '*',
+  config = true,
   keys = {
     { '<leader>n',  '<cmd>:Neorg<cr>',        desc = '[Neorg]Open menu' },
     { '<leader>nc', '<cmd>:Neorg return<cr>', desc = '[Neorg]Close neorg' },
@@ -9,30 +10,35 @@ return {
   opts = {
     load = {
       ['core.defaults'] = {},
-      ['core.export'] = {},
-      ['core.export.markdown'] = {},
-      ['core.completion'] = { config = { engine = 'nvim-cmp' } },
-      ['core.concealer'] = {},
       ['core.qol.todo_items'] = {
         config = {
           create_todo_parents = true,
         },
       },
+      ['core.completion'] = { config = { engine = 'nvim-cmp' } },
+      ['core.concealer'] = {
+        config = {
+          icons = {
+            code_block = {
+              conceal = true,
+            }
+          }
+        }
+      },
       ['core.dirman'] = {
         config = {
-          default_workspace = 'coding',
+          default_workspace = 'code',
           workspaces = {
-            coding = '~/notes/codiing',
+            code = '~/notes/code',
             home = '~/notes/home',
           },
         },
       },
+      ['core.export'] = {},
+      ['core.export.markdown'] = {},
       ['core.integrations.telescope'] = {},
-      ['core.keybinds'] = {
-        config = {
-          neorg_leader = ' ',
-        }
-      }
+      -- ['core.keybinds'] = {},
+      -- ['external.conceal-wrap'] = {}
     },
   },
   dependencies = { { 'nvim-lua/plenary.nvim' }, 'nvim-neorg/neorg-telescope' },
