@@ -1,8 +1,8 @@
 return {
   'm4xshen/hardtime.nvim',
   event = 'VeryLazy',
+  enabled = false,
   opts = {
-    allow_different_key = true,
     disabled_filetypes = {
       'qf',
       'netrw',
