@@ -11,13 +11,14 @@ local function setup()
       'bashls',
       'cssls',
       'dockerls',
+      'eslint',
       'graphql',
       'html',
       'jsonls',
       'lua_ls',
       'rust_analyzer',
       'tailwindcss',
-      'tsserver',
+      'ts_ls',
       'yamlls',
     },
   })
@@ -47,13 +48,14 @@ local function setup()
   --  │ Settings ui                                              │
   --  └──────────────────────────────────────────────────────────┘
   require('lsp.diagnostics')
+  require('lsp.attach')
 end
 
 return {
   'neovim/nvim-lspconfig',
   event = 'BufReadPre',
   dependencies = {
-    { 'hrsh7th/cmp-nvim-lsp' },
+    -- { 'hrsh7th/cmp-nvim-lsp' },
     { 'b0o/SchemaStore.nvim' },
     { 'folke/neodev.nvim',   opts = {} },
     'mason.nvim',
