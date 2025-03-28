@@ -6,8 +6,7 @@ local M = {}
 
 function M.on_attach(client, bufnr)
   vim.api.nvim_set_option_value('omnifunc', 'v:lua.lsp.omnifunc', { buf = bufnr })
-
-  require('lsp.mapping').init(client, bufnr)
+  -- require('lsp.mapping').init(client, bufnr)
 end
 
 local capabilities = {}
@@ -51,10 +50,6 @@ M.handlers = {
         end
       end
     end
-  end,
-  ['textDocument/definition'] = function(_, result, ctx)
-    -- P(result)
-    -- P(ctx)
   end,
 }
 
