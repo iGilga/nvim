@@ -127,4 +127,5 @@ return {
     { 'hrsh7th/cmp-cmdline' },
   },
   config = setup,
+  enabled = false,
 }
