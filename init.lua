@@ -1,6 +1,7 @@
 require('config.settings')
 require('config.global')
 require('config.lazy')
+require('config.lsp')
 require('config.mapping')
 require('config.commands')
 require('config.autocmds')
