@@ -15,22 +15,9 @@ cmd('TextYankPost', {
 -- cmd("BufRead", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 -- cmd("BufNewFile", { pattern = "*/node_modules/*", command = "lua vim.diagnostic.disable(0)" })
 
--- Enable spell checking for certain file types
--- cmd({ 'BufRead', 'BufNewFile' }, { pattern = { '*.md', '*.tex' }, command = 'setlocal spell' })
-
 cmd({ 'BufEnter' }, { command = 'lua require("lazygit.utils").project_root_dir()' })
 
--- cmd({ 'BufEnter' }, { command = 'silent! setlocal foldlevel=99' })
-
 -- cmd('BufRead', { pattern = '*/openra/*', command = 'setlocal noexpandtab tabstop=4 shiftwidth=4' })
-
-local wrap_md_group = augroup('Markdown Wrap Settings', { clear = true })
-
-cmd('BufEnter', {
-  pattern = { '*.md' },
-  group = wrap_md_group,
-  command = 'setlocal wrap',
-})
 
 local customSessionGroup = augroup('CustomSessionGroup', {})
 
@@ -61,3 +48,13 @@ cmd('User', {
     })
   end,
 })
+
+-- cmd('LspAttach', {
+--   callback = function(ev)
+--     vim.print('LspAttach')
+--     local client = vim.lsp.get_client_by_id(ev.data.client_id)
+--     if client:supports_method('textDocument/completion') then
+--       vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+--     end
+--   end,
+-- })
