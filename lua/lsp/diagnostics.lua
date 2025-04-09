@@ -31,5 +31,14 @@ vim.diagnostic.config({
   virtual_text = {
     spacing = 1,
     prefix = '󰝤',
+    severity = {
+      max = vim.diagnostic.severity.WARN
+    }
   },
+  virtual_lines = {
+    current_line = true,
+    severity = {
+      min = vim.diagnostic.severity.ERROR
+    }
+  }
 })
