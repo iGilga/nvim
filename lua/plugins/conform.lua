@@ -1,21 +1,4 @@
 return {
-  {
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    cmd = {
-      'MasonToolsInstall', 'MasonToolsUpdate', 'MasonToolsClean'
-    },
-    event = { 'BufWritePre' },
-    opts = {
-      ensure_installed = {
-        'prettierd',
-        'shfmt',
-        'emmet-language-server',
-      }
-    },
-    config = function(_, opts)
-      require('mason-tool-installer').setup(opts)
-    end
-  }, {
   'stevearc/conform.nvim',
   event = { 'BufWritePre' },
   cmd = 'ConformInfo',
@@ -23,7 +6,6 @@ return {
     vim.api.nvim_create_user_command('ConFormat', function()
       require('conform').format({ async = true, lsp_fallback = true })
     end, {})
-
     vim.api.nvim_create_user_command('FormatToggle', function()
       vim.g.disable_autoformat = not vim.g.disable_autoformat
       vim.notify(('Autoformat: %s'):format(tostring(not vim.g.disable_autoformat)), 2)
@@ -35,6 +17,8 @@ return {
     formatters_by_ft = {
       javascript = { 'prettierd' },
       javascriptreact = { 'prettierd' },
+      json = { 'prettierd' },
+      lua = { 'stylua' },
       sh = { 'shfmt' },
     },
     format_on_save = function(bufnr)
@@ -52,7 +36,7 @@ return {
         inherit = false,
         command = 'shfmt',
         args = { '-i', '2', '-filename', '$FILENAME' },
-      }
-    }
+      },
+    },
   },
-} }
+}
