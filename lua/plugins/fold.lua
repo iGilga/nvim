@@ -30,6 +30,7 @@ return {
   {
     'chrisgrieser/nvim-origami',
     event = 'BufReadPost',
+    enabled = false,
     keys = function()
       local origami = require('origami')
       return {
