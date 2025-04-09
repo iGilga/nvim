@@ -4,7 +4,7 @@ return {
   version = '*',
   config = true,
   keys = {
-    { '<leader>n',  '<cmd>:Neorg<cr>',        desc = '[Neorg]Open menu' },
+    { '<leader>n', '<cmd>:Neorg<cr>', desc = '[Neorg]Open menu' },
     { '<leader>nc', '<cmd>:Neorg return<cr>', desc = '[Neorg]Close neorg' },
   },
   opts = {
@@ -15,15 +15,14 @@ return {
           create_todo_parents = true,
         },
       },
-      ['core.completion'] = { config = { engine = 'nvim-cmp' } },
       ['core.concealer'] = {
         config = {
           icons = {
             code_block = {
               conceal = true,
-            }
-          }
-        }
+            },
+          },
+        },
       },
       ['core.dirman'] = {
         config = {
@@ -37,8 +36,6 @@ return {
       ['core.export'] = {},
       ['core.export.markdown'] = {},
       ['core.integrations.telescope'] = {},
-      -- ['core.keybinds'] = {},
-      -- ['external.conceal-wrap'] = {}
     },
   },
   dependencies = { { 'nvim-lua/plenary.nvim' }, 'nvim-neorg/neorg-telescope' },
