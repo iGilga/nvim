@@ -31,6 +31,7 @@ return {
     },
     completion = {
       documentation = { auto_show = false },
+      accept = { auto_brackets = { enabled = true } },
       list = {
         selection = {
           preselect = true,
@@ -78,6 +79,10 @@ return {
       default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
     cmdline = {
+      keymap = {
+        preset = 'default',
+        ['<CR>'] = { 'select_and_accept', 'fallback' },
+      },
       sources = function()
         local type = vim.fn.getcmdtype()
         if type == '/' or type == '?' then
@@ -89,7 +94,6 @@ return {
         return {}
       end,
       completion = {
-        -- accept = { auto_brackets = { enabled = true } },
         trigger = {
           show_on_blocked_trigger_characters = {},
           show_on_x_blocked_trigger_characters = {},
