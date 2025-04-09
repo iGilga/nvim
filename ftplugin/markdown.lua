@@ -1,3 +1,4 @@
+vim.opt_local.wrap = true
 -- Add the key mappings only for Markdown files in a zk notebook.
 if require('zk.util').notebook_root(vim.fn.expand('%:p')) ~= nil then
   local function map(...)
@@ -13,9 +14,19 @@ if require('zk.util').notebook_root(vim.fn.expand('%:p')) ~= nil then
 
   -- Create a new note after asking for its title.
   -- This overrides the global `<leader>zn` mapping to create the note in the same directory as the current buffer.
-  map('n', '<leader>zn', "<Cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", opts('[zk] new note'))
+  map(
+    'n',
+    '<leader>zn',
+    "<Cmd>ZkNew { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>",
+    opts('[zk] new note')
+  )
   -- Create a new note in the same directory as the current buffer, using the current selection for title.
-  map('v', '<leader>znt', ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<CR>", opts('[zk] new from title selection'))
+  map(
+    'v',
+    '<leader>znt',
+    ":'<,'>ZkNewFromTitleSelection { dir = vim.fn.expand('%:p:h') }<CR>",
+    opts('[zk] new from title selection')
+  )
   -- Create a new note in the same directory as the current buffer, using the current selection for note content and asking for its title.
   map(
     'v',
@@ -34,5 +45,10 @@ if require('zk.util').notebook_root(vim.fn.expand('%:p')) ~= nil then
   -- Preview a linked note.
   map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts('Preview a linked note.'))
   -- Open the code actions for a visual selection.
-  map('v', '<leader>za', ":'<,'>lua vim.lsp.buf.range_code_action()<CR>", opts('Open the code actions for a visual selection.'))
+  map(
+    'v',
+    '<leader>za',
+    ":'<,'>lua vim.lsp.buf.range_code_action()<CR>",
+    opts('Open the code actions for a visual selection.')
+  )
 end
