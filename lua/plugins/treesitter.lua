@@ -34,9 +34,6 @@ local setup = {
   autotag = { enable = true },
   refactor = {
     highlight_definitions = { enable = true },
-    smart_rename = {
-      enable = true,
-    },
     navigation = {
       enable = true,
     },
