@@ -1,6 +1,6 @@
 local logger = require('utils.logger').Logger
 
-function mapping(client, bufnr)
+function setting_keymaps(client, bufnr)
   local function map(m, l, r, desc)
     local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc or '' }
     vim.keymap.set(m, l, r, opts)
@@ -49,6 +49,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(args)
     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
     local bufnr = args.buf
-    mapping(client, bufnr)
+    setting_keymaps(client, bufnr)
   end,
 })
