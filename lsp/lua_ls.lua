@@ -1,5 +1,3 @@
--- local on_attach = require('lsp.mapping')
-
 return {
   cmd = { 'lua-language-server' },
   filetypes = { 'lua' },
@@ -33,11 +31,12 @@ return {
         disable = {
           'lowercase-global',
         },
-        workspace = {
-          checkThirdParty = false,
-          library = {
-            vim.env.VIMRUNTIME,
-          },
+      },
+      workspace = {
+        checkThirdParty = false,
+        library = {
+          vim.env.VIMRUNTIME,
+          '${3rd}/luv/library',
         },
       },
     })
