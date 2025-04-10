@@ -1,4 +1,7 @@
-local on_attach = require('lsp.mapping')
+local handlers = require('lsp.handlers')
+
+require('lsp.mapping')
+require('lsp.diagnostics')
 
 local lsp_list = {
   'lua_ls',
@@ -7,8 +10,8 @@ local lsp_list = {
 }
 
 vim.lsp.config('*', {
-  on_attach = on_attach,
+  handlers = handlers,
   capabilities = require('blink.cmp').get_lsp_capabilities(),
 })
+
 vim.lsp.enable(lsp_list)
-require('lsp.diagnostics')
