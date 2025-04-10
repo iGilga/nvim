@@ -1,6 +1,6 @@
 local logger = require('utils.logger').Logger
 
-return function(client, bufnr)
+function mapping(client, bufnr)
   local function map(m, l, r, desc)
     local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc or '' }
     vim.keymap.set(m, l, r, opts)
@@ -44,3 +44,11 @@ return function(client, bufnr)
     require('conform').format({ async = true, lsp_fallback = true })
   end, '[lsp]Formatting')
 end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    local bufnr = args.buf
+    mapping(client, bufnr)
+  end,
+})
