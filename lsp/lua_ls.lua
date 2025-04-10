@@ -1,4 +1,4 @@
-local on_attach = require('lsp.mapping')
+-- local on_attach = require('lsp.mapping')
 
 return {
   cmd = { 'lua-language-server' },
@@ -17,11 +17,9 @@ return {
     client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
       runtime = {
         version = 'LuaJIT',
-        path = { 'lua/?.lua', 'lua/?/init.lua' },
       },
       completion = { callSnippet = 'Replace' },
       diagnostics = {
-        enable = true,
         globals = {
           'vim',
           --   'describe',
@@ -45,7 +43,6 @@ return {
     })
   end,
   on_attach = function(client, bufnr)
-    on_attach(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end,
