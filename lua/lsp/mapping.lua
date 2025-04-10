@@ -1,110 +1,46 @@
 local logger = require('utils.logger').Logger
 
-local M = {}
-
-function M.init(client, bufnr)
-  local function buf_set_keymap(mode, lhs, rhs, desc)
-    local options = { noremap = true, silent = true, desc = desc or '' }
-    vim.keymap.set(mode, lhs, rhs, options)
+return function(client, bufnr)
+  local function map(m, l, r, desc)
+    local opts = { noremap = true, silent = true, buffer = bufnr, desc = desc or '' }
+    vim.keymap.set(m, l, r, opts)
   end
 
-  local telescope = require('telescope.builtin')
+  local t = require('telescope.builtin')
   --  ┌──────────────────────────────────────────────────────────┐
   --  │                       diagnostics                        │
   --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', 'gD', vim.lsp.buf.declaration, '[lsp]Goto declaration')
-  buf_set_keymap('n', 'gd', telescope.lsp_definitions, '[lsp]Search definitions')
-  buf_set_keymap(
-    'n',
-    'gi',
-    telescope.lsp_implementations,
-    '[lsp]Search implementations'
-  )
-  buf_set_keymap('n', 'gr', telescope.lsp_references, '[lsp]Search references')
-  buf_set_keymap(
-    'n',
-    'gt',
-    telescope.lsp_type_definitions,
-    '[lsp]Search type definitions'
-  )
-  buf_set_keymap(
-    'n',
-    'ge',
-    function()
-      telescope.diagnostics({ bufnr = 0 })
-    end,
-    '[lsp]Search diagnostics current buffer'
-  )
-  buf_set_keymap('n', 'gs', telescope.lsp_document_symbols, '[lsp]Document symbols')
-  buf_set_keymap(
-    'n',
-    '<leader>ge',
-    telescope.diagnostics,
-    '[lsp]search diagnostics'
-  )
-  buf_set_keymap('n', 'do', vim.diagnostic.open_float, '[lsp]Open float')
-
-  if client.supports_method('textDocument/inlayHint') then
-    buf_set_keymap('n', '<leader>h', function()
-        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
-        local msg = ('Inlay hint %s'):format(vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) and 'enabled' or 'disabled')
-        logger.info(msg, '[LSP]')
-      end,
-      '[lsp]Toggle inlay hint')
+  map('n', 'grr', t.lsp_references, '[lsp]Search references')
+  map('n', 'gri', t.lsp_implementations, '[lsp]Search implementations')
+  map('n', 'gD', vim.lsp.buf.declaration, '[lsp]Goto declaration')
+  map('n', 'grd', t.lsp_definitions, '[lsp]Search definitions')
+  map('n', 'grt', t.lsp_type_definitions, '[lsp]Search type definitions')
+  map('n', 'g0', t.lsp_document_symbols, '[lsp]Document symbols')
+  map('n', 'do', vim.diagnostic.open_float, '[lsp]Open float')
+  -- search diagnostic current buffer
+  map('n', 'ge', function()
+    t.diagnostics({ bufnr = 0 })
+  end, '[lsp]Search diagnostics current buffer')
+  -- search diagnostic all buffer
+  map('n', '<leader>ge', t.diagnostics, '[lsp]search diagnostics')
+  -- inlay hint
+  if client:supports_method('textDocument/inlayHint') then
+    map('n', '<leader>h', function()
+      vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
+      local msg = ('Inlay hint %s'):format(vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) and 'enabled' or 'disabled')
+      logger.info(msg, '[LSP]')
+    end, '[lsp]Toggle inlay hint')
   end
-  --  ┌──────────────────────────────────────────────────────────┐
-  --  │                          rename                          │
-  --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>gg', require('utils.rename').rename, '[lsp]Rename')
-
-  --  ┌──────────────────────────────────────────────────────────┐
-  --  │                          hover                           │
-  --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', 'K', vim.lsp.buf.hover, '[lsp]hover')
-
-  --  ┌──────────────────────────────────────────────────────────┐
-  --  │                       code actions                       │
-  --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>ga', require('utils.codeaction').code_action, '[lsp]Code actions')
-  buf_set_keymap(
-    'v',
-    '<leader>ga',
-    require('utils.codeaction').range_code_action,
-    '[lsp]Code actions on selected'
-  )
-
-  --  ┌──────────────────────────────────────────────────────────┐
-  --  │                        formatting                        │
-  --  └──────────────────────────────────────────────────────────┘
-  -- buf_set_keymap('n', '<leader>f', 'vim.lsp.buf.format', '[lsp]formatting')
-  buf_set_keymap('n', '<leader>f', function()
+  -- rename
+  map('n', '<leader>gg', require('utils.rename').rename, '[lsp]Rename')
+  -- hover
+  map('n', 'K', function()
+    vim.lsp.buf.hover({ border = 'solid' })
+  end, '[lsp]hover')
+  -- code action
+  map({ 'n', 'v' }, '<leader>ga', require('utils.codeaction').code_action, '[lsp]Code actions')
+  -- format
+  map('n', '<leader>f', function()
     require('conform').format({ async = true, lsp_fallback = true })
   end, '[lsp]Formatting')
-  -- buf_set_keymap('v', '<leader>f', 'vim.lsp.buf.range_formatting',  'motion line' })
-
-  -- -- signature help
-  -- buf_set_keymap('n', '<C-K>', 'require("lsp_signature").signature')
-
-  --  ┌──────────────────────────────────────────────────────────┐
-  --  │                      lsp workspace                       │
-  --  └──────────────────────────────────────────────────────────┘
-  buf_set_keymap('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, '[lsp]add ws folder')
-  buf_set_keymap('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, '[lsp]remove ws folder')
-
-  buf_set_keymap(
-    'n',
-    '<leader>so',
-    require('telescope.builtin').lsp_document_symbols,
-    '[lsp]search document symbols'
-  )
-  if client.name == 'eslint' then
-    buf_set_keymap('n', '<leader>efa', ':EslintFixAll', '[eslint]fix all')
-  end
-  -- if client.name == 'tsserver' then
-  --   buf_set_keymap('n', '<leader>gr',':TSLspRenameFile<cr>')
-  --   buf_set_keymap('n', '<leader>go',':TSLspOrganize<cr>')
-  --   buf_set_keymap('n', '<leader>gi',':TSLspImportAll<cr>')
-  -- end
 end
-
-return M
