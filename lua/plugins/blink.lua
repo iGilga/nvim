@@ -31,7 +31,7 @@ return {
     },
     completion = {
       documentation = { auto_show = false },
-      accept = { auto_brackets = { enabled = true } },
+      -- accept = { auto_brackets = { enabled = true } },
       list = {
         selection = {
           preselect = true,
@@ -76,12 +76,18 @@ return {
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      default = { 'snippets', 'lsp', 'buffer', 'path' },
     },
     cmdline = {
       keymap = {
-        preset = 'default',
-        ['<CR>'] = { 'select_and_accept', 'fallback' },
+        -- preset = 'default',
+        ['<Tab>'] = {
+          function(cmp)
+            return cmp.select_next()
+          end,
+          'snippet_forward',
+          'fallback',
+        },
       },
       sources = function()
         local type = vim.fn.getcmdtype()
