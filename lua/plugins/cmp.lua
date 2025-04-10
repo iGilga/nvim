@@ -74,7 +74,7 @@ local function setup()
       ghost_text = true,
     },
     sources = cmp.config.sources({
-      { name = 'luasnip',  max_item_count = 10, priority = 20 },
+      { name = 'luasnip', max_item_count = 10, priority = 20 },
       { name = 'nvim_lsp', max_item_count = 7 },
       -- { name = 'nvim_lua', max_item_count = 7 },
       { name = 'neorg' },
@@ -127,5 +127,5 @@ return {
     { 'hrsh7th/cmp-cmdline' },
   },
   config = setup,
-  enabled = false,
+  -- enabled = false,
 }

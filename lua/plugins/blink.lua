@@ -6,6 +6,7 @@ return {
     'nvim-tree/nvim-web-devicons',
     'onsails/lspkind-nvim',
   },
+  enabled = false,
   version = '1.*',
   opts = {
     keymap = {
