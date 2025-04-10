@@ -25,19 +25,11 @@ local config = {
   hl = 'NormalFloat:NuiNormal,FloatBorder:NuiBorder',
 }
 
-local title = function(name)
+local fmt_title = function(name)
   if name then
-    return ('[LSP][%s]Code Action'):format(name)
+    return ('[LSP][%s]Code action'):format(name)
   else
-    return '[LSP]Code Action'
-  end
-end
-
-local index_of = function(tbl, item)
-  for i, value in ipairs(tbl) do
-    if value == item then
-      return i
-    end
+    return '[LSP]Code action'
   end
 end
 
@@ -45,28 +37,20 @@ local function applyAction(action, client)
   local isCommand = type(action.command) == 'table'
   if action.edit then
     lsp.util.apply_workspace_edit(action.edit, client.offset_encoding)
-    logger.info(action.title, title(client.name))
+    logger.info(action.title, fmt_title(client.name))
   end
   if action.command then
     if isCommand then
       lsp.buf.execute_command(action.command)
-      logger.info(action.title, title(client.name))
+      logger.info(action.title, fmt_title(client.name))
     else
       lsp.buf.execute_command(action)
-      logger.info(action.title, title(client.name))
+      logger.info(action.title, fmt_title(client.name))
     end
   end
 end
 
-local function onChange(actionList)
-  return function(item, menu)
-    local pos = index_of(actionList, item)
-    local text = ' ' .. tostring(pos) .. '/' .. #actionList .. ' '
-    menu.border:set_text('bottom', ntext(text, config.bottom.hl), 'right')
-  end
-end
-
-local function window(itemList, actionList, onSubmit)
+local function window(itemList, _, onSubmit)
   local popup_opts = {
     position = {
       row = 3,
@@ -95,7 +79,6 @@ local function window(itemList, actionList, onSubmit)
       close = { 'h', '<Esc>', '<C-c>' },
       submit = { '<CR>', '<Space>' },
     },
-    on_change = onChange(actionList),
     on_submit = onSubmit,
   }
 
@@ -114,7 +97,7 @@ local function onSubmit(item)
   then
     client.request('codeAction/resolve', action, function(err, resolvedAction)
       if err then
-        logger.error(err.code .. ': ' .. err.message, title(client.name))
+        logger.error(err.code .. ': ' .. err.message, fmt_title(client.name))
         return
       end
       applyAction(resolvedAction, client)
@@ -126,7 +109,7 @@ end
 
 local function codeActionCallback(results)
   if not results then
-    logger.warn('No results from textDocument/codeAction', title())
+    logger.warn('No results from textDocument/codeAction', fmt_title())
     return
   end
 
@@ -136,8 +119,7 @@ local function codeActionCallback(results)
   for client_id, response in pairs(results) do
     if response.result and not vim.tbl_isempty(response.result) then
       local client = lsp.get_client_by_id(client_id)
-      table.insert(itemList,
-        nmenu.separator(ntext('[' .. client.name .. ']', config.separator.hl), config.separator))
+      table.insert(itemList, nmenu.separator(ntext('[' .. client.name .. ']', config.separator.hl), config.separator))
       for _, action in ipairs(response.result) do
         local title = action.title
         local item = nmenu.item(action.title)
@@ -147,7 +129,6 @@ local function codeActionCallback(results)
           clientName = client and client.name or '',
           command = action,
         }
-        -- minWidth = math.max(config.min_width, #title, 30)
         table.insert(itemList, item)
         table.insert(actionList, item)
       end
@@ -155,7 +136,7 @@ local function codeActionCallback(results)
   end
 
   if #actionList == 0 then
-    logger.warn('No code actions available', title())
+    logger.warn('No code actions available', fmt_title())
     return
   end
 
@@ -167,32 +148,30 @@ local function codeActionCallback(results)
       vim.api.nvim_input('<Esc>')
     end
   end)
-
-  -- close menu when cursor leaves buffer
   menu:on(event.BufLeave, menu.menu_props.on_close, { once = true })
 end
 
-local function codeActionRequest(params)
-  local bfnr = vim.api.nvim_get_current_buf()
+local function codeActionRequest(bufnr, params)
   local method = 'textDocument/codeAction'
-  vim.lsp.buf_request_all(bfnr, method, params, codeActionCallback)
+  vim.lsp.buf_request_all(bufnr, method, params, codeActionCallback)
 end
 
-local function codeAction(ctx)
-  local params = lsp.util.make_range_params()
-  local context = ctx or { diagnostics = lsp.diagnostic.get_line_diagnostics() }
+local function codeAction()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local params = lsp.util.make_range_params(0, 'utf-32')
+  local context = { diagnostics = vim.diagnostic.get(bufnr) }
   params.context = context
-  codeActionRequest(params)
+  codeActionRequest(bufnr, params)
 end
 
-local function rangeCodeAction(ctx, startPos, endPos)
-  local params = lsp.util.make_given_range_params(startPos, endPos)
-  local context = ctx or { diagnostics = lsp.diagnostic.get_line_diagnostics() }
-  params.context = context
-  codeActionRequest(params)
-end
+-- local function rangeCodeAction()
+--   local bufnr = vim.api.nvim_get_current_buf()
+--   local params = lsp.util.make_given_range_params(startPos, endPos, 0, 'utf-32')
+--   local context = { diagnostics = lsp.diagnostic.get(bufnr) }
+--   params.context = context
+-- end
 
 return {
   code_action = codeAction,
-  range_code_action = rangeCodeAction,
+  -- range_code_action = rangeCodeAction,
 }
