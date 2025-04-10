@@ -41,10 +41,10 @@ local function applyAction(action, client)
   end
   if action.command then
     if isCommand then
-      lsp.buf.execute_command(action.command)
+      client:exec_cmd(action.command)
       logger.info(action.title, fmt_title(client.name))
     else
-      lsp.buf.execute_command(action)
+      client:exec_cmd(action)
       logger.info(action.title, fmt_title(client.name))
     end
   end
