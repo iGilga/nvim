@@ -3,7 +3,6 @@ return function(colors)
   for plugin, enabled in pairs({
     base = true,
     alpha = true,
-    cmp = true,
     hop = true,
     ibl = true,
     illuminate = true,

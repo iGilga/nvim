@@ -11,11 +11,6 @@ local lsp_list = {
 
 local capabilities = {}
 
-local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
-if ok then
-  capabilities = cmp_nvim_lsp.default_capabilities()
-end
-
 local ok, blink = pcall(require, 'blink')
 if ok then
   capabilities = blink.get_lsp_capabilities()
