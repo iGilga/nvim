@@ -4,6 +4,9 @@ local opts = function(desc)
   return { noremap = true, silent = true, desc = desc }
 end
 
+vim.keymap.del('n', 'grn')
+vim.keymap.del({ 'n', 'v' }, 'gra')
+
 map('i', 'jk', '<ESC>', { noremap = true, silent = true })
 map('i', 'jj', '<ESC>', { noremap = true, silent = true })
 map('i', 'kj', '<ESC>', { noremap = true, silent = true })
