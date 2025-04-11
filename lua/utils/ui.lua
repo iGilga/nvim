@@ -1,5 +1,3 @@
-local M = {}
-
 local nmenu = require('nui.menu')
 local ntext = require('nui.text')
 local nline = require('nui.line')
@@ -8,7 +6,7 @@ local event = require('nui.utils.autocmd').event
 local config = {
   min_width = 80,
   text = {
-    hl_gray = 'NuiGrayText'
+    hl_gray = 'NuiGrayText',
   },
   border = {
     style = 'solid',
@@ -45,7 +43,7 @@ local function build_popup_opts(title)
       text = {
         top = ntext(' ' .. title .. ' ', config.title.hl),
         top_align = config.title.align,
-      }
+      },
     },
     win_options = {
       winhighlight = config.hl,
@@ -75,7 +73,7 @@ local function build_format_item(opts, title)
       local dir = ntext((vim.fs.dirname(path):gsub('/home/stag', '~')) .. '/', config.text.hl_gray)
       local basename = ntext(vim.fs.basename(path), 'NuiText')
       return nline({ dir, basename })
-    end
+    end,
   }
   if case[title] then
     format_item = case[title]
@@ -125,10 +123,11 @@ local function override_ui_select()
 
   local select_ui = nil
 
+  ---@diagnostic disable-next-line: duplicate-set-field
   vim.ui.select = function(items, opts, on_choice)
     assert(type(on_choice) == 'function', 'missing on_choice function')
     if select_ui then
-      vim.api.nvim_err_writeln('busy: another select is pending!')
+      vim.notify('busy: another select is pending!')
       return
     end
     select_ui = UISelect(items, opts, function(item, index)
