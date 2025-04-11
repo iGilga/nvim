@@ -1,17 +1,18 @@
 return {
   'saghen/blink.cmp',
+  -- event = { 'InsertEnter', 'CmdlineEnter' },
+  lazy = false,
   dependencies = {
     'rafamadriz/friendly-snippets',
     { 'L3MON4D3/LuaSnip', version = 'v2.*' },
     'nvim-tree/nvim-web-devicons',
     'onsails/lspkind-nvim',
   },
-  enabled = false,
   version = '1.*',
   opts = {
     keymap = {
       preset = 'default',
-      ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+      ['<A-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide' },
       ['<CR>'] = { 'select_and_accept', 'fallback' },
       ['<Up>'] = { 'select_prev', 'fallback' },
@@ -27,11 +28,17 @@ return {
         'snippet_forward',
         'fallback',
       },
-      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+      ['<S-Tab>'] = {
+        function(cmp)
+          return cmp.select_prev()
+        end,
+        'snippet_backward',
+        'fallback',
+      },
       ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
     },
     completion = {
-      documentation = { auto_show = false },
+      documentation = { auto_show = true },
       -- accept = { auto_brackets = { enabled = true } },
       list = {
         selection = {
@@ -43,6 +50,10 @@ return {
       menu = {
         auto_show = true,
         draw = {
+          columns = {
+            { 'kind_icon', 'label', gap = 1 },
+            { 'source_name' },
+          },
           components = {
             kind_icon = {
               text = function(ctx)
@@ -71,22 +82,56 @@ return {
                 return hl
               end,
             },
+            source_name = {
+              width = { max = 10 },
+              text = function(ctx)
+                return ctx.source_name
+              end,
+            },
           },
         },
       },
     },
     snippets = { preset = 'luasnip' },
     sources = {
-      default = { 'snippets', 'lsp', 'buffer', 'path' },
+      default = { 'lsp', 'snippets', 'buffer', 'path' },
+      providers = {
+        lsp = {
+          -- min_keyword_length = 1,
+          score_offset = 0,
+        },
+        snippets = {
+          min_keyword_length = 1,
+        },
+        buffer = {
+          min_keyword_length = 2,
+          max_items = 5,
+        },
+        path = {
+          min_keyword_length = 0,
+        },
+      },
+    },
+    fuzzy = {
+      implementation = 'lua',
+      prebuilt_binaries = {
+        download = false,
+      },
     },
     cmdline = {
       keymap = {
-        -- preset = 'default',
         ['<Tab>'] = {
           function(cmp)
             return cmp.select_next()
           end,
           'snippet_forward',
+          'fallback',
+        },
+        ['<S-Tab>'] = {
+          function(cmp)
+            return cmp.select_prev()
+          end,
+          'snippet_backward',
           'fallback',
         },
       },
@@ -118,4 +163,5 @@ return {
       },
     },
   },
+  -- opts_extend = { 'sources.default' },
 }
