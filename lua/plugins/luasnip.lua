@@ -36,4 +36,5 @@ return {
     'rafamadriz/friendly-snippets',
   },
   config = setup,
+  enabled = false,
 }
