@@ -36,11 +36,11 @@ function setting_keymaps(client, bufnr)
   -- hover
   map('n', 'K', function()
     vim.lsp.buf.hover({ border = 'solid' })
-  end, '[lsp]hover')
+  end, '[lsp]Hover')
   -- code action
   map({ 'n', 'v' }, '<leader>ga', require('utils.codeaction').code_action, '[lsp]Code actions')
   -- format
-  map('n', '<leader>f', function()
+  map({ 'n', 'v' }, '<leader>f', function()
     require('conform').format({ async = true, lsp_fallback = true })
   end, '[lsp]Formatting')
 end
