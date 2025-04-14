@@ -4,9 +4,18 @@ require('lsp.mapping')
 require('lsp.diagnostics')
 
 local lsp_list = {
-  'lua_ls',
-  'ts_ls',
+  'clangd',
+  'cssls',
+  'cssmodules_ls',
+  -- 'dockerls',
+  'emmet-language-server',
   'eslint',
+  -- 'graphql',
+  'jsonls',
+  'lua_ls',
+  -- 'tailwindcssls',
+  'ts_ls',
+  'yamlls',
 }
 
 local capabilities = {}
