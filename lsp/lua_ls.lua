@@ -19,14 +19,14 @@ return {
       completion = { callSnippet = 'Replace' },
       diagnostics = {
         globals = {
+          'after_each',
+          'before_each',
+          'describe',
+          'it',
+          'pending',
+          'teardown',
+          'use',
           'vim',
-          --   'describe',
-          --   'it',
-          --   'before_each',
-          --   'after_each',
-          --   'teardown',
-          --   'pending',
-          --   'use',
         },
         disable = {
           'lowercase-global',
@@ -41,7 +41,7 @@ return {
       },
     })
   end,
-  on_attach = function(client, bufnr)
+  on_attach = function(client, _)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end,

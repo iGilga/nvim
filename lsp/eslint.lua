@@ -1,31 +1,17 @@
--- local root_file = {
---   '.eslintrc',
---   '.eslintrc.js',
---   '.eslintrc.cjs',
---   '.eslintrc.yaml',
---   '.eslintrc.yml',
---   '.eslintrc.json',
---   'eslint.config.js',
---   'eslint.config.mjs',
---   'eslint.config.cjs',
---   'eslint.config.ts',
---   'eslint.config.mts',
---   'eslint.config.cts',
--- }
-
 return {
   cmd = { 'vscode-eslint-language-server', '--stdio' },
   filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx',
-    'vue',
-    'svelte',
     'astro',
+    'javascript',
+    'javascript.jsx',
+    'javascriptreact',
+    'svelte',
+    'typescript',
+    'typescript.tsx',
+    'typescriptreact',
+    'vue',
   },
+  root_markers = { '.eslintrc', '.eslintrc.*', 'eslint.config.*s' },
   on_attach = function()
     vim.keymap.set('n', '<leader>efa', ':EslintFixAll<cr>', { noremap = true, silent = true, desc = '[eslint]fix all' })
   end,
