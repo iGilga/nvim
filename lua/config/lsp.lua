@@ -28,6 +28,9 @@ end
 vim.lsp.config('*', {
   handlers = handlers,
   capabilities = capabilities,
+  flags = {
+    debounce_text_cahnges = 500,
+  },
 })
 
 vim.lsp.enable(lsp_list)
