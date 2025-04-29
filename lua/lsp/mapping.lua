@@ -17,6 +17,13 @@ function setting_keymaps(client, bufnr)
   map('n', 'grt', t.lsp_type_definitions, '[lsp]Search type definitions')
   map('n', 'g0', t.lsp_document_symbols, '[lsp]Document symbols')
   map('n', 'do', vim.diagnostic.open_float, '[lsp]Open float')
+  map('n', 'K', function()
+    vim.lsp.buf.hover({ border = 'solid' })
+  end, '[lsp]Hover')
+  map('n', '<C-K>', function()
+    vim.lsp.buf.signature_help({ border = 'solid' })
+  end)
+
   -- search diagnostic current buffer
   map('n', 'ge', function()
     t.diagnostics({ bufnr = 0 })
@@ -33,16 +40,18 @@ function setting_keymaps(client, bufnr)
   end
   -- rename
   map('n', '<leader>gg', require('utils.rename').rename, '[lsp]Rename')
-  -- hover
-  map('n', 'K', function()
-    vim.lsp.buf.hover({ border = 'solid' })
-  end, '[lsp]Hover')
   -- code action
   map({ 'n', 'v' }, '<leader>ga', require('utils.codeaction').code_action, '[lsp]Code actions')
   -- format
   map({ 'n', 'v' }, '<leader>f', function()
     require('conform').format({ async = true, lsp_fallback = true })
   end, '[lsp]Formatting')
+  -- workspace_folders
+  map('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, 'Add workspace folder')
+  map('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, 'Remove workspace folder')
+  map('n', '<leader>wl', function()
+    vim.print(vim.lsp.buf.list_workspace_folders())
+  end, 'List workspace folder')
 end
 
 vim.api.nvim_create_autocmd('LspAttach', {
