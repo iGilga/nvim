@@ -12,16 +12,18 @@ vim.api.nvim_create_user_command('DiagnosticToggle', function()
   })
 end, { desc = 'toggle diagnostic' })
 
-local isAbs = false
-vim.api.nvim_create_user_command('AbsToggle', function()
-  if isAbs then
-    vim.o.statuscolumn = '%s %r'
-    isAbs = false
-  else
-    vim.o.statuscolumn = '%s %l %r'
-    isAbs = true
-  end
-end, {})
+-- local isAbs = false
+-- vim.api.nvim_create_user_command('AbsToggle', function()
+--   if isAbs then
+--     -- vim.o.statuscolumn = '%s %r'
+--     vim.o.stc = '%s %r'
+--     isAbs = false
+--   else
+--     -- vim.o.statuscolumn = '%s %l %r'
+--     vim.o.stc = '%s %l %r'
+--     isAbs = true
+--   end
+-- end, {})
 
 local isEmmet = true
 local emmetConfig
