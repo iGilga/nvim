@@ -24,4 +24,16 @@ return {
       end
     end
   end,
+  -- ['textDocument/formatting'] = function(_, result, ctx)
+  --   local client = assert(vim.lsp.get_client_by_id(ctx.client_id))
+  --   local bufnr = ctx.bufnr
+  --   if not vim.tbl_isempty(result) then
+  --     vim.lsp.util.apply_text_edits(result, bufnr, client.offset_encoding)
+  --     local msg = ('Formatting by %s'):format(client.name)
+  --     logger.info(msg, '[LSP]')
+  --   else
+  --     local msg = ('No Formatting by %s'):format(client.name)
+  --     logger.info(msg, '[LSP]')
+  --   end
+  -- end,
 }
