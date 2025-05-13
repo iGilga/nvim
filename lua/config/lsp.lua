@@ -14,8 +14,9 @@ local lsp_list = {
   'jsonls',
   'lua_ls',
   -- 'tailwindcssls',
-  'ts_ls',
+  -- 'ts_ls',
   'yamlls',
+  'vtsls',
 }
 
 local capabilities = {}
