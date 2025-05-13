@@ -12,9 +12,6 @@ return {
     'vue',
   },
   root_markers = { '.eslintrc', '.eslintrc.*', 'eslint.config.*s' },
-  on_attach = function()
-    vim.keymap.set('n', '<leader>efa', ':EslintFixAll<cr>', { noremap = true, silent = true, desc = '[eslint]fix all' })
-  end,
   settings = {
     codeAction = {
       disableRuleComment = {
@@ -32,7 +29,6 @@ return {
     experimental = {
       useFlatConfig = false,
     },
-    format = true,
     nodePath = '',
     onIgnoredFiles = 'off',
     problems = {
