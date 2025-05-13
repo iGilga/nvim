@@ -31,7 +31,7 @@ function setting_keymaps(client, bufnr)
   -- search diagnostic all buffer
   map('n', '<leader>ge', t.diagnostics, '[lsp]search diagnostics')
   -- inlay hint
-  if client:supports_method('textDocument/inlayHint') then
+  if client:supports_method('textDocument/inlayHint', bufnr) then
     map('n', '<leader>h', function()
       vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
       local msg = ('Inlay hint %s'):format(vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }) and 'enabled' or 'disabled')
