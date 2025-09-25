@@ -10,8 +10,6 @@ return {
       vim.g.disable_autoformat = not vim.g.disable_autoformat
       vim.notify(('Autoformat: %s'):format(tostring(not vim.g.disable_autoformat)), 2)
     end, { desc = 'Toggleable autoformat' })
-
-    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
   opts = {
     formatters_by_ft = {
@@ -21,6 +19,9 @@ return {
       lua = { 'stylua' },
       sh = { 'shfmt' },
     },
+    default_format_opts = {
+      lsp_format = 'fallback',
+    },
     format_on_save = function(bufnr)
       local bufname = vim.api.nvim_buf_get_name(bufnr)
       if bufname:match('/node_modules/') then
@@ -29,7 +30,7 @@ return {
       if vim.g.disable_autoformat then
         return
       end
-      return { timeout_ms = 500, lsp_fallback = true }
+      return { timeout_ms = 500 }
     end,
     formatters = {
       shfmt = {

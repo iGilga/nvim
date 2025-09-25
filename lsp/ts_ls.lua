@@ -57,7 +57,6 @@ return {
         },
       },
       javascript = {
-        diagnostics = false,
         inlayHints = {
           includeInlayParameterNameHints = 'all',
           includeInlayParameterNameHintsWhenArgumentMatchesName = false,
@@ -70,12 +69,7 @@ return {
       },
     },
   },
-  on_attach = function(client, bufnr)
-    -- if client.name == 'tsserver' then
-    --   buf_set_keymap('n', '<leader>gr',':TSLspRenameFile<cr>')
-    --   buf_set_keymap('n', '<leader>go',':TSLspOrganize<cr>')
-    --   buf_set_keymap('n', '<leader>gi',':TSLspImportAll<cr>')
-    -- end
+  on_attach = function(client)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
   end,
